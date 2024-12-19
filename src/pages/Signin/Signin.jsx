@@ -3,6 +3,10 @@ import React from "react";
 import "./Signin.css";
 
 const Signin = () => {
+  const [loginState, setLoginState] = useState({
+    username: "",
+    password: "",
+  });
   return (
     <div className="signin-container">
       <div className="flex items-center justify-center min-h-screen">
