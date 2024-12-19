@@ -1,4 +1,4 @@
-import { Button, capitalize, Divider, TextField } from "@mui/material";
+import { Divider, TextField } from "@mui/material";
 import React, { useState } from "react";
 import "./Signin.css";
 
@@ -10,10 +10,12 @@ const Signin = () => {
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setLoginState({ ...loginState, [name]: value });
+    const { id, value } = e.target;
+    setLoginState({ ...loginState, [id]: value });
     setError("");
   };
+
+  const handleSignIn = () => {};
   return (
     <div className="signin-container">
       <div className="flex items-center justify-center min-h-screen">
@@ -39,11 +41,23 @@ const Signin = () => {
                     >
                       Username
                     </label>
-                    <input
-                      type="text"
+                    <TextField
                       id="username"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Enter your username"
+                      onChange={handleInputChange}
+                      variant="outlined"
+                      sx={{
+                        width: "100%",
+
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 2.5,
+                          color: "#B0E9FF",
+                          fontWeight: "bold",
+                          backgroundColor: "#1E25A6",
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "none",
+                        },
+                      }}
                     />
                   </div>
 
@@ -54,11 +68,23 @@ const Signin = () => {
                     >
                       Password
                     </label>
-                    <input
-                      type="password"
+                    <TextField
                       id="password"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Enter your password"
+                      type="password"
+                      variant="outlined"
+                      onChange={handleInputChange}
+                      sx={{
+                        width: "100%",
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 2.5,
+                          color: "#B0E9FF",
+                          fontWeight: "bold",
+                          backgroundColor: "#1E25A6",
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "none",
+                        },
+                      }}
                     />
                   </div>
                 </div>
@@ -72,7 +98,10 @@ const Signin = () => {
                   </p>
                 </div>
 
-                <button className="w-full py-3 text-lg font-extrabold text-white transition bg-blue-600 rounded-md hover:bg-blue-700">
+                <button
+                  className="w-full py-3 text-lg font-extrabold text-white transition bg-blue-600 rounded-md hover:bg-blue-700"
+                  onClick={handleSignIn}
+                >
                   Sign in
                 </button>
               </div>
