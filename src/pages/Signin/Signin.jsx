@@ -1,12 +1,19 @@
 import { Button, capitalize, Divider, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import "./Signin.css";
 
 const Signin = () => {
+  const [error, setError] = useState("");
   const [loginState, setLoginState] = useState({
     username: "",
     password: "",
   });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setLoginState({ ...loginState, [name]: value });
+    setError("");
+  };
   return (
     <div className="signin-container">
       <div className="flex items-center justify-center min-h-screen">
