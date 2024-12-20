@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signin from "./pages/Signin/Signin";
+import SignUp from "./pages/Signup/Signup";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<div>Homepage</div>}></Route>
         <Route path="/signin" element={<Signin />}></Route>
-        <Route path="/signup" element={<div>Sign up page</div>}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/learning" element={<div>My learning page</div>}></Route>
         <Route path="/myprofile" element={<div>My profile page</div>}></Route>
         <Route path="/community" element={<div>communities page</div>}></Route>
