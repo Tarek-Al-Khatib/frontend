@@ -49,13 +49,10 @@ const Signin = () => {
                         width: "100%",
 
                         "& .MuiOutlinedInput-root": {
-                          borderRadius: 2.5,
-                          color: "#B0E9FF",
-                          fontWeight: "bold",
-                          backgroundColor: "#1E25A6",
+                          borderRadius: 5,
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
-                          border: "none",
+                          borderColor: "#E5E5E5",
                         },
                       }}
                     />
@@ -76,13 +73,10 @@ const Signin = () => {
                       sx={{
                         width: "100%",
                         "& .MuiOutlinedInput-root": {
-                          borderRadius: 2.5,
-                          color: "#B0E9FF",
-                          fontWeight: "bold",
-                          backgroundColor: "#1E25A6",
+                          borderRadius: 5,
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
-                          border: "none",
+                          borderColor: "#E5E5E5",
                         },
                       }}
                     />
@@ -99,7 +93,7 @@ const Signin = () => {
                 </div>
 
                 <button
-                  className="w-full py-3 text-lg font-extrabold text-white transition bg-blue-600 rounded-md hover:bg-blue-700"
+                  className="w-full py-3 text-lg font-extrabold text-white transition bg-blue-600 rounded- hover:bg-blue-700 rounded-self"
                   onClick={handleSignIn}
                 >
                   Sign in
