@@ -4,7 +4,7 @@ import "../../css/colors.css";
 
 const Navbar = () => {
   return (
-    <div className="min-h-screen font-sans bg-white">
+    <div className="font-sans bg-white">
       <header className="flex items-center justify-between px-6 py-4 text-white border-b border-b-blue-600">
         <div className="flex items-center space-x-2">
           <img src="public/images/logo.png" alt="Logo" className="h-8" />
