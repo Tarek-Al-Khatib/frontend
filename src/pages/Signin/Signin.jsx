@@ -1,5 +1,6 @@
 import { Divider, TextField } from "@mui/material";
 import React, { useState } from "react";
+import "../../css/colors.css";
 import "./Signin.css";
 
 const Signin = () => {
@@ -26,10 +27,8 @@ const Signin = () => {
           <div className="flex items-center justify-center w-full ">
             <div className="w-3/5 pr-8">
               <div>
-                <h3 className="mb-2 text-2xl font-bold text-blue-600">
-                  Welcome Back!
-                </h3>
-                <p className="mb-6 text-sm text-gray-500">
+                <h3 className="text-2xl font-bold text-navy">Welcome Back!</h3>
+                <p className="mb-6 text-sm font-bold text-dark-gray">
                   Let today be as a step to empower growth!
                 </p>
 
@@ -37,7 +36,7 @@ const Signin = () => {
                   <div>
                     <label
                       htmlFor="username"
-                      className="block mb-1 font-medium text-gray-600"
+                      className="block mb-3 text-xs font-extrabold text-navy"
                     >
                       Username
                     </label>
@@ -61,7 +60,7 @@ const Signin = () => {
                   <div>
                     <label
                       htmlFor="password"
-                      className="block mb-1 font-medium text-gray-600"
+                      className="block mb-3 text-xs font-extrabold text-navy"
                     >
                       Password
                     </label>
@@ -84,16 +83,16 @@ const Signin = () => {
                 </div>
 
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-navy">
                     Forgot your password?{" "}
-                    <button className="text-blue-500 hover:underline">
-                      Reset
+                    <button>
+                      <strong>Reset</strong>
                     </button>
                   </p>
                 </div>
 
                 <button
-                  className="w-full py-3 text-lg font-extrabold text-white transition bg-blue-600 rounded- hover:bg-blue-700 rounded-self"
+                  className="w-full py-3 text-2xl font-extrabold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
                   onClick={handleSignIn}
                 >
                   Sign in
@@ -121,9 +120,11 @@ const Signin = () => {
               <strong>Sign in with Linkedin</strong>
             </div>
           </div>
-          <p className="pb-4 text-sm text-gray-500">
+          <p className="pb-4 text-sm text-navy">
             No account? No problem,{" "}
-            <button className="text-blue-500 hover:underline">Signup</button>
+            <button>
+              <strong>Signup</strong>
+            </button>
           </p>
         </div>
       </div>
