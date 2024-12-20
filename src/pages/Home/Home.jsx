@@ -46,6 +46,41 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <section className="py-16">
+        <div className="mx-auto text-center">
+          <h2 className="mb-8 text-3xl font-extrabold text-navy">Our goals</h2>
+          <div className="flex items-center justify-center w-1/2 gap-20 mx-auto ">
+            <div className="w-2/6 p-6 bg-white rounded-md shadow h-60">
+              <h3 className="p-2 font-extrabold text-white -translate-y-full rounded-lg text-l bg-navy">
+                Unlock
+              </h3>
+              <p className="p-4 text-gray-600 text-start">
+                Unlocking your potential is about embracing growth, discovering
+                new opportunities, and achieving greater success.
+              </p>
+            </div>
+            <div className="w-2/6 p-6 bg-white rounded-md shadow h-60">
+              <h3 className="p-2 font-extrabold text-white -translate-y-full rounded-lg text-l bg-navy">
+                Grow
+              </h3>
+              <p className="p-4 pt-2 text-gray-600 text-start">
+                Grow by learning, adapting, and embracing new opportunities to
+                become your best self.
+              </p>
+            </div>
+            <div className="w-2/6 p-6 bg-white rounded-md shadow h-52">
+              <h3 className="p-2 font-extrabold text-white -translate-y-full rounded-lg text-l bg-navy">
+                Expand
+              </h3>
+              <p className="p-4 text-gray-600 text-start">
+                Expand relations by building strong communities through trust,
+                collaboration, and shared values.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
