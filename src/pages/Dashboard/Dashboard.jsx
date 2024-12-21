@@ -1,13 +1,17 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Navbar/Footer";
-
+import "./Dashboard.css";
+import { LuGraduationCap } from "react-icons/lu";
+import { RiSpeakFill } from "react-icons/ri";
+import { MdPeopleAlt } from "react-icons/md";
+import { FaUserPen } from "react-icons/fa6";
 const Dashboard = () => {
   return (
     <div>
       <Navbar />
       <div className="px-6 py-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-3">
           <div>
             <h1 className="pb-5 text-2xl font-thin text-navy">Dashboard</h1>
             <h1 className="mb-4 text-4xl font-bold text-blue-900">
@@ -29,8 +33,49 @@ const Dashboard = () => {
             </p>
           </div>
         </div>
-      </div>
 
+        <div className="flex items-center justify-center w-full p-12 border border-gray-300 rounded-3xl">
+          <div className="w-3/5 p-4 bg-gray-100 rounded shadow">
+            <div className="flex items-center justify-center h-64 bg-gray-200">
+              <span>Graph Placeholder</span>
+            </div>
+          </div>
+          <div className="grid w-2/5 grid-cols-2 gap-7">
+            <button className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600">
+              <div className="flex items-center justify-center dashboard-buttons-icons">
+                <LuGraduationCap size={80} />
+              </div>
+              <p className="my-1 mt-5 text-xl font-medium text-black">
+                My Learning
+              </p>
+            </button>
+            <button className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600">
+              <div className="flex items-center justify-center dashboard-buttons-icons">
+                <RiSpeakFill size={80} />
+              </div>
+              <p className="my-1 mt-5 text-xl font-medium text-black">
+                My Interviews
+              </p>
+            </button>
+            <button className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600">
+              <div className="flex items-center justify-center dashboard-buttons-icons">
+                <MdPeopleAlt size={80} />
+              </div>
+              <p className="my-1 mt-5 text-xl font-medium text-black">
+                Communities
+              </p>
+            </button>
+            <button className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600">
+              <div className="flex items-center justify-center dashboard-buttons-icons">
+                <FaUserPen size={80} />
+              </div>
+              <p className="my-1 mt-5 text-xl font-medium text-black">
+                My Profile
+              </p>
+            </button>
+          </div>
+        </div>
+      </div>
       <Footer />
     </div>
   );
