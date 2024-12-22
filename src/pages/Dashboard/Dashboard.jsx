@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Navbar/Footer";
+import Footer from "../../components/Footer/Footer";
 import "./Dashboard.css";
 import { LuGraduationCap } from "react-icons/lu";
 import { RiSpeakFill } from "react-icons/ri";
