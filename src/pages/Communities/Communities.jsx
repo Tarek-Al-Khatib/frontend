@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Communities.css";
 import { IoMdAdd } from "react-icons/io";
+import { FiSend } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 const Communities = () => {
@@ -90,6 +91,69 @@ const Communities = () => {
                 <div class="text-white text-sm font-thin">Moderator name</div>
               </button>
             </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col flex-grow bg-white p-6">
+          <div>
+            <h1 class="text-4xl text-navy mb-4">Welcome to //general</h1>
+            <p class="text-xl text-navy mb-4 font-thin">
+              @Admin created this channel on 17/07/2024: Channel description
+              (not more than 250 chars)
+            </p>
+            <hr class="border-t border-blue-900 mb-6" />
+          </div>
+          <div class="flex flex-col gap-5 flex-grow">
+            <div>
+              <div class="flex items-start gap-7">
+                <div class="w-12 h-12 bg-blue-900 rounded-full"></div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between gap-6 w-fit">
+                    <div class="text-sm text-blue-900 font-bold">Name</div>
+                    <div class="px-2 py-1 bg-blue-900 text-white text-xs rounded">
+                      Badge
+                    </div>
+                    <div class="text-blue-900 text-sm">17-8-2024 7:42 PM</div>
+                  </div>
+                  <p class="text-base text-black">
+                    Hello Everyone <br />
+                    I'm so excited to start learning today!
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-start gap-7">
+                <div class="w-12 h-12 bg-blue-900 rounded-full"></div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between gap-6 w-fit">
+                    <div class="text-sm text-blue-900 font-bold">Name 2</div>
+                    <div class="px-2 py-1 bg-blue-900 text-white text-xs rounded">
+                      Badge
+                    </div>
+                    <div class="text-blue-900 text-sm">17-8-2024 7:45 PM</div>
+                  </div>
+                  <p class="text-base text-black">
+                    Me too ! <br />
+                    By the way where are you from ?
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 bg-slight-gray p-4 rounded-self">
+            <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+              <IoMdAdd size={25} className="text-navy" />
+            </button>
+            <input
+              type="text"
+              class="flex-1 bg-transparent placeholder-gray-400 text-xl outline-none"
+              placeholder="Type your message here for //general"
+            />
+            <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+              <FiSend size={25} className="text-navy" />
+            </button>
           </div>
         </div>
       </div>
