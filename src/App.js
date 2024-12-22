@@ -4,6 +4,7 @@ import Signin from "./pages/Signin/Signin";
 import SignUp from "./pages/Signup/Signup";
 import Home from "./pages/Home/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Communities from "./pages/Communities/Communities";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/learning" element={<div>My learning page</div>}></Route>
         <Route path="/myprofile" element={<div>My profile page</div>}></Route>
-        <Route path="/community" element={<div>communities page</div>}></Route>
+        <Route path="/community" element={<Communities />}></Route>
         <Route path="/interview" element={<div>interviews page</div>}></Route>
       </Routes>
     </BrowserRouter>
