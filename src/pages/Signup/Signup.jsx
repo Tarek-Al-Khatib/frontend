@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material";
 import "./Signup.css";
+import "../../css/base.css";
 import React from "react";
 
 const SignUp = () => {

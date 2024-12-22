@@ -1,2 +1,6 @@
 .primary-btn {
 }
+
+.rounded-self {
+  border-radius: 20px;
+}

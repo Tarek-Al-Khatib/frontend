@@ -34,7 +34,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center w-full p-12 border border-gray-300 rounded-3xl">
+        <div className="flex items-center justify-center w-full p-12 border border-gray-300 mb-14 rounded-3xl">
           <div className="w-3/5 p-4 bg-gray-100 rounded shadow">
             <div className="flex items-center justify-center h-64 bg-gray-200">
               <span>Graph Placeholder</span>
@@ -75,6 +75,181 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
+
+        <section className="flex justify-center gap-6">
+          <div className="w-1/2 p-6 mb-8 border border-gray-300 rounded-3xl">
+            <h2 className="mb-4 text-2xl font-normal text-black">
+              Top Learning Picks
+            </h2>
+            <div className="flex items-center justify-center ">
+              <div className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded">
+                <div>
+                  <div className="w-full h-48 mb-1 bg-navy rounded-3xl"></div>
+                  <div className="inline-block mb-1 text-sm font-bold text-center rounded-full px-9 bg-light-navy text-cyan">
+                    Category
+                  </div>
+                  <h3 className="text-xl font-bold text-navy">
+                    Become a Full Stack Developer
+                  </h3>
+                </div>
+                <ul className="p-4 text-base list-disc text-navy text-start">
+                  <li>Introduction to web development</li>
+                  <li>Learn the basics</li>
+                  <li>What is a library?</li>
+                  <li>Learn about JavaScript</li>
+                  <li>Do a dynamic website</li>
+                  <li>Learn about ReactJS</li>
+                  <li>Create your first React page</li>
+                  <li>What is a framework?</li>
+                </ul>
+                <button className="w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                  Add to your learning
+                </button>
+              </div>
+              <div className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded">
+                <div>
+                  <div className="w-full h-48 mb-1 bg-navy rounded-3xl"></div>
+                  <div className="inline-block mb-1 text-sm font-bold text-center rounded-full px-9 bg-light-navy text-cyan">
+                    Category
+                  </div>
+                  <h3 className="text-xl font-bold text-navy">
+                    Become a Full Stack Developer
+                  </h3>
+                </div>
+                <ul className="p-4 text-base list-disc text-navy text-start">
+                  <li>Introduction to web development</li>
+                  <li>Learn the basics</li>
+                  <li>What is a library?</li>
+                  <li>Learn about JavaScript</li>
+                  <li>Do a dynamic website</li>
+                  <li>Learn about ReactJS</li>
+                  <li>Create your first React page</li>
+                  <li>What is a framework?</li>
+                </ul>
+                <button className="w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                  Add to your learning
+                </button>
+              </div>
+              <div className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded">
+                <div>
+                  <div className="w-full h-48 mb-1 bg-navy rounded-3xl"></div>
+                  <div className="inline-block mb-1 text-sm font-bold text-center rounded-full px-9 bg-light-navy text-cyan">
+                    Category
+                  </div>
+                  <h3 className="text-xl font-bold text-navy">
+                    Become a Full Stack Developer
+                  </h3>
+                </div>
+                <ul className="p-4 text-base list-disc text-navy text-start">
+                  <li>Introduction to web development</li>
+                  <li>Learn the basics</li>
+                  <li>What is a library?</li>
+                  <li>Learn about JavaScript</li>
+                  <li>Do a dynamic website</li>
+                  <li>Learn about ReactJS</li>
+                  <li>Create your first React page</li>
+                  <li>What is a framework?</li>
+                </ul>
+                <button className="w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                  Add to your learning
+                </button>
+              </div>
+            </div>
+            <div></div>
+          </div>
+          <div className="flex flex-col items-start justify-between w-1/2 p-6 mb-8 border border-gray-300 min-h-max rounded-3xl">
+            <h2 className="mb-4 text-2xl font-normal text-black">
+              Top Communities
+            </h2>
+            <div className="grid grid-cols-1 p-4 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+              <div className="flex flex-col items-center justify-center p-4 rounded">
+                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
+
+                <div className="self-start">
+                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
+                  <p className="text-base font-normal text-navy">
+                    Join us to know more about react !
+                  </p>
+                </div>
+
+                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                  Join Community
+                </button>
+              </div>
+              <div className="flex flex-col items-center justify-center p-4 rounded">
+                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
+
+                <div className="self-start">
+                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
+                  <p className="text-base font-normal text-navy">
+                    Join us to know more about react !
+                  </p>
+                </div>
+
+                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                  Join Community
+                </button>
+              </div>
+              <div className="flex flex-col items-center justify-center p-4 rounded">
+                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
+
+                <div className="self-start">
+                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
+                  <p className="text-base font-normal text-navy">
+                    Join us to know more about react !
+                  </p>
+                </div>
+
+                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                  Join Community
+                </button>
+              </div>
+              <div className="flex flex-col items-center justify-center p-4 rounded">
+                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
+
+                <div className="self-start">
+                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
+                  <p className="text-base font-normal text-navy">
+                    Join us to know more about react !
+                  </p>
+                </div>
+
+                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                  Join Community
+                </button>
+              </div>
+              <div className="flex flex-col items-center justify-center p-4 rounded">
+                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
+
+                <div className="self-start">
+                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
+                  <p className="text-base font-normal text-navy">
+                    Join us to know more about react !
+                  </p>
+                </div>
+
+                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                  Join Community
+                </button>
+              </div>
+              <div className="flex flex-col items-center justify-center p-4 rounded">
+                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
+
+                <div className="self-start">
+                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
+                  <p className="text-base font-normal text-navy">
+                    Join us to know more about react !
+                  </p>
+                </div>
+
+                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                  Join Community
+                </button>
+              </div>
+            </div>
+            <div></div>
+          </div>
+        </section>
       </div>
       <Footer />
     </div>

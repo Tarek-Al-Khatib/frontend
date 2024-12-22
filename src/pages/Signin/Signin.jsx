@@ -1,6 +1,7 @@
 import { Divider, TextField } from "@mui/material";
 import React, { useState } from "react";
 import "../../css/colors.css";
+import "../../css/base.css";
 import "./Signin.css";
 
 const Signin = () => {
@@ -92,7 +93,7 @@ const Signin = () => {
                 </div>
 
                 <button
-                  className="w-full py-3 text-2xl font-extrabold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
+                  className="w-full py-3 text-2xl font-extrabold text-white transition bg-dark-blue hover:bg-blue-400 rounded-self"
                   onClick={handleSignIn}
                 >
                   Sign in
