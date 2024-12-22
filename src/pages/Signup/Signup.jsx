@@ -5,7 +5,7 @@ import React from "react";
 
 const SignUp = () => {
   return (
-    <div className="signin-container">
+    <div className="signup-container">
       <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="bg-white w-[477px] rounded-self shadow-lg flex flex-col items-center justify-center gap-10 pt-6 ">
           <div className="w-full">
