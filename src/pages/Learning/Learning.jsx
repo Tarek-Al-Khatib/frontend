@@ -1,4 +1,5 @@
 import React from "react";
+import "../../css/custom-scroll.css";
 import CircularWithValueLabel from "../../components/CircularProgressWithLabel/CircularProgressWithLabel";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -68,7 +69,7 @@ const Learning = () => {
         </div>
 
         <div>
-          <div className=" border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[600px]">
+          <div className=" border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]">
             <div className="flex gap-6">
               <div>
                 <div className="text-navy text-2xl font-bold font-['Open Sans Hebrew'] mb-4">
@@ -84,33 +85,7 @@ const Learning = () => {
             </div>
 
             <div className="relative p-4 bg-white ">
-              <div className="space-y-4 h-[400px] overflow-y-scroll">
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
-                    <Divider
-                      orientation="horizontal"
-                      textAlign="center"
-                      flexItem
-                      sx={{
-                        color: "#1E25A6",
-                        "::before, ::after": {
-                          borderColor: "#1E25A6",
-                        },
-                        fontWeight: "800",
-                        fontSize: 20,
-                      }}
-                    ></Divider>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
+              <div className="space-y-4 h-[400px] overflow-y-auto custom-scrollbar">
                 <div className="flex items-center space-x-4">
                   <img
                     className="w-14 h-14"
@@ -263,46 +238,6 @@ const Learning = () => {
                         fontSize: 20,
                       }}
                     ></Divider>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
                     <div className="text-2xl font-normal text-navy">
                       Do something
                     </div>
