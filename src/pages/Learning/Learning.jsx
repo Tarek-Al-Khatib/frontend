@@ -6,7 +6,35 @@ import Footer from "../../components/Footer/Footer";
 import { Divider } from "@mui/material";
 
 const Learning = () => {
-  const [plans, setPlans] = useState([]);
+  const [plans, setPlans] = useState([
+    {
+      id: 1,
+      title: "React Mastery Plan",
+      description: "Learn React from beginner to advanced concepts.",
+      progress: 70, // Progress percentage
+      isCompleted: false,
+      steps: [
+        {
+          id: 1,
+          title: "Step 1",
+          description: "Learn JSX and Components",
+          icon: "https://via.placeholder.com/61x59",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          description: "State and Props",
+          icon: "https://via.placeholder.com/61x59",
+        },
+        {
+          id: 3,
+          title: "Step 3",
+          description: "Routing with React Router",
+          icon: "https://via.placeholder.com/61x59",
+        },
+      ],
+    },
+  ]);
 
   const renderPlanSteps = (steps) =>
     steps.map((step, index) => (
@@ -101,185 +129,34 @@ const Learning = () => {
         </div>
 
         <div>
-          <div className=" border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]">
-            <div className="flex gap-6">
-              <div>
-                <div className="text-navy text-2xl font-bold font-['Open Sans Hebrew'] mb-4">
-                  Learning Plan
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]"
+            >
+              <div className="flex gap-6">
+                <div>
+                  <div className="mb-4 text-2xl font-bold text-navy">
+                    {plan.title}
+                  </div>
+                  <div className="mb-6 text-xl font-normal text-navy">
+                    {plan.description}
+                  </div>
                 </div>
-                <div className="text-navy text-xl font-normal font-['Open Sans Hebrew'] mb-6">
-                  This is a learning plan that was implemented by the user
+                <div>
+                  <CircularWithValueLabel value={plan.progress} size={60} />
                 </div>
               </div>
-              <div>
-                <CircularWithValueLabel value={67} size={60} />
+
+              <div className="relative p-4 bg-white ">
+                <div className="space-y-4 h-[400px] overflow-y-auto custom-scrollbar">
+                  {renderPlanSteps(plan.steps)}
+                </div>
+                <div className="absolute top-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-b from-white via-white/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-t from-white via-white/70 to-transparent"></div>
               </div>
             </div>
-
-            <div className="relative p-4 bg-white ">
-              <div className="space-y-4 h-[400px] overflow-y-auto custom-scrollbar">
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
-                    <Divider
-                      orientation="horizontal"
-                      textAlign="center"
-                      flexItem
-                      sx={{
-                        color: "#1E25A6",
-                        "::before, ::after": {
-                          borderColor: "#1E25A6",
-                        },
-                        fontWeight: "800",
-                        fontSize: 20,
-                      }}
-                    ></Divider>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
-                    <Divider
-                      orientation="horizontal"
-                      textAlign="center"
-                      flexItem
-                      sx={{
-                        color: "#1E25A6",
-                        "::before, ::after": {
-                          borderColor: "#1E25A6",
-                        },
-                        fontWeight: "800",
-                        fontSize: 20,
-                      }}
-                    ></Divider>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
-                    <Divider
-                      orientation="horizontal"
-                      textAlign="center"
-                      flexItem
-                      sx={{
-                        color: "#1E25A6",
-                        "::before, ::after": {
-                          borderColor: "#1E25A6",
-                        },
-                        fontWeight: "800",
-                        fontSize: 20,
-                      }}
-                    ></Divider>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
-                    <Divider
-                      orientation="horizontal"
-                      textAlign="center"
-                      flexItem
-                      sx={{
-                        color: "#1E25A6",
-                        "::before, ::after": {
-                          borderColor: "#1E25A6",
-                        },
-                        fontWeight: "800",
-                        fontSize: 20,
-                      }}
-                    ></Divider>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
-                    <Divider
-                      orientation="horizontal"
-                      textAlign="center"
-                      flexItem
-                      sx={{
-                        color: "#1E25A6",
-                        "::before, ::after": {
-                          borderColor: "#1E25A6",
-                        },
-                        fontWeight: "800",
-                        fontSize: 20,
-                      }}
-                    ></Divider>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <img
-                    className="w-14 h-14"
-                    src="https://via.placeholder.com/61x59"
-                    alt="Step Icon"
-                  />
-                  <div>
-                    <div className="text-base font-normal text-navy">Step</div>
-                    <Divider
-                      orientation="horizontal"
-                      textAlign="center"
-                      flexItem
-                      sx={{
-                        color: "#1E25A6",
-                        "::before, ::after": {
-                          borderColor: "#1E25A6",
-                        },
-                        fontWeight: "800",
-                        fontSize: 20,
-                      }}
-                    ></Divider>
-                    <div className="text-2xl font-normal text-navy">
-                      Do something
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute top-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-b from-white via-white/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-t from-white via-white/70 to-transparent"></div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <Footer />
