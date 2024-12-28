@@ -77,7 +77,7 @@ const Communities = () => {
         message: messageInput,
       };
       setMessages([...messages, newMessage]);
-      setMessageInput(""); // Clear input after sending
+      setMessageInput("");
     }
   };
   return (
@@ -101,11 +101,11 @@ const Communities = () => {
         <div class="w-80 bg-blue-900 p-6">
           <div class="flex flex-col items-center mb-8">
             <div class="w-28 h-24 bg-blue-900 rounded mb-4 flex items-center justify-center text-center text-blue-300 text-base font-light">
-              Community
-              <br />
-              logo
+              {selectedCommunity.logo}
             </div>
-            <div class="text-white text-lg font-light">Community Name</div>
+            <div class="text-white text-lg font-light">
+              {selectedCommunity.name}
+            </div>
           </div>
 
           <div class="mb-10">
@@ -115,33 +115,19 @@ const Communities = () => {
               Channels
             </hutton>
             <div class="flex flex-col">
-              <button class="w-full py-3 bg-blue-600/60 rounded text-white font-bold text-start px-3">
-                // general
-              </button>
-              <button class="w-full py-3 bg-transparent px-3 hover:bg-blue-700/30 flex justify-between items-center rounded text-white font-bold text-start">
-                // announcements
-                <div class="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center text-xs">
-                  1
-                </div>
-              </button>
-              <button class="w-full py-3 bg-transparent px-3 hover:bg-blue-700/30 flex justify-between items-center rounded text-white font-bold">
-                // projects
-                <div class="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center text-xs">
-                  1
-                </div>
-              </button>
-              <button class="w-full py-3 bg-transparent px-3 hover:bg-blue-700/30 flex justify-between items-center rounded text-white font-bold">
-                // q/a
-                <div class="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center text-xs">
-                  1
-                </div>
-              </button>
-              <button class="w-full py-3 bg-transparent px-3 hover:bg-blue-700/30 flex justify-between items-center rounded text-white font-bold">
-                // discussion
-                <div class="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center text-xs">
-                  1
-                </div>
-              </button>
+              {channelsData.map((channel, index) => (
+                <button
+                  key={index}
+                  className="flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded hover:bg-blue-700/30 text-start"
+                >
+                  // {channel.name}
+                  {channel.unread > 0 && (
+                    <div className="flex items-center justify-center w-5 h-5 text-xs bg-blue-600 rounded-full">
+                      {channel.unread}
+                    </div>
+                  )}
+                </button>
+              ))}
             </div>
           </div>
 
