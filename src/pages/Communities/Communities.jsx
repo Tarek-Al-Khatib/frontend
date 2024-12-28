@@ -64,8 +64,45 @@ const Communities = () => {
   const [messages, setMessages] = useState(messagesData);
   const [messageInput, setMessageInput] = useState("");
 
+  const parseTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.getTime();
+  };
+
+  const getMessageDuration = (prevTimestamp, currentTimestamp) => {
+    const prevTime = parseTimestamp(prevTimestamp);
+    const currentTime = parseTimestamp(currentTimestamp);
+    return (currentTime - prevTime) / 60000;
+  };
+
   const handleCommunitySelect = (community) => {
     setSelectedCommunity(community);
+  };
+
+  const renderMessages = () => {
+    const combinedMessages = [];
+
+    for (let i = 0; i < messages.length; i++) {
+      const currentMessage = messages[i];
+      const previousMessage = messages[i - 1];
+
+      if (
+        previousMessage &&
+        previousMessage.name === currentMessage.name &&
+        getMessageDuration(
+          previousMessage.timestamp,
+          currentMessage.timestamp
+        ) < 5
+      ) {
+        combinedMessages[
+          combinedMessages.length - 1
+        ].message += `<br />${currentMessage.message}`;
+      } else {
+        combinedMessages.push(currentMessage);
+      }
+    }
+
+    return combinedMessages;
   };
 
   const handleMessageSend = () => {
