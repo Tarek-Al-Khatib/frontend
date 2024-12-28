@@ -1,13 +1,17 @@
 import { Divider, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../../css/colors.css";
 import "../../css/base.css";
+import { authContext } from "../../contexts/AuthContext/AuthContext";
 import "./Signin.css";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
+  const navigation = useNavigate();
+  const { fetchLogin } = useContext(authContext);
   const [error, setError] = useState("");
   const [loginState, setLoginState] = useState({
-    username: "",
+    emailOrUsername: "",
     password: "",
   });
 
@@ -17,7 +21,17 @@ const Signin = () => {
     setError("");
   };
 
-  const handleSignIn = () => {};
+  const handleSignIn = async () => {
+    const result = await fetchLogin(
+      loginState.emailOrUsername,
+      loginState.password
+    );
+
+    if (result) {
+      navigation.navigate("/dashboard");
+    } else {
+    }
+  };
   return (
     <div className="signin-container">
       <div className="flex items-center justify-center min-h-screen">
@@ -36,13 +50,13 @@ const Signin = () => {
                 <div className="flex flex-col mb-4 space-y-4">
                   <div>
                     <label
-                      htmlFor="username"
+                      htmlFor="emailOrUsername"
                       className="block mb-3 text-xs font-extrabold text-navy"
                     >
-                      Username
+                      Username/email
                     </label>
                     <TextField
-                      id="username"
+                      id="emailOrUsername"
                       onChange={handleInputChange}
                       variant="outlined"
                       sx={{

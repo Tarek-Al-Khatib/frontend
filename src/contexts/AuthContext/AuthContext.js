@@ -25,9 +25,7 @@ const AuthProvider = ({ children }) => {
       return user;
     } catch (error) {
       console.error("Error during login:", error);
-      throw new Error(
-        error.response?.data?.error || "Failed to log in. Please try again."
-      );
+      return null;
     }
   };
 
@@ -58,7 +56,6 @@ const AuthProvider = ({ children }) => {
     <authContext.Provider
       value={{
         user,
-        userId: user.id,
         token,
         fetchLogin,
         fetchSignup,
