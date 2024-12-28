@@ -67,6 +67,19 @@ const Communities = () => {
   const handleCommunitySelect = (community) => {
     setSelectedCommunity(community);
   };
+
+  const handleMessageSend = () => {
+    if (messageInput.trim()) {
+      const newMessage = {
+        name: "You",
+        badge: "Learner",
+        timestamp: new Date().toLocaleString(),
+        message: messageInput,
+      };
+      setMessages([...messages, newMessage]);
+      setMessageInput(""); // Clear input after sending
+    }
+  };
   return (
     <div>
       <Navbar />
