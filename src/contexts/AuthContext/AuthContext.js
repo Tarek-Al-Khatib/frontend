@@ -22,10 +22,10 @@ const AuthProvider = ({ children }) => {
 
       localStorage.setItem("authToken", token);
 
-      return user;
+      return { successful: true, error: null };
     } catch (error) {
       console.error("Error during login:", error);
-      return null;
+      return { successful: false, error };
     }
   };
 

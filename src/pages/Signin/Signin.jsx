@@ -1,4 +1,4 @@
-import { Divider, TextField } from "@mui/material";
+import { Alert, AlertTitle, Collapse, Divider, TextField } from "@mui/material";
 import React, { useContext, useState } from "react";
 import "../../css/colors.css";
 import "../../css/base.css";
@@ -10,6 +10,7 @@ const Signin = () => {
   const navigation = useNavigate();
   const { fetchLogin } = useContext(authContext);
   const [error, setError] = useState("");
+  const [alertVisible, setAlertVisible] = useState(false);
   const [loginState, setLoginState] = useState({
     emailOrUsername: "",
     password: "",
@@ -22,19 +23,38 @@ const Signin = () => {
   };
 
   const handleSignIn = async () => {
-    const result = await fetchLogin(
+    const { successful, error } = await fetchLogin(
       loginState.emailOrUsername,
       loginState.password
     );
 
-    if (result) {
+    if (successful) {
       navigation.navigate("/dashboard");
     } else {
+      setError(error.response.data.error);
+      setAlertVisible(true);
+      setTimeout(() => {
+        setAlertVisible(false);
+      }, 4000);
     }
   };
   return (
     <div className="signin-container">
       <div className="flex items-center justify-center min-h-screen">
+        <Collapse
+          in={alertVisible}
+          sx={{
+            position: "absolute",
+            top: "20px",
+            zIndex: 1000,
+            width: "20%",
+          }}
+        >
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {error}
+          </Alert>
+        </Collapse>
         <div
           className="bg-white w-[923px] p-12 pb-0 rounded-lg shadow-lg flex flex-col items-center justify-center gap-10"
           style={{ borderRadius: 50 }}
