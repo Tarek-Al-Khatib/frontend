@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { serverUrl } from "../../config/url";
 
 export const authContext = createContext();
 
@@ -10,14 +11,14 @@ const AuthProvider = ({ children }) => {
 
   const fetchLogin = async (emailOrUsername, password) => {
     try {
-      const response = await axios.post("/api/auth/login", {
+      const response = await axios.post(`${serverUrl}/api/auth/login`, {
         emailOrUsername,
         password,
       });
-      const { user, token } = response.data;
+      const data = response.data;
 
-      setUser(user);
-      setToken(token);
+      setUser(data.user);
+      setToken(data.token);
 
       localStorage.setItem("authToken", token);
 
@@ -37,6 +38,7 @@ const AuthProvider = ({ children }) => {
       value={{
         user,
         userId: user.id,
+        token,
         fetchLogin,
         fetchSignup,
       }}
