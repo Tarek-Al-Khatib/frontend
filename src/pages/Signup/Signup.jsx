@@ -22,6 +22,24 @@ const SignUp = () => {
     setSignupState({ ...signupState, [id]: value });
     setError("");
   };
+
+  const handleSignup = async () => {
+    const { successful, error } = await fetchSignup(
+      signupState.username,
+      signupState.email,
+      signupState.password
+    );
+
+    if (successful) {
+      navigation("/signin");
+    } else {
+      setError(error.response.data.error);
+      setAlertVisible(true);
+      setTimeout(() => {
+        setAlertVisible(false);
+      }, 4000);
+    }
+  };
   return (
     <div className="signup-container">
       <div className="flex flex-col items-center justify-center min-h-screen">
