@@ -198,16 +198,21 @@ const Communities = () => {
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-6 bg-slight-gray p-4 rounded-self">
-            <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+          <div className="flex items-center gap-6 p-4 bg-slight-gray rounded-self">
+            <button className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
               <IoMdAdd size={25} className="text-navy" />
             </button>
             <input
               type="text"
-              class="flex-1 bg-transparent placeholder-gray-400 text-xl outline-none"
+              className="flex-1 text-xl placeholder-gray-400 bg-transparent outline-none"
               placeholder="Type your message here for //general"
+              value={messageInput}
+              onChange={(e) => setMessageInput(e.target.value)}
             />
-            <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+            <button
+              className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg"
+              onClick={handleMessageSend}
+            >
               <FiSend size={25} className="text-navy" />
             </button>
           </div>
