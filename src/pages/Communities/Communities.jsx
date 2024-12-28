@@ -63,6 +63,10 @@ const Communities = () => {
   );
   const [messages, setMessages] = useState(messagesData);
   const [messageInput, setMessageInput] = useState("");
+
+  const handleCommunitySelect = (community) => {
+    setSelectedCommunity(community);
+  };
   return (
     <div>
       <Navbar />
