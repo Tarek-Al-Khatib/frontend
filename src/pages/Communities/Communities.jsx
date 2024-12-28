@@ -138,22 +138,14 @@ const Communities = () => {
               Moderators
             </hutton>
             <div class="space-y-3">
-              <button class="flex items-center space-x-3">
-                <div class="w-6 h-6 bg-white rounded"></div>
-                <div class="text-white text-sm font-thin">Moderator name</div>
-              </button>
-              <button class="flex items-center space-x-3">
-                <div class="w-6 h-6 bg-white rounded"></div>
-                <div class="text-white text-sm font-thin">Moderator name</div>
-              </button>
-              <button class="flex items-center space-x-3">
-                <div class="w-6 h-6 bg-white rounded"></div>
-                <div class="text-white text-sm font-thin">Moderator name</div>
-              </button>
-              <button class="flex items-center space-x-3">
-                <div class="w-6 h-6 bg-white rounded"></div>
-                <div class="text-white text-sm font-thin">Moderator name</div>
-              </button>
+              {moderatorsData.map((moderator, index) => (
+                <button key={index} className="flex items-center space-x-3">
+                  <div className="w-6 h-6 bg-white rounded"></div>
+                  <div className="text-sm font-thin text-white">
+                    {moderator.name}
+                  </div>
+                </button>
+              ))}
             </div>
           </div>
         </div>
