@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Dashboard.css";
@@ -6,7 +6,98 @@ import { LuGraduationCap } from "react-icons/lu";
 import { RiSpeakFill } from "react-icons/ri";
 import { MdPeopleAlt } from "react-icons/md";
 import { FaUserPen } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
+  const navigation = useNavigate();
+  const [topLearningPicks, setTopLearningPicks] = useState([]);
+  const [topCommunities, setTopCommunities] = useState([]);
+  const [dashboardButtons, setDashboardButtons] = useState([]);
+
+  useEffect(() => {
+    // Example static data for top learning picks
+    setTopLearningPicks([
+      {
+        id: 1,
+        title: "Become a Full Stack Developer",
+        category: "Web Development",
+        imageUrl: "bg-navy", // use your actual image URLs
+        lessons: [
+          "Introduction to web development",
+          "Learn the basics",
+          "What is a library?",
+          "Learn about JavaScript",
+          "Create your first React page",
+        ],
+      },
+      {
+        id: 2,
+        title: "Learn Data Science",
+        category: "Data Science",
+        imageUrl: "bg-green-500",
+        lessons: [
+          "Intro to Data Science",
+          "Learn Python",
+          "Statistics for Data Science",
+          "Data Visualization",
+        ],
+      },
+      {
+        id: 2,
+        title: "Learn Data Science",
+        category: "Data Science",
+        imageUrl: "bg-green-500",
+        lessons: [
+          "Intro to Data Science",
+          "Learn Python",
+          "Statistics for Data Science",
+          "Data Visualization",
+        ],
+      },
+    ]);
+
+    // Example static data for top communities
+    setTopCommunities([
+      {
+        id: 1,
+        name: "React Lovers",
+        description: "Join us to know more about React!",
+      },
+      {
+        id: 2,
+        name: "Frontend Devs",
+        description: "A community for frontend enthusiasts.",
+      },
+    ]);
+
+    // Example static data for dashboard buttons
+    setDashboardButtons([
+      {
+        id: 1,
+        label: "My Learning",
+        icon: <LuGraduationCap size={80} />,
+        url: "/learning",
+      },
+      {
+        id: 2,
+        label: "My Interviews",
+        icon: <RiSpeakFill size={80} />,
+        url: "/interview",
+      },
+      {
+        id: 3,
+        label: "Communities",
+        icon: <MdPeopleAlt size={80} />,
+        url: "/community",
+      },
+      {
+        id: 4,
+        label: "My Profile",
+        icon: <FaUserPen size={80} />,
+        url: "/profile",
+      },
+    ]);
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -41,38 +132,22 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="grid w-2/5 grid-cols-2 gap-7">
-            <button className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600">
-              <div className="flex items-center justify-center dashboard-buttons-icons">
-                <LuGraduationCap size={80} />
-              </div>
-              <p className="my-1 mt-5 text-xl font-medium text-black">
-                My Learning
-              </p>
-            </button>
-            <button className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600">
-              <div className="flex items-center justify-center dashboard-buttons-icons">
-                <RiSpeakFill size={80} />
-              </div>
-              <p className="my-1 mt-5 text-xl font-medium text-black">
-                My Interviews
-              </p>
-            </button>
-            <button className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600">
-              <div className="flex items-center justify-center dashboard-buttons-icons">
-                <MdPeopleAlt size={80} />
-              </div>
-              <p className="my-1 mt-5 text-xl font-medium text-black">
-                Communities
-              </p>
-            </button>
-            <button className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600">
-              <div className="flex items-center justify-center dashboard-buttons-icons">
-                <FaUserPen size={80} />
-              </div>
-              <p className="my-1 mt-5 text-xl font-medium text-black">
-                My Profile
-              </p>
-            </button>
+            {dashboardButtons.map((button) => (
+              <button
+                key={button.id}
+                className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600"
+                onClick={() => {
+                  navigation(button.url);
+                }}
+              >
+                <div className="flex items-center justify-center dashboard-buttons-icons">
+                  {button.icon}
+                </div>
+                <p className="my-1 mt-5 text-xl font-medium text-black">
+                  {button.label}
+                </p>
+              </button>
+            ))}
           </div>
         </div>
 
@@ -82,78 +157,32 @@ const Dashboard = () => {
               Top Learning Picks
             </h2>
             <div className="flex items-center justify-center ">
-              <div className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded">
-                <div>
-                  <div className="w-full h-48 mb-1 bg-navy rounded-3xl"></div>
-                  <div className="inline-block mb-1 text-sm font-bold text-center rounded-full px-9 bg-light-navy text-cyan">
-                    Category
+              {topLearningPicks.map((pick) => (
+                <div
+                  key={pick.id}
+                  className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded"
+                >
+                  <div>
+                    <div
+                      className={`w-full h-48 mb-1 ${pick.imageUrl} rounded-3xl`}
+                    ></div>
+                    <div className="inline-block mb-1 text-sm font-bold text-center rounded-full px-9 bg-light-navy text-cyan">
+                      {pick.category}
+                    </div>
+                    <h3 className="text-xl font-bold text-navy">
+                      {pick.title}
+                    </h3>
                   </div>
-                  <h3 className="text-xl font-bold text-navy">
-                    Become a Full Stack Developer
-                  </h3>
+                  <ul className="p-4 text-base list-disc text-navy text-start">
+                    {pick.lessons.map((lesson, index) => (
+                      <li key={index}>{lesson}</li>
+                    ))}
+                  </ul>
+                  <button className="w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                    Add to your learning
+                  </button>
                 </div>
-                <ul className="p-4 text-base list-disc text-navy text-start">
-                  <li>Introduction to web development</li>
-                  <li>Learn the basics</li>
-                  <li>What is a library?</li>
-                  <li>Learn about JavaScript</li>
-                  <li>Do a dynamic website</li>
-                  <li>Learn about ReactJS</li>
-                  <li>Create your first React page</li>
-                  <li>What is a framework?</li>
-                </ul>
-                <button className="w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                  Add to your learning
-                </button>
-              </div>
-              <div className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded">
-                <div>
-                  <div className="w-full h-48 mb-1 bg-navy rounded-3xl"></div>
-                  <div className="inline-block mb-1 text-sm font-bold text-center rounded-full px-9 bg-light-navy text-cyan">
-                    Category
-                  </div>
-                  <h3 className="text-xl font-bold text-navy">
-                    Become a Full Stack Developer
-                  </h3>
-                </div>
-                <ul className="p-4 text-base list-disc text-navy text-start">
-                  <li>Introduction to web development</li>
-                  <li>Learn the basics</li>
-                  <li>What is a library?</li>
-                  <li>Learn about JavaScript</li>
-                  <li>Do a dynamic website</li>
-                  <li>Learn about ReactJS</li>
-                  <li>Create your first React page</li>
-                  <li>What is a framework?</li>
-                </ul>
-                <button className="w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                  Add to your learning
-                </button>
-              </div>
-              <div className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded">
-                <div>
-                  <div className="w-full h-48 mb-1 bg-navy rounded-3xl"></div>
-                  <div className="inline-block mb-1 text-sm font-bold text-center rounded-full px-9 bg-light-navy text-cyan">
-                    Category
-                  </div>
-                  <h3 className="text-xl font-bold text-navy">
-                    Become a Full Stack Developer
-                  </h3>
-                </div>
-                <ul className="p-4 text-base list-disc text-navy text-start">
-                  <li>Introduction to web development</li>
-                  <li>Learn the basics</li>
-                  <li>What is a library?</li>
-                  <li>Learn about JavaScript</li>
-                  <li>Do a dynamic website</li>
-                  <li>Learn about ReactJS</li>
-                  <li>Create your first React page</li>
-                  <li>What is a framework?</li>
-                </ul>
-                <button className="w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                  Add to your learning
-                </button>
-              </div>
+              ))}
             </div>
             <div></div>
           </div>
