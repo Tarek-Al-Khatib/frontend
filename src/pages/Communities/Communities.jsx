@@ -159,44 +159,28 @@ const Communities = () => {
             </p>
             <hr class="border-t border-blue-900 mb-6" />
           </div>
-          <div class="flex flex-col gap-5 flex-grow">
-            <div>
-              <div class="flex items-start gap-7">
-                <div class="w-12 h-12 bg-blue-900 rounded-full"></div>
-                <div class="flex-1">
-                  <div class="flex items-center justify-between gap-6 w-fit">
-                    <div class="text-sm text-blue-900 font-bold">Name</div>
-                    <div class="px-2 py-1 bg-blue-900 text-white text-xs rounded">
-                      Badge
+          <div className="flex flex-col flex-grow gap-5">
+            {messages.map((message, index) => (
+              <div key={index}>
+                <div className="flex items-start gap-7">
+                  <div className="w-12 h-12 bg-blue-900 rounded-full"></div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between gap-6 w-fit">
+                      <div className="text-sm font-bold text-blue-900">
+                        {message.name}
+                      </div>
+                      <div className="px-2 py-1 text-xs text-white bg-blue-900 rounded">
+                        {message.badge}
+                      </div>
+                      <div className="text-sm text-blue-900">
+                        {message.timestamp}
+                      </div>
                     </div>
-                    <div class="text-blue-900 text-sm">17-8-2024 7:42 PM</div>
+                    <p className="text-base text-black">{message.message}</p>
                   </div>
-                  <p class="text-base text-black">
-                    Hello Everyone <br />
-                    I'm so excited to start learning today!
-                  </p>
                 </div>
               </div>
-            </div>
-
-            <div>
-              <div class="flex items-start gap-7">
-                <div class="w-12 h-12 bg-blue-900 rounded-full"></div>
-                <div class="flex-1">
-                  <div class="flex items-center justify-between gap-6 w-fit">
-                    <div class="text-sm text-blue-900 font-bold">Name 2</div>
-                    <div class="px-2 py-1 bg-blue-900 text-white text-xs rounded">
-                      Badge
-                    </div>
-                    <div class="text-blue-900 text-sm">17-8-2024 7:45 PM</div>
-                  </div>
-                  <p class="text-base text-black">
-                    Me too ! <br />
-                    By the way where are you from ?
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
           <div className="flex items-center gap-6 p-4 bg-slight-gray rounded-self">
             <button className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
