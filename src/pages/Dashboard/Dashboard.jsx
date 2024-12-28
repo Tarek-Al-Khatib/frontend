@@ -14,13 +14,12 @@ const Dashboard = () => {
   const [dashboardButtons, setDashboardButtons] = useState([]);
 
   useEffect(() => {
-    // Example static data for top learning picks
     setTopLearningPicks([
       {
         id: 1,
         title: "Become a Full Stack Developer",
         category: "Web Development",
-        imageUrl: "bg-navy", // use your actual image URLs
+        imageUrl: "bg-navy",
         lessons: [
           "Introduction to web development",
           "Learn the basics",
@@ -55,7 +54,6 @@ const Dashboard = () => {
       },
     ]);
 
-    // Example static data for top communities
     setTopCommunities([
       {
         id: 1,
@@ -67,9 +65,28 @@ const Dashboard = () => {
         name: "Frontend Devs",
         description: "A community for frontend enthusiasts.",
       },
+      {
+        id: 2,
+        name: "Frontend Devs",
+        description: "A community for frontend enthusiasts.",
+      },
+      {
+        id: 2,
+        name: "Frontend Devs",
+        description: "A community for frontend enthusiasts.",
+      },
+      {
+        id: 2,
+        name: "Frontend Devs",
+        description: "A community for frontend enthusiasts.",
+      },
+      {
+        id: 2,
+        name: "Frontend Devs",
+        description: "A community for frontend enthusiasts.",
+      },
     ]);
 
-    // Example static data for dashboard buttons
     setDashboardButtons([
       {
         id: 1,
@@ -191,90 +208,25 @@ const Dashboard = () => {
               Top Communities
             </h2>
             <div className="grid grid-cols-1 p-4 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-              <div className="flex flex-col items-center justify-center p-4 rounded">
-                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
-
-                <div className="self-start">
-                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
-                  <p className="text-base font-normal text-navy">
-                    Join us to know more about react !
-                  </p>
+              {topCommunities.map((community) => (
+                <div
+                  key={community.id}
+                  className="flex flex-col items-center justify-center p-4 rounded"
+                >
+                  <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
+                  <div className="self-start">
+                    <h3 className="text-xl font-bold text-navy">
+                      {community.name}
+                    </h3>
+                    <p className="text-base font-normal text-navy">
+                      {community.description}
+                    </p>
+                  </div>
+                  <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                    Join Community
+                  </button>
                 </div>
-
-                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                  Join Community
-                </button>
-              </div>
-              <div className="flex flex-col items-center justify-center p-4 rounded">
-                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
-
-                <div className="self-start">
-                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
-                  <p className="text-base font-normal text-navy">
-                    Join us to know more about react !
-                  </p>
-                </div>
-
-                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                  Join Community
-                </button>
-              </div>
-              <div className="flex flex-col items-center justify-center p-4 rounded">
-                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
-
-                <div className="self-start">
-                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
-                  <p className="text-base font-normal text-navy">
-                    Join us to know more about react !
-                  </p>
-                </div>
-
-                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                  Join Community
-                </button>
-              </div>
-              <div className="flex flex-col items-center justify-center p-4 rounded">
-                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
-
-                <div className="self-start">
-                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
-                  <p className="text-base font-normal text-navy">
-                    Join us to know more about react !
-                  </p>
-                </div>
-
-                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                  Join Community
-                </button>
-              </div>
-              <div className="flex flex-col items-center justify-center p-4 rounded">
-                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
-
-                <div className="self-start">
-                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
-                  <p className="text-base font-normal text-navy">
-                    Join us to know more about react !
-                  </p>
-                </div>
-
-                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                  Join Community
-                </button>
-              </div>
-              <div className="flex flex-col items-center justify-center p-4 rounded">
-                <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
-
-                <div className="self-start">
-                  <h3 className="text-xl font-bold text-navy">React Lovers</h3>
-                  <p className="text-base font-normal text-navy">
-                    Join us to know more about react !
-                  </p>
-                </div>
-
-                <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                  Join Community
-                </button>
-              </div>
+              ))}
             </div>
             <div></div>
           </div>
