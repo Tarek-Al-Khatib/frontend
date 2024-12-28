@@ -1,9 +1,27 @@
 import { TextField } from "@mui/material";
 import "./Signup.css";
 import "../../css/base.css";
-import React from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { authContext } from "../../contexts/AuthContext/AuthContext";
 
 const SignUp = () => {
+  const navigation = useNavigate();
+  const { fetchSignup } = useContext(authContext);
+  const [error, setError] = useState("");
+  const [alertVisible, setAlertVisible] = useState(false);
+
+  const [signupState, setSignupState] = useState({
+    email: "",
+    username: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setSignupState({ ...signupState, [id]: value });
+    setError("");
+  };
   return (
     <div className="signup-container">
       <div className="flex flex-col items-center justify-center min-h-screen">
@@ -27,7 +45,7 @@ const SignUp = () => {
                   </label>
                   <TextField
                     id="username"
-                    // onChange={handleInputChange}
+                    onChange={handleInputChange}
                     variant="outlined"
                     sx={{
                       width: "100%",
@@ -50,7 +68,7 @@ const SignUp = () => {
                   </label>
                   <TextField
                     id="email"
-                    // onChange={handleInputChange}
+                    onChange={handleInputChange}
                     variant="outlined"
                     sx={{
                       width: "100%",
@@ -76,7 +94,7 @@ const SignUp = () => {
                     id="password"
                     type="password"
                     variant="outlined"
-                    // onChange={handleInputChange}
+                    onChange={handleInputChange}
                     sx={{
                       width: "100%",
                       "& .MuiOutlinedInput-root": {
@@ -92,7 +110,7 @@ const SignUp = () => {
 
               <button
                 className="w-full py-3 text-2xl font-extrabold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
-                // onClick={handleSignIn}
+                onClick={handleSignup}
               >
                 Sign in
               </button>
