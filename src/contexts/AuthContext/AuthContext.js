@@ -43,12 +43,10 @@ const AuthProvider = ({ children }) => {
 
       localStorage.setItem("authToken", token);
 
-      return user;
+      return { successful: true, error: null };
     } catch (error) {
-      console.error("Error during signup:", error);
-      throw new Error(
-        error.response?.data?.error || "Failed to sign up. Please try again."
-      );
+      console.error("Error during login:", error);
+      return { successful: false, error };
     }
   };
 
