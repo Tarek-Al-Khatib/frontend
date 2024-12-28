@@ -6,18 +6,39 @@ export const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
-  const fetchPlans = async () => {};
+  const fetchLogin = async (emailOrUsername, password) => {
+    try {
+      const response = await axios.post("/api/auth/login", {
+        emailOrUsername,
+        password,
+      });
+      const { user, token } = response.data;
 
-  const addPlan = async () => {};
+      setUser(user);
+      setToken(token);
+
+      localStorage.setItem("authToken", token);
+
+      return user;
+    } catch (error) {
+      console.error("Error during login:", error);
+      throw new Error(
+        error.response?.data?.error || "Failed to log in. Please try again."
+      );
+    }
+  };
+
+  const fetchSignup = async () => {};
 
   return (
     <authContext.Provider
       value={{
         user,
         userId: user.id,
-        fetchPlans,
-        addPlan,
+        fetchLogin,
+        fetchSignup,
       }}
     >
       {children}
