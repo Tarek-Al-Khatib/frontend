@@ -3,6 +3,8 @@ import "../../css/custom-scroll.css";
 import CircularWithValueLabel from "../../components/CircularProgressWithLabel/CircularProgressWithLabel";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import Completed from "../../assets/completed.png";
+import Progress from "../../assets/progress.png";
 import { Divider } from "@mui/material";
 
 const Learning = () => {
@@ -11,26 +13,186 @@ const Learning = () => {
       id: 1,
       title: "React Mastery Plan",
       description: "Learn React from beginner to advanced concepts.",
-      progress: 70, // Progress percentage
+      progress: 70,
       isCompleted: false,
       steps: [
         {
           id: 1,
           title: "Step 1",
+          is_completed: true,
           description: "Learn JSX and Components",
-          icon: "https://via.placeholder.com/61x59",
         },
         {
           id: 2,
           title: "Step 2",
+          is_completed: true,
           description: "State and Props",
-          icon: "https://via.placeholder.com/61x59",
         },
         {
           id: 3,
           title: "Step 3",
+          is_completed: false,
           description: "Routing with React Router",
-          icon: "https://via.placeholder.com/61x59",
+        },
+      ],
+    },
+    {
+      id: 1,
+      title: "React Mastery Plan",
+      description: "Learn React from beginner to advanced concepts.",
+      progress: 70,
+      isCompleted: false,
+      steps: [
+        {
+          id: 1,
+          title: "Step 1",
+          is_completed: true,
+          description: "Learn JSX and Components",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          is_completed: true,
+          description: "State and Props",
+        },
+        {
+          id: 3,
+          title: "Step 3",
+          is_completed: false,
+          description: "Routing with React Router",
+        },
+      ],
+    },
+    {
+      id: 1,
+      title: "React Mastery Plan",
+      description: "Learn React from beginner to advanced concepts.",
+      progress: 70,
+      isCompleted: false,
+      steps: [
+        {
+          id: 1,
+          title: "Step 1",
+          is_completed: true,
+          description: "Learn JSX and Components",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          is_completed: true,
+          description: "State and Props",
+        },
+        {
+          id: 3,
+          title: "Step 3",
+          is_completed: false,
+          description: "Routing with React Router",
+        },
+      ],
+    },
+    {
+      id: 1,
+      title: "React Mastery Plan",
+      description: "Learn React from beginner to advanced concepts.",
+      progress: 70,
+      isCompleted: false,
+      steps: [
+        {
+          id: 1,
+          title: "Step 1",
+          is_completed: true,
+          description: "Learn JSX and Components",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          is_completed: true,
+          description: "State and Props",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          is_completed: true,
+          description: "State and Props",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          is_completed: true,
+          description: "State and Props",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          is_completed: true,
+          description: "State and Props",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          is_completed: true,
+          description: "State and Props",
+        },
+
+        {
+          id: 3,
+          title: "Step 3",
+          is_completed: false,
+          description: "Routing with React Router",
+        },
+      ],
+    },
+    {
+      id: 1,
+      title: "React Mastery Plan",
+      description: "Learn React from beginner to advanced concepts.",
+      progress: 70,
+      isCompleted: false,
+      steps: [
+        {
+          id: 1,
+          title: "Step 1",
+          is_completed: true,
+          description: "Learn JSX and Components",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          is_completed: true,
+          description: "State and Props",
+        },
+        {
+          id: 3,
+          title: "Step 3",
+          is_completed: false,
+          description: "Routing with React Router",
+        },
+      ],
+    },
+    {
+      id: 1,
+      title: "React Mastery Plan",
+      description: "Learn React from beginner to advanced concepts.",
+      progress: 70,
+      isCompleted: false,
+      steps: [
+        {
+          id: 1,
+          title: "Step 1",
+          is_completed: true,
+          description: "Learn JSX and Components",
+        },
+        {
+          id: 2,
+          title: "Step 2",
+          is_completed: true,
+          description: "State and Props",
+        },
+        {
+          id: 3,
+          title: "Step 3",
+          is_completed: false,
+          description: "Routing with React Router",
         },
       ],
     },
@@ -41,7 +203,7 @@ const Learning = () => {
       <div key={index} className="flex items-center space-x-4">
         <img
           className="w-14 h-14"
-          src="https://via.placeholder.com/61x59"
+          src={step.is_completed ? Completed : Progress}
           alt="Step Icon"
         />
         <div>
@@ -88,7 +250,7 @@ const Learning = () => {
                 Add Plan
               </button>
             </div>
-            <div className="flex justify-center gap-10 mb-12 h-60">
+            <div className="flex justify-center gap-10 h-60">
               <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl">
                 <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy"></div>
                 <div>
@@ -128,35 +290,37 @@ const Learning = () => {
           </div>
         </div>
 
-        <div>
-          {plans.map((plan, index) => (
-            <div
-              key={index}
-              className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]"
-            >
-              <div className="flex gap-6">
-                <div>
-                  <div className="mb-4 text-2xl font-bold text-navy">
-                    {plan.title}
+        <div className="overflow-x-auto scroll-container custom-scrollbar">
+          <div className="flex gap-9 min-w-max">
+            {plans.map((plan, index) => (
+              <div
+                key={index}
+                className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]"
+              >
+                <div className="flex gap-6">
+                  <div>
+                    <div className="mb-4 text-2xl font-bold text-navy">
+                      {plan.title}
+                    </div>
+                    <div className="mb-6 text-xl font-normal text-navy">
+                      {plan.description}
+                    </div>
                   </div>
-                  <div className="mb-6 text-xl font-normal text-navy">
-                    {plan.description}
+                  <div>
+                    <CircularWithValueLabel value={plan.progress} size={60} />
                   </div>
                 </div>
-                <div>
-                  <CircularWithValueLabel value={plan.progress} size={60} />
-                </div>
-              </div>
 
-              <div className="relative p-4 bg-white ">
-                <div className="space-y-4 h-[400px] overflow-y-auto custom-scrollbar">
-                  {renderPlanSteps(plan.steps)}
+                <div className="relative p-4 bg-white ">
+                  <div className="space-y-4 h-[400px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
+                    {renderPlanSteps(plan.steps)}
+                  </div>
+                  <div className="absolute top-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-b from-white via-white/70 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-t from-white via-white/70 to-transparent"></div>
                 </div>
-                <div className="absolute top-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-b from-white via-white/70 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-t from-white via-white/70 to-transparent"></div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       <Footer />
