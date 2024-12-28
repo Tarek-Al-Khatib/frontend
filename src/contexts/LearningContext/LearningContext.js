@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 export const learningContext = createContext();
 
@@ -31,3 +31,5 @@ const LearningProvider = ({ children }) => {
     </learningContext.Provider>
   );
 };
+
+export default LearningProvider;
