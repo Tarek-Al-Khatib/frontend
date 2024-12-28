@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Communities.css";
@@ -57,6 +57,12 @@ const Communities = () => {
       message: "Me too! By the way, where are you from?",
     },
   ];
+
+  const [selectedCommunity, setSelectedCommunity] = useState(
+    communitiesData[0]
+  );
+  const [messages, setMessages] = useState(messagesData);
+  const [messageInput, setMessageInput] = useState("");
   return (
     <div>
       <Navbar />
