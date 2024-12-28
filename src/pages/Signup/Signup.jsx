@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Alert, AlertTitle, Collapse, TextField } from "@mui/material";
 import "./Signup.css";
 import "../../css/base.css";
 import React, { useContext, useState } from "react";
@@ -43,6 +43,20 @@ const SignUp = () => {
   return (
     <div className="signup-container">
       <div className="flex flex-col items-center justify-center min-h-screen">
+        <Collapse
+          in={alertVisible}
+          sx={{
+            position: "absolute",
+            top: "20px",
+            zIndex: 1000,
+            width: "20%",
+          }}
+        >
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {error}
+          </Alert>
+        </Collapse>
         <div className="bg-white w-[477px] rounded-self shadow-lg flex flex-col items-center justify-center gap-10 pt-6 ">
           <div className="w-full">
             <div className="m-6">
