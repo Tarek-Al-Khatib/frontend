@@ -7,6 +7,56 @@ import { FiSend } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 const Communities = () => {
+  const communitiesData = [
+    {
+      id: 1,
+      name: "Community 1",
+      logo: "Logo 1",
+      description: "Description of Community 1",
+    },
+    {
+      id: 2,
+      name: "Community 2",
+      logo: "Logo 2",
+      description: "Description of Community 2",
+    },
+    {
+      id: 3,
+      name: "Community 3",
+      logo: "Logo 3",
+      description: "Description of Community 3",
+    },
+  ];
+
+  const channelsData = [
+    { name: "general", unread: 1 },
+    { name: "announcements", unread: 1 },
+    { name: "projects", unread: 1 },
+    { name: "q/a", unread: 1 },
+    { name: "discussion", unread: 1 },
+  ];
+
+  const moderatorsData = [
+    { name: "Moderator 1" },
+    { name: "Moderator 2" },
+    { name: "Moderator 3" },
+    { name: "Moderator 4" },
+  ];
+
+  const messagesData = [
+    {
+      name: "User 1",
+      badge: "Newbie",
+      timestamp: "17-8-2024 7:42 PM",
+      message: "Hello Everyone! I'm so excited to start learning today!",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+  ];
   return (
     <div>
       <Navbar />
