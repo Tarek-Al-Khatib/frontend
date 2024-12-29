@@ -21,7 +21,6 @@ const Learning = () => {
 
   useEffect(() => {
     fetchPlans();
-    console.log(learningPlans);
   }, []);
 
   const renderPlanSteps = (steps) =>
@@ -78,6 +77,20 @@ const Learning = () => {
     const progress = (completedSteps / totalSteps) * 100;
     return Math.round(progress);
   };
+
+  const calculateTotalStepsProgress = () => {
+    if (learningPlans.length > 0) {
+      let count = 0;
+      for (const plan of learningPlans) {
+        if (plan.steps.length > 0)
+          count += plan.steps.filter((s) => !s.is_completed).length;
+      }
+
+      return count;
+    } else {
+      return 0;
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -105,7 +118,7 @@ const Learning = () => {
                 <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy"></div>
                 <div>
                   <div className="mb-5 text-6xl font-bold text-center text-navy">
-                    13
+                    {learningPlans.length}
                   </div>
                   <div className="text-xl font-normal text-navy">
                     Plans Created
@@ -117,7 +130,7 @@ const Learning = () => {
                 <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy"></div>
                 <div>
                   <div className="mb-5 text-5xl font-bold text-center text-navy ">
-                    4
+                    {learningPlans.filter((l) => l.is_completed).length}
                   </div>
                   <div className="text-xl font-normal text-navy">
                     Plans Completed
@@ -129,7 +142,7 @@ const Learning = () => {
                 <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy"></div>
                 <div>
                   <div className="mb-5 text-5xl font-bold text-center text-navy ">
-                    7
+                    {calculateTotalStepsProgress()}
                   </div>
                   <div className="text-xl font-normal text-navy">
                     Steps in progress
