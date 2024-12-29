@@ -104,13 +104,28 @@ const CommunityProvider = ({ children }) => {
           },
         }
       );
-      // Update members or communities if needed
     } catch (error) {
       console.error("Error joining community:", error);
     }
   };
 
-  return <CommunityContext.Provider>{children}</CommunityContext.Provider>;
+  return (
+    <CommunityContext.Provider
+      value={{
+        communities,
+        channels,
+        members,
+        fetchUserCommunities,
+        fetchChannels,
+        fetchMembers,
+        createCommunity,
+        createChannel,
+        joinCommunity,
+      }}
+    >
+      {children}
+    </CommunityContext.Provider>
+  );
 };
 
 export default CommunityProvider;
