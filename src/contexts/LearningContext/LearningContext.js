@@ -23,7 +23,23 @@ const LearningProvider = ({ children }) => {
     }
   };
 
-  const addPlan = async () => {};
+  const addPlan = async (planData, steps) => {
+    try {
+      const response = await axios.post(
+        `${serverUrl}/api/learning/${user.id}`,
+        { planData, steps },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const newPlan = response.data.plan;
+      setLearningPlans((prevPlans) => [...prevPlans, newPlan]);
+    } catch (error) {
+      console.error("Error adding plan:", error);
+    }
+  };
 
   const updatePlan = async () => {};
 
