@@ -14,7 +14,7 @@ const CommunityProvider = ({ children }) => {
   const fetchUserCommunities = async () => {
     try {
       const response = await axios.get(
-        `${serverUrl}/api/communities/${user.id}`,
+        `${serverUrl}/api/community/${user.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -30,7 +30,7 @@ const CommunityProvider = ({ children }) => {
   const fetchChannels = async (communityId) => {
     try {
       const response = await axios.get(
-        `${serverUrl}/api/communities/${communityId}/channels`,
+        `${serverUrl}/api/community/${communityId}/channels`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -46,7 +46,7 @@ const CommunityProvider = ({ children }) => {
   const fetchMembers = async (communityId) => {
     try {
       const response = await axios.get(
-        `${serverUrl}/api/communities/${communityId}/members`,
+        `${serverUrl}/api/community/${communityId}/members`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -56,6 +56,23 @@ const CommunityProvider = ({ children }) => {
       setMembers(response.data);
     } catch (error) {
       console.error("Error fetching members:", error);
+    }
+  };
+
+  const createCommunity = async (communityData) => {
+    try {
+      const response = await axios.post(
+        `${serverUrl}/api/community/${user.id}`,
+        communityData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setCommunities((prev) => [...prev, response.data]);
+    } catch (error) {
+      console.error("Error creating community:", error);
     }
   };
 
