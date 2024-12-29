@@ -87,7 +87,31 @@ const LearningProvider = ({ children }) => {
     }
   };
 
-  const markStepAsDone = async () => {};
+  const markStepAsDone = async (stepId) => {
+    try {
+      const response = await axios.put(
+        `${serverUrl}/api/learning/step-done/${stepId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const updatedStep = response.data.step;
+
+      setLearningPlans((prevPlans) =>
+        prevPlans.map((plan) => ({
+          ...plan,
+          steps: plan.steps.map((step) =>
+            step.id === stepId ? { ...step, ...updatedStep } : step
+          ),
+        }))
+      );
+    } catch (error) {
+      console.error("Error marking step as done:", error);
+    }
+  };
 
   return (
     <learningContext.Provider
