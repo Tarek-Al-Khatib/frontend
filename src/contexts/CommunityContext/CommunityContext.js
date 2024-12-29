@@ -93,6 +93,23 @@ const CommunityProvider = ({ children }) => {
     }
   };
 
+  const joinCommunity = async (communityId, role = "USER") => {
+    try {
+      const response = await axios.post(
+        `${serverUrl}/api/communities/${user.id}/${communityId}/join`,
+        { role },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // Update members or communities if needed
+    } catch (error) {
+      console.error("Error joining community:", error);
+    }
+  };
+
   return <CommunityContext.Provider>{children}</CommunityContext.Provider>;
 };
 
