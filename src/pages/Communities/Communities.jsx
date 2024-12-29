@@ -64,10 +64,7 @@ const Communities = () => {
   const [messages, setMessages] = useState(messagesData);
   const [messageInput, setMessageInput] = useState("");
 
-  const parseTimestamp = (timestamp) => {
-    const date = new Date(timestamp);
-    return date.getTime();
-  };
+  const parseTimestamp = (timestamp) => new Date(timestamp).getTime();
 
   const getMessageDuration = (prevTimestamp, currentTimestamp) => {
     const prevTime = parseTimestamp(prevTimestamp);
@@ -79,13 +76,23 @@ const Communities = () => {
     setSelectedCommunity(community);
   };
 
+  const handleMessageSend = () => {
+    if (messageInput.trim()) {
+      const newMessage = {
+        name: "You",
+        badge: "Learner",
+        timestamp: new Date().toLocaleString(),
+        message: messageInput.trim(),
+      };
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      setMessageInput("");
+    }
+  };
+
   const renderMessages = () => {
     const combinedMessages = [];
-
-    for (let i = 0; i < messages.length; i++) {
-      const currentMessage = messages[i];
-      const previousMessage = messages[i - 1];
-
+    messages.forEach((currentMessage, index) => {
+      const previousMessage = messages[index - 1];
       if (
         previousMessage &&
         previousMessage.name === currentMessage.name &&
@@ -98,25 +105,14 @@ const Communities = () => {
           combinedMessages.length - 1
         ].message += `<br />${currentMessage.message}`;
       } else {
-        combinedMessages.push(currentMessage);
+        combinedMessages.push({ ...currentMessage });
       }
-    }
-
+    });
     return combinedMessages;
   };
 
-  const handleMessageSend = () => {
-    if (messageInput.trim()) {
-      const newMessage = {
-        name: "You",
-        badge: "Learner",
-        timestamp: new Date().toLocaleString(),
-        message: messageInput,
-      };
-      setMessages([...messages, newMessage]);
-      setMessageInput("");
-    }
-  };
+  const messagesToRender = renderMessages();
+
   return (
     <div>
       <Navbar />
@@ -197,27 +193,32 @@ const Communities = () => {
             <hr class="border-t border-blue-900 mb-6" />
           </div>
           <div className="flex flex-col flex-grow gap-5">
-            {messages.map((message, index) => (
-              <div key={index}>
-                <div className="flex items-start gap-7">
-                  <div className="w-12 h-12 bg-blue-900 rounded-full"></div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between gap-6 w-fit">
-                      <div className="text-sm font-bold text-blue-900">
-                        {message.name}
+            <div className="flex flex-col flex-grow gap-5">
+              {messagesToRender.map((message, index) => (
+                <div key={index}>
+                  <div className="flex items-start gap-7">
+                    <div className="w-12 h-12 bg-blue-900 rounded-full"></div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-6 w-fit">
+                        <div className="text-sm font-bold text-blue-900">
+                          {message.name}
+                        </div>
+                        <div className="px-2 py-1 text-xs text-white bg-blue-900 rounded">
+                          {message.badge}
+                        </div>
+                        <div className="text-sm text-blue-900">
+                          {message.timestamp}
+                        </div>
                       </div>
-                      <div className="px-2 py-1 text-xs text-white bg-blue-900 rounded">
-                        {message.badge}
-                      </div>
-                      <div className="text-sm text-blue-900">
-                        {message.timestamp}
-                      </div>
+                      <p
+                        className="text-base text-black"
+                        dangerouslySetInnerHTML={{ __html: message.message }}
+                      ></p>
                     </div>
-                    <p className="text-base text-black">{message.message}</p>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           <div className="flex items-center gap-6 p-4 bg-slight-gray rounded-self">
             <button className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
@@ -229,6 +230,12 @@ const Communities = () => {
               placeholder="Type your message here for //general"
               value={messageInput}
               onChange={(e) => setMessageInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleMessageSend();
+                }
+              }}
             />
             <button
               className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg"
