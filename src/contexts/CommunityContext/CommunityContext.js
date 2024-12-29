@@ -27,6 +27,22 @@ const CommunityProvider = ({ children }) => {
     }
   };
 
+  const fetchChannels = async (communityId) => {
+    try {
+      const response = await axios.get(
+        `${serverUrl}/api/communities/${communityId}/channels`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setChannels(response.data);
+    } catch (error) {
+      console.error("Error fetching channels:", error);
+    }
+  };
+
   return <CommunityContext.Provider>{children}</CommunityContext.Provider>;
 };
 
