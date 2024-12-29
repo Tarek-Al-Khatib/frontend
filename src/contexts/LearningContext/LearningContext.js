@@ -64,7 +64,28 @@ const LearningProvider = ({ children }) => {
     }
   };
 
-  const markPlanAsDone = async () => {};
+  const markPlanAsDone = async (planId) => {
+    try {
+      const response = await axios.put(
+        `${serverUrl}/api/learning/plan-done/${planId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const updatedPlan = response.data.plan;
+
+      setLearningPlans((prevPlans) =>
+        prevPlans.map((plan) =>
+          plan.id === planId ? { ...plan, ...updatedPlan } : plan
+        )
+      );
+    } catch (error) {
+      console.error("Error marking plan as done:", error);
+    }
+  };
 
   const markStepAsDone = async () => {};
 
