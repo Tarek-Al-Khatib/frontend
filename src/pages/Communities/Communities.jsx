@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Communities.css";
@@ -56,13 +56,109 @@ const Communities = () => {
       timestamp: "17-8-2024 7:45 PM",
       message: "Me too! By the way, where are you from?",
     },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
+    {
+      name: "User 2",
+      badge: "Learner",
+      timestamp: "17-8-2024 7:45 PM",
+      message: "Me too! By the way, where are you from?",
+    },
   ];
 
   const [selectedCommunity, setSelectedCommunity] = useState(
     communitiesData[0]
   );
+  const messagesContainerRef = useRef(null);
   const [messages, setMessages] = useState(messagesData);
   const [messageInput, setMessageInput] = useState("");
+
+  useEffect(() => {
+    if (messages[messages.length - 1].name === "You") scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop =
+        messagesContainerRef.current.scrollHeight;
+    }
+  };
 
   const parseTimestamp = (timestamp) => new Date(timestamp).getTime();
 
@@ -183,7 +279,7 @@ const Communities = () => {
           </div>
         </div>
 
-        <div class="flex flex-col flex-grow bg-white p-6">
+        <div class="flex flex-col flex-grow bg-white p-6 gap-4">
           <div>
             <h1 class="text-4xl text-navy mb-4">Welcome to //general</h1>
             <p class="text-xl text-navy mb-4 font-thin">
@@ -192,8 +288,11 @@ const Communities = () => {
             </p>
             <hr class="border-t border-blue-900 mb-6" />
           </div>
-          <div className="flex flex-col flex-grow gap-5">
-            <div className="flex flex-col flex-grow gap-5">
+          <div
+            ref={messagesContainerRef}
+            className="flex flex-col flex-grow gap-5 overflow-y-auto scroll-container custom-scrollbar scroll-smooth"
+          >
+            <div className="flex flex-col flex-grow gap-5 ">
               {messagesToRender.map((message, index) => (
                 <div key={index}>
                   <div className="flex items-start gap-7">
