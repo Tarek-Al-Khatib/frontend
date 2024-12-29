@@ -76,6 +76,23 @@ const CommunityProvider = ({ children }) => {
     }
   };
 
+  const createChannel = async (communityId, channelData) => {
+    try {
+      const response = await axios.post(
+        `${serverUrl}/api/communities/${user.id}/${communityId}/channels`,
+        channelData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setChannels((prev) => [...prev, response.data]);
+    } catch (error) {
+      console.error("Error creating channel:", error);
+    }
+  };
+
   return <CommunityContext.Provider>{children}</CommunityContext.Provider>;
 };
 
