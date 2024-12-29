@@ -33,7 +33,9 @@ const Learning = () => {
           alt="Step Icon"
         />
         <div>
-          <div className="text-base font-normal text-navy">{step.title}</div>
+          <div className="text-base font-normal text-navy">
+            {step.step_title}
+          </div>
           <Divider
             orientation="horizontal"
             textAlign="center"
@@ -48,7 +50,7 @@ const Learning = () => {
             }}
           ></Divider>
           <div className="text-2xl font-normal text-navy">
-            {step.description}
+            {step.step_description}
           </div>
         </div>
       </div>
@@ -155,7 +157,10 @@ const Learning = () => {
                     </div>
                   </div>
                   <div>
-                    <CircularWithValueLabel value={plan.progress} size={60} />
+                    <CircularWithValueLabel
+                      value={calculateProgress(plan)}
+                      size={60}
+                    />
                   </div>
                 </div>
 
