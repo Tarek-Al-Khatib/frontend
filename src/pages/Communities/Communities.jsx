@@ -238,11 +238,11 @@ const Communities = () => {
           </div>
 
           <div className="mb-10">
-            <hutton className="flex items-center mb-3 text-lg font-bold text-white">
+            <button className="flex items-center mb-3 text-lg font-bold text-white">
               <IoIosArrowForward />
               <IoIosArrowDown />
               Channels
-            </hutton>
+            </button>
             <div className="flex flex-col">
               {channelsData.map((channel, index) => (
                 <button
@@ -261,11 +261,11 @@ const Communities = () => {
           </div>
 
           <div>
-            <hutton className="flex items-center mb-3 text-lg font-bold text-white">
+            <button className="flex items-center mb-3 text-lg font-bold text-white">
               <IoIosArrowForward />
               <IoIosArrowDown />
               Moderators
-            </hutton>
+            </button>
             <div className="space-y-3">
               {moderatorsData.map((moderator, index) => (
                 <button key={index} className="flex items-center space-x-3">
