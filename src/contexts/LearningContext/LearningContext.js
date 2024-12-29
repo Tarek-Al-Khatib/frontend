@@ -41,7 +41,28 @@ const LearningProvider = ({ children }) => {
     }
   };
 
-  const updatePlan = async () => {};
+  const updatePlan = async (planId, planData, steps) => {
+    try {
+      const response = await axios.put(
+        `${serverUrl}/api/learning/${planId}`,
+        { planData, steps },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const updatedPlan = response.data.plan;
+
+      setLearningPlans((prevPlans) =>
+        prevPlans.map((plan) =>
+          plan.id === planId ? { ...plan, ...updatedPlan } : plan
+        )
+      );
+    } catch (error) {
+      console.error("Error updating plan:", error);
+    }
+  };
 
   const markPlanAsDone = async () => {};
 
