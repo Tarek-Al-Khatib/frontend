@@ -43,6 +43,22 @@ const CommunityProvider = ({ children }) => {
     }
   };
 
+  const fetchMembers = async (communityId) => {
+    try {
+      const response = await axios.get(
+        `${serverUrl}/api/communities/${communityId}/members`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setMembers(response.data);
+    } catch (error) {
+      console.error("Error fetching members:", error);
+    }
+  };
+
   return <CommunityContext.Provider>{children}</CommunityContext.Provider>;
 };
 
