@@ -5,9 +5,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Completed from "../../assets/completed.png";
 import Progress from "../../assets/progress.png";
+import { PiTreeStructureBold } from "react-icons/pi";
 import { Divider } from "@mui/material";
 import { learningContext } from "../../contexts/LearningContext/LearningContext";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
+import { MdAddTask, MdDoneOutline } from "react-icons/md";
+import { GiProgression } from "react-icons/gi";
+import { GoTasklist } from "react-icons/go";
 
 const Learning = () => {
   const {
@@ -115,7 +119,9 @@ const Learning = () => {
             </div>
             <div className="flex justify-center gap-10 h-60">
               <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl">
-                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy"></div>
+                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy">
+                  <GoTasklist size={60} color="white" />
+                </div>
                 <div>
                   <div className="mb-5 text-6xl font-bold text-center text-navy">
                     {learningPlans.length}
@@ -127,7 +133,9 @@ const Learning = () => {
               </div>
 
               <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl">
-                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy"></div>
+                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy">
+                  <MdDoneOutline size={60} color="white" />
+                </div>
                 <div>
                   <div className="mb-5 text-5xl font-bold text-center text-navy ">
                     {learningPlans.filter((l) => l.is_completed).length}
@@ -139,7 +147,9 @@ const Learning = () => {
               </div>
 
               <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl">
-                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy"></div>
+                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy">
+                  <GiProgression size={60} color="white" />
+                </div>
                 <div>
                   <div className="mb-5 text-5xl font-bold text-center text-navy ">
                     {calculateTotalStepsProgress()}
