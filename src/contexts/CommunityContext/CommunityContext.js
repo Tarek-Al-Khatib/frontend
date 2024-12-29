@@ -6,6 +6,11 @@ import { authContext } from "../AuthContext/AuthContext";
 export const CommunityContext = createContext();
 
 const CommunityProvider = ({ children }) => {
+  const [communities, setCommunities] = useState([]);
+  const [channels, setChannels] = useState([]);
+  const [members, setMembers] = useState([]);
+  const { user, token } = useContext(authContext);
+
   return <CommunityContext.Provider>{children}</CommunityContext.Provider>;
 };
 
