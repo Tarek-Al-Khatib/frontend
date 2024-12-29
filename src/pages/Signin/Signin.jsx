@@ -29,7 +29,7 @@ const Signin = () => {
     );
 
     if (successful) {
-      navigation("/dashboard");
+      navigation("/learning");
     } else {
       setError(error.response.data.error);
       setAlertVisible(true);

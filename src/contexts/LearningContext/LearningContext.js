@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { useState } from "react";
 import { serverUrl } from "../../config/url";
 import axios from "axios";
@@ -9,6 +9,12 @@ export const learningContext = createContext();
 const LearningProvider = ({ children }) => {
   const [learningPlans, setLearningPlans] = useState([]);
   const { user, token } = useContext(authContext);
+
+  useEffect(() => {
+    if (user && token) {
+      fetchPlans();
+    }
+  }, [user, token]);
 
   const fetchPlans = async () => {
     try {

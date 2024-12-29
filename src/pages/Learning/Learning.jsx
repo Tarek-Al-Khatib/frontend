@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../css/custom-scroll.css";
 import CircularWithValueLabel from "../../components/CircularProgressWithLabel/CircularProgressWithLabel";
 import Navbar from "../../components/Navbar/Navbar";
@@ -6,197 +6,23 @@ import Footer from "../../components/Footer/Footer";
 import Completed from "../../assets/completed.png";
 import Progress from "../../assets/progress.png";
 import { Divider } from "@mui/material";
+import { learningContext } from "../../contexts/LearningContext/LearningContext";
+import { authContext } from "../../contexts/AuthContext/AuthContext";
 
 const Learning = () => {
-  const [plans, setPlans] = useState([
-    {
-      id: 1,
-      title: "React Mastery Plan",
-      description: "Learn React from beginner to advanced concepts.",
-      progress: 70,
-      isCompleted: false,
-      steps: [
-        {
-          id: 1,
-          title: "Step 1",
-          is_completed: true,
-          description: "Learn JSX and Components",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
-        {
-          id: 3,
-          title: "Step 3",
-          is_completed: false,
-          description: "Routing with React Router",
-        },
-      ],
-    },
-    {
-      id: 1,
-      title: "React Mastery Plan",
-      description: "Learn React from beginner to advanced concepts.",
-      progress: 70,
-      isCompleted: false,
-      steps: [
-        {
-          id: 1,
-          title: "Step 1",
-          is_completed: true,
-          description: "Learn JSX and Components",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
-        {
-          id: 3,
-          title: "Step 3",
-          is_completed: false,
-          description: "Routing with React Router",
-        },
-      ],
-    },
-    {
-      id: 1,
-      title: "React Mastery Plan",
-      description: "Learn React from beginner to advanced concepts.",
-      progress: 70,
-      isCompleted: false,
-      steps: [
-        {
-          id: 1,
-          title: "Step 1",
-          is_completed: true,
-          description: "Learn JSX and Components",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
-        {
-          id: 3,
-          title: "Step 3",
-          is_completed: false,
-          description: "Routing with React Router",
-        },
-      ],
-    },
-    {
-      id: 1,
-      title: "React Mastery Plan",
-      description: "Learn React from beginner to advanced concepts.",
-      progress: 70,
-      isCompleted: false,
-      steps: [
-        {
-          id: 1,
-          title: "Step 1",
-          is_completed: true,
-          description: "Learn JSX and Components",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
+  const {
+    learningPlans,
+    fetchPlans,
+    addPlan,
+    updatePlan,
+    markPlanAsDone,
+    markStepAsDone,
+  } = useContext(learningContext);
 
-        {
-          id: 3,
-          title: "Step 3",
-          is_completed: false,
-          description: "Routing with React Router",
-        },
-      ],
-    },
-    {
-      id: 1,
-      title: "React Mastery Plan",
-      description: "Learn React from beginner to advanced concepts.",
-      progress: 70,
-      isCompleted: false,
-      steps: [
-        {
-          id: 1,
-          title: "Step 1",
-          is_completed: true,
-          description: "Learn JSX and Components",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
-        {
-          id: 3,
-          title: "Step 3",
-          is_completed: false,
-          description: "Routing with React Router",
-        },
-      ],
-    },
-    {
-      id: 1,
-      title: "React Mastery Plan",
-      description: "Learn React from beginner to advanced concepts.",
-      progress: 70,
-      isCompleted: false,
-      steps: [
-        {
-          id: 1,
-          title: "Step 1",
-          is_completed: true,
-          description: "Learn JSX and Components",
-        },
-        {
-          id: 2,
-          title: "Step 2",
-          is_completed: true,
-          description: "State and Props",
-        },
-        {
-          id: 3,
-          title: "Step 3",
-          is_completed: false,
-          description: "Routing with React Router",
-        },
-      ],
-    },
-  ]);
+  useEffect(() => {
+    fetchPlans();
+    console.log(learningPlans);
+  }, []);
 
   const renderPlanSteps = (steps) =>
     steps.map((step, index) => (
@@ -228,6 +54,28 @@ const Learning = () => {
       </div>
     ));
 
+  const calculateProgress = (plan) => {
+    if (!plan || !plan.steps) {
+      console.error("Invalid plan data.");
+      return 0;
+    }
+
+    if (plan.is_completed) {
+      return 100;
+    }
+
+    const totalSteps = plan.steps.length;
+    const completedSteps = plan.steps.filter(
+      (step) => step.is_completed
+    ).length;
+
+    if (totalSteps === 0) {
+      return 0;
+    }
+
+    const progress = (completedSteps / totalSteps) * 100;
+    return Math.round(progress);
+  };
   return (
     <div>
       <Navbar />
@@ -292,7 +140,7 @@ const Learning = () => {
 
         <div className="overflow-x-auto scroll-container custom-scrollbar">
           <div className="flex gap-9 min-w-max">
-            {plans.map((plan, index) => (
+            {learningPlans.map((plan, index) => (
               <div
                 key={index}
                 className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]"
