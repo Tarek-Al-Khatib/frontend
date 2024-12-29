@@ -212,8 +212,8 @@ const Communities = () => {
   return (
     <div>
       <Navbar />
-      <div class="flex bg-white w-full h-screen/92">
-        <div class="w-24 bg-white flex flex-col items-center py-6">
+      <div className="flex w-full bg-white h-screen/92">
+        <div className="flex flex-col items-center w-24 py-6 bg-white">
           {communitiesData.map((community) => (
             <button
               key={community.id}
@@ -223,27 +223,27 @@ const Communities = () => {
               <span className="text-white">{community.logo}</span>
             </button>
           ))}
-          <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+          <button className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
             <IoMdAdd size={25} />
           </button>
         </div>
-        <div class="w-80 bg-blue-900 p-6">
-          <div class="flex flex-col items-center mb-8">
-            <div class="w-28 h-24 bg-blue-900 rounded mb-4 flex items-center justify-center text-center text-blue-300 text-base font-light">
+        <div className="p-6 bg-blue-900 w-80">
+          <div className="flex flex-col items-center mb-8">
+            <div className="flex items-center justify-center h-24 mb-4 text-base font-light text-center text-blue-300 bg-blue-900 rounded w-28">
               {selectedCommunity.logo}
             </div>
-            <div class="text-white text-lg font-light">
+            <div className="text-lg font-light text-white">
               {selectedCommunity.name}
             </div>
           </div>
 
-          <div class="mb-10">
-            <hutton class="text-white text-lg font-bold mb-3 flex items-center">
+          <div className="mb-10">
+            <hutton className="flex items-center mb-3 text-lg font-bold text-white">
               <IoIosArrowForward />
               <IoIosArrowDown />
               Channels
             </hutton>
-            <div class="flex flex-col">
+            <div className="flex flex-col">
               {channelsData.map((channel, index) => (
                 <button
                   key={index}
@@ -261,12 +261,12 @@ const Communities = () => {
           </div>
 
           <div>
-            <hutton class="text-white text-lg font-bold mb-3 flex items-center">
+            <hutton className="flex items-center mb-3 text-lg font-bold text-white">
               <IoIosArrowForward />
               <IoIosArrowDown />
               Moderators
             </hutton>
-            <div class="space-y-3">
+            <div className="space-y-3">
               {moderatorsData.map((moderator, index) => (
                 <button key={index} className="flex items-center space-x-3">
                   <div className="w-6 h-6 bg-white rounded"></div>
@@ -279,14 +279,14 @@ const Communities = () => {
           </div>
         </div>
 
-        <div class="flex flex-col flex-grow bg-white p-6 gap-4">
+        <div className="flex flex-col flex-grow gap-4 p-6 bg-white">
           <div>
-            <h1 class="text-4xl text-navy mb-4">Welcome to //general</h1>
-            <p class="text-xl text-navy mb-4 font-thin">
+            <h1 className="mb-4 text-4xl text-navy">Welcome to //general</h1>
+            <p className="mb-4 text-xl font-thin text-navy">
               @Admin created this channel on 17/07/2024: Channel description
               (not more than 250 chars)
             </p>
-            <hr class="border-t border-blue-900 mb-6" />
+            <hr className="mb-6 border-t border-blue-900" />
           </div>
           <div
             ref={messagesContainerRef}
