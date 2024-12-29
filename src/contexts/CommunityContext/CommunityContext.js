@@ -11,6 +11,22 @@ const CommunityProvider = ({ children }) => {
   const [members, setMembers] = useState([]);
   const { user, token } = useContext(authContext);
 
+  const fetchUserCommunities = async () => {
+    try {
+      const response = await axios.get(
+        `${serverUrl}/api/communities/${user.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setCommunities(response.data);
+    } catch (error) {
+      console.error("Error fetching user communities:", error);
+    }
+  };
+
   return <CommunityContext.Provider>{children}</CommunityContext.Provider>;
 };
 
