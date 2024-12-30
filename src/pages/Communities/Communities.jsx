@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import "../../css/colors.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Communities.css";
@@ -38,7 +39,8 @@ const Communities = () => {
 
   useEffect(() => {
     if (messages.length > 0)
-      if (messages[messages.length - 1].name === "You") scrollToBottom();
+      if (messages[messages.length - 1].name === "You")
+        scrollToBottom(messagesContainerRef);
   }, [messages]);
 
   const handleCommunitySelect = (community) => {
@@ -52,7 +54,7 @@ const Communities = () => {
     setMessages(channel.messages || []);
   };
 
-  const handleMessageSend = (messageInput) => {
+  const handleMessageSend = () => {
     if (messageInput.trim()) {
       const newMessage = {
         name: "You",
@@ -107,7 +109,11 @@ const Communities = () => {
               {channels.map((channel, index) => (
                 <button
                   key={index}
-                  className="flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded hover:bg-blue-700/30 text-start"
+                  className={`flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded text-start ${
+                    selectedChannel != null && channel.id === selectedChannel.id
+                      ? "bg-dark-blue"
+                      : "hover:bg-blue-700/30"
+                  }`}
                   onClick={() => {
                     handleChannelSelect(channel);
                   }}
@@ -144,10 +150,12 @@ const Communities = () => {
         {selectedChannel ? (
           <div className="flex flex-col flex-grow gap-4 p-6 bg-white">
             <div>
-              <h1 className="mb-4 text-4xl text-navy">Welcome to //general</h1>
+              <h1 className="mb-4 text-4xl text-navy">
+                Welcome to // {selectedChannel.name}
+              </h1>
               <p className="mb-4 text-xl font-thin text-navy">
-                @Admin created this channel on 17/07/2024: Channel description
-                (not more than 250 chars)
+                @{selectedChannel.creator.username} created this channel on
+                17/07/2024: {selectedChannel.description}
               </p>
               <hr className="mb-6 border-t border-blue-900" />
             </div>
@@ -184,7 +192,9 @@ const Communities = () => {
                     </div>
                   ))
                 ) : (
-                  <div>No Messages to show here</div>
+                  <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
+                    No Messages to show here
+                  </div>
                 )}
               </div>
             </div>
@@ -195,9 +205,14 @@ const Communities = () => {
               <input
                 type="text"
                 className="flex-1 text-xl placeholder-gray-400 bg-transparent outline-none"
-                placeholder="Type your message here for //general"
+                placeholder={
+                  "Type your message here for // " + selectedChannel.name
+                }
                 value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
+                onChange={(e) => {
+                  setMessageInput(e.target.value);
+                  console.log(messageInput);
+                }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
@@ -218,7 +233,6 @@ const Communities = () => {
             Please select a channel to start chatting.
           </div>
         )}
-        }
       </div>
       <Footer />
     </div>
