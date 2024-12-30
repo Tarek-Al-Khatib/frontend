@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import "../../../css/colors.css";
 import React, { useState } from "react";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -25,13 +26,24 @@ const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
     }));
   };
   return (
-    <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle
-        className="text-navy"
-        sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 20 }}
-      >
-        New Community ? Let's go !
-      </DialogTitle>
+    <Dialog
+      open={isOpen}
+      onClose={onClose}
+      maxWidth="sm"
+      fullWidth
+      sx={({ borderRadius: 20 }, "& .Mui-Paper")}
+    >
+      <div className="flex justify-between">
+        <DialogTitle
+          className="text-navy"
+          sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 20 }}
+        >
+          New Community ? Let's go !
+        </DialogTitle>
+        <Button onClick={onClose} color="text-navy">
+          <IoCloseCircleOutline color="text-navy" size={50} />
+        </Button>
+      </div>
       <form>
         <DialogContent className="flex flex-col gap-5">
           <div className="mb-3">
@@ -87,36 +99,43 @@ const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
               }}
             />
           </div>
-          <div style={{ marginTop: "16px" }}>
-            <label style={{ display: "block", marginBottom: "8px" }}>
-              Community Logo
-            </label>
-            <input
-              type="file"
-              name="logo"
-              accept="image/*"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div style={{ marginTop: "16px" }}>
-            <label style={{ display: "block", marginBottom: "8px" }}>
-              Community Banner
-            </label>
-            <input
-              type="file"
-              name="banner"
-              accept="image/*"
-              onChange={handleInputChange}
-            />
+          <div className="flex gap-4">
+            <div className="flex flex-col items-center">
+              <label
+                htmlFor="logo"
+                className="flex items-center justify-center w-24 h-24 text-white bg-blue-500 rounded-full cursor-pointer"
+              >
+                Community Logo
+              </label>
+              <input
+                id="logo"
+                type="file"
+                name="logo"
+                accept="image/*"
+                className="hidden"
+              />
+            </div>
+            <div className="flex flex-col items-center">
+              <label
+                htmlFor="banner"
+                className="flex items-center justify-center w-24 h-12 text-white bg-blue-500 rounded-lg cursor-pointer"
+              >
+                Community Banner
+              </label>
+              <input
+                id="banner"
+                type="file"
+                name="banner"
+                accept="image/*"
+                className="hidden"
+              />
+            </div>
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} color="secondary">
-            Cancel
-          </Button>
-          <Button type="submit" color="primary" variant="contained">
+          <button className="px-4 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self">
             Create Community
-          </Button>
+          </button>
         </DialogActions>
       </form>
     </Dialog>
