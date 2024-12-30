@@ -11,7 +11,7 @@ const DashboardProvider = ({ children }) => {
       await getQuote();
     };
 
-    fetchQuote();
+    // fetchQuote();
   }, []);
 
   const getQuote = async () => {
