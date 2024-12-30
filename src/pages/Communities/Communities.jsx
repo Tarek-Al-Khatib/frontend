@@ -46,6 +46,10 @@ const Communities = () => {
   }, [selectedCommunity]);
 
   useEffect(() => {
+    setModeratorsData(members.filter((m) => m.role === "MODERATOR"));
+  }, [members]);
+
+  useEffect(() => {
     if (messages.length > 0)
       if (messages[messages.length - 1].name === "You")
         scrollToBottom(messagesContainerRef);
