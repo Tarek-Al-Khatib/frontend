@@ -10,6 +10,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { scrollToBottom, renderMessages } from "./utils";
 import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
 import CreateCommunity from "./Modals/CreateCommunityModal";
+import CreateChannel from "./Modals/CreateChannelModal";
 
 const Communities = () => {
   const {
@@ -82,7 +83,7 @@ const Communities = () => {
   return (
     <div>
       <Navbar />
-      <CreateCommunity isOpen={isModalOpen} onClose={handleModalToggle} />
+      <CreateChannel isOpen={isModalOpen} onClose={handleModalToggle} />
       <div className="flex w-full bg-white h-screen/92">
         <div className="flex flex-col items-center w-24 py-6 bg-white">
           {communities.map((community) => (
