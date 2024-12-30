@@ -11,8 +11,8 @@ import React, { useContext, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { communityContext } from "../../../contexts/CommunityContext/CommunityContext";
 
-const CreateChannel = ({ isOpen, onClose }) => {
-  const { createCommunity } = useContext(communityContext);
+const CreateChannel = ({ isOpen, onClose, communityId }) => {
+  const { createChannel } = useContext(communityContext);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -28,9 +28,12 @@ const CreateChannel = ({ isOpen, onClose }) => {
 
   const handleSubmit = async () => {
     if (formData.name !== "" && formData.description !== "null") {
-      const response = await createCommunity(formData);
-      console.log(response);
-      onClose();
+      try {
+        await createChannel(communityId, formData);
+        onClose();
+      } catch (e) {
+        console.log("Error in creating channel", e);
+      }
     }
   };
   return (
@@ -48,11 +51,10 @@ const CreateChannel = ({ isOpen, onClose }) => {
           className="text-navy"
           sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 22 }}
         >
-          Create a channel!
-          <p className="text-xs text-gray-300">
-            Customize your community to fit in people with similar interests as
-            you
-          </p>
+          <div className="flex items-center gap-1">
+            Create a channel!
+            <p className="text-sm text-gray-300">(ensure it's meaningful)</p>
+          </div>
         </DialogTitle>
 
         <Button onClick={onClose} color="text-navy">
@@ -72,7 +74,7 @@ const CreateChannel = ({ isOpen, onClose }) => {
               htmlFor="name"
               className="block mb-3 text-xs font-extrabold text-navy"
             >
-              Community Name
+              Channel Name
             </label>
             <TextField
               id="name"
@@ -98,7 +100,7 @@ const CreateChannel = ({ isOpen, onClose }) => {
               htmlFor="description"
               className="block mb-3 text-xs font-extrabold text-navy"
             >
-              Community Description
+              Channel Description
             </label>
             <TextField
               id="description"
@@ -125,7 +127,7 @@ const CreateChannel = ({ isOpen, onClose }) => {
         <DialogActions>
           <button
             type="submit"
-            className="px-4 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
+            className="px-8 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
           >
             Create Channel
           </button>

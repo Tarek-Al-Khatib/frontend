@@ -87,6 +87,7 @@ const Communities = () => {
       <CreateCommunity
         isOpen={isCommunityModalOpen}
         onClose={handleCommunityModalToggle}
+        communityId={selectedCommunity.id}
       />
 
       <CreateChannel
