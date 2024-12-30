@@ -54,6 +54,7 @@ const CommunityProvider = ({ children }) => {
         `${serverUrl}/api/community/${communityId}/members`,
         {
           headers: {
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
         }

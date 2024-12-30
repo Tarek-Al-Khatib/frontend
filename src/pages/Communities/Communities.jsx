@@ -26,9 +26,7 @@ const Communities = () => {
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const [selectedCommunity, setSelectedCommunity] = useState(
-    communities[0] || null
-  );
+  const [selectedCommunity, setSelectedCommunity] = useState(communities[0]);
   const [selectedChannel, setSelectedChannel] = useState(null);
   const [moderatorsData, setModeratorsData] = useState(
     members.filter((m) => m.role === "MODERATOR")

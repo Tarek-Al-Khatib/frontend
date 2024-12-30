@@ -30,6 +30,11 @@ const CreateCommunity = ({ isOpen, onClose }) => {
 
   const handleSubmit = async () => {
     if (formData.name !== "" && formData.description !== "null") {
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("description", formData.description);
+      if (formData.logo) data.append("logo", formData.logo);
+      if (formData.banner) data.append("banner", formData.banner);
       const response = await createCommunity(formData);
       console.log(response);
       onClose();
@@ -119,7 +124,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
               <div className="flex items-center justify-center overflow-hidden rounded-full w-36 h-36 bg-navy bg-blue-10">
                 {formData.logo ? (
                   <img
-                    src={URL.createObjectURL(formData.logo)}
+                    src={formData.logo}
                     alt="Selected Logo"
                     className="object-cover w-full h-full"
                   />
@@ -154,7 +159,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
               <div className="flex items-center justify-center w-64 overflow-hidden rounded-lg h-36 bg-navy">
                 {formData.banner ? (
                   <img
-                    src={URL.createObjectURL(formData.banner)}
+                    src={formData.banner}
                     alt="Selected Banner"
                     className="object-cover w-full h-full"
                   />
