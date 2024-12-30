@@ -68,7 +68,7 @@ const CommunityProvider = ({ children }) => {
   const createCommunity = async (communityData) => {
     try {
       const response = await axios.post(
-        `${serverUrl}/api/community/${user.id}`,
+        `${serverUrl}/api/community/`,
         communityData,
         {
           headers: {

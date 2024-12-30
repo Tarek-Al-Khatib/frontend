@@ -14,10 +14,10 @@ import { communityContext } from "../../../contexts/CommunityContext/CommunityCo
 const CreateCommunity = ({ isOpen, onClose }) => {
   const { createCommunity } = useContext(communityContext);
   const [formData, setFormData] = useState({
-    name: "",
+    title: "",
     description: "",
-    logo: null,
-    banner: null,
+    community_logo: null,
+    community_banner: null,
   });
 
   const handleInputChange = (e) => {
@@ -29,12 +29,13 @@ const CreateCommunity = ({ isOpen, onClose }) => {
   };
 
   const handleSubmit = async () => {
-    if (formData.name !== "" && formData.description !== "null") {
+    if (formData.title !== "" && formData.description !== "null") {
       const data = new FormData();
-      data.append("name", formData.name);
+      data.append("title", formData.title);
       data.append("description", formData.description);
-      if (formData.logo) data.append("logo", formData.logo);
-      if (formData.banner) data.append("banner", formData.banner);
+      if (formData.community_logo) data.append("logo", formData.community_logo);
+      if (formData.community_banner)
+        data.append("banner", formData.community_banner);
       const response = await createCommunity(formData);
       console.log(response);
       onClose();
@@ -46,14 +47,16 @@ const CreateCommunity = ({ isOpen, onClose }) => {
       onClose={onClose}
       maxWidth="sm"
       fullWidth
-      sx={({ borderRadius: 20 }, { "& .MuiPaper-root": { borderRadius: 5 } })}
+      sx={{
+        "& .MuiPaper-root": { borderRadius: 5 },
+      }}
     >
       <div className="flex justify-between">
         <DialogTitle
           className="text-navy"
           sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 22 }}
         >
-          New Community ? Let's go !
+          New Community? Let's go!
           <p className="text-xs text-gray-300">
             Customize your community to fit in people with similar interests as
             you
@@ -64,17 +67,24 @@ const CreateCommunity = ({ isOpen, onClose }) => {
           <IoCloseCircleOutline color="navy" size={40} />
         </Button>
       </div>
-      <form>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
         <DialogContent className="flex flex-col gap-5">
           <div className="mb-3">
             <label
-              htmlFor="name"
+              htmlFor="title"
               className="block mb-3 text-xs font-extrabold text-navy"
             >
               Community Name
             </label>
             <TextField
-              id="name"
+              id="title"
+              name="title"
               variant="outlined"
               placeholder="ex: The Fellowship of NodeJesters"
               onChange={handleInputChange}
@@ -100,14 +110,14 @@ const CreateCommunity = ({ isOpen, onClose }) => {
             </label>
             <TextField
               id="description"
+              name="description"
               multiline={true}
               maxRows={4}
-              placeholder="ex: A lively community of Node.js enthusiasts who come together to share knowledge, tackle challenges, and enjoy a good laugh while exploring the world of asynchronous adventures!"
+              placeholder="ex: A lively community of Node.js enthusiasts..."
               variant="outlined"
               onChange={handleInputChange}
               sx={{
                 width: "100%",
-
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
                   fontWeight: "700",
@@ -122,9 +132,9 @@ const CreateCommunity = ({ isOpen, onClose }) => {
           <div className="flex justify-between gap-4 px-6">
             <div className="flex flex-col items-center gap-2">
               <div className="flex items-center justify-center overflow-hidden rounded-full w-36 h-36 bg-navy bg-blue-10">
-                {formData.logo ? (
+                {formData.community_logo ? (
                   <img
-                    src={formData.logo}
+                    src={URL.createObjectURL(formData.community_logo)}
                     alt="Selected Logo"
                     className="object-cover w-full h-full"
                   />
@@ -134,32 +144,26 @@ const CreateCommunity = ({ isOpen, onClose }) => {
               </div>
 
               <label
-                htmlFor="logo"
+                htmlFor="community_logo"
                 className="flex items-center justify-center text-xs font-extrabold cursor-pointer text-navy"
               >
                 Community Logo
               </label>
 
               <input
-                id="logo"
+                id="community_logo"
                 type="file"
-                name="logo"
+                name="community_logo"
                 accept="image/*"
                 className="hidden"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  setFormData((prev) => ({
-                    ...prev,
-                    logo: file,
-                  }));
-                }}
+                onChange={handleInputChange}
               />
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="flex items-center justify-center w-64 overflow-hidden rounded-lg h-36 bg-navy">
-                {formData.banner ? (
+                {formData.community_banner ? (
                   <img
-                    src={formData.banner}
+                    src={URL.createObjectURL(formData.community_banner)}
                     alt="Selected Banner"
                     className="object-cover w-full h-full"
                   />
@@ -169,33 +173,27 @@ const CreateCommunity = ({ isOpen, onClose }) => {
               </div>
 
               <label
-                htmlFor="banner"
+                htmlFor="community_banner"
                 className="flex items-center justify-center text-xs font-extrabold cursor-pointer text-navy"
               >
                 Community Banner
               </label>
 
               <input
-                id="banner"
+                id="community_banner"
                 type="file"
-                name="banner"
+                name="community_banner"
                 accept="image/*"
                 className="hidden"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  setFormData((prev) => ({
-                    ...prev,
-                    banner: file,
-                  }));
-                }}
+                onChange={handleInputChange}
               />
             </div>
           </div>
         </DialogContent>
         <DialogActions>
           <button
+            type="submit"
             className="px-4 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
-            onClick={handleSubmit}
           >
             Create Community
           </button>
