@@ -21,6 +21,7 @@ const Communities = () => {
   } = useContext(communityContext);
 
   const [flipChannel, setFlipChannel] = useState(true);
+  const [flipModerators, setFlipModerators] = useState(true);
 
   const messagesContainerRef = useRef(null);
   const [messageInput, setMessageInput] = useState("");
@@ -136,23 +137,27 @@ const Communities = () => {
             )}
           </div>
 
-          <div>
-            <button className="flex items-center mb-3 text-lg font-bold text-white">
-              <IoIosArrowForward />
-              <IoIosArrowDown />
-              Moderators
-            </button>
-            <div className="space-y-3">
-              {moderatorsData.map((moderator, index) => (
-                <button key={index} className="flex items-center space-x-3">
-                  <div className="w-6 h-6 bg-white rounded"></div>
-                  <div className="text-sm font-thin text-white">
-                    {moderator.name}
-                  </div>
-                </button>
-              ))}
+          {moderatorsData.length > 0 && (
+            <div>
+              <button
+                onClick={() => setFlipModerators(!flipModerators)}
+                className="flex items-center mb-3 text-lg font-bold text-white"
+              >
+                {flipModerators ? <IoIosArrowDown /> : <IoIosArrowForward />}
+                Moderators
+              </button>
+              <div className="space-y-3">
+                {moderatorsData.map((moderator, index) => (
+                  <button key={index} className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-white rounded"></div>
+                    <div className="text-sm font-thin text-white">
+                      {moderator.name}
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
         {selectedChannel ? (
           <div className="flex flex-col flex-grow gap-4 p-6 bg-white">
