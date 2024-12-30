@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Dashboard.css";
@@ -7,7 +7,9 @@ import { RiSpeakFill } from "react-icons/ri";
 import { MdPeopleAlt } from "react-icons/md";
 import { FaUserPen } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { dashboardContext } from "../../contexts/DashboardContext/DashboardContext";
 const Dashboard = () => {
+  const { quote } = useContext(dashboardContext);
   const navigation = useNavigate();
   const [topLearningPicks, setTopLearningPicks] = useState([]);
   const [topCommunities, setTopCommunities] = useState([]);
@@ -135,10 +137,12 @@ const Dashboard = () => {
             <h2 className="mb-3 font-thin text-center text-navy">
               For you to remember
             </h2>
-            <p className="text-xl font-bold text-center text-navy">
-              "Continuous effort, not strength or intelligence, is the key to
-              unlocking our potential." - Winston Churchill
-            </p>
+
+            {quote && (
+              <p className="text-xl font-bold text-center text-navy">
+                {quote.quote} - {quote.author}
+              </p>
+            )}
           </div>
         </div>
 
