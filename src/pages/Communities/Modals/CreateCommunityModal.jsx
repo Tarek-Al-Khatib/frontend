@@ -36,7 +36,7 @@ const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
       <div className="flex justify-between">
         <DialogTitle
           className="text-navy"
-          sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 20 }}
+          sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 22 }}
         >
           New Community ? Let's go !
           <p className="text-xs text-gray-300">

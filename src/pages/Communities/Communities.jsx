@@ -22,7 +22,8 @@ const Communities = () => {
     fetchMembers,
   } = useContext(communityContext);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
+  const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
 
   const [flipChannel, setFlipChannel] = useState(true);
   const [flipModerators, setFlipModerators] = useState(true);
@@ -61,8 +62,12 @@ const Communities = () => {
     setMessages(channel.messages || []);
   };
 
-  const handleModalToggle = () => {
-    setIsModalOpen((prev) => !prev);
+  const handleCommunityModalToggle = () => {
+    setIsCommunityModalOpen((prev) => !prev);
+  };
+
+  const handleChannelModalToggle = () => {
+    setIsChannelModalOpen((prev) => !prev);
   };
 
   const handleMessageSend = () => {
@@ -83,7 +88,15 @@ const Communities = () => {
   return (
     <div>
       <Navbar />
-      <CreateChannel isOpen={isModalOpen} onClose={handleModalToggle} />
+      <CreateCommunity
+        isOpen={isCommunityModalOpen}
+        onClose={handleCommunityModalToggle}
+      />
+
+      <CreateChannel
+        isOpen={isChannelModalOpen}
+        onClose={handleChannelModalToggle}
+      />
       <div className="flex w-full bg-white h-screen/92">
         <div className="flex flex-col items-center w-24 py-6 bg-white">
           {communities.map((community) => (
@@ -98,7 +111,7 @@ const Communities = () => {
             </button>
           ))}
           <button
-            onClick={handleModalToggle}
+            onClick={handleCommunityModalToggle}
             className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg"
           >
             <IoMdAdd size={25} />
@@ -115,13 +128,18 @@ const Communities = () => {
           </div>
 
           <div className="mb-10">
-            <button
-              onClick={() => setFlipChannel(!flipChannel)}
-              className="flex items-center mb-3 text-lg font-bold text-white"
-            >
-              {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
-              Channels
-            </button>
+            <div className="flex items-center justify-between w-full mb-3 text-lg font-bold text-white">
+              <button
+                className="flex items-center"
+                onClick={() => setFlipChannel(!flipChannel)}
+              >
+                {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
+                Channels
+              </button>
+              <button onClick={handleChannelModalToggle}>
+                <IoMdAdd size={25} />
+              </button>
+            </div>
             {flipChannel && (
               <div className="flex flex-col">
                 {channels.map((channel, index) => (
