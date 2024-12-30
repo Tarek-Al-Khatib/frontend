@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Communities.css";
@@ -6,148 +6,30 @@ import { IoMdAdd } from "react-icons/io";
 import { FiSend } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
+import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
+
 const Communities = () => {
-  const communitiesData = [
-    {
-      id: 1,
-      name: "Community 1",
-      logo: "Logo 1",
-      description: "Description of Community 1",
-    },
-    {
-      id: 2,
-      name: "Community 2",
-      logo: "Logo 2",
-      description: "Description of Community 2",
-    },
-    {
-      id: 3,
-      name: "Community 3",
-      logo: "Logo 3",
-      description: "Description of Community 3",
-    },
-  ];
+  const {
+    communities,
+    channels,
+    members,
+    fetchUserCommunities,
+    fetchChannels,
+    fetchMembers,
+  } = useContext(communityContext);
 
-  const channelsData = [
-    { name: "general", unread: 1 },
-    { name: "announcements", unread: 1 },
-    { name: "projects", unread: 1 },
-    { name: "q/a", unread: 1 },
-    { name: "discussion", unread: 1 },
-  ];
-
-  const moderatorsData = [
-    { name: "Moderator 1" },
-    { name: "Moderator 2" },
-    { name: "Moderator 3" },
-    { name: "Moderator 4" },
-  ];
-
-  const messagesData = [
-    {
-      name: "User 1",
-      badge: "Newbie",
-      timestamp: "17-8-2024 7:42 PM",
-      message: "Hello Everyone! I'm so excited to start learning today!",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-    {
-      name: "User 2",
-      badge: "Learner",
-      timestamp: "17-8-2024 7:45 PM",
-      message: "Me too! By the way, where are you from?",
-    },
-  ];
-
-  const [selectedCommunity, setSelectedCommunity] = useState(
-    communitiesData[0]
+  const [selectedCommunity, setSelectedCommunity] = useState(communities[0]);
+  const [messages, setMessages] = useState(channels[0]);
+  const [moderatorsData, setModeratorsData] = useState(
+    members.filter((m) => m.role === "MODERATOR")
   );
   const messagesContainerRef = useRef(null);
-  const [messages, setMessages] = useState(messagesData);
   const [messageInput, setMessageInput] = useState("");
+
+  useEffect(() => {
+    fetchMembers(selectedCommunity.id);
+    fetchChannels(selectedCommunity.id);
+  }, [selectedCommunity]);
 
   useEffect(() => {
     if (messages[messages.length - 1].name === "You") scrollToBottom();
@@ -214,7 +96,7 @@ const Communities = () => {
       <Navbar />
       <div className="flex w-full bg-white h-screen/92">
         <div className="flex flex-col items-center w-24 py-6 bg-white">
-          {communitiesData.map((community) => (
+          {communities.map((community) => (
             <button
               key={community.id}
               className="w-20 h-20 mb-5 rounded-full bg-navy"
@@ -244,7 +126,7 @@ const Communities = () => {
               Channels
             </button>
             <div className="flex flex-col">
-              {channelsData.map((channel, index) => (
+              {channels.map((channel, index) => (
                 <button
                   key={index}
                   className="flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded hover:bg-blue-700/30 text-start"

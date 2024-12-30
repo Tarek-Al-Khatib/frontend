@@ -3,7 +3,7 @@ import axios from "axios";
 import { serverUrl } from "../../config/url";
 import { authContext } from "../AuthContext/AuthContext";
 
-export const CommunityContext = createContext();
+export const communityContext = createContext();
 
 const CommunityProvider = ({ children }) => {
   const [communities, setCommunities] = useState([]);
@@ -11,10 +11,14 @@ const CommunityProvider = ({ children }) => {
   const [members, setMembers] = useState([]);
   const { user, token } = useContext(authContext);
 
+  useEffect(() => {
+    if (user && token) fetchUserCommunities();
+  }, [user, token]);
+
   const fetchUserCommunities = async () => {
     try {
       const response = await axios.get(
-        `${serverUrl}/api/community/${user.id}`,
+        `${serverUrl}/api/community/${user.id}/communities`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -22,6 +26,7 @@ const CommunityProvider = ({ children }) => {
         }
       );
       setCommunities(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching user communities:", error);
     }
@@ -104,13 +109,15 @@ const CommunityProvider = ({ children }) => {
           },
         }
       );
+
+      return response;
     } catch (error) {
       console.error("Error joining community:", error);
     }
   };
 
   return (
-    <CommunityContext.Provider
+    <communityContext.Provider
       value={{
         communities,
         channels,
@@ -124,7 +131,7 @@ const CommunityProvider = ({ children }) => {
       }}
     >
       {children}
-    </CommunityContext.Provider>
+    </communityContext.Provider>
   );
 };
 
