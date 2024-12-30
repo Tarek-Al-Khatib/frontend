@@ -85,7 +85,7 @@ const CommunityProvider = ({ children }) => {
   const createChannel = async (communityId, channelData) => {
     try {
       const response = await axios.post(
-        `${serverUrl}/api/communities/${user.id}/${communityId}/channels`,
+        `${serverUrl}/api/communities/${communityId}/channels`,
         channelData,
         {
           headers: {
