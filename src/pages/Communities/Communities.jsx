@@ -18,8 +18,11 @@ const Communities = () => {
     fetchMembers,
   } = useContext(communityContext);
 
-  const [selectedCommunity, setSelectedCommunity] = useState(communities[0]);
-  const [messages, setMessages] = useState(channels[0]);
+  const [selectedCommunity, setSelectedCommunity] = useState(
+    communities[0] || null
+  );
+  const [selectedChannel, setSelectedChannel] = useState(null);
+  const [messages, setMessages] = useState([]);
   const [moderatorsData, setModeratorsData] = useState(
     members.filter((m) => m.role === "MODERATOR")
   );
@@ -52,6 +55,13 @@ const Communities = () => {
 
   const handleCommunitySelect = (community) => {
     setSelectedCommunity(community);
+    setSelectedChannel(null);
+    setMessages([]);
+  };
+
+  const handleChannelSelect = (channel) => {
+    setSelectedChannel(channel);
+    setMessages(channel.messages || []);
   };
 
   const handleMessageSend = () => {
@@ -69,23 +79,25 @@ const Communities = () => {
 
   const renderMessages = () => {
     const combinedMessages = [];
-    messages.forEach((currentMessage, index) => {
-      const previousMessage = messages[index - 1];
-      if (
-        previousMessage &&
-        previousMessage.name === currentMessage.name &&
-        getMessageDuration(
-          previousMessage.timestamp,
-          currentMessage.timestamp
-        ) < 5
-      ) {
-        combinedMessages[
-          combinedMessages.length - 1
-        ].message += `<br />${currentMessage.message}`;
-      } else {
-        combinedMessages.push({ ...currentMessage });
-      }
-    });
+    if (messages.length > 0) {
+      messages.forEach((currentMessage, index) => {
+        const previousMessage = messages[index - 1];
+        if (
+          previousMessage &&
+          previousMessage.name === currentMessage.name &&
+          getMessageDuration(
+            previousMessage.timestamp,
+            currentMessage.timestamp
+          ) < 5
+        ) {
+          combinedMessages[
+            combinedMessages.length - 1
+          ].message += `<br />${currentMessage.message}`;
+        } else {
+          combinedMessages.push({ ...currentMessage });
+        }
+      });
+    }
     return combinedMessages;
   };
 
@@ -102,7 +114,9 @@ const Communities = () => {
               className="w-20 h-20 mb-5 rounded-full bg-navy"
               onClick={() => handleCommunitySelect(community)}
             >
-              <span className="text-white">{community.logo}</span>
+              <span className="text-white">
+                {community ? community.logo : ""}
+              </span>
             </button>
           ))}
           <button className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
@@ -112,7 +126,7 @@ const Communities = () => {
         <div className="p-6 bg-blue-900 w-80">
           <div className="flex flex-col items-center mb-8">
             <div className="flex items-center justify-center h-24 mb-4 text-base font-light text-center text-blue-300 bg-blue-900 rounded w-28">
-              {selectedCommunity.logo}
+              {selectedCommunity ? selectedCommunity.logo : ""}
             </div>
             <div className="text-lg font-light text-white">
               {selectedCommunity.name}
@@ -130,6 +144,9 @@ const Communities = () => {
                 <button
                   key={index}
                   className="flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded hover:bg-blue-700/30 text-start"
+                  onClick={() => {
+                    handleChannelSelect(channel);
+                  }}
                 >
                   // {channel.name}
                   {channel.unread > 0 && (
@@ -175,30 +192,34 @@ const Communities = () => {
             className="flex flex-col flex-grow gap-5 overflow-y-auto scroll-container custom-scrollbar scroll-smooth"
           >
             <div className="flex flex-col flex-grow gap-5 ">
-              {messagesToRender.map((message, index) => (
-                <div key={index}>
-                  <div className="flex items-start gap-7">
-                    <div className="w-12 h-12 bg-blue-900 rounded-full"></div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-6 w-fit">
-                        <div className="text-sm font-bold text-blue-900">
-                          {message.name}
+              {messagesToRender.length > 0 ? (
+                messagesToRender.map((message, index) => (
+                  <div key={index}>
+                    <div className="flex items-start gap-7">
+                      <div className="w-12 h-12 bg-blue-900 rounded-full"></div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between gap-6 w-fit">
+                          <div className="text-sm font-bold text-blue-900">
+                            {message.name}
+                          </div>
+                          <div className="px-2 py-1 text-xs text-white bg-blue-900 rounded">
+                            {message.badge}
+                          </div>
+                          <div className="text-sm text-blue-900">
+                            {message.timestamp}
+                          </div>
                         </div>
-                        <div className="px-2 py-1 text-xs text-white bg-blue-900 rounded">
-                          {message.badge}
-                        </div>
-                        <div className="text-sm text-blue-900">
-                          {message.timestamp}
-                        </div>
+                        <p
+                          className="text-base text-black"
+                          dangerouslySetInnerHTML={{ __html: message.message }}
+                        ></p>
                       </div>
-                      <p
-                        className="text-base text-black"
-                        dangerouslySetInnerHTML={{ __html: message.message }}
-                      ></p>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <div>No Messages to show here</div>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-6 p-4 bg-slight-gray rounded-self">
