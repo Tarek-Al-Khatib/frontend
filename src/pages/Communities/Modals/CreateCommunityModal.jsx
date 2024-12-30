@@ -30,14 +30,11 @@ const CreateCommunity = ({ isOpen, onClose }) => {
 
   const handleSubmit = async () => {
     if (formData.title !== "" && formData.description !== "null") {
-      const data = new FormData();
-      data.append("title", formData.title);
-      data.append("description", formData.description);
-      if (formData.community_logo) data.append("logo", formData.community_logo);
-      if (formData.community_banner)
-        data.append("banner", formData.community_banner);
-      const response = await createCommunity(formData);
-      console.log(response);
+      try {
+        await createCommunity(formData);
+      } catch (e) {
+        console.log("Error in creating community", e);
+      }
       onClose();
     }
   };
