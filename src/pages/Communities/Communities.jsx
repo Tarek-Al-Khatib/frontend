@@ -13,14 +13,8 @@ import CreateCommunity from "./Modals/CreateCommunityModal";
 import CreateChannel from "./Modals/CreateChannelModal";
 
 const Communities = () => {
-  const {
-    communities,
-    channels,
-    members,
-    fetchUserCommunities,
-    fetchChannels,
-    fetchMembers,
-  } = useContext(communityContext);
+  const { communities, channels, members, fetchChannels, fetchMembers } =
+    useContext(communityContext);
 
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
