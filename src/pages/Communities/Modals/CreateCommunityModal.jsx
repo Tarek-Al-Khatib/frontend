@@ -31,7 +31,7 @@ const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
       onClose={onClose}
       maxWidth="sm"
       fullWidth
-      sx={({ borderRadius: 20 }, "& .Mui-Paper")}
+      sx={({ borderRadius: 20 }, { "& .MuiPaper-root": { borderRadius: 5 } })}
     >
       <div className="flex justify-between">
         <DialogTitle
@@ -39,9 +39,14 @@ const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
           sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 20 }}
         >
           New Community ? Let's go !
+          <p className="text-xs text-gray-300">
+            Customize your community to fit in people with similar interests as
+            you
+          </p>
         </DialogTitle>
+
         <Button onClick={onClose} color="text-navy">
-          <IoCloseCircleOutline color="text-navy" size={50} />
+          <IoCloseCircleOutline color="navy" size={40} />
         </Button>
       </div>
       <form>
@@ -99,35 +104,75 @@ const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
               }}
             />
           </div>
-          <div className="flex gap-4">
-            <div className="flex flex-col items-center">
+          <div className="flex justify-between gap-4 px-6">
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex items-center justify-center overflow-hidden rounded-full w-36 h-36 bg-navy bg-blue-10">
+                {formData.logo ? (
+                  <img
+                    src={URL.createObjectURL(formData.logo)}
+                    alt="Selected Logo"
+                    className="object-cover w-full h-full"
+                  />
+                ) : (
+                  <span className="text-white">No Image</span>
+                )}
+              </div>
+
               <label
                 htmlFor="logo"
-                className="flex items-center justify-center w-24 h-24 text-white bg-blue-500 rounded-full cursor-pointer"
+                className="flex items-center justify-center text-xs font-extrabold cursor-pointer text-navy"
               >
                 Community Logo
               </label>
+
               <input
                 id="logo"
                 type="file"
                 name="logo"
                 accept="image/*"
                 className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setFormData((prev) => ({
+                    ...prev,
+                    logo: file,
+                  }));
+                }}
               />
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex items-center justify-center w-64 overflow-hidden rounded-lg h-36 bg-navy">
+                {formData.banner ? (
+                  <img
+                    src={URL.createObjectURL(formData.banner)}
+                    alt="Selected Banner"
+                    className="object-cover w-full h-full"
+                  />
+                ) : (
+                  <span className="text-white">No Banner</span>
+                )}
+              </div>
+
               <label
                 htmlFor="banner"
-                className="flex items-center justify-center w-24 h-12 text-white bg-blue-500 rounded-lg cursor-pointer"
+                className="flex items-center justify-center text-xs font-extrabold cursor-pointer text-navy"
               >
                 Community Banner
               </label>
+
               <input
                 id="banner"
                 type="file"
                 name="banner"
                 accept="image/*"
                 className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setFormData((prev) => ({
+                    ...prev,
+                    banner: file,
+                  }));
+                }}
               />
             </div>
           </div>
