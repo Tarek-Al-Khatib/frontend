@@ -9,6 +9,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { scrollToBottom, renderMessages } from "./utils";
 import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
+import CreateCommunity from "./Modals/CreateCommunityModal";
 
 const Communities = () => {
   const {
@@ -19,6 +20,8 @@ const Communities = () => {
     fetchChannels,
     fetchMembers,
   } = useContext(communityContext);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [flipChannel, setFlipChannel] = useState(true);
   const [flipModerators, setFlipModerators] = useState(true);
@@ -57,6 +60,10 @@ const Communities = () => {
     setMessages(channel.messages || []);
   };
 
+  const handleModalToggle = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+
   const handleMessageSend = () => {
     if (messageInput.trim()) {
       const newMessage = {
@@ -75,6 +82,7 @@ const Communities = () => {
   return (
     <div>
       <Navbar />
+      <CreateCommunity isOpen={isModalOpen} onClose={handleModalToggle} />
       <div className="flex w-full bg-white h-screen/92">
         <div className="flex flex-col items-center w-24 py-6 bg-white">
           {communities.map((community) => (
@@ -88,7 +96,10 @@ const Communities = () => {
               </span>
             </button>
           ))}
-          <button className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
+          <button
+            onClick={handleModalToggle}
+            className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg"
+          >
             <IoMdAdd size={25} />
           </button>
         </div>
