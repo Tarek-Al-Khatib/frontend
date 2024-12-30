@@ -18,6 +18,9 @@ const Communities = () => {
     fetchMembers,
   } = useContext(communityContext);
 
+  const messagesContainerRef = useRef(null);
+
+  const [messageInput, setMessageInput] = useState("");
   const [selectedCommunity, setSelectedCommunity] = useState(
     communities[0] || null
   );
@@ -26,8 +29,6 @@ const Communities = () => {
   const [moderatorsData, setModeratorsData] = useState(
     members.filter((m) => m.role === "MODERATOR")
   );
-  const messagesContainerRef = useRef(null);
-  const [messageInput, setMessageInput] = useState("");
 
   useEffect(() => {
     fetchMembers(selectedCommunity.id);
@@ -35,7 +36,8 @@ const Communities = () => {
   }, [selectedCommunity]);
 
   useEffect(() => {
-    if (messages[messages.length - 1].name === "You") scrollToBottom();
+    if (messages.length > 0)
+      if (messages[messages.length - 1].name === "You") scrollToBottom();
   }, [messages]);
 
   const scrollToBottom = () => {
@@ -129,7 +131,7 @@ const Communities = () => {
               {selectedCommunity ? selectedCommunity.logo : ""}
             </div>
             <div className="text-lg font-light text-white">
-              {selectedCommunity.name}
+              {selectedCommunity.title}
             </div>
           </div>
 
