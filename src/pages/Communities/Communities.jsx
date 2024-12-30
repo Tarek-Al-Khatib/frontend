@@ -87,12 +87,12 @@ const Communities = () => {
       <CreateCommunity
         isOpen={isCommunityModalOpen}
         onClose={handleCommunityModalToggle}
-        communityId={selectedCommunity.id}
       />
 
       <CreateChannel
         isOpen={isChannelModalOpen}
         onClose={handleChannelModalToggle}
+        communityId={selectedCommunity.id}
       />
       <div className="flex w-full bg-white h-screen/92">
         <div className="flex flex-col items-center w-24 py-6 bg-white">

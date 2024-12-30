@@ -26,7 +26,6 @@ const CommunityProvider = ({ children }) => {
         }
       );
       setCommunities(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error("Error fetching user communities:", error);
     }
@@ -85,7 +84,7 @@ const CommunityProvider = ({ children }) => {
   const createChannel = async (communityId, channelData) => {
     try {
       const response = await axios.post(
-        `${serverUrl}/api/communities/${communityId}/channels`,
+        `${serverUrl}/api/community/${communityId}/channels`,
         channelData,
         {
           headers: {
