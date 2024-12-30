@@ -20,6 +20,8 @@ const Communities = () => {
     fetchMembers,
   } = useContext(communityContext);
 
+  const [flipChannel, setFlipChannel] = useState(true);
+
   const messagesContainerRef = useRef(null);
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -100,33 +102,38 @@ const Communities = () => {
           </div>
 
           <div className="mb-10">
-            <button className="flex items-center mb-3 text-lg font-bold text-white">
-              <IoIosArrowForward />
-              <IoIosArrowDown />
+            <button
+              onClick={() => setFlipChannel(!flipChannel)}
+              className="flex items-center mb-3 text-lg font-bold text-white"
+            >
+              {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
               Channels
             </button>
-            <div className="flex flex-col">
-              {channels.map((channel, index) => (
-                <button
-                  key={index}
-                  className={`flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded text-start ${
-                    selectedChannel != null && channel.id === selectedChannel.id
-                      ? "bg-dark-blue"
-                      : "hover:bg-blue-700/30"
-                  }`}
-                  onClick={() => {
-                    handleChannelSelect(channel);
-                  }}
-                >
-                  // {channel.name}
-                  {channel.unread > 0 && (
-                    <div className="flex items-center justify-center w-5 h-5 text-xs bg-blue-600 rounded-full">
-                      {channel.unread}
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
+            {flipChannel && (
+              <div className="flex flex-col">
+                {channels.map((channel, index) => (
+                  <button
+                    key={index}
+                    className={`flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded text-start ${
+                      selectedChannel != null &&
+                      channel.id === selectedChannel.id
+                        ? "bg-dark-blue"
+                        : "hover:bg-blue-700/30"
+                    }`}
+                    onClick={() => {
+                      handleChannelSelect(channel);
+                    }}
+                  >
+                    // {channel.name}
+                    {channel.unread > 0 && (
+                      <div className="flex items-center justify-center w-5 h-5 text-xs bg-blue-600 rounded-full">
+                        {channel.unread}
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <div>
