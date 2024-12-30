@@ -7,10 +7,12 @@ import {
   TextField,
 } from "@mui/material";
 import "../../../css/colors.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { communityContext } from "../../../contexts/CommunityContext/CommunityContext";
 
-const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
+const CreateCommunity = ({ isOpen, onClose }) => {
+  const { createCommunity } = useContext(communityContext);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -24,6 +26,14 @@ const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
       ...prev,
       [name]: files ? files[0] : value,
     }));
+  };
+
+  const handleSubmit = async () => {
+    if (formData.name !== "" && formData.description !== "null") {
+      const response = await createCommunity(formData);
+      console.log(response);
+      onClose();
+    }
   };
   return (
     <Dialog
@@ -178,7 +188,10 @@ const CreateCommunity = ({ isOpen, onClose, onSubmit }) => {
           </div>
         </DialogContent>
         <DialogActions>
-          <button className="px-4 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self">
+          <button
+            className="px-4 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
+            onClick={handleSubmit}
+          >
             Create Community
           </button>
         </DialogActions>
