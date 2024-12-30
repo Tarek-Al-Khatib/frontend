@@ -154,8 +154,13 @@ const Communities = () => {
                 Welcome to // {selectedChannel.name}
               </h1>
               <p className="mb-4 text-xl font-thin text-navy">
-                @{selectedChannel.creator.username} created this channel on
-                17/07/2024: {selectedChannel.description}
+                @{selectedChannel.creator.username} created this channel on{" "}
+                {new Date(selectedChannel.created_at).toLocaleString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+                : {selectedChannel.description}
               </p>
               <hr className="mb-6 border-t border-blue-900" />
             </div>
