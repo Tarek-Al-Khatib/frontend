@@ -7,6 +7,14 @@ const CreateCommunity = () => {
     logo: null,
     banner: null,
   });
+
+  const handleInputChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value,
+    }));
+  };
   return <div></div>;
 };
 
