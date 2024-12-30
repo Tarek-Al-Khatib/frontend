@@ -8,6 +8,7 @@ import { MdPeopleAlt } from "react-icons/md";
 import { FaUserPen } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { dashboardContext } from "../../contexts/DashboardContext/DashboardContext";
+import { LineChart } from "@mui/x-charts";
 const Dashboard = () => {
   const { quote } = useContext(dashboardContext);
   const navigation = useNavigate();
@@ -146,12 +147,20 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center w-full p-12 border border-gray-300 mb-14 rounded-3xl">
-          <div className="w-3/5 p-4 bg-gray-100 rounded shadow">
-            <div className="flex items-center justify-center h-64 bg-gray-200">
-              <span>Graph Placeholder</span>
-            </div>
-          </div>
+        <div className="flex items-center justify-center w-full p-8 py-0 border border-gray-300 mb-14 rounded-3xl">
+          <LineChart
+            xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+            series={[
+              {
+                data: [2, 5.5, 2, 8.5, 1.5, 5],
+                color: "#1e25a6",
+              },
+            ]}
+            width={1000}
+            height={600}
+            grid={{ vertical: true, horizontal: true }}
+          />
+
           <div className="grid w-2/5 grid-cols-2 gap-7">
             {dashboardButtons.map((button) => (
               <button
