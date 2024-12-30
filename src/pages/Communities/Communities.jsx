@@ -6,6 +6,7 @@ import { IoMdAdd } from "react-icons/io";
 import { FiSend } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
+import { scrollToBottom, renderMessages } from "./utils";
 import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
 
 const Communities = () => {
@@ -40,21 +41,6 @@ const Communities = () => {
       if (messages[messages.length - 1].name === "You") scrollToBottom();
   }, [messages]);
 
-  const scrollToBottom = () => {
-    if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop =
-        messagesContainerRef.current.scrollHeight;
-    }
-  };
-
-  const parseTimestamp = (timestamp) => new Date(timestamp).getTime();
-
-  const getMessageDuration = (prevTimestamp, currentTimestamp) => {
-    const prevTime = parseTimestamp(prevTimestamp);
-    const currentTime = parseTimestamp(currentTimestamp);
-    return (currentTime - prevTime) / 60000;
-  };
-
   const handleCommunitySelect = (community) => {
     setSelectedCommunity(community);
     setSelectedChannel(null);
@@ -66,7 +52,7 @@ const Communities = () => {
     setMessages(channel.messages || []);
   };
 
-  const handleMessageSend = () => {
+  const handleMessageSend = (messageInput) => {
     if (messageInput.trim()) {
       const newMessage = {
         name: "You",
@@ -77,30 +63,6 @@ const Communities = () => {
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setMessageInput("");
     }
-  };
-
-  const renderMessages = () => {
-    const combinedMessages = [];
-    if (messages.length > 0) {
-      messages.forEach((currentMessage, index) => {
-        const previousMessage = messages[index - 1];
-        if (
-          previousMessage &&
-          previousMessage.name === currentMessage.name &&
-          getMessageDuration(
-            previousMessage.timestamp,
-            currentMessage.timestamp
-          ) < 5
-        ) {
-          combinedMessages[
-            combinedMessages.length - 1
-          ].message += `<br />${currentMessage.message}`;
-        } else {
-          combinedMessages.push({ ...currentMessage });
-        }
-      });
-    }
-    return combinedMessages;
   };
 
   const messagesToRender = renderMessages();
