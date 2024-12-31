@@ -50,15 +50,17 @@ const Communities = () => {
   }, [messages]);
 
   useEffect(() => {
-    socket.on("receiveMessage", (newMessage) => {
-      console.log("Received something");
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-    });
+    if (socket) {
+      socket.on("receiveMessage", (newMessage) => {
+        console.log("Received something");
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+      });
 
-    return () => {
-      socket.off("receiveMessage");
-    };
-  }, []);
+      return () => {
+        socket.off("receiveMessage");
+      };
+    }
+  }, [socket]);
 
   const handleCommunitySelect = (community) => {
     setSelectedCommunity(community);
@@ -88,8 +90,6 @@ const Communities = () => {
         channelId: selectedChannel.id,
         userId: user.id,
       });
-
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
       setMessageInput("");
     }
   };
