@@ -17,7 +17,7 @@ import { authContext } from "../../contexts/AuthContext/AuthContext";
 const Communities = () => {
   const { communities, channels, members, fetchChannels, fetchMembers } =
     useContext(communityContext);
-  const { user, token } = useContext(authContext);
+  const { user } = useContext(authContext);
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
 
@@ -33,8 +33,7 @@ const Communities = () => {
   const [moderatorsData, setModeratorsData] = useState(
     members.filter((m) => m.role === "MODERATOR")
   );
-
-  const socket = useSocket(selectedChannel?.id);
+  let socket = useSocket(selectedChannel?.id);
   useEffect(() => {
     fetchMembers(selectedCommunity.id);
     fetchChannels(selectedCommunity.id);
@@ -52,13 +51,14 @@ const Communities = () => {
 
   useEffect(() => {
     socket.on("receiveMessage", (newMessage) => {
+      console.log("Received something");
       setMessages((prevMessages) => [...prevMessages, newMessage]);
     });
 
     return () => {
       socket.off("receiveMessage");
     };
-  }, [socket]);
+  }, []);
 
   const handleCommunitySelect = (community) => {
     setSelectedCommunity(community);
@@ -82,10 +82,11 @@ const Communities = () => {
   const handleMessageSend = () => {
     if (messageInput.trim()) {
       const newMessage = messageInput.trim();
+      console.log(newMessage);
       socket.emit("sendMessage", {
+        messageContent: newMessage,
         channelId: selectedChannel.id,
-        message: newMessage,
-        senderId: user.id,
+        userId: user.id,
       });
 
       setMessages((prevMessages) => [...prevMessages, newMessage]);
