@@ -18,13 +18,11 @@ export const renderMessages = (messages) => {
   if (messages.length > 0) {
     messages.forEach((currentMessage, index) => {
       const previousMessage = messages[index - 1];
+
       if (
         previousMessage &&
-        previousMessage.name === currentMessage.name &&
-        getMessageDuration(
-          previousMessage.timestamp,
-          currentMessage.timestamp
-        ) < 5
+        previousMessage.sender.username === currentMessage.sender.username &&
+        getMessageDuration(previousMessage.sent_at, currentMessage.sent_at) < 5
       ) {
         combinedMessages[
           combinedMessages.length - 1
