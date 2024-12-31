@@ -11,11 +11,11 @@ import { scrollToBottom, renderMessages } from "./utils";
 import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
 import CreateCommunity from "./Modals/CreateCommunityModal";
 import CreateChannel from "./Modals/CreateChannelModal";
+import { useSocket } from "../../utils/useSocket";
 
 const Communities = () => {
   const { communities, channels, members, fetchChannels, fetchMembers } =
     useContext(communityContext);
-
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
 
@@ -32,6 +32,7 @@ const Communities = () => {
     members.filter((m) => m.role === "MODERATOR")
   );
 
+  const socket = useSocket(selectedChannel?.id);
   useEffect(() => {
     fetchMembers(selectedCommunity.id);
     fetchChannels(selectedCommunity.id);
@@ -46,6 +47,16 @@ const Communities = () => {
       if (messages[messages.length - 1].name === "You")
         scrollToBottom(messagesContainerRef);
   }, [messages]);
+
+  useEffect(() => {
+    socket.on("receiveMessage", (newMessage) => {
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    });
+
+    return () => {
+      socket.off("receiveMessage");
+    };
+  }, [socket]);
 
   const handleCommunitySelect = (community) => {
     setSelectedCommunity(community);
