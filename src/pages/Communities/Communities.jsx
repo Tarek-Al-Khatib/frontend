@@ -12,10 +12,12 @@ import { communityContext } from "../../contexts/CommunityContext/CommunityConte
 import CreateCommunity from "./Modals/CreateCommunityModal";
 import CreateChannel from "./Modals/CreateChannelModal";
 import { useSocket } from "../../utils/useSocket";
+import { authContext } from "../../contexts/AuthContext/AuthContext";
 
 const Communities = () => {
   const { communities, channels, members, fetchChannels, fetchMembers } =
     useContext(communityContext);
+  const { user, token } = useContext(authContext);
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
 
@@ -79,12 +81,13 @@ const Communities = () => {
 
   const handleMessageSend = () => {
     if (messageInput.trim()) {
-      const newMessage = {
-        name: "You",
-        badge: "Learner",
-        timestamp: new Date().toLocaleString(),
-        message: messageInput.trim(),
-      };
+      const newMessage = messageInput.trim();
+      socket.emit("sendMessage", {
+        channelId: selectedChannel.id,
+        message: newMessage,
+        senderId: user.id,
+      });
+
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setMessageInput("");
     }
