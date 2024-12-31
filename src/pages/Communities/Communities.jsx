@@ -45,8 +45,10 @@ const Communities = () => {
 
   useEffect(() => {
     if (messages.length > 0)
-      if (messages[messages.length - 1].name === "You")
-        scrollToBottom(messagesContainerRef);
+      scrollToBottom(
+        messagesContainerRef,
+        messages[messages.length - 1].sender.username !== user.username
+      );
   }, [messages]);
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const Communities = () => {
 
   const handleChannelSelect = (channel) => {
     setSelectedChannel(channel);
-    setMessages(channel.messages || []);
+    setMessages(channel.chats || []);
   };
 
   const handleCommunityModalToggle = () => {
@@ -231,13 +233,18 @@ const Communities = () => {
                         <div className="flex-1">
                           <div className="flex items-center justify-between gap-6 w-fit">
                             <div className="text-sm font-bold text-blue-900">
-                              {message.name}
+                              {message.sender.username}
                             </div>
                             <div className="px-2 py-1 text-xs text-white bg-blue-900 rounded">
-                              {message.badge}
+                              {
+                                members.find(
+                                  (member) =>
+                                    member.user_id === message.sender.id
+                                ).role
+                              }
                             </div>
                             <div className="text-sm text-blue-900">
-                              {message.timestamp}
+                              {message.sent_at}
                             </div>
                           </div>
                           <p

@@ -1,10 +1,19 @@
-export const scrollToBottom = (messagesContainerRef) => {
+export const scrollToBottom = (messagesContainerRef, notMe) => {
   if (messagesContainerRef.current) {
-    messagesContainerRef.current.scrollTop =
-      messagesContainerRef.current.scrollHeight;
+    const container = messagesContainerRef.current;
+    const isNearBottom =
+      container.scrollHeight - container.scrollTop <=
+      container.clientHeight + 300;
+
+    if (isNearBottom && notMe) {
+      container.scrollTop = container.scrollHeight;
+    }
+
+    if (!notMe) {
+      container.scrollTop = container.scrollHeight;
+    }
   }
 };
-
 const parseTimestamp = (timestamp) => new Date(timestamp).getTime();
 
 const getMessageDuration = (prevTimestamp, currentTimestamp) => {
