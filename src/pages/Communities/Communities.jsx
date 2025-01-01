@@ -16,8 +16,14 @@ import { authContext } from "../../contexts/AuthContext/AuthContext";
 import moment from "moment";
 
 const Communities = () => {
-  const { communities, channels, members, fetchChannels, fetchMembers } =
-    useContext(communityContext);
+  const {
+    communities,
+    channels,
+    members,
+    setChannels,
+    fetchChannels,
+    fetchMembers,
+  } = useContext(communityContext);
   const { user } = useContext(authContext);
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
@@ -56,7 +62,16 @@ const Communities = () => {
     if (socket) {
       socket.on("receiveMessage", (newMessage) => {
         console.log("Received something");
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        setChannels((prevChannels) => {
+          const updatedMessages = prevChannels[newMessage.channelId]
+            ? [...prevChannels[newMessage.channelId], newMessage]
+            : [newMessage];
+
+          return {
+            ...prevChannels,
+            [newMessage.channelId]: updatedMessages,
+          };
+        });
       });
 
       return () => {

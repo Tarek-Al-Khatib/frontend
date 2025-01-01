@@ -122,6 +122,7 @@ const CommunityProvider = ({ children }) => {
         communities,
         channels,
         members,
+        setChannels,
         fetchUserCommunities,
         fetchChannels,
         fetchMembers,
