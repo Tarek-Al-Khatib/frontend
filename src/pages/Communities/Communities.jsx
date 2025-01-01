@@ -5,8 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import "./Communities.css";
 import { IoMdAdd } from "react-icons/io";
 import { FiSend } from "react-icons/fi";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 import { scrollToBottom, renderMessages } from "./utils";
 import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
 import CreateCommunity from "./Modals/CreateCommunityModal";
@@ -27,7 +26,6 @@ const Communities = () => {
   const { user } = useContext(authContext);
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
-
   const [flipChannel, setFlipChannel] = useState(true);
   const [flipModerators, setFlipModerators] = useState(true);
 
@@ -41,6 +39,7 @@ const Communities = () => {
     members.filter((m) => m.role === "MODERATOR")
   );
   let socket = useSocket(selectedChannel?.id);
+
   useEffect(() => {
     fetchMembers(selectedCommunity.id);
     fetchChannels(selectedCommunity.id);
@@ -62,23 +61,40 @@ const Communities = () => {
     if (socket) {
       socket.on("receiveMessage", (newMessage) => {
         console.log("Received something");
-        setChannels((prevChannels) => {
-          const updatedMessages = prevChannels[newMessage.channelId]
-            ? [...prevChannels[newMessage.channelId], newMessage]
-            : [newMessage];
-
-          return {
-            ...prevChannels,
-            [newMessage.channelId]: updatedMessages,
-          };
-        });
+        if (selectedChannel?.id !== newMessage.channel_id) {
+          setChannels((prevChannels) => {
+            return prevChannels.map((channel) => {
+              if (channel.id === newMessage.channel_id) {
+                return {
+                  ...channel,
+                  unread: channel.unread ? channel.unread + 1 : 1,
+                  chats: [...channel.chats, newMessage],
+                };
+              }
+              return channel;
+            });
+          });
+        } else {
+          setChannels((prevChannels) => {
+            return prevChannels.map((channel) => {
+              if (channel.id === selectedChannel.id) {
+                return {
+                  ...channel,
+                  chats: [...channel.chats, newMessage],
+                };
+              }
+              return channel;
+            });
+          });
+          setMessages((prevMessages) => [...prevMessages, newMessage]);
+        }
       });
 
       return () => {
         socket.off("receiveMessage");
       };
     }
-  }, [socket]);
+  }, [socket, selectedChannel]);
 
   const handleCommunitySelect = (community) => {
     setSelectedCommunity(community);
@@ -87,9 +103,13 @@ const Communities = () => {
   };
 
   const handleChannelSelect = (channel) => {
-    fetchChannels(selectedCommunity.id);
     setSelectedChannel(channel);
-    setMessages(channel.chats || []);
+    setMessages(channel.chats);
+    setChannels((prevChannels) => {
+      return prevChannels.map((ch) =>
+        ch.id === channel.id ? { ...ch, unread: 0 } : ch
+      );
+    });
   };
 
   const handleCommunityModalToggle = () => {
@@ -103,7 +123,6 @@ const Communities = () => {
   const handleMessageSend = () => {
     if (messageInput.trim()) {
       const newMessage = messageInput.trim();
-      console.log(newMessage);
       socket.emit("sendMessage", {
         messageContent: newMessage,
         channelId: selectedChannel.id,
@@ -122,7 +141,6 @@ const Communities = () => {
         isOpen={isCommunityModalOpen}
         onClose={handleCommunityModalToggle}
       />
-
       <CreateChannel
         isOpen={isChannelModalOpen}
         onClose={handleChannelModalToggle}
@@ -182,11 +200,9 @@ const Communities = () => {
                         ? "bg-dark-blue"
                         : "hover:bg-blue-700/30"
                     }`}
-                    onClick={() => {
-                      handleChannelSelect(channel);
-                    }}
+                    onClick={() => handleChannelSelect(channel)}
                   >
-                    // {channel.name}
+                    {channel.name}
                     {channel.unread > 0 && (
                       <div className="flex items-center justify-center w-5 h-5 text-xs bg-blue-600 rounded-full">
                         {channel.unread}
@@ -232,7 +248,7 @@ const Communities = () => {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
-                })}
+                })}{" "}
                 : {selectedChannel.description}
               </p>
               <hr className="mb-6 border-t border-blue-900" />
@@ -299,7 +315,6 @@ const Communities = () => {
                 value={messageInput}
                 onChange={(e) => {
                   setMessageInput(e.target.value);
-                  console.log(messageInput);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
