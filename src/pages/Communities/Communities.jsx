@@ -13,6 +13,7 @@ import CreateCommunity from "./Modals/CreateCommunityModal";
 import CreateChannel from "./Modals/CreateChannelModal";
 import { useSocket } from "../../utils/useSocket";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
+import moment from "moment";
 
 const Communities = () => {
   const { communities, channels, members, fetchChannels, fetchMembers } =
@@ -71,6 +72,7 @@ const Communities = () => {
   };
 
   const handleChannelSelect = (channel) => {
+    fetchChannels(selectedCommunity.id);
     setSelectedChannel(channel);
     setMessages(channel.chats || []);
   };
@@ -231,7 +233,7 @@ const Communities = () => {
                       <div className="flex items-start gap-7">
                         <div className="w-12 h-12 bg-blue-900 rounded-full"></div>
                         <div className="flex-1">
-                          <div className="flex items-center justify-between gap-6 w-fit">
+                          <div className="flex items-center justify-between gap-2 w-fit">
                             <div className="text-sm font-bold text-blue-900">
                               {message.sender.username}
                             </div>
@@ -244,7 +246,12 @@ const Communities = () => {
                               }
                             </div>
                             <div className="text-sm text-blue-900">
-                              {message.sent_at}
+                              {moment().diff(moment(message.sent_at), "days") >=
+                              2
+                                ? moment(message.sent_at).format(
+                                    "MMM Do, YYYY, h:mm A"
+                                  )
+                                : moment(message.sent_at).fromNow()}
                             </div>
                           </div>
                           <p
