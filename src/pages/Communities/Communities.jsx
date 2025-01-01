@@ -255,7 +255,7 @@ const Communities = () => {
                             </div>
                           </div>
                           <p
-                            className="text-base text-black"
+                            className="text-base text-black break-all whitespace-normal"
                             dangerouslySetInnerHTML={{
                               __html: message.message,
                             }}
