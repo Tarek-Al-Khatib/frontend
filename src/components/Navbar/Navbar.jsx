@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FaBell } from "react-icons/fa";
 import Logo from "../../assets/logo.png";
 import "../../css/colors.css";
+import Avatar from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { Menu, MenuItem } from "@mui/material";
 
@@ -41,9 +43,12 @@ const Navbar = () => {
           <button>
             <FaBell className="text-navy" size={20} />
           </button>
-          <button className="rounded-full bg-navy w-11 h-11"></button>
+          <button
+            className="rounded-full bg-navy w-11 h-11"
+            onClick={handleProfileClick}
+          ></button>
           <Menu
-            id="basic-menu"
+            id="account-menu"
             aria-labelledby="demo-positioned-button"
             anchorEl={anchorEl}
             open={open}
@@ -51,9 +56,63 @@ const Navbar = () => {
             MenuListProps={{
               "aria-labelledby": "basic-button",
             }}
+            slotProps={{
+              paper: {
+                elevation: 0,
+                sx: {
+                  overflow: "visible",
+                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                  mt: 1.5,
+                  "& .MuiAvatar-root": {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  "&::before": {
+                    content: '""',
+                    display: "block",
+                    position: "absolute",
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: "background.paper",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    zIndex: 0,
+                  },
+                },
+              },
+            }}
+            transformOrigin={{ horizontal: "right", vertical: "top" }}
+            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                color: "navy",
+                fontWeight: "bold",
+                display: "flex",
+                justifyContent: "space-between",
+                textAlign: "start",
+              }}
+            >
+              <Avatar />
+              Profile
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                color: "navy",
+                fontWeight: "bold",
+                display: "flex",
+                justifyContent: "space-between",
+                textAlign: "start",
+              }}
+            >
+              <LogoutIcon />
+              Logout
+            </MenuItem>
           </Menu>
         </div>
       </header>
