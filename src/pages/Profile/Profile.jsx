@@ -47,6 +47,48 @@ const Profile = () => {
       learningPlans: 0,
       points: 900,
     },
+    {
+      rank: 6,
+      username: "Username5",
+      interviews: 0,
+      learningPlans: 0,
+      points: 900,
+    },
+    {
+      rank: 7,
+      username: "Username5",
+      interviews: 0,
+      learningPlans: 0,
+      points: 900,
+    },
+    {
+      rank: 8,
+      username: "Username5",
+      interviews: 0,
+      learningPlans: 0,
+      points: 900,
+    },
+    {
+      rank: 9,
+      username: "Username5",
+      interviews: 0,
+      learningPlans: 0,
+      points: 900,
+    },
+    {
+      rank: 10,
+      username: "Username5",
+      interviews: 0,
+      learningPlans: 0,
+      points: 900,
+    },
+    {
+      rank: 11,
+      username: "Username5",
+      interviews: 0,
+      learningPlans: 0,
+      points: 900,
+    },
   ];
   return (
     <div className="flex gap-10">
@@ -190,82 +232,82 @@ const Profile = () => {
           </div>
           <div className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]">
             <div className="mb-3 text-base font-bold text-center text-navy">
-              My learning plans
+              My Communities
             </div>
 
-            <div className="p-4 bg-white h-[550px]">
-              <div className="space-y-4 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
-                <div className="flex justify-between px-5">
+            <div className="p-4 bg-white h-[550px] px-0">
+              <div className="flex flex-col gap-6 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
+                <div className="flex items-center gap-4 pr-2">
+                  <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold text-navy">Learning plan</p>
-                    <p className="font-normal text-navy">description</p>
-                  </div>
-                  <div>
-                    <CircularProgressWithLabel value={67} size={60} />
+                    <p className="font-bold text-navy">Community Name</p>
+                    <p className="font-normal text-navy">
+                      Community description
+                    </p>
                   </div>
                 </div>
-                <div className="flex justify-between px-5">
+                <div className="flex items-center gap-4 pr-2">
+                  <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold text-navy">Learning plan</p>
-                    <p className="font-normal text-navy">description</p>
-                  </div>
-                  <div>
-                    <CircularProgressWithLabel value={67} size={60} />
+                    <p className="font-bold text-navy">Community Name</p>
+                    <p className="font-normal text-navy">
+                      Community description
+                    </p>
                   </div>
                 </div>
-                <div className="flex justify-between px-5">
+                <div className="flex items-center gap-4 pr-2">
+                  <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold text-navy">Learning plan</p>
-                    <p className="font-normal text-navy">description</p>
-                  </div>
-                  <div>
-                    <CircularProgressWithLabel value={67} size={60} />
+                    <p className="font-bold text-navy">Community Name</p>
+                    <p className="font-normal text-navy">
+                      Community description
+                    </p>
                   </div>
                 </div>
-                <div className="flex justify-between px-5">
+                <div className="flex items-center gap-4 pr-2">
+                  <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold text-navy">Learning plan</p>
-                    <p className="font-normal text-navy">description</p>
-                  </div>
-                  <div>
-                    <CircularProgressWithLabel value={67} size={60} />
+                    <p className="font-bold text-navy">Community Name</p>
+                    <p className="font-normal text-navy">
+                      Community description
+                    </p>
                   </div>
                 </div>
-                <div className="flex justify-between px-5">
+                <div className="flex items-center gap-4 pr-2">
+                  <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold text-navy">Learning plan</p>
-                    <p className="font-normal text-navy">description</p>
-                  </div>
-                  <div>
-                    <CircularProgressWithLabel value={67} size={60} />
+                    <p className="font-bold text-navy">Community Name</p>
+                    <p className="font-normal text-navy">
+                      Community description
+                    </p>
                   </div>
                 </div>
-                <div className="flex justify-between px-5">
+                <div className="flex items-center gap-4 pr-2">
+                  <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold text-navy">Learning plan</p>
-                    <p className="font-normal text-navy">description</p>
-                  </div>
-                  <div>
-                    <CircularProgressWithLabel value={67} size={60} />
+                    <p className="font-bold text-navy">Community Name</p>
+                    <p className="font-normal text-navy">
+                      Community description
+                    </p>
                   </div>
                 </div>
-                <div className="flex justify-between px-5">
+                <div className="flex items-center gap-4 pr-2">
+                  <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold text-navy">Learning plan</p>
-                    <p className="font-normal text-navy">description</p>
-                  </div>
-                  <div>
-                    <CircularProgressWithLabel value={67} size={60} />
+                    <p className="font-bold text-navy">Community Name</p>
+                    <p className="font-normal text-navy">
+                      Community description
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex justify-between px-5">
+                <div className="flex items-center gap-4 pr-2">
+                  <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold text-navy">Learning plan</p>
-                    <p className="font-normal text-navy">description</p>
-                  </div>
-                  <div>
-                    <CircularProgressWithLabel value={67} size={60} />
+                    <p className="font-bold text-navy">Community Name</p>
+                    <p className="font-normal text-navy">
+                      Community description
+                    </p>
                   </div>
                 </div>
               </div>
