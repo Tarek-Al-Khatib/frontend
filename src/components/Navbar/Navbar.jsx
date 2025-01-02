@@ -5,7 +5,20 @@ import "../../css/colors.css";
 import Avatar from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-import { Box, List, Menu, MenuItem, Popover, Typography } from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
+import EventNoteIcon from "@mui/icons-material/EventNote";
+import WarningIcon from "@mui/icons-material/Warning";
+import {
+  Box,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Popover,
+  Typography,
+} from "@mui/material";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -14,6 +27,39 @@ const Navbar = () => {
   const open = Boolean(anchorEl);
   const openNotifications = Boolean(anchorElNotifications);
 
+  const typeConfig = {
+    INFO: { icon: <InfoIcon color="info" />, color: "blue" },
+    REMINDER: { icon: <EventNoteIcon color="primary" />, color: "green" },
+    ALERT: { icon: <WarningIcon color="error" />, color: "red" },
+  };
+
+  const mockNotifications = [
+    {
+      title: "New Message",
+      message: "You have a new message from John.",
+      timestamp: "2025-01-01 10:00 AM",
+    },
+    {
+      title: "Update Available",
+      message: "Version 2.0 of the app is now available. Click to update!",
+      timestamp: "2025-01-01 9:30 AM",
+    },
+    {
+      title: "Payment Successful",
+      message: "Your payment of $49.99 has been processed successfully.",
+      timestamp: "2025-01-01 8:45 AM",
+    },
+    {
+      title: "System Alert",
+      message: "Your account password will expire in 3 days. Update now.",
+      timestamp: "2025-01-01 7:15 AM",
+    },
+    {
+      title: "Friend Request",
+      message: "Alice has sent you a friend request.",
+      timestamp: "2025-01-01 6:50 AM",
+    },
+  ];
   return (
     <div className="font-sans bg-white">
       <header className="flex items-center justify-between px-6 py-2 text-white border-b border-b-blue-600">
@@ -53,16 +99,36 @@ const Navbar = () => {
             }}
           >
             <Box sx={{ width: 300, maxHeight: 400, overflowY: "auto" }}>
-              <Typography
-                variant="h6"
-                sx={{ p: 2, borderBottom: "1px solid #e0e0e0" }}
-              >
-                Notifications
-              </Typography>
               <List>
-                <Typography sx={{ p: 2, textAlign: "center" }}>
-                  No notifications
-                </Typography>
+                {mockNotifications.length > 0 ? (
+                  mockNotifications.map((notification, index) => {
+                    const { type, title, message } = notification;
+                    const config = typeConfig[type] || {};
+                    return (
+                      <ListItem
+                        key={index}
+                        sx={{
+                          alignItems: "flex-start",
+                          display: "flex",
+                          gap: 1,
+                        }}
+                      >
+                        {config.icon}
+                        <ListItemText
+                          primary={title}
+                          secondary={message}
+                          sx={{
+                            "& .MuiTypography-body1": { fontWeight: 600 },
+                          }}
+                        />
+                      </ListItem>
+                    );
+                  })
+                ) : (
+                  <Typography sx={{ textAlign: "center", p: 2 }}>
+                    No notifications
+                  </Typography>
+                )}
               </List>
             </Box>
           </Popover>
