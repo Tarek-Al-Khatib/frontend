@@ -1,16 +1,14 @@
 import React from "react";
 import {
-  Box,
-  Paper,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
+import { LuInfo } from "react-icons/lu";
 import CircularProgressWithLabel from "../../components/CircularProgressWithLabel/CircularProgressWithLabel";
+import TableCellStyled from "../../components/TableCell/TableCell";
 
 const Profile = () => {
   const leaderboardData = [
@@ -275,66 +273,36 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="p-6">
-        <h1 className="mb-4 text-xl font-bold text-navy">Leaderboard</h1>
-        <TableContainer component={Paper}>
+      <div className="p-6 border border-gray-200 rounded-2xl">
+        <div className="flex items-center gap-3 mb-4 ">
+          <h1 className="text-xl font-bold text-navy">Leaderboard</h1>
+          <LuInfo color="navy" size={25} />
+        </div>
+        <TableContainer className="p-3 pb-8 border border-gray-200 rounded-xl">
           <Table aria-label="leaderboard table">
             <TableHead>
               <TableRow>
-                <TableCell
-                  sx={{
-                    color: "#4a80f1",
-                    fontWeight: "bold",
-                    fontFamily: "Open sans",
-                    width: 300,
-                    textAlign: "start",
-                  }}
-                  align="right"
-                >
-                  Changemakers
-                </TableCell>
-                <TableCell
-                  sx={{
-                    color: "#4a80f1",
-                    fontWeight: "bold",
-                    fontFamily: "Open sans",
-                  }}
-                  align="right"
-                >
-                  Interviews
-                </TableCell>
-                <TableCell
-                  sx={{
-                    color: "#4a80f1",
-                    fontWeight: "bold",
-                    fontFamily: "Open sans",
-                  }}
-                  align="right"
-                >
-                  Learning Plans
-                </TableCell>
-                <TableCell
-                  sx={{
-                    color: "#4a80f1",
-                    fontWeight: "bold",
-                    fontFamily: "Open sans",
-                    textAlign: "end",
-                  }}
-                  align="right"
-                >
-                  Points
-                </TableCell>
+                <TableCellStyled start={true}>Changemakers</TableCellStyled>
+                <TableCellStyled>Interviews</TableCellStyled>
+                <TableCellStyled>Learning Plans</TableCellStyled>
+                <TableCellStyled end={true}>Points</TableCellStyled>
               </TableRow>
             </TableHead>
             <TableBody>
               {leaderboardData.map((user) => (
                 <TableRow key={user.rank}>
-                  <TableCell align="right" sx={{ textAlign: "start" }}>
-                    {user.rank} {". "} {user.username}
-                  </TableCell>
-                  <TableCell align="right">{user.interviews}</TableCell>
-                  <TableCell align="right">{user.learningPlans}</TableCell>
-                  <TableCell align="right">{user.points}</TableCell>
+                  <TableCellStyled start={true}>
+                    <div className="flex items-center gap-3">
+                      {user.rank} {". "}
+                      <div className="flex items-center gap-1">
+                        <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
+                        {user.username}
+                      </div>
+                    </div>
+                  </TableCellStyled>
+                  <TableCellStyled>{user.interviews}</TableCellStyled>
+                  <TableCellStyled>{user.learningPlans}</TableCellStyled>
+                  <TableCellStyled end={true}>{user.points}</TableCellStyled>
                 </TableRow>
               ))}
             </TableBody>
