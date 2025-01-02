@@ -9,8 +9,11 @@ import { FaUserPen } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { dashboardContext } from "../../contexts/DashboardContext/DashboardContext";
 import { LineChart } from "@mui/x-charts";
+import { authContext } from "../../contexts/AuthContext/AuthContext";
+import capitalize from "capitalize";
 const Dashboard = () => {
   const { quote } = useContext(dashboardContext);
+  const { user } = useContext(authContext);
   const navigation = useNavigate();
   const [topLearningPicks, setTopLearningPicks] = useState([]);
   const [topCommunities, setTopCommunities] = useState([]);
@@ -126,7 +129,7 @@ const Dashboard = () => {
           <div>
             <h1 className="pb-5 text-2xl font-thin text-navy">Dashboard</h1>
             <h1 className="mb-4 text-4xl font-bold text-blue-900">
-              Welcome Back, Nour!
+              Welcome Back, {capitalize(user.username)}!
             </h1>
             <p className="w-3/5 text-xl font-normal text-navy">
               Here you can check your current stats, regarding interviews,
