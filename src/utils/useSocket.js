@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 import { useEffect, useRef } from "react";
 
-export const useSocket = (channelId) => {
+export const useSocket = (channelIds = []) => {
   const socketRef = useRef(null);
 
   useEffect(() => {
@@ -9,18 +9,22 @@ export const useSocket = (channelId) => {
       socketRef.current = io("http://localhost:8080");
     }
 
-    if (channelId) {
-      console.log("Joined channel", channelId);
-      socketRef.current.emit("joinChannel", channelId);
+    if (channelIds.length > 0) {
+      console.log("Joining channels", channelIds);
+      channelIds.forEach((channelId) => {
+        socketRef.current.emit("joinChannel", channelId);
+      });
     }
 
     return () => {
-      if (channelId) {
-        console.log("Leaving channel", channelId);
-        socketRef.current.emit("leaveChannel", channelId);
+      if (channelIds.length > 0) {
+        console.log("Leaving channels", channelIds);
+        channelIds.forEach((channelId) => {
+          socketRef.current.emit("leaveChannel", channelId);
+        });
       }
     };
-  }, [channelId]);
+  }, [channelIds]);
 
   return socketRef.current;
 };

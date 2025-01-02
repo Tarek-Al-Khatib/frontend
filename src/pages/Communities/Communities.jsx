@@ -38,7 +38,7 @@ const Communities = () => {
   const [moderatorsData, setModeratorsData] = useState(
     members.filter((m) => m.role === "MODERATOR")
   );
-  let socket = useSocket(selectedChannel?.id);
+  const socket = useSocket(channels.map((channel) => channel.id));
 
   useEffect(() => {
     fetchMembers(selectedCommunity.id);
