@@ -51,9 +51,9 @@ const Profile = () => {
     },
   ];
   return (
-    <div className="flex">
-      <div>
-        <div class="flex gap-5 justify-between w-[650px] bg-white rounded-[15px] p-6 h-fit">
+    <div className="flex gap-10">
+      <div className="flex flex-col gap-8">
+        <div class="flex gap-5 justify-between w-[650px] border rounded-2xl border-gray-200 bg-white p-6 h-fit">
           <div class="w-32 h-32 bg-[#1e25a6] rounded-full flex justify-center items-center">
             <span class="text-white text-sm font-bold font-['Open Sans Hebrew']">
               user img
@@ -106,97 +106,177 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]">
-          <div className="mb-3 text-base font-bold text-center text-navy">
-            My learning plans
+        <div className="flex gap-8">
+          <div className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]">
+            <div className="mb-3 text-base font-bold text-center text-navy">
+              My learning plans
+            </div>
+
+            <div className="p-4 bg-white h-[550px]">
+              <div className="space-y-4 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
+                </div>
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
+                </div>
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
+                </div>
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
+                </div>
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
+                </div>
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
+                </div>
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
+                </div>
+
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <div className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]">
+            <div className="mb-3 text-base font-bold text-center text-navy">
+              My learning plans
+            </div>
 
-          <div className="p-4 bg-white h-[650px]">
-            <div className="space-y-4 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
-              <div className="flex justify-between px-5">
-                <div className="flex flex-col gap-2">
-                  <p className="font-bold text-navy">Learning plan</p>
-                  <p className="font-normal text-navy">description</p>
+            <div className="p-4 bg-white h-[550px]">
+              <div className="space-y-4 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
                 </div>
-                <div>
-                  <CircularProgressWithLabel value={67} size={60} />
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-between px-5">
-                <div className="flex flex-col gap-2">
-                  <p className="font-bold text-navy">Learning plan</p>
-                  <p className="font-normal text-navy">description</p>
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
                 </div>
-                <div>
-                  <CircularProgressWithLabel value={67} size={60} />
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-between px-5">
-                <div className="flex flex-col gap-2">
-                  <p className="font-bold text-navy">Learning plan</p>
-                  <p className="font-normal text-navy">description</p>
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
                 </div>
-                <div>
-                  <CircularProgressWithLabel value={67} size={60} />
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-between px-5">
-                <div className="flex flex-col gap-2">
-                  <p className="font-bold text-navy">Learning plan</p>
-                  <p className="font-normal text-navy">description</p>
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
                 </div>
-                <div>
-                  <CircularProgressWithLabel value={67} size={60} />
-                </div>
-              </div>
-              <div className="flex justify-between px-5">
-                <div className="flex flex-col gap-2">
-                  <p className="font-bold text-navy">Learning plan</p>
-                  <p className="font-normal text-navy">description</p>
-                </div>
-                <div>
-                  <CircularProgressWithLabel value={67} size={60} />
-                </div>
-              </div>
-              <div className="flex justify-between px-5">
-                <div className="flex flex-col gap-2">
-                  <p className="font-bold text-navy">Learning plan</p>
-                  <p className="font-normal text-navy">description</p>
-                </div>
-                <div>
-                  <CircularProgressWithLabel value={67} size={60} />
-                </div>
-              </div>
-              <div className="flex justify-between px-5">
-                <div className="flex flex-col gap-2">
-                  <p className="font-bold text-navy">Learning plan</p>
-                  <p className="font-normal text-navy">description</p>
-                </div>
-                <div>
-                  <CircularProgressWithLabel value={67} size={60} />
-                </div>
-              </div>
 
-              <div className="flex justify-between px-5">
-                <div className="flex flex-col gap-2">
-                  <p className="font-bold text-navy">Learning plan</p>
-                  <p className="font-normal text-navy">description</p>
-                </div>
-                <div>
-                  <CircularProgressWithLabel value={67} size={60} />
+                <div className="flex justify-between px-5">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-navy">Learning plan</p>
+                    <p className="font-normal text-navy">description</p>
+                  </div>
+                  <div>
+                    <CircularProgressWithLabel value={67} size={60} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <Typography
-          variant="h6"
-          sx={{ color: "#1e25a6", fontWeight: "bold", mb: 2 }}
-        >
-          Leaderboard
-        </Typography>
+      <div className="p-6">
+        <h1 className="mb-4 text-xl font-bold text-navy">Leaderboard</h1>
         <TableContainer component={Paper}>
           <Table aria-label="leaderboard table">
             <TableHead>
