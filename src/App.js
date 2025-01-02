@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Communities from "./pages/Communities/Communities";
 import Learning from "./pages/Learning/Learning";
 import AppProviders from "./contexts/AppProviders";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/learning" element={<Learning />}></Route>
-          <Route path="/myprofile" element={<div>My profile page</div>}></Route>
+          <Route path="/myprofile" element={<Profile />}></Route>
           <Route path="/community" element={<Communities />}></Route>
           <Route path="/interview" element={<div>interviews page</div>}></Route>
         </Routes>
