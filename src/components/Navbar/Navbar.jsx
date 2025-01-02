@@ -5,20 +5,15 @@ import "../../css/colors.css";
 import Avatar from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-import { Menu, MenuItem } from "@mui/material";
+import { Box, List, Menu, MenuItem, Popover, Typography } from "@mui/material";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorElNotifications, setAnchorElNotifications] = useState(null);
   const open = Boolean(anchorEl);
+  const openNotifications = Boolean(anchorElNotifications);
 
-  const handleProfileClick = (e) => {
-    setAnchorEl(e.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
     <div className="font-sans bg-white">
       <header className="flex items-center justify-between px-6 py-2 text-white border-b border-b-blue-600">
@@ -40,19 +35,47 @@ const Navbar = () => {
           </button>
         </nav>
         <div className="flex items-center gap-8">
-          <button>
+          <button onClick={(e) => setAnchorElNotifications(e.currentTarget)}>
             <FaBell className="text-navy" size={20} />
           </button>
+          <Popover
+            id="notification-popover"
+            open={openNotifications}
+            anchorEl={anchorElNotifications}
+            onClose={() => setAnchorElNotifications(null)}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            <Box sx={{ width: 300, maxHeight: 400, overflowY: "auto" }}>
+              <Typography
+                variant="h6"
+                sx={{ p: 2, borderBottom: "1px solid #e0e0e0" }}
+              >
+                Notifications
+              </Typography>
+              <List>
+                <Typography sx={{ p: 2, textAlign: "center" }}>
+                  No notifications
+                </Typography>
+              </List>
+            </Box>
+          </Popover>
           <button
             className="rounded-full bg-navy w-11 h-11"
-            onClick={handleProfileClick}
+            onClick={(e) => setAnchorEl(e.currentTarget)}
           ></button>
           <Menu
             id="account-menu"
             aria-labelledby="demo-positioned-button"
             anchorEl={anchorEl}
             open={open}
-            onClose={handleClose}
+            onClose={() => setAnchorEl(null)}
             MenuListProps={{
               "aria-labelledby": "basic-button",
             }}
@@ -88,7 +111,7 @@ const Navbar = () => {
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
             <MenuItem
-              onClick={handleClose}
+              onClick={() => setAnchorEl(null)}
               sx={{
                 color: "navy",
                 fontWeight: "bold",
@@ -101,7 +124,7 @@ const Navbar = () => {
               Profile
             </MenuItem>
             <MenuItem
-              onClick={handleClose}
+              onClick={() => setAnchorEl(null)}
               sx={{
                 color: "navy",
                 fontWeight: "bold",
