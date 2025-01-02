@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaBell } from "react-icons/fa";
 import Logo from "../../assets/logo.png";
 import "../../css/colors.css";
@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleProfileClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
   return (
     <div className="font-sans bg-white">
       <header className="flex items-center justify-between px-6 py-2 text-white border-b border-b-blue-600">
