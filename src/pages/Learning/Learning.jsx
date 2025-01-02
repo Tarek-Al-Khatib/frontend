@@ -12,6 +12,7 @@ import { authContext } from "../../contexts/AuthContext/AuthContext";
 import { MdAddTask, MdDoneOutline } from "react-icons/md";
 import { GiProgression } from "react-icons/gi";
 import { GoTasklist } from "react-icons/go";
+import capitalize from "capitalize";
 
 const Learning = () => {
   const {
@@ -22,6 +23,7 @@ const Learning = () => {
     markPlanAsDone,
     markStepAsDone,
   } = useContext(learningContext);
+  const { user } = useContext(authContext);
 
   useEffect(() => {
     fetchPlans();
@@ -104,7 +106,9 @@ const Learning = () => {
             <div className="mb-16 text-2xl font-light text-navy">
               My Learning | Learning Plans
             </div>
-            <div className="mb-2 text-4xl font-bold text-navy">Hey Nour!</div>
+            <div className="mb-2 text-4xl font-bold text-navy">
+              Hey {capitalize(user.username)}!
+            </div>
             <div className="mb-8 text-xl font-light text-navy">
               Here you can check your learning plans and see each plan's steps
               and progress. Have a productive day!
