@@ -3,13 +3,19 @@ import { FaBell } from "react-icons/fa";
 import Logo from "../../assets/logo.png";
 import "../../css/colors.css";
 import { useNavigate } from "react-router-dom";
+import { Menu, MenuItem } from "@mui/material";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   const handleProfileClick = (e) => {
     setAnchorEl(e.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
   return (
     <div className="font-sans bg-white">
@@ -36,6 +42,19 @@ const Navbar = () => {
             <FaBell className="text-navy" size={20} />
           </button>
           <button className="rounded-full bg-navy w-11 h-11"></button>
+          <Menu
+            id="basic-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
+          </Menu>
         </div>
       </header>
     </div>
