@@ -27,6 +27,10 @@ const Navbar = () => {
   const open = Boolean(anchorEl);
   const openNotifications = Boolean(anchorElNotifications);
 
+  const handleProfileClick = () => {
+    navigate("/myprofile");
+  };
+
   const typeConfig = {
     INFO: { icon: <InfoIcon color="info" />, color: "blue" },
     REMINDER: { icon: <EventNoteIcon color="primary" />, color: "green" },
@@ -177,7 +181,10 @@ const Navbar = () => {
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
             <MenuItem
-              onClick={() => setAnchorEl(null)}
+              onClick={() => {
+                handleProfileClick();
+                setAnchorEl(null);
+              }}
               sx={{
                 color: "navy",
                 fontWeight: "bold",
