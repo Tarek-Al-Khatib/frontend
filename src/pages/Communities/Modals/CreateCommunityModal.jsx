@@ -28,6 +28,10 @@ const CreateCommunity = ({ isOpen, onClose }) => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData({ ...formData, [name]: files[0] });
+  };
   const handleSubmit = async () => {
     if (formData.title !== "" && formData.description !== "null") {
       try {
