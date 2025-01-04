@@ -25,10 +25,6 @@ const Learning = () => {
   } = useContext(learningContext);
   const { user } = useContext(authContext);
 
-  useEffect(() => {
-    fetchPlans();
-  }, []);
-
   const renderPlanSteps = (steps) =>
     steps.map((step, index) => (
       <div key={index} className="flex items-center space-x-4">
