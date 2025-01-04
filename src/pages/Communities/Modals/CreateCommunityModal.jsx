@@ -157,7 +157,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
                 name="community_logo"
                 accept="image/*"
                 className="hidden"
-                onChange={handleInputChange}
+                onChange={handleFileChange}
               />
             </div>
             <div className="flex flex-col items-center gap-2">
@@ -186,7 +186,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
                 name="community_banner"
                 accept="image/*"
                 className="hidden"
-                onChange={handleInputChange}
+                onChange={handleFileChange}
               />
             </div>
           </div>
