@@ -113,6 +113,43 @@ const Interview = () => {
               </Table>
             </TableContainer>
           </div>
+          <div className="w-1/2">
+            <h1 className="pb-5 text-2xl font-normal text-navy">
+              Interview Invitations
+            </h1>
+            <TableContainer className="p-3 pb-8 border border-gray-200 rounded-xl">
+              <Table aria-label="leaderboard table">
+                <TableHead>
+                  <TableRow>
+                    <TableCellStyled start={true}>Interviewer</TableCellStyled>
+                    <TableCellStyled>Feedback</TableCellStyled>
+                    <TableCellStyled>Status</TableCellStyled>
+                    <TableCellStyled end={true}>Points</TableCellStyled>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {leaderboardData.map((user) => (
+                    <TableRow key={user.rank}>
+                      <TableCellStyled start={true}>
+                        <div className="flex items-center gap-3">
+                          {user.rank} {". "}
+                          <div className="flex items-center gap-1">
+                            <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
+                            {user.interviewer}
+                          </div>
+                        </div>
+                      </TableCellStyled>
+                      <TableCellStyled>hi</TableCellStyled>
+                      <TableCellStyled>{user.learningPlans}</TableCellStyled>
+                      <TableCellStyled end={true}>
+                        +{user.points}
+                      </TableCellStyled>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
         </div>
       </div>
 
