@@ -153,12 +153,18 @@ const Communities = () => {
           {communities.map((community) => (
             <button
               key={community.id}
-              className="w-20 h-20 mb-5 rounded-full bg-navy"
+              className="flex items-center justify-center w-20 h-20 mb-5 overflow-hidden rounded-full bg-navy"
               onClick={() => handleCommunitySelect(community)}
             >
-              <span className="text-white">
-                {community ? community.logo : ""}
-              </span>
+              {community.community_logo ? (
+                <img
+                  src={community.community_logo}
+                  alt={`${community.title} logo`}
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <span className="text-sm text-white">No Logo</span>
+              )}
             </button>
           ))}
           <button
