@@ -149,31 +149,36 @@ const Communities = () => {
         communityId={selectedCommunity ? selectedCommunity.id : null}
       />
       <div className="flex w-full bg-white h-screen/92">
-        <div className="flex flex-col items-center w-24 py-6 bg-white">
-          {communities.map((community) => (
+        <div className="flex flex-col items-center w-24 max-h-screen py-6 overflow-y-auto bg-white scrollbar-hidden">
+          <div className="flex flex-col items-center w-full ">
+            {communities.map((community) => (
+              <button
+                key={community.id}
+                className="flex items-center justify-center w-20 h-20 mb-5 overflow-hidden rounded-full bg-navy"
+                onClick={() => handleCommunitySelect(community)}
+              >
+                {community.community_logo ? (
+                  <img
+                    src={community.community_logo}
+                    alt={`${community.title} logo`}
+                    className="object-cover w-full h-full"
+                  />
+                ) : (
+                  <span className="text-sm text-white">No Logo</span>
+                )}
+              </button>
+            ))}
+          </div>
+          <div>
             <button
-              key={community.id}
-              className="flex items-center justify-center w-20 h-20 mb-5 overflow-hidden rounded-full bg-navy"
-              onClick={() => handleCommunitySelect(community)}
+              onClick={handleCommunityModalToggle}
+              className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:bg-gray-100"
             >
-              {community.community_logo ? (
-                <img
-                  src={community.community_logo}
-                  alt={`${community.title} logo`}
-                  className="object-cover w-full h-full"
-                />
-              ) : (
-                <span className="text-sm text-white">No Logo</span>
-              )}
+              <IoMdAdd size={25} className="text-gray-700" />
             </button>
-          ))}
-          <button
-            onClick={handleCommunityModalToggle}
-            className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg"
-          >
-            <IoMdAdd size={25} />
-          </button>
+          </div>
         </div>
+
         {communities && communities.length > 0 ? (
           selectedCommunity ? (
             <div className="p-6 bg-blue-900 w-80">
