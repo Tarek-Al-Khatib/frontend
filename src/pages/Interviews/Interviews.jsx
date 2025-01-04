@@ -113,9 +113,6 @@ const Interview = () => {
                         </div>
                       </TableCellStyled>
                       <TableCellStyled dark={true} bold={false}>
-                        hi
-                      </TableCellStyled>
-                      <TableCellStyled dark={true} bold={false}>
                         <button
                           onClick={() => {
                             setText(user.feedback);
@@ -125,6 +122,10 @@ const Interview = () => {
                           {user.feedback.substring(0, 15).concat("...")}
                         </button>
                       </TableCellStyled>
+                      <TableCellStyled dark={true} bold={false}>
+                        hi
+                      </TableCellStyled>
+
                       <TableCellStyled dark={true} bold={false} end={true}>
                         +{user.points}
                       </TableCellStyled>
