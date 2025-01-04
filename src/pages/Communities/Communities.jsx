@@ -278,105 +278,112 @@ const Communities = () => {
           </div>
         )}
 
-        {selectedChannel ? (
-          <div className="flex flex-col flex-grow gap-4 p-6 bg-white">
-            <div>
-              <h1 className="mb-4 text-4xl text-navy">
-                Welcome to // {selectedChannel.name}
-              </h1>
-              <p className="mb-4 text-xl font-thin text-navy">
-                @{selectedChannel.creator.username} created this channel on{" "}
-                {new Date(selectedChannel.created_at).toLocaleString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}{" "}
-                : {selectedChannel.description}
-              </p>
-              <hr className="mb-6 border-t border-blue-900" />
-            </div>
-            <div
-              ref={messagesContainerRef}
-              className="flex flex-col flex-grow gap-5 overflow-y-auto scroll-container custom-scrollbar scroll-smooth"
-            >
-              <div className="flex flex-col flex-grow gap-5 ">
-                {messagesToRender.length > 0 ? (
-                  messagesToRender.map((message, index) => (
-                    <div key={index}>
-                      <div className="flex items-start gap-7">
-                        <div className="w-12 h-12 bg-blue-900 rounded-full"></div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between gap-2 w-fit">
-                            <div className="text-sm font-bold text-blue-900">
-                              {message.sender.username}
-                            </div>
-                            <div className="px-2 py-1 text-xs text-white bg-blue-900 rounded">
-                              {
-                                members.find(
-                                  (member) =>
-                                    member.user_id === message.sender.id
-                                ).role
-                              }
-                            </div>
-                            <div className="text-sm text-blue-900">
-                              {moment().diff(moment(message.sent_at), "days") >=
-                              2
-                                ? moment(message.sent_at).format(
-                                    "MMM Do, YYYY, h:mm A"
-                                  )
-                                : moment(message.sent_at).fromNow()}
-                            </div>
-                          </div>
-                          <p
-                            className="text-base text-black break-all whitespace-normal"
-                            dangerouslySetInnerHTML={{
-                              __html: message.message,
-                            }}
-                          ></p>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
-                    No Messages to show here
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="flex items-center gap-6 p-4 bg-slight-gray rounded-self">
-              <button className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
-                <IoMdAdd size={25} className="text-navy" />
-              </button>
-              <input
-                type="text"
-                className="flex-1 text-xl placeholder-gray-400 bg-transparent outline-none"
-                placeholder={
-                  "Type your message here for // " + selectedChannel.name
-                }
-                value={messageInput}
-                onChange={(e) => {
-                  setMessageInput(e.target.value);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    handleMessageSend();
-                  }
-                }}
-              />
-              <button
-                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg"
-                onClick={handleMessageSend}
-              >
-                <FiSend size={25} className="text-navy" />
-              </button>
-            </div>
-          </div>
-        ) : (
+        {!selectedChannel && selectedCommunity ? (
           <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
             Please select a channel to start chatting.
           </div>
+        ) : (
+          selectedChannel && (
+            <div className="flex flex-col flex-grow gap-4 p-6 bg-white">
+              <div>
+                <h1 className="mb-4 text-4xl text-navy">
+                  Welcome to // {selectedChannel.name}
+                </h1>
+                <p className="mb-4 text-xl font-thin text-navy">
+                  @{selectedChannel.creator.username} created this channel on{" "}
+                  {new Date(selectedChannel.created_at).toLocaleString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}{" "}
+                  : {selectedChannel.description}
+                </p>
+                <hr className="mb-6 border-t border-blue-900" />
+              </div>
+              <div
+                ref={messagesContainerRef}
+                className="flex flex-col flex-grow gap-5 overflow-y-auto scroll-container custom-scrollbar scroll-smooth"
+              >
+                <div className="flex flex-col flex-grow gap-5 ">
+                  {messagesToRender.length > 0 ? (
+                    messagesToRender.map((message, index) => (
+                      <div key={index}>
+                        <div className="flex items-start gap-7">
+                          <div className="w-12 h-12 bg-blue-900 rounded-full"></div>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between gap-2 w-fit">
+                              <div className="text-sm font-bold text-blue-900">
+                                {message.sender.username}
+                              </div>
+                              <div className="px-2 py-1 text-xs text-white bg-blue-900 rounded">
+                                {
+                                  members.find(
+                                    (member) =>
+                                      member.user_id === message.sender.id
+                                  ).role
+                                }
+                              </div>
+                              <div className="text-sm text-blue-900">
+                                {moment().diff(
+                                  moment(message.sent_at),
+                                  "days"
+                                ) >= 2
+                                  ? moment(message.sent_at).format(
+                                      "MMM Do, YYYY, h:mm A"
+                                    )
+                                  : moment(message.sent_at).fromNow()}
+                              </div>
+                            </div>
+                            <p
+                              className="text-base text-black break-all whitespace-normal"
+                              dangerouslySetInnerHTML={{
+                                __html: message.message,
+                              }}
+                            ></p>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
+                      No Messages to show here
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="flex items-center gap-6 p-4 bg-slight-gray rounded-self">
+                <button className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
+                  <IoMdAdd size={25} className="text-navy" />
+                </button>
+                <input
+                  type="text"
+                  className="flex-1 text-xl placeholder-gray-400 bg-transparent outline-none"
+                  placeholder={
+                    "Type your message here for // " + selectedChannel.name
+                  }
+                  value={messageInput}
+                  onChange={(e) => {
+                    setMessageInput(e.target.value);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleMessageSend();
+                    }
+                  }}
+                />
+                <button
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg"
+                  onClick={handleMessageSend}
+                >
+                  <FiSend size={25} className="text-navy" />
+                </button>
+              </div>
+            </div>
+          )
         )}
       </div>
       <Footer />
