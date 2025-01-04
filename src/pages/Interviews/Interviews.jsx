@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,6 +11,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "../../css/colors.css";
 const Interview = () => {
+  const [text, setText] = useState("");
   const leaderboardData = [
     {
       rank: 1,
@@ -38,6 +39,7 @@ const Interview = () => {
     },
   ];
 
+  useEffect(() => {}, [text]);
   return (
     <div>
       <Navbar />
