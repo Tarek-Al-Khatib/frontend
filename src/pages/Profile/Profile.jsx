@@ -156,63 +156,9 @@ const Profile = () => {
                       My learning plans
                     </div>
 
-                    <div className="p-4 bg-white h-[570px]">
+                    <div className="bg-white h-[570px] pt-4">
                       <div className="space-y-4 h-[570px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
-                        <div className="flex justify-between px-5">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between px-5">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between px-5">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between px-5">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between px-5">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between px-5">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between px-5">
+                        <div className="flex justify-between pr-3">
                           <div className="flex flex-col gap-2">
                             <p className="font-bold text-navy">Learning plan</p>
                             <p className="font-normal text-navy">description</p>
@@ -222,7 +168,62 @@ const Profile = () => {
                           </div>
                         </div>
 
-                        <div className="flex justify-between px-5">
+                        <div className="flex justify-between pr-3">
+                          <div className="flex flex-col gap-2">
+                            <p className="font-bold text-navy">Learning plan</p>
+                            <p className="font-normal text-navy">description</p>
+                          </div>
+                          <div>
+                            <CircularProgressWithLabel value={67} size={60} />
+                          </div>
+                        </div>
+                        <div className="flex justify-between pr-3">
+                          <div className="flex flex-col gap-2">
+                            <p className="font-bold text-navy">Learning plan</p>
+                            <p className="font-normal text-navy">description</p>
+                          </div>
+                          <div>
+                            <CircularProgressWithLabel value={67} size={60} />
+                          </div>
+                        </div>
+                        <div className="flex justify-between pr-3">
+                          <div className="flex flex-col gap-2">
+                            <p className="font-bold text-navy">Learning plan</p>
+                            <p className="font-normal text-navy">description</p>
+                          </div>
+                          <div>
+                            <CircularProgressWithLabel value={67} size={60} />
+                          </div>
+                        </div>
+                        <div className="flex justify-between pr-3">
+                          <div className="flex flex-col gap-2">
+                            <p className="font-bold text-navy">Learning plan</p>
+                            <p className="font-normal text-navy">description</p>
+                          </div>
+                          <div>
+                            <CircularProgressWithLabel value={67} size={60} />
+                          </div>
+                        </div>
+                        <div className="flex justify-between pr-3">
+                          <div className="flex flex-col gap-2">
+                            <p className="font-bold text-navy">Learning plan</p>
+                            <p className="font-normal text-navy">description</p>
+                          </div>
+                          <div>
+                            <CircularProgressWithLabel value={67} size={60} />
+                          </div>
+                        </div>
+                        <div className="flex justify-between pr-3">
+                          <div className="flex flex-col gap-2">
+                            <p className="font-bold text-navy">Learning plan</p>
+                            <p className="font-normal text-navy">description</p>
+                          </div>
+                          <div>
+                            <CircularProgressWithLabel value={67} size={60} />
+                          </div>
+                        </div>
+
+                        <div className="flex justify-between pr-3">
                           <div className="flex flex-col gap-2">
                             <p className="font-bold text-navy">Learning plan</p>
                             <p className="font-normal text-navy">description</p>
