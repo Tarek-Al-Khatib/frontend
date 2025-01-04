@@ -7,6 +7,7 @@ const TableCellStyled = ({
   end = false,
   display,
   dark,
+  bold,
 }) => {
   const width = start ? 300 : "auto";
   const position = start ? "start" : end ? "end" : "center";
@@ -14,7 +15,7 @@ const TableCellStyled = ({
     <TableCell
       sx={{
         color: dark ? "#1e25a6" : "#4a80f1",
-        fontWeight: "bold",
+        fontWeight: bold ? "bold" : "medium",
         fontFamily: "Open sans",
         width: width,
         textAlign: position,
