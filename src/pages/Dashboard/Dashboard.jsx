@@ -129,7 +129,7 @@ const Dashboard = () => {
           <div>
             <h1 className="pb-5 text-2xl font-thin text-navy">Dashboard</h1>
             <h1 className="mb-4 text-4xl font-bold text-blue-900">
-              Welcome Back, {capitalize(user.username)}!
+              Welcome Back, {user && capitalize(user.username)}!
             </h1>
             <p className="w-3/5 text-xl font-normal text-navy">
               Here you can check your current stats, regarding interviews,
