@@ -76,16 +76,13 @@ const CommunityProvider = ({ children }) => {
         data.append("community_banner", communityData.community_banner);
       }
 
-      const response = await axios.post(
-        `${serverUrl}/api/community/`,
-        communityData,
-        {
-          headers: {
-            "Context-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      console.log(data);
+      const response = await axios.post(`${serverUrl}/api/community/`, data, {
+        headers: {
+          "Context-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setCommunities((prev) => [...prev, response.data]);
     } catch (error) {
       console.error("Error creating community:", error);
