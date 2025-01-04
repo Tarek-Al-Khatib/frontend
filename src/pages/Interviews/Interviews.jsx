@@ -10,8 +10,10 @@ import TableCellStyled from "../../components/TableCell/TableCell";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "../../css/colors.css";
+import ViewFeedback from "./Modal/ViewFeedback";
 const Interview = () => {
   const [text, setText] = useState("");
+  const [open, setOpen] = useState(false);
   const leaderboardData = [
     {
       rank: 1,
@@ -39,10 +41,18 @@ const Interview = () => {
     },
   ];
 
-  useEffect(() => {}, [text]);
+  useEffect(() => {
+    if (text.length > 0) setOpen(true);
+  }, [text]);
+
+  const handleClose = () => {
+    setText("");
+    setOpen(false);
+  };
   return (
     <div>
       <Navbar />
+      <ViewFeedback open={open} handleClose={handleClose} text={text} />
       <div class="p-8 min-h-screen">
         <h1 className="pb-5 text-2xl font-thin text-navy">My interviewer</h1>
 
@@ -106,7 +116,12 @@ const Interview = () => {
                         hi
                       </TableCellStyled>
                       <TableCellStyled dark={true} bold={false}>
-                        <button className="p-1 px-3 rounded-lg bg-cyan">
+                        <button
+                          onClick={() => {
+                            setText(user.feedback);
+                          }}
+                          className="p-1 px-3 rounded-lg bg-cyan"
+                        >
                           {user.feedback.substring(0, 15).concat("...")}
                         </button>
                       </TableCellStyled>

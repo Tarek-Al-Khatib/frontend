@@ -1,5 +1,6 @@
 import { Box, Modal, Typography } from "@mui/material";
 import React from "react";
+import "../../../css/colors.css";
 
 const ViewFeedback = ({ text, open, handleClose }) => {
   return (
@@ -17,14 +18,18 @@ const ViewFeedback = ({ text, open, handleClose }) => {
           transform: "translate(-50%, -50%)",
           width: 300,
           bgcolor: "background.paper",
-          border: "2px solid #000",
           boxShadow: 24,
           p: 4,
           textAlign: "center",
           borderRadius: 2,
         }}
       >
-        <Typography id="simple-modal-title" variant="h6" component="h2">
+        <Typography
+          id="simple-modal-title"
+          variant="h6"
+          component="h2"
+          className="text-navy"
+        >
           {text}
         </Typography>
       </Box>
