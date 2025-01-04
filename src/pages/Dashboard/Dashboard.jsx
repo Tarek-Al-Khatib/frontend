@@ -124,7 +124,7 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      <div className="px-6 py-8">
+      <div className="p-8">
         <div className="flex items-center justify-between mb-3">
           <div>
             <h1 className="pb-5 text-2xl font-thin text-navy">Dashboard</h1>
