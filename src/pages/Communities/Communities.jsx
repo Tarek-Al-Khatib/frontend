@@ -41,8 +41,10 @@ const Communities = () => {
   const socket = useSocket(channels.map((channel) => channel.id));
 
   useEffect(() => {
-    fetchMembers(selectedCommunity.id);
-    fetchChannels(selectedCommunity.id);
+    if (selectedCommunity) {
+      fetchMembers(selectedCommunity.id);
+      fetchChannels(selectedCommunity.id);
+    }
   }, [selectedCommunity]);
 
   useEffect(() => {
@@ -144,7 +146,7 @@ const Communities = () => {
       <CreateChannel
         isOpen={isChannelModalOpen}
         onClose={handleChannelModalToggle}
-        communityId={selectedCommunity.id}
+        communityId={selectedCommunity ? selectedCommunity.id : null}
       />
       <div className="flex w-full bg-white h-screen/92">
         <div className="flex flex-col items-center w-24 py-6 bg-white">
@@ -166,76 +168,83 @@ const Communities = () => {
             <IoMdAdd size={25} />
           </button>
         </div>
-        <div className="p-6 bg-blue-900 w-80">
-          <div className="flex flex-col items-center mb-8">
-            <div className="flex items-center justify-center h-24 mb-4 text-base font-light text-center text-blue-300 bg-blue-900 rounded w-28">
-              {selectedCommunity ? selectedCommunity.logo : ""}
+        {selectedCommunity ? (
+          <div className="p-6 bg-blue-900 w-80">
+            <div className="flex flex-col items-center mb-8">
+              <div className="flex items-center justify-center h-24 mb-4 text-base font-light text-center text-blue-300 bg-blue-900 rounded w-28">
+                {selectedCommunity ? selectedCommunity.logo : ""}
+              </div>
+              <div className="text-lg font-light text-white">
+                {selectedCommunity.title}
+              </div>
             </div>
-            <div className="text-lg font-light text-white">
-              {selectedCommunity.title}
-            </div>
-          </div>
 
-          <div className="mb-10">
-            <div className="flex items-center justify-between w-full mb-3 text-lg font-bold text-white">
-              <button
-                className="flex items-center"
-                onClick={() => setFlipChannel(!flipChannel)}
-              >
-                {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
-                Channels
-              </button>
-              <button onClick={handleChannelModalToggle}>
-                <IoMdAdd size={25} />
-              </button>
+            <div className="mb-10">
+              <div className="flex items-center justify-between w-full mb-3 text-lg font-bold text-white">
+                <button
+                  className="flex items-center"
+                  onClick={() => setFlipChannel(!flipChannel)}
+                >
+                  {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
+                  Channels
+                </button>
+                <button onClick={handleChannelModalToggle}>
+                  <IoMdAdd size={25} />
+                </button>
+              </div>
+              {flipChannel && (
+                <div className="flex flex-col">
+                  {channels.map((channel, index) => (
+                    <button
+                      key={index}
+                      className={`flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded text-start ${
+                        selectedChannel != null &&
+                        channel.id === selectedChannel.id
+                          ? "bg-dark-blue"
+                          : "hover:bg-blue-700/30"
+                      }`}
+                      onClick={() => handleChannelSelect(channel)}
+                    >
+                      {channel.name}
+                      {channel.unread > 0 && (
+                        <div className="flex items-center justify-center w-5 h-5 text-xs bg-blue-600 rounded-full">
+                          {channel.unread}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-            {flipChannel && (
-              <div className="flex flex-col">
-                {channels.map((channel, index) => (
-                  <button
-                    key={index}
-                    className={`flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded text-start ${
-                      selectedChannel != null &&
-                      channel.id === selectedChannel.id
-                        ? "bg-dark-blue"
-                        : "hover:bg-blue-700/30"
-                    }`}
-                    onClick={() => handleChannelSelect(channel)}
-                  >
-                    {channel.name}
-                    {channel.unread > 0 && (
-                      <div className="flex items-center justify-center w-5 h-5 text-xs bg-blue-600 rounded-full">
-                        {channel.unread}
+
+            {moderatorsData.length > 0 && (
+              <div>
+                <button
+                  onClick={() => setFlipModerators(!flipModerators)}
+                  className="flex items-center mb-3 text-lg font-bold text-white"
+                >
+                  {flipModerators ? <IoIosArrowDown /> : <IoIosArrowForward />}
+                  Moderators
+                </button>
+                <div className="space-y-3">
+                  {moderatorsData.map((moderator, index) => (
+                    <button key={index} className="flex items-center space-x-3">
+                      <div className="w-6 h-6 bg-white rounded"></div>
+                      <div className="text-sm font-thin text-white">
+                        {moderator.name}
                       </div>
-                    )}
-                  </button>
-                ))}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
+        ) : (
+          <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
+            Please join a community or create a new one !
+          </div>
+        )}
 
-          {moderatorsData.length > 0 && (
-            <div>
-              <button
-                onClick={() => setFlipModerators(!flipModerators)}
-                className="flex items-center mb-3 text-lg font-bold text-white"
-              >
-                {flipModerators ? <IoIosArrowDown /> : <IoIosArrowForward />}
-                Moderators
-              </button>
-              <div className="space-y-3">
-                {moderatorsData.map((moderator, index) => (
-                  <button key={index} className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-white rounded"></div>
-                    <div className="text-sm font-thin text-white">
-                      {moderator.name}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
         {selectedChannel ? (
           <div className="flex flex-col flex-grow gap-4 p-6 bg-white">
             <div>
