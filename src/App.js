@@ -9,6 +9,7 @@ import Learning from "./pages/Learning/Learning";
 import AppProviders from "./contexts/AppProviders";
 import Profile from "./pages/Profile/Profile";
 import ProtectionRoute from "./components/ProtectionRoute/ProtectionRoute";
+import Interview from "./pages/Interviews/Interviews";
 
 function App() {
   return (
@@ -23,10 +24,7 @@ function App() {
             <Route path="/learning" element={<Learning />}></Route>
             <Route path="/myprofile" element={<Profile />}></Route>
             <Route path="/community" element={<Communities />}></Route>
-            <Route
-              path="/interview"
-              element={<div>interviews page</div>}
-            ></Route>
+            <Route path="/interview" element={<Interview />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
