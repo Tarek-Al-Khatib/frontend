@@ -107,7 +107,7 @@ const Learning = () => {
               My Learning | Learning Plans
             </div>
             <div className="mb-2 text-4xl font-bold text-navy">
-              Hey {capitalize(user.username)}!
+              {user != null && `Hey ${capitalize(user.username)}!`}
             </div>
             <div className="mb-8 text-xl font-light text-navy">
               Here you can check your learning plans and see each plan's steps
