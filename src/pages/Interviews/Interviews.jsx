@@ -15,31 +15,29 @@ const Interview = () => {
     {
       rank: 1,
       interviewer: "Username1",
-      learningPlans: 0,
+      feedback: "Hi this is the full feedback about the previous interview",
       points: 1200,
     },
     {
       rank: 2,
       interviewer: "Username2",
-
-      learningPlans: 0,
+      feedback: "Hi this is the full feedback about the previous interview",
       points: 1100,
     },
     {
       rank: 3,
       interviewer: "Username3",
-
-      learningPlans: 0,
+      feedback: "Hi this is the full feedback about the previous interview",
       points: 1000,
     },
     {
       rank: 4,
       interviewer: "Username4",
-
-      learningPlans: 0,
+      feedback: "Hi this is the full feedback about the previous interview",
       points: 950,
     },
   ];
+
   return (
     <div>
       <Navbar />
@@ -93,7 +91,7 @@ const Interview = () => {
                 <TableBody>
                   {leaderboardData.map((user) => (
                     <TableRow key={user.rank}>
-                      <TableCellStyled start={true}>
+                      <TableCellStyled dark={true} start={true} bold={false}>
                         <div className="flex items-center gap-3">
                           {user.rank} {". "}
                           <div className="flex items-center gap-1">
@@ -102,9 +100,15 @@ const Interview = () => {
                           </div>
                         </div>
                       </TableCellStyled>
-                      <TableCellStyled>hi</TableCellStyled>
-                      <TableCellStyled>{user.learningPlans}</TableCellStyled>
-                      <TableCellStyled end={true}>
+                      <TableCellStyled dark={true} bold={false}>
+                        hi
+                      </TableCellStyled>
+                      <TableCellStyled dark={true} bold={false}>
+                        <button className="p-1 px-3 rounded-lg bg-cyan">
+                          {user.feedback.substring(0, 15).concat("...")}
+                        </button>
+                      </TableCellStyled>
+                      <TableCellStyled dark={true} bold={false} end={true}>
                         +{user.points}
                       </TableCellStyled>
                     </TableRow>
