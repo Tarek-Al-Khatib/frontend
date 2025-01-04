@@ -66,11 +66,22 @@ const CommunityProvider = ({ children }) => {
 
   const createCommunity = async (communityData) => {
     try {
+      const data = new FormData();
+      data.append("title", communityData.title);
+      data.append("description", communityData.description);
+      if (communityData.community_logo) {
+        data.append("community_logo", communityData.community_logo);
+      }
+      if (communityData.community_logo) {
+        data.append("community_banner", communityData.community_banner);
+      }
+
       const response = await axios.post(
         `${serverUrl}/api/community/`,
         communityData,
         {
           headers: {
+            "Context-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
         }
