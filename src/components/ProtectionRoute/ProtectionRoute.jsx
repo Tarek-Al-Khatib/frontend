@@ -2,9 +2,9 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectionRoute = () => {
-  const { userId } = localStorage.getItem("userId");
+  const data = localStorage.getItem("userId");
 
-  if (!userId) {
+  if (!data) {
     return <Navigate to="/signin" />;
   }
 
