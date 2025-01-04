@@ -31,6 +31,12 @@ const Navbar = () => {
     navigate("/myprofile");
   };
 
+  const handleLogoutClick = () => {
+    navigate("/signin");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+  };
+
   const typeConfig = {
     INFO: { icon: <InfoIcon color="info" />, color: "blue" },
     REMINDER: { icon: <EventNoteIcon color="primary" />, color: "green" },
@@ -197,7 +203,10 @@ const Navbar = () => {
               Profile
             </MenuItem>
             <MenuItem
-              onClick={() => setAnchorEl(null)}
+              onClick={() => {
+                handleLogoutClick();
+                setAnchorEl(null);
+              }}
               sx={{
                 color: "navy",
                 fontWeight: "bold",
