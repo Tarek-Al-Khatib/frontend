@@ -177,9 +177,18 @@ const Communities = () => {
         {selectedCommunity ? (
           <div className="p-6 bg-blue-900 w-80">
             <div className="flex flex-col items-center mb-8">
-              <div className="flex items-center justify-center h-24 mb-4 text-base font-light text-center text-blue-300 bg-blue-900 rounded w-28">
-                {selectedCommunity ? selectedCommunity.logo : ""}
+              <div className="flex items-center justify-center h-24 mb-4 overflow-hidden text-base font-light text-center text-blue-300 bg-blue-900 rounded w-28">
+                {selectedCommunity && selectedCommunity.community_logo ? (
+                  <img
+                    src={selectedCommunity.community_logo}
+                    alt={`${selectedCommunity.title} logo`}
+                    className="object-contain w-full h-full"
+                  />
+                ) : (
+                  <span>No Logo</span>
+                )}
               </div>
+
               <div className="text-lg font-light text-white">
                 {selectedCommunity.title}
               </div>
