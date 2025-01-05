@@ -10,7 +10,11 @@ const GeneralProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
   const { user, token } = useContext(authContext);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (user && token) {
+      fetchNotifications();
+    }
+  }, [user, token]);
 
   const fetchNotifications = async (userId, token) => {
     const response = await axios.get(`${serverUrl}/api/notifications`, {
