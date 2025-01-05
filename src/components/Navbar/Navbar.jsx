@@ -26,7 +26,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
-  const [notifications, setNotifcations] = useState();
+  const [notifications, setNotifcations] = useState([]);
   const open = Boolean(anchorEl);
   const openNotifications = Boolean(anchorElNotifications);
 
