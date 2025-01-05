@@ -54,12 +54,12 @@ const Interview = () => {
       <Navbar />
       <ViewFeedback open={open} handleClose={handleClose} text={text} />
       <div class="p-8 min-h-screen">
-        <h1 className="pb-5 text-2xl font-thin text-navy">My interviewer</h1>
+        <h1 className="pb-5 text-2xl font-thin text-navy">My Interviews</h1>
 
         <div className="flex">
           <div class="bg-gradient-to-r from-[#b0e9ff] to-[#0594b4] rounded-l-lg w-full flex flex-col items-start justify-center p-6 pl-32 gap-4">
             <h1 class="text-navy text-4xl font-extrabold">
-              Practicing interviewer?
+              Practicing interviews?
             </h1>
             <p class="text-navy text-2xl font-normal">
               Try out our new advanced{" "}
@@ -113,7 +113,6 @@ const Interview = () => {
                     <TableRow key={user.rank}>
                       <TableCellStyled dark={true} start={true} bold={false}>
                         <div className="flex items-center gap-3">
-                          {user.rank} {". "}
                           <div className="flex items-center gap-1">
                             <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
                             {user.interviewer}
@@ -165,9 +164,8 @@ const Interview = () => {
                 <TableBody>
                   {leaderboardData.map((user) => (
                     <TableRow key={user.rank}>
-                      <TableCellStyled bold start={true}>
+                      <TableCellStyled dark start={true}>
                         <div className="flex items-center gap-3">
-                          {user.rank} {". "}
                           <div className="flex items-center gap-1">
                             <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
                             {user.interviewer}
