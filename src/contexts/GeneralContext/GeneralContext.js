@@ -8,15 +8,15 @@ export const generalContext = createContext();
 
 const GeneralProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
-  const { user, token } = useContext(authContext);
+  const { token } = useContext(authContext);
 
   useEffect(() => {
-    if (user && token) {
-      fetchNotifications();
+    if (token) {
+      fetchNotifications(token);
     }
-  }, [user, token]);
+  }, [token]);
 
-  const fetchNotifications = async (userId, token) => {
+  const fetchNotifications = async (token) => {
     const response = await axios.get(`${serverUrl}/api/notifications`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -27,7 +27,7 @@ const GeneralProvider = ({ children }) => {
   };
 
   return (
-    <generalContext.Provider value={{ notifications }}>
+    <generalContext.Provider value={{ notifications, setNotifications }}>
       {children}
     </generalContext.Provider>
   );
