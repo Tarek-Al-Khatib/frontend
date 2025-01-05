@@ -28,7 +28,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
-  const { notifications, setNotifications } = useContext(generalContext);
+  const { notifications, setNotifications, markAsReadNotifications } =
+    useContext(generalContext);
   const open = Boolean(anchorEl);
   const openNotifications = Boolean(anchorElNotifications);
 
@@ -81,7 +82,12 @@ const Navbar = () => {
           </button>
         </nav>
         <div className="flex items-center gap-8">
-          <button onClick={(e) => setAnchorElNotifications(e.currentTarget)}>
+          <button
+            onClick={(e) => {
+              setAnchorElNotifications(e.currentTarget);
+              markAsReadNotifications();
+            }}
+          >
             {notifications.filter((n) => !n.is_read).length > 0 ? (
               <BiSolidBellRing className="text-navy" size={20} />
             ) : (
