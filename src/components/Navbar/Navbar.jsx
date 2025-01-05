@@ -7,6 +7,7 @@ import Avatar from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import InfoIcon from "@mui/icons-material/Info";
+import NotificationSound from "../../assets/sounds/notification.mp3";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import WarningIcon from "@mui/icons-material/Warning";
 import {
@@ -37,6 +38,11 @@ const Navbar = () => {
     if (socket) {
       socket.on("receiveNotification", (notification) => {
         setNotifications((prev) => [notification, ...prev]);
+
+        const audio = new Audio(NotificationSound);
+        audio.play().catch((error) => {
+          console.error("Error playing notification sound:", error);
+        });
       });
 
       return () => {
@@ -84,9 +90,9 @@ const Navbar = () => {
         <div className="flex items-center gap-8">
           <button onClick={(e) => setAnchorElNotifications(e.currentTarget)}>
             {notifications.filter((n) => !n.is_read).length > 0 ? (
-              <BiSolidBellRing className="text-navy" size={20} />
+              <BiSolidBellRing className="text-navy" size={25} />
             ) : (
-              <BiSolidBell className="text-navy" size={20} />
+              <BiSolidBell className="text-navy" size={25} />
             )}
           </button>
           <Popover
