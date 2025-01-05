@@ -26,7 +26,11 @@ const GeneralProvider = ({ children }) => {
     setNotifications(response.data);
   };
 
-  return <generalContext.Provider>{children}</generalContext.Provider>;
+  return (
+    <generalContext.Provider value={{ notifications }}>
+      {children}
+    </generalContext.Provider>
+  );
 };
 
 export default GeneralProvider;
