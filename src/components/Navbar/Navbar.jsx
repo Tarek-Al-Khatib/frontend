@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { FaBell } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from "react";
+import { BiSolidBell } from "react-icons/bi";
+import { BiSolidBellRing } from "react-icons/bi";
 import Logo from "../../assets/logo.png";
 import "../../css/colors.css";
 import Avatar from "@mui/icons-material/AccountCircle";
@@ -20,20 +21,21 @@ import {
   Typography,
 } from "@mui/material";
 import { useSocket } from "../../utils/useSocket";
+import { generalContext } from "../../contexts/GeneralContext/GeneralContext";
 
 const Navbar = () => {
   const socket = useSocket();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
-  const [notifications, setNotifcations] = useState([]);
+  const { notifications, setNotifications } = useContext(generalContext);
   const open = Boolean(anchorEl);
   const openNotifications = Boolean(anchorElNotifications);
 
   useEffect(() => {
     if (socket) {
       socket.on("receiveNotification", (notification) => {
-        setNotifcations((prev) => [notification, ...prev]);
+        setNotifications((prev) => [notification, ...prev]);
       });
 
       return () => {
@@ -58,33 +60,6 @@ const Navbar = () => {
     ALERT: { icon: <WarningIcon color="error" />, color: "red" },
   };
 
-  const mockNotifications = [
-    {
-      title: "New Message",
-      message: "You have a new message from John.",
-      timestamp: "2025-01-01 10:00 AM",
-    },
-    {
-      title: "Update Available",
-      message: "Version 2.0 of the app is now available. Click to update!",
-      timestamp: "2025-01-01 9:30 AM",
-    },
-    {
-      title: "Payment Successful",
-      message: "Your payment of $49.99 has been processed successfully.",
-      timestamp: "2025-01-01 8:45 AM",
-    },
-    {
-      title: "System Alert",
-      message: "Your account password will expire in 3 days. Update now.",
-      timestamp: "2025-01-01 7:15 AM",
-    },
-    {
-      title: "Friend Request",
-      message: "Alice has sent you a friend request.",
-      timestamp: "2025-01-01 6:50 AM",
-    },
-  ];
   return (
     <div className="font-sans bg-white">
       <header className="flex items-center justify-between px-6 py-2 text-white border-b border-b-blue-600">
@@ -107,7 +82,11 @@ const Navbar = () => {
         </nav>
         <div className="flex items-center gap-8">
           <button onClick={(e) => setAnchorElNotifications(e.currentTarget)}>
-            <FaBell className="text-navy" size={20} />
+            {notifications.filter((n) => !n.is_read).length > 0 ? (
+              <BiSolidBellRing className="text-navy" size={20} />
+            ) : (
+              <BiSolidBell className="text-navy" size={20} />
+            )}
           </button>
           <Popover
             id="notification-popover"
