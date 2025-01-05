@@ -30,8 +30,10 @@ const GeneralProvider = ({ children }) => {
     notifications
       .filter((n) => !n.is_read)
       .map(async (notification) => {
+        console.log(token);
         const response = await axios.patch(
           `${serverUrl}/api/notifications/${notification.id}/read`,
+          {},
           {
             headers: {
               Authorization: `Bearer ${token}`,
