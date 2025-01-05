@@ -94,10 +94,18 @@ const Interview = () => {
               <Table aria-label="leaderboard table">
                 <TableHead>
                   <TableRow>
-                    <TableCellStyled start={true}>Interviewer</TableCellStyled>
-                    <TableCellStyled>Feedback</TableCellStyled>
-                    <TableCellStyled>Status</TableCellStyled>
-                    <TableCellStyled end={true}>Points</TableCellStyled>
+                    <TableCellStyled bold dark start={true}>
+                      Interviewer
+                    </TableCellStyled>
+                    <TableCellStyled bold dark>
+                      Feedback
+                    </TableCellStyled>
+                    <TableCellStyled bold dark>
+                      Status
+                    </TableCellStyled>
+                    <TableCellStyled bold dark end={true}>
+                      Points
+                    </TableCellStyled>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -143,16 +151,21 @@ const Interview = () => {
               <Table aria-label="leaderboard table">
                 <TableHead>
                   <TableRow>
-                    <TableCellStyled start={true}>Interviewer</TableCellStyled>
-                    <TableCellStyled>Feedback</TableCellStyled>
-                    <TableCellStyled>Status</TableCellStyled>
-                    <TableCellStyled end={true}>Points</TableCellStyled>
+                    <TableCellStyled bold dark start={true}>
+                      Requester
+                    </TableCellStyled>
+                    <TableCellStyled bold dark>
+                      Date
+                    </TableCellStyled>
+                    <TableCellStyled bold dark end={true}>
+                      Action
+                    </TableCellStyled>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {leaderboardData.map((user) => (
                     <TableRow key={user.rank}>
-                      <TableCellStyled start={true}>
+                      <TableCellStyled bold start={true}>
                         <div className="flex items-center gap-3">
                           {user.rank} {". "}
                           <div className="flex items-center gap-1">
@@ -161,9 +174,8 @@ const Interview = () => {
                           </div>
                         </div>
                       </TableCellStyled>
-                      <TableCellStyled>hi</TableCellStyled>
-                      <TableCellStyled>{user.learningPlans}</TableCellStyled>
-                      <TableCellStyled end={true}>
+                      <TableCellStyled dark>hi</TableCellStyled>
+                      <TableCellStyled dark end>
                         +{user.points}
                       </TableCellStyled>
                     </TableRow>
