@@ -19,8 +19,10 @@ import {
   Popover,
   Typography,
 } from "@mui/material";
+import { useSocket } from "../../utils/useSocket";
 
 const Navbar = () => {
+  const socket = useSocket();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
