@@ -12,6 +12,16 @@ const GeneralProvider = ({ children }) => {
 
   useEffect(() => {}, []);
 
+  const fetchNotifications = async (userId, token) => {
+    const response = await axios.get(`${serverUrl}/api/notifications`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setNotifications(response.data);
+  };
+
   return <generalContext.Provider>{children}</generalContext.Provider>;
 };
 
