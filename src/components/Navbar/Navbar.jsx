@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBell } from "react-icons/fa";
 import Logo from "../../assets/logo.png";
 import "../../css/colors.css";
@@ -26,8 +26,21 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
+  const [notifications, setNotifcations] = useState();
   const open = Boolean(anchorEl);
   const openNotifications = Boolean(anchorElNotifications);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("receiveNotification", (notification) => {
+        setNotifcations((prev) => [notification, ...prev]);
+      });
+
+      return () => {
+        socket.off("receiveNotification");
+      };
+    }
+  }, [socket]);
 
   const handleProfileClick = () => {
     navigate("/myprofile");
@@ -112,8 +125,8 @@ const Navbar = () => {
           >
             <Box sx={{ width: 300, maxHeight: 400, overflowY: "auto" }}>
               <List>
-                {mockNotifications.length > 0 ? (
-                  mockNotifications.map((notification, index) => {
+                {notifications.length > 0 ? (
+                  notifications.map((notification, index) => {
                     const { type, title, message } = notification;
                     const config = typeConfig[type] || {};
                     return (
