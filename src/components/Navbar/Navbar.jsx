@@ -82,12 +82,7 @@ const Navbar = () => {
           </button>
         </nav>
         <div className="flex items-center gap-8">
-          <button
-            onClick={(e) => {
-              setAnchorElNotifications(e.currentTarget);
-              markAsReadNotifications();
-            }}
-          >
+          <button onClick={(e) => setAnchorElNotifications(e.currentTarget)}>
             {notifications.filter((n) => !n.is_read).length > 0 ? (
               <BiSolidBellRing className="text-navy" size={20} />
             ) : (
@@ -98,7 +93,10 @@ const Navbar = () => {
             id="notification-popover"
             open={openNotifications}
             anchorEl={anchorElNotifications}
-            onClose={() => setAnchorElNotifications(null)}
+            onClose={() => {
+              setAnchorElNotifications(null);
+              markAsReadNotifications();
+            }}
             anchorOrigin={{
               vertical: "bottom",
               horizontal: "right",
@@ -121,6 +119,10 @@ const Navbar = () => {
                           alignItems: "flex-start",
                           display: "flex",
                           gap: 1,
+
+                          backgroundColor: notification.is_read
+                            ? ""
+                            : "#b0e9ff",
                         }}
                       >
                         {config.icon}
