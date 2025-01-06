@@ -13,6 +13,7 @@ import "../../css/colors.css";
 import ViewFeedback from "./Modal/ViewFeedback";
 import { interviewContext } from "../../contexts/InterviewContext/InterviewContext";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
+import moment from "moment";
 const Interview = () => {
   const [text, setText] = useState("");
   const { user } = useContext(authContext);
@@ -173,7 +174,7 @@ const Interview = () => {
                         <TableCellStyled dark start={true}>
                           <div className="flex items-center gap-3">
                             <div className="flex items-center gap-1">
-                              <div class="w-9 h-9 bg-[#1e25a6] rounded-full">
+                              <div class="w-9 h-9 rounded-full">
                                 <img
                                   src={invitation.user.profile_pic}
                                   alt={`${invitation.user.profile_pic} profile pic`}
@@ -185,7 +186,20 @@ const Interview = () => {
                           </div>
                         </TableCellStyled>
                         <TableCellStyled dark>
-                          {invitation.date}
+                          <div className="flex items-center justify-center gap-1">
+                            <div className="flex flex-col">
+                              <div className="text-xs">
+                                {moment(invitation.date)
+                                  .format("ddd")
+                                  .toUpperCase()}
+                                , {moment(invitation.date).format("MMM")}
+                              </div>
+                              <div className="text-2xl font-bold">
+                                {moment(invitation.date).format("DD")}
+                              </div>
+                            </div>
+                            {moment(invitation.date).format("hh:mm A")}
+                          </div>
                         </TableCellStyled>
                         <TableCellStyled dark end>
                           {invitation.status}
@@ -208,7 +222,20 @@ const Interview = () => {
                           </div>
                         </TableCellStyled>
                         <TableCellStyled dark>
-                          {invitation.date}
+                          <div className="flex items-center justify-center gap-1">
+                            <div className="flex flex-col">
+                              <div className="text-xs">
+                                {moment(invitation.date)
+                                  .format("ddd")
+                                  .toUpperCase()}
+                                , {moment(invitation.date).format("MMM")}
+                              </div>
+                              <div className="text-2xl font-bold">
+                                {moment(invitation.date).format("DD")}
+                              </div>
+                            </div>
+                            {moment(invitation.date).format("hh:mm A")}
+                          </div>
                         </TableCellStyled>
                         <TableCellStyled dark end>
                           {invitation.status}
