@@ -3,6 +3,7 @@ import { useState } from "react";
 import { serverUrl } from "../../config/url";
 import axios from "axios";
 import { authContext } from "../AuthContext/AuthContext";
+import moment from "moment/moment";
 
 export const generalContext = createContext();
 
@@ -14,6 +15,7 @@ const GeneralProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       fetchNotifications(token);
+      fetchStepsLastWeek(token);
     }
   }, [token]);
 
@@ -54,7 +56,30 @@ const GeneralProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log(response.data);
+      const steps = response.data;
+
+      const last7Days = Array.from({ length: 7 }, (_, i) =>
+        moment()
+          .subtract(6 - i, "days")
+          .format("MM/DD")
+      );
+
+      const stepCounts = last7Days.map(
+        (day) =>
+          steps.filter(
+            (step) => moment(step.completed_at).format("MM/DD") === day
+          ).length
+      );
+
+      setChartData({
+        xAxis: [{ data: last7Days }],
+        series: [
+          {
+            data: stepCounts,
+            color: "#1e25a6",
+          },
+        ],
+      });
     } catch (error) {
       console.log("Error in fetching steps last week: ", error);
     }

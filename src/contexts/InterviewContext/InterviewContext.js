@@ -1,8 +1,7 @@
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useEffect } from "react";
 import { useState } from "react";
 import { serverUrl } from "../../config/url";
 import axios from "axios";
-import { authContext } from "../AuthContext/AuthContext";
 
 export const interviewContext = createContext();
 
