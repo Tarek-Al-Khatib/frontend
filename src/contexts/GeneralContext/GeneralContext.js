@@ -94,7 +94,7 @@ const GeneralProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      setLeaderboardData(response.data);
+      setLeaderboardData(response.data.data);
     } catch (error) {
       console.log("Error fetching the leaderboard: ", error);
     }
