@@ -14,6 +14,17 @@ const LearningPlanModal = ({ open, handleClose }) => {
       description: "",
     },
   ]);
+
+  const addStep = () => {
+    setSteps([...steps, { title: "", description: "" }]);
+  };
+
+  const removeStep = (index) => {
+    console.log(index);
+    const updatedSteps = steps.filter((_, i) => i !== index);
+    setSteps(updatedSteps);
+  };
+
   return <Modal open={open} onClose={handleClose}></Modal>;
 };
 
