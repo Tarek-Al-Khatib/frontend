@@ -128,12 +128,34 @@ const Communities = () => {
   const handleMessageSend = () => {
     if (messageInput.trim()) {
       const newMessage = messageInput.trim();
+
       socket.emit("sendMessage", {
         messageContent: newMessage,
         channelId: selectedChannel.id,
         userId: user.id,
       });
+
       setMessageInput("");
+
+      const now = moment();
+      const messageDisplay = {
+        sender: user,
+        sent_at: now,
+        message: newMessage,
+      };
+
+      setChannels((prevChannels) =>
+        prevChannels.map((channel) =>
+          channel.id === selectedChannel.id
+            ? {
+                ...channel,
+                chats: [...channel.chats, messageDisplay],
+              }
+            : channel
+        )
+      );
+
+      setMessages((prevMessages) => [...prevMessages, messageDisplay]);
     }
   };
 
