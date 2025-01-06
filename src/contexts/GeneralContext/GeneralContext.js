@@ -10,12 +10,15 @@ export const generalContext = createContext();
 const GeneralProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
   const [chartData, setChartData] = useState({});
+  const [leaderboardData, setLeaderboardData] = useState([]);
   const { token } = useContext(authContext);
 
   useEffect(() => {
     if (token) {
       fetchNotifications(token);
       fetchStepsLastWeek(token);
+      fetchStepsLastWeek(token);
+      fetchLeaderboard(token);
     }
   }, [token]);
 
@@ -85,9 +88,27 @@ const GeneralProvider = ({ children }) => {
     }
   };
 
+  const fetchLeaderboard = async (token) => {
+    try {
+      const response = await axios.get(`${serverUrl}/api/user/leaderboard`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setLeaderboardData(response.data);
+    } catch (error) {
+      console.log("Error fetching the leaderboard: ", error);
+    }
+  };
+
   return (
     <generalContext.Provider
-      value={{ notifications, setNotifications, markAsReadNotifications }}
+      value={{
+        notifications,
+        setNotifications,
+        markAsReadNotifications,
+        chartData,
+        leaderboardData,
+      }}
     >
       {children}
     </generalContext.Provider>
