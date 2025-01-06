@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -13,82 +13,12 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
 import { learningContext } from "../../contexts/LearningContext/LearningContext";
+import { generalContext } from "../../contexts/GeneralContext/GeneralContext";
 
 const Profile = () => {
   const { communities } = useContext(communityContext);
   const { learningPlans, calculateProgress } = useContext(learningContext);
-  const leaderboardData = [
-    {
-      rank: 1,
-      username: "Username1",
-      interviews: 0,
-      learningPlans: 0,
-      points: 1200,
-    },
-    {
-      rank: 2,
-      username: "Username2",
-      interviews: 0,
-      learningPlans: 0,
-      points: 1100,
-    },
-    {
-      rank: 3,
-      username: "Username3",
-      interviews: 0,
-      learningPlans: 0,
-      points: 1000,
-    },
-    {
-      rank: 4,
-      username: "Username4",
-      interviews: 0,
-      learningPlans: 0,
-      points: 950,
-    },
-    {
-      rank: 5,
-      username: "Username5",
-      interviews: 0,
-      learningPlans: 0,
-      points: 900,
-    },
-    {
-      rank: 6,
-      username: "Username5",
-      interviews: 0,
-      learningPlans: 0,
-      points: 900,
-    },
-    {
-      rank: 7,
-      username: "Username5",
-      interviews: 0,
-      learningPlans: 0,
-      points: 900,
-    },
-    {
-      rank: 8,
-      username: "Username5",
-      interviews: 0,
-      learningPlans: 0,
-      points: 900,
-    },
-    {
-      rank: 9,
-      username: "Username5",
-      interviews: 0,
-      learningPlans: 0,
-      points: 900,
-    },
-    {
-      rank: 10,
-      username: "Username5",
-      interviews: 0,
-      learningPlans: 0,
-      points: 900,
-    },
-  ];
+  const { leaderboardData } = useContext(generalContext);
   return (
     <div>
       <Navbar />
@@ -238,26 +168,36 @@ const Profile = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {leaderboardData.map((user) => (
-                        <TableRow key={user.rank}>
-                          <TableCellStyled start={true}>
-                            <div className="flex items-center gap-3">
-                              {user.rank} {". "}
-                              <div className="flex items-center gap-1">
-                                <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
-                                {user.username}
+                      {leaderboardData &&
+                      leaderboardData.leaderboard &&
+                      leaderboardData.leaderboard.length > 0 ? (
+                        leaderboardData.leaderboard.map((user, index) => (
+                          <TableRow key={user.id}>
+                            <TableCellStyled start={true}>
+                              <div className="flex items-center gap-3">
+                                {index + 1} {". "}
+                                <div className="flex items-center gap-1">
+                                  <div className="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
+                                  {user.username}
+                                </div>
                               </div>
-                            </div>
-                          </TableCellStyled>
-                          <TableCellStyled>{user.interviews}</TableCellStyled>
-                          <TableCellStyled>
-                            {user.learningPlans}
-                          </TableCellStyled>
-                          <TableCellStyled end={true}>
-                            {user.points}
+                            </TableCellStyled>
+                            <TableCellStyled>{user.interviews}</TableCellStyled>
+                            <TableCellStyled>
+                              {user.learningPlans}
+                            </TableCellStyled>
+                            <TableCellStyled end={true}>
+                              {user.points}
+                            </TableCellStyled>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCellStyled colSpan={4} align="center">
+                            No data available
                           </TableCellStyled>
                         </TableRow>
-                      ))}
+                      )}
                     </TableBody>
                   </Table>
                 </TableContainer>
