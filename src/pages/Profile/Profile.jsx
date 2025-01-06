@@ -12,9 +12,11 @@ import TableCellStyled from "../../components/TableCell/TableCell";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
+import { learningContext } from "../../contexts/LearningContext/LearningContext";
 
 const Profile = () => {
   const { communities } = useContext(communityContext);
+  const { learningPlans, calculateProgress } = useContext(learningContext);
   const leaderboardData = [
     {
       rank: 1,
@@ -160,80 +162,24 @@ const Profile = () => {
 
                     <div className="bg-white h-[570px] pt-4">
                       <div className="space-y-4 h-[570px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
-                        <div className="flex justify-between pr-3">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
+                        {learningPlans.map((plan) => (
+                          <div className="flex justify-between pr-3">
+                            <div className="flex flex-col gap-2">
+                              <p className="font-bold text-navy">
+                                {plan.title}
+                              </p>
+                              <p className="font-normal text-navy">
+                                {plan.description}
+                              </p>
+                            </div>
+                            <div>
+                              <CircularProgressWithLabel
+                                value={calculateProgress(plan)}
+                                size={60}
+                              />
+                            </div>
                           </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-
-                        <div className="flex justify-between pr-3">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between pr-3">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between pr-3">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between pr-3">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between pr-3">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-                        <div className="flex justify-between pr-3">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
-
-                        <div className="flex justify-between pr-3">
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">Learning plan</p>
-                            <p className="font-normal text-navy">description</p>
-                          </div>
-                          <div>
-                            <CircularProgressWithLabel value={67} size={60} />
-                          </div>
-                        </div>
+                        ))}
                       </div>
                     </div>
                   </div>
