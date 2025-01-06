@@ -56,6 +56,23 @@ const InterviewProvider = ({ children }) => {
       console.log("Error creating interview: ", error);
     }
   };
+
+  const updateInterview = async (interviewData) => {
+    try {
+      const response = await axios.put(
+        `${serverUrl}/api/interviews/${interviewData.id}`,
+        interviewData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(
+        `Error updating interview with id ${interviewData.id}:`,
+        error
+      );
+    }
+  };
+
   return <interviewContext.Provider>{children}</interviewContext.Provider>;
 };
 
