@@ -9,6 +9,7 @@ export const interviewContext = createContext();
 const InterviewProvider = ({ children }) => {
   const [userInterviews, setUserInterviews] = useState([]);
   const [interviewInvitations, setInterviewInvitations] = useState([]);
+  const token = localStorage.getItem("token");
 
   const fetchInterviews = async (token) => {
     try {
@@ -18,6 +19,7 @@ const InterviewProvider = ({ children }) => {
         },
       });
       setUserInterviews(response.data);
+      console.log(response.message);
     } catch (error) {
       console.log("Error fetching user interviews: ", error);
     }
@@ -35,11 +37,25 @@ const InterviewProvider = ({ children }) => {
       );
 
       setInterviewInvitations(response.data);
+      console.log(response.message);
     } catch (error) {
       console.log("Error fetching invitations: ", error);
     }
   };
 
+  const createInterview = async (interviewData) => {
+    try {
+      const response = await axios.post(
+        `${serverUrl}/api/interviews`,
+        interviewData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.log("Error creating interview: ", error);
+    }
+  };
   return <interviewContext.Provider>{children}</interviewContext.Provider>;
 };
 
