@@ -16,6 +16,29 @@ const LearningProvider = ({ children }) => {
     }
   }, [user, token]);
 
+  const calculateProgress = (plan) => {
+    if (!plan || !plan.steps) {
+      console.error("Invalid plan data.");
+      return 0;
+    }
+
+    if (plan.is_completed) {
+      return 100;
+    }
+
+    const totalSteps = plan.steps.length;
+    const completedSteps = plan.steps.filter(
+      (step) => step.is_completed
+    ).length;
+
+    if (totalSteps === 0) {
+      return 0;
+    }
+
+    const progress = (completedSteps / totalSteps) * 100;
+    return Math.round(progress);
+  };
+
   const fetchPlans = async () => {
     try {
       const response = await axios.get(`${serverUrl}/api/learning/${user.id}`, {
@@ -128,6 +151,7 @@ const LearningProvider = ({ children }) => {
         updatePlan,
         markPlanAsDone,
         markStepAsDone,
+        calculateProgress,
       }}
     >
       {children}

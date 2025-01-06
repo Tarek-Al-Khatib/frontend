@@ -23,6 +23,7 @@ const Learning = () => {
     updatePlan,
     markPlanAsDone,
     markStepAsDone,
+    calculateProgress,
   } = useContext(learningContext);
   const { user } = useContext(authContext);
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -61,29 +62,6 @@ const Learning = () => {
         </div>
       </div>
     ));
-
-  const calculateProgress = (plan) => {
-    if (!plan || !plan.steps) {
-      console.error("Invalid plan data.");
-      return 0;
-    }
-
-    if (plan.is_completed) {
-      return 100;
-    }
-
-    const totalSteps = plan.steps.length;
-    const completedSteps = plan.steps.filter(
-      (step) => step.is_completed
-    ).length;
-
-    if (totalSteps === 0) {
-      return 0;
-    }
-
-    const progress = (completedSteps / totalSteps) * 100;
-    return Math.round(progress);
-  };
 
   const calculateTotalStepsProgress = () => {
     if (learningPlans.length > 0) {
