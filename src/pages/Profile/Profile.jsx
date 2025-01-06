@@ -35,7 +35,7 @@ const Profile = () => {
               <div class="flex gap-5 justify-between w-[650px] border rounded-2xl border-gray-200 bg-white p-6 h-fit">
                 <div class="w-32 h-32 rounded-full flex justify-center items-center">
                   <div>
-                    {user.profile_pic && (
+                    {user && user.profile_pic && (
                       <img
                         src={user.profile_pic}
                         alt={`${user.profile_pic} profile pic`}
@@ -52,7 +52,7 @@ const Profile = () => {
                         Name:
                       </span>
                       <span class="text-[#1e25a6] text-sm font-bold font-['Open Sans Hebrew']">
-                        {user.username}
+                        {user && user.username}
                       </span>
                     </div>
                     <div class="flex justify-start gap-5">
@@ -60,7 +60,7 @@ const Profile = () => {
                         Email:
                       </span>
                       <span class="text-[#1e25a6] text-sm font-bold font-['Open Sans Hebrew']">
-                        {user.email}
+                        {user && user.email}
                       </span>
                     </div>
                     <div class="flex justify-start gap-5">
@@ -68,7 +68,7 @@ const Profile = () => {
                         Points:
                       </span>
                       <span class="text-[#1e25a6] text-sm font-bold font-['Open Sans Hebrew']">
-                        {user.points}
+                        {user && user.points}
                       </span>
                     </div>
                   </div>
