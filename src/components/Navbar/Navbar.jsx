@@ -23,9 +23,11 @@ import {
 } from "@mui/material";
 import { useSocket } from "../../utils/useSocket";
 import { generalContext } from "../../contexts/GeneralContext/GeneralContext";
+import { authContext } from "../../contexts/AuthContext/AuthContext";
 
 const Navbar = () => {
   const socket = useSocket();
+  const { user } = useContext(authContext);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
@@ -151,9 +153,17 @@ const Navbar = () => {
             </Box>
           </Popover>
           <button
-            className="rounded-full bg-navy w-11 h-11"
+            className="w-11 h-11"
             onClick={(e) => setAnchorEl(e.currentTarget)}
-          ></button>
+          >
+            {user && (
+              <img
+                src={user.profile_pic}
+                alt={`${user.profile_pic} profile pic`}
+                className="object-cover w-full h-full rounded-full"
+              />
+            )}
+          </button>
           <Menu
             id="account-menu"
             aria-labelledby="demo-positioned-button"
