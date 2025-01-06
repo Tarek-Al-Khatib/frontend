@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Table,
   TableBody,
@@ -11,8 +11,10 @@ import CircularProgressWithLabel from "../../components/CircularProgressWithLabe
 import TableCellStyled from "../../components/TableCell/TableCell";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
 
 const Profile = () => {
+  const { communities } = useContext(communityContext);
   const leaderboardData = [
     {
       rank: 1,
@@ -242,95 +244,31 @@ const Profile = () => {
 
                     <div className="p-4 bg-white h-[550px] px-0">
                       <div className="flex flex-col gap-6 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
-                        <div className="flex items-center gap-4 pr-2">
-                          <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">
-                              Community Name
-                            </p>
-                            <p className="font-normal text-navy">
-                              Community description
-                            </p>
+                        {communities.map((community) => (
+                          <div className="flex items-center gap-4 pr-2">
+                            <div className="flex items-center justify-center w-12 h-12 mb-5 overflow-hidden rounded-full bg-navy">
+                              {community.community_logo ? (
+                                <img
+                                  src={community.community_logo}
+                                  alt={`${community.title} logo`}
+                                  className="object-cover w-full h-full"
+                                />
+                              ) : (
+                                <span className="text-sm text-center text-white">
+                                  No Logo
+                                </span>
+                              )}
+                            </div>
+                            <div className="flex flex-col gap-2">
+                              <p className="font-bold text-navy">
+                                {community.title}
+                              </p>
+                              <p className="font-normal text-navy">
+                                {community.description}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                        <div className="flex items-center gap-4 pr-2">
-                          <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">
-                              Community Name
-                            </p>
-                            <p className="font-normal text-navy">
-                              Community description
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4 pr-2">
-                          <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">
-                              Community Name
-                            </p>
-                            <p className="font-normal text-navy">
-                              Community description
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4 pr-2">
-                          <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">
-                              Community Name
-                            </p>
-                            <p className="font-normal text-navy">
-                              Community description
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4 pr-2">
-                          <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">
-                              Community Name
-                            </p>
-                            <p className="font-normal text-navy">
-                              Community description
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4 pr-2">
-                          <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">
-                              Community Name
-                            </p>
-                            <p className="font-normal text-navy">
-                              Community description
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4 pr-2">
-                          <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">
-                              Community Name
-                            </p>
-                            <p className="font-normal text-navy">
-                              Community description
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-4 pr-2">
-                          <div class="w-12 h-12 bg-[#1e25a6] rounded-full"></div>
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">
-                              Community Name
-                            </p>
-                            <p className="font-normal text-navy">
-                              Community description
-                            </p>
-                          </div>
-                        </div>
+                        ))}
                       </div>
                     </div>
                   </div>
