@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 import { useEffect, useRef } from "react";
 
-export const useSocket = (channelIds = [], selectedChannel) => {
+export const useSocket = (channelIds = [], selectedChannel, channels) => {
   const socketRef = useRef(null);
   const userId = localStorage.getItem("userId") || null;
 
@@ -31,7 +31,7 @@ export const useSocket = (channelIds = [], selectedChannel) => {
         });
       }
     };
-  }, [selectedChannel]);
+  }, [selectedChannel, channels]);
 
   return socketRef.current;
 };

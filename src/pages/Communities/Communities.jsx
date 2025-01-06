@@ -40,7 +40,8 @@ const Communities = () => {
   );
   const socket = useSocket(
     channels.map((channel) => channel.id),
-    selectedChannel
+    selectedChannel,
+    channels
   );
 
   useEffect(() => {
@@ -99,7 +100,7 @@ const Communities = () => {
         socket.off("receiveMessage");
       };
     }
-  }, [socket, selectedChannel]);
+  }, [socket, selectedChannel, selectedCommunity]);
 
   const handleCommunitySelect = (community) => {
     setSelectedCommunity(community);
