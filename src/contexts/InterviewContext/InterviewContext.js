@@ -11,6 +11,13 @@ const InterviewProvider = ({ children }) => {
   const [interviewInvitations, setInterviewInvitations] = useState([]);
   const token = localStorage.getItem("token");
 
+  useEffect(() => {
+    if (token) {
+      fetchInterviews(token);
+      fetchInvitations(token);
+    }
+  }, [token]);
+
   const fetchInterviews = async (token) => {
     try {
       const response = await axios.get(`${serverUrl}/api/interviews/`, {
@@ -73,7 +80,20 @@ const InterviewProvider = ({ children }) => {
     }
   };
 
-  return <interviewContext.Provider>{children}</interviewContext.Provider>;
+  return (
+    <interviewContext.Provider
+      value={{
+        userInterviews,
+        interviewInvitations,
+        fetchInterviews,
+        fetchInvitations,
+        createInterview,
+        updateInterview,
+      }}
+    >
+      {children}
+    </interviewContext.Provider>
+  );
 };
 
 export default InterviewProvider;
