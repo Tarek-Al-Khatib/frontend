@@ -80,6 +80,19 @@ const InterviewProvider = ({ children }) => {
     }
   };
 
+  const updateStatus = async (interviewId, status) => {
+    try {
+      const response = await axios.put(
+        `${serverUrl}/api/interviews/${interviewId}/status`,
+        { status: status },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(`Error updating interview with id ${interviewId}:`, error);
+    }
+  };
+
   return (
     <interviewContext.Provider
       value={{
@@ -89,6 +102,7 @@ const InterviewProvider = ({ children }) => {
         fetchInvitations,
         createInterview,
         updateInterview,
+        updateStatus,
       }}
     >
       {children}
