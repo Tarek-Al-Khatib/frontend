@@ -19,13 +19,12 @@ const InterviewProvider = ({ children }) => {
 
   const fetchInterviews = async (token) => {
     try {
-      const response = await axios.get(`${serverUrl}/api/interviews/`, {
+      const response = await axios.get(`${serverUrl}/api/interviews`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setUserInterviews(response.data);
-      console.log(response.message);
+      setUserInterviews(response.data.data);
     } catch (error) {
       console.log("Error fetching user interviews: ", error);
     }
@@ -42,8 +41,7 @@ const InterviewProvider = ({ children }) => {
         }
       );
 
-      setInterviewInvitations(response.data);
-      console.log(response.message);
+      setInterviewInvitations(response.data.data);
     } catch (error) {
       console.log("Error fetching invitations: ", error);
     }

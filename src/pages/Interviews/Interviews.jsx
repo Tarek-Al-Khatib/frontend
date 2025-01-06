@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,8 +11,10 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "../../css/colors.css";
 import ViewFeedback from "./Modal/ViewFeedback";
+import { interviewContext } from "../../contexts/InterviewContext/InterviewContext";
 const Interview = () => {
   const [text, setText] = useState("");
+  const { userInterviews, interviewInvitations } = useContext(interviewContext);
   const [open, setOpen] = useState(false);
   const leaderboardData = [
     {
@@ -109,35 +111,52 @@ const Interview = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {leaderboardData.map((user) => (
-                    <TableRow key={user.rank}>
-                      <TableCellStyled dark={true} start={true} bold={false}>
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center gap-1">
-                            <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
-                            {user.interviewer}
-                          </div>
-                        </div>
-                      </TableCellStyled>
-                      <TableCellStyled dark={true} bold={false}>
-                        <button
-                          onClick={() => {
-                            setText(user.feedback);
-                          }}
-                          className="p-1 px-3 rounded-lg bg-cyan"
+                  {userInterviews &&
+                    (userInterviews.length === 0 ? (
+                      <TableRow>
+                        <TableCellStyled
+                          dark={true}
+                          start={true}
+                          bold={false}
+                          colSpan={4}
                         >
-                          {user.feedback.substring(0, 15).concat("...")}
-                        </button>
-                      </TableCellStyled>
-                      <TableCellStyled dark={true} bold={false}>
-                        hi
-                      </TableCellStyled>
-
-                      <TableCellStyled dark={true} bold={false} end={true}>
-                        +{user.points}
-                      </TableCellStyled>
-                    </TableRow>
-                  ))}
+                          No interviews available
+                        </TableCellStyled>
+                      </TableRow>
+                    ) : (
+                      userInterviews.map((user) => (
+                        <TableRow key={user.id}>
+                          <TableCellStyled
+                            dark={true}
+                            start={true}
+                            bold={false}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="flex items-center gap-1">
+                                <div className="w-9 h-9 bg-[#1e25a6] rounded-full"></div>
+                                {user.interviewer}
+                              </div>
+                            </div>
+                          </TableCellStyled>
+                          <TableCellStyled dark={true} bold={false}>
+                            <button
+                              onClick={() => {
+                                setText(user.feedback);
+                              }}
+                              className="p-1 px-3 rounded-lg bg-cyan"
+                            >
+                              {user.feedback.substring(0, 15).concat("...")}
+                            </button>
+                          </TableCellStyled>
+                          <TableCellStyled dark={true} bold={false}>
+                            {user.status}
+                          </TableCellStyled>
+                          <TableCellStyled dark={true} bold={false} end={true}>
+                            +{user.points}
+                          </TableCellStyled>
+                        </TableRow>
+                      ))
+                    ))}
                 </TableBody>
               </Table>
             </TableContainer>
