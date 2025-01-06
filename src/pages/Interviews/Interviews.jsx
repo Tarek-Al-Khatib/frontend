@@ -12,36 +12,12 @@ import Footer from "../../components/Footer/Footer";
 import "../../css/colors.css";
 import ViewFeedback from "./Modal/ViewFeedback";
 import { interviewContext } from "../../contexts/InterviewContext/InterviewContext";
+import { authContext } from "../../contexts/AuthContext/AuthContext";
 const Interview = () => {
   const [text, setText] = useState("");
+  const { user } = useContext(authContext);
   const { userInterviews, interviewInvitations } = useContext(interviewContext);
   const [open, setOpen] = useState(false);
-  const leaderboardData = [
-    {
-      rank: 1,
-      interviewer: "Username1",
-      feedback: "Hi this is the full feedback about the previous interview",
-      points: 1200,
-    },
-    {
-      rank: 2,
-      interviewer: "Username2",
-      feedback: "Hi this is the full feedback about the previous interview",
-      points: 1100,
-    },
-    {
-      rank: 3,
-      interviewer: "Username3",
-      feedback: "Hi this is the full feedback about the previous interview",
-      points: 1000,
-    },
-    {
-      rank: 4,
-      interviewer: "Username4",
-      feedback: "Hi this is the full feedback about the previous interview",
-      points: 950,
-    },
-  ];
 
   useEffect(() => {
     if (text.length > 0) setOpen(true);
@@ -191,22 +167,55 @@ const Interview = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {leaderboardData.map((user) => (
-                    <TableRow key={user.rank}>
-                      <TableCellStyled dark start={true}>
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center gap-1">
-                            <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
-                            {user.interviewer}
+                  {interviewInvitations.map((invitation) =>
+                    user && invitation.moderator.id === user.id ? (
+                      <TableRow key={invitation.user.id}>
+                        <TableCellStyled dark start={true}>
+                          <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-1">
+                              <div class="w-9 h-9 bg-[#1e25a6] rounded-full">
+                                <img
+                                  src={invitation.user.profile_pic}
+                                  alt={`${invitation.user.profile_pic} profile pic`}
+                                  className="object-cover w-full h-full rounded-full"
+                                />
+                              </div>
+                              {invitation.user.username}
+                            </div>
                           </div>
-                        </div>
-                      </TableCellStyled>
-                      <TableCellStyled dark>hi</TableCellStyled>
-                      <TableCellStyled dark end>
-                        +{user.points}
-                      </TableCellStyled>
-                    </TableRow>
-                  ))}
+                        </TableCellStyled>
+                        <TableCellStyled dark>
+                          {invitation.date}
+                        </TableCellStyled>
+                        <TableCellStyled dark end>
+                          {invitation.status}
+                        </TableCellStyled>
+                      </TableRow>
+                    ) : (
+                      <TableRow key={invitation.rank}>
+                        <TableCellStyled dark start={true}>
+                          <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-1">
+                              <div class="w-9 h-9 rounded-full">
+                                <img
+                                  src={invitation.user.profile_pic}
+                                  alt={`${invitation.user.profile_pic} profile pic`}
+                                  className="object-cover w-full h-full rounded-full"
+                                />
+                              </div>{" "}
+                              {invitation.moderator.username}
+                            </div>
+                          </div>
+                        </TableCellStyled>
+                        <TableCellStyled dark>
+                          {invitation.date}
+                        </TableCellStyled>
+                        <TableCellStyled dark end>
+                          {invitation.status}
+                        </TableCellStyled>
+                      </TableRow>
+                    )
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
