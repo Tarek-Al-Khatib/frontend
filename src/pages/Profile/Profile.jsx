@@ -11,14 +11,17 @@ import CircularProgressWithLabel from "../../components/CircularProgressWithLabe
 import TableCellStyled from "../../components/TableCell/TableCell";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import "../../css/colors.css";
 import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
 import { learningContext } from "../../contexts/LearningContext/LearningContext";
 import { generalContext } from "../../contexts/GeneralContext/GeneralContext";
+import { authContext } from "../../contexts/AuthContext/AuthContext";
 
 const Profile = () => {
   const { communities } = useContext(communityContext);
   const { learningPlans, calculateProgress } = useContext(learningContext);
   const { leaderboardData } = useContext(generalContext);
+  const { user } = useContext(authContext);
   return (
     <div>
       <Navbar />
@@ -122,7 +125,7 @@ const Profile = () => {
                       <div className="flex flex-col gap-6 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
                         {communities.map((community) => (
                           <div className="flex items-center gap-4 pr-2">
-                            <div className="flex items-center justify-center w-12 h-12 mb-5 overflow-hidden rounded-full bg-navy">
+                            <div className="flex items-center justify-center w-12 h-12 overflow-hidden rounded-full bg-navy">
                               {community.community_logo ? (
                                 <img
                                   src={community.community_logo}
@@ -168,26 +171,29 @@ const Profile = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {leaderboardData &&
-                      leaderboardData.leaderboard &&
-                      leaderboardData.leaderboard.length > 0 ? (
-                        leaderboardData.leaderboard.map((user, index) => (
-                          <TableRow key={user.id}>
+                      {leaderboardData && leaderboardData.length > 0 ? (
+                        leaderboardData.map((userData) => (
+                          <TableRow
+                            key={userData.id}
+                            className={userData.id === user.id ? "bg-cyan" : ""}
+                          >
                             <TableCellStyled start={true}>
                               <div className="flex items-center gap-3">
-                                {index + 1} {". "}
+                                {userData.rank + 1} {". "}
                                 <div className="flex items-center gap-1">
                                   <div className="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
-                                  {user.username}
+                                  {userData.username}
                                 </div>
                               </div>
                             </TableCellStyled>
-                            <TableCellStyled>{user.interviews}</TableCellStyled>
                             <TableCellStyled>
-                              {user.learningPlans}
+                              {userData.interviews}
+                            </TableCellStyled>
+                            <TableCellStyled>
+                              {userData.learningPlans}
                             </TableCellStyled>
                             <TableCellStyled end={true}>
-                              {user.points}
+                              {userData.points}
                             </TableCellStyled>
                           </TableRow>
                         ))
