@@ -159,6 +159,11 @@ const Communities = () => {
     }
   };
 
+  useEffect(() => {
+    if (selectedChannel) {
+      fetchChannels(selectedCommunity.id);
+    }
+  }, [selectedChannel]);
   const messagesToRender = renderMessages(messages);
 
   return (
