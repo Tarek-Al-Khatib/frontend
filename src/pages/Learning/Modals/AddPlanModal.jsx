@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
+  Modal,
   Box,
   Button,
-  Divider,
   IconButton,
-  Modal,
   TextField,
+  Divider,
 } from "@mui/material";
 import "../../../css/colors.css";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import {
-  IoIosAddCircleOutline,
-  IoIosRemoveCircleOutline,
-} from "react-icons/io";
-
 const LearningPlanModal = ({ open, handleClose }) => {
   const [learningPlan, setLearningPlan] = useState({
     title: "",
@@ -26,8 +23,24 @@ const LearningPlanModal = ({ open, handleClose }) => {
       description: "",
     },
   ]);
+
+  const stepsContainerRef = useRef(null);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [steps]);
+
   const handleInputChange = (field, value) => {
     setLearningPlan({ ...learningPlan, [field]: value });
+  };
+
+  const scrollToBottom = () => {
+    if (stepsContainerRef) {
+      if (steps.length > 4) {
+        const container = stepsContainerRef.current;
+        container.scrollTop = container.scrollHeight;
+      }
+    }
   };
 
   const addStep = () => {
@@ -141,7 +154,10 @@ const LearningPlanModal = ({ open, handleClose }) => {
             Enhance with AI
           </button>
         </div>
-        <div className="overflow-y-auto custom-scrollbar h-[300px] mb-5 scroll-smooth">
+        <div
+          className="overflow-y-auto custom-scrollbar h-[300px] mb-5 scroll-smooth"
+          ref={stepsContainerRef}
+        >
           {steps.map((step, index) => (
             <div
               key={index}
@@ -215,6 +231,12 @@ const LearningPlanModal = ({ open, handleClose }) => {
               </IconButton>
             </div>
           ))}
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <button className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-700 rounded-self">
+            Create Learning Plan
+          </button>
         </div>
       </Box>
     </Modal>

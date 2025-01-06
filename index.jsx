@@ -29,14 +29,9 @@ const LearningPlanModal = ({ open, handleClose }) => {
   useEffect(() => {
     scrollToBottom();
   }, [steps]);
+
   const handleInputChange = (field, value) => {
     setLearningPlan({ ...learningPlan, [field]: value });
-  };
-
-  const handleStepChange = (index, field, value) => {
-    const updatedSteps = [...learningPlan.steps];
-    updatedSteps[index][field] = value;
-    setLearningPlan({ ...learningPlan, steps: updatedSteps });
   };
 
   const scrollToBottom = () => {
