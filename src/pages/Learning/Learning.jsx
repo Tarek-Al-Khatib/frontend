@@ -28,7 +28,7 @@ const Learning = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
 
   const handleAddModalClose = () => {
-    setOpenAddModal(true);
+    setOpenAddModal(false);
   };
   const renderPlanSteps = (steps) =>
     steps.map((step, index) => (

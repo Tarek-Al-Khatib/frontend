@@ -65,9 +65,9 @@ const AddPlan = ({ open, handleClose }) => {
         }}
       >
         <div className="flex justify-end w-full">
-          <Button onClick={handleClose} color="text-navy">
-            <IoCloseCircleOutline color="navy" size={40} />
-          </Button>
+          <button onClick={handleClose}>
+            <IoCloseCircleOutline className="text-navy" size={40} />
+          </button>
         </div>
         <h2 className="mb-1 text-3xl font-extrabold text-navy">
           Learning Plan
