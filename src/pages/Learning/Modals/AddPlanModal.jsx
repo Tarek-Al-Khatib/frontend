@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Modal } from "@mui/material";
+import { Box, Button, Divider, Modal, TextField } from "@mui/material";
 import "../../../css/colors.css";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 const LearningPlanModal = ({ open, handleClose }) => {
   const [learningPlan, setLearningPlan] = useState({
@@ -14,6 +15,9 @@ const LearningPlanModal = ({ open, handleClose }) => {
       description: "",
     },
   ]);
+  const handleInputChange = (field, value) => {
+    setLearningPlan({ ...learningPlan, [field]: value });
+  };
 
   const addStep = () => {
     setSteps([...steps, { title: "", description: "" }]);
