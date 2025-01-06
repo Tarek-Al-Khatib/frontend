@@ -8,6 +8,7 @@ export const generalContext = createContext();
 
 const GeneralProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
+  const [chartData, setChartData] = useState({});
   const { token } = useContext(authContext);
 
   useEffect(() => {
@@ -45,6 +46,18 @@ const GeneralProvider = ({ children }) => {
       });
 
     fetchNotifications(token);
+  };
+
+  const fetchStepsLastWeek = async (token) => {
+    try {
+      const response = await axios.get(`${serverUrl}/api/learning/last-week`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(response.data);
+    } catch (error) {
+      console.log("Error in fetching steps last week: ", error);
+    }
   };
 
   return (
