@@ -13,6 +13,7 @@ import { MdAddTask, MdDoneOutline } from "react-icons/md";
 import { GiProgression } from "react-icons/gi";
 import { GoTasklist } from "react-icons/go";
 import capitalize from "capitalize";
+import AddPlan from "./Modals/AddPlanModal";
 
 const Learning = () => {
   const {
@@ -24,7 +25,11 @@ const Learning = () => {
     markStepAsDone,
   } = useContext(learningContext);
   const { user } = useContext(authContext);
+  const [openAddModal, setOpenAddModal] = useState(false);
 
+  const handleAddModalClose = () => {
+    setOpenAddModal(true);
+  };
   const renderPlanSteps = (steps) =>
     steps.map((step, index) => (
       <div key={index} className="flex items-center space-x-4">
@@ -96,6 +101,7 @@ const Learning = () => {
   return (
     <div>
       <Navbar />
+      <AddPlan open={openAddModal} handleClose={handleAddModalClose} />
       <div className="min-h-screen p-8 bg-white">
         <div className="flex justify-center">
           <div className="w-1/4">
@@ -113,7 +119,10 @@ const Learning = () => {
 
           <div className="flex flex-col items-stretch flex-grow gap-5 pl-20 mt-10">
             <div className="flex justify-end">
-              <button className="px-12 py-2 text-xl font-normal text-white bg-navy rounded-2xl">
+              <button
+                onClick={() => setOpenAddModal(true)}
+                className="px-12 py-2 text-xl font-normal text-white bg-navy rounded-2xl"
+              >
                 Add Plan
               </button>
             </div>

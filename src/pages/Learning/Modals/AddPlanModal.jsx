@@ -11,7 +11,7 @@ import "../../../css/colors.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { IoCloseCircleOutline } from "react-icons/io5";
-const LearningPlanModal = ({ open, handleClose }) => {
+const AddPlan = ({ open, handleClose }) => {
   const [learningPlan, setLearningPlan] = useState({
     title: "",
     description: "",
@@ -243,4 +243,4 @@ const LearningPlanModal = ({ open, handleClose }) => {
   );
 };
 
-export default LearningPlanModal;
+export default AddPlan;
