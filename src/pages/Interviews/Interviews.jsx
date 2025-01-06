@@ -124,8 +124,8 @@ const Interview = () => {
                         </TableCellStyled>
                       </TableRow>
                     ) : (
-                      userInterviews.map((user) => (
-                        <TableRow key={user.id}>
+                      userInterviews.map((interview) => (
+                        <TableRow key={interview.id}>
                           <TableCellStyled
                             dark={true}
                             start={true}
@@ -133,26 +133,36 @@ const Interview = () => {
                           >
                             <div className="flex items-center gap-3">
                               <div className="flex items-center gap-1">
-                                <div className="w-9 h-9 bg-[#1e25a6] rounded-full"></div>
-                                {user.interviewer}
+                                <div className="rounded-full w-9 h-9">
+                                  <img
+                                    src={interview.interviewer.profile_pic}
+                                    alt={`${interview.interviewer.profile_pic} profile pic`}
+                                    className="object-cover w-full h-full rounded-full"
+                                  />
+                                </div>
+                                {interview.interviewer.username}
                               </div>
                             </div>
                           </TableCellStyled>
                           <TableCellStyled dark={true} bold={false}>
                             <button
                               onClick={() => {
-                                setText(user.feedback);
+                                setText(interview.feedback);
                               }}
                               className="p-1 px-3 rounded-lg bg-cyan"
                             >
-                              {user.feedback.substring(0, 15).concat("...")}
+                              {interview.feedback
+                                .substring(0, 15)
+                                .concat("...")}
                             </button>
                           </TableCellStyled>
                           <TableCellStyled dark={true} bold={false}>
-                            {user.status}
+                            {interview.status}
                           </TableCellStyled>
                           <TableCellStyled dark={true} bold={false} end={true}>
-                            +{user.points}
+                            {interview.points !== 0
+                              ? interview.points
+                              : "Pending"}
                           </TableCellStyled>
                         </TableRow>
                       ))
