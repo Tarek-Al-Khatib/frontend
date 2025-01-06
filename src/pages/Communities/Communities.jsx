@@ -312,7 +312,15 @@ const Communities = () => {
                     messagesToRender.map((message, index) => (
                       <div key={index}>
                         <div className="flex items-start gap-7">
-                          <div className="w-12 h-12 bg-blue-900 rounded-full"></div>
+                          <div className="w-12 h-12">
+                            {message.sender.profile_pic && (
+                              <img
+                                src={message.sender.profile_pic}
+                                alt={`${message.sender.profile_pic} profile pic`}
+                                className="object-cover w-full h-full rounded-full"
+                              />
+                            )}
+                          </div>
                           <div className="flex-1">
                             <div className="flex items-center justify-between gap-2 w-fit">
                               <div className="text-sm font-bold text-blue-900">
