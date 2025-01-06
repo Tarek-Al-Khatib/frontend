@@ -23,6 +23,23 @@ const InterviewProvider = ({ children }) => {
     }
   };
 
+  const fetchInvitations = async (token) => {
+    try {
+      const response = await axios.get(
+        `${serverUrl}/api/interviews/invitations`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setInterviewInvitations(response.data);
+    } catch (error) {
+      console.log("Error fetching invitations: ", error);
+    }
+  };
+
   return <interviewContext.Provider>{children}</interviewContext.Provider>;
 };
 
