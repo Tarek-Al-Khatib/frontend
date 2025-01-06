@@ -33,12 +33,15 @@ const Communities = () => {
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const [selectedCommunity, setSelectedCommunity] = useState(communities[0]);
+  const [selectedCommunity, setSelectedCommunity] = useState(null);
   const [selectedChannel, setSelectedChannel] = useState(null);
   const [moderatorsData, setModeratorsData] = useState(
     members.filter((m) => m.role === "MODERATOR")
   );
-  const socket = useSocket(channels.map((channel) => channel.id));
+  const socket = useSocket(
+    channels.map((channel) => channel.id),
+    selectedChannel
+  );
 
   useEffect(() => {
     if (selectedCommunity) {
@@ -60,7 +63,7 @@ const Communities = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (socket) {
+    if (socket && socket.connected) {
       socket.on("receiveMessage", (newMessage) => {
         console.log("Received something");
         if (selectedChannel?.id !== newMessage.channel_id) {
