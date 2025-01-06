@@ -35,10 +35,16 @@ const Profile = () => {
             <div className="flex gap-10 p-5">
               <div className="flex flex-col justify-between gap-8">
                 <div class="flex gap-5 justify-between w-[650px] border rounded-2xl border-gray-200 bg-white p-6 h-fit">
-                  <div class="w-32 h-32 bg-[#1e25a6] rounded-full flex justify-center items-center">
-                    <span class="text-white text-sm font-bold font-['Open Sans Hebrew']">
-                      user img
-                    </span>
+                  <div class="w-32 h-32 rounded-full flex justify-center items-center">
+                    <div>
+                      {user.profile_pic && (
+                        <img
+                          src={user.profile_pic}
+                          alt={`${user.profile_pic} profile pic`}
+                          className="object-cover w-full h-full rounded-full"
+                        />
+                      )}
+                    </div>
                   </div>
 
                   <div class="flex justify-center gap-10">
@@ -48,7 +54,7 @@ const Profile = () => {
                           Name:
                         </span>
                         <span class="text-[#1e25a6] text-sm font-bold font-['Open Sans Hebrew']">
-                          Username
+                          {user.username}
                         </span>
                       </div>
                       <div class="flex justify-start gap-5">
@@ -56,7 +62,7 @@ const Profile = () => {
                           Email:
                         </span>
                         <span class="text-[#1e25a6] text-sm font-bold font-['Open Sans Hebrew']">
-                          Email
+                          {user.email}
                         </span>
                       </div>
                       <div class="flex justify-start gap-5">
@@ -64,7 +70,7 @@ const Profile = () => {
                           Points:
                         </span>
                         <span class="text-[#1e25a6] text-sm font-bold font-['Open Sans Hebrew']">
-                          1200
+                          {user.points}
                         </span>
                       </div>
                     </div>
