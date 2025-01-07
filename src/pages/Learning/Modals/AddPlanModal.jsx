@@ -39,6 +39,16 @@ const AddPlan = ({ open, handleClose }) => {
       )
     );
   };
+
+  const handleModalClose = () => {
+    handleClose();
+    setSteps([
+      {
+        step_title: "",
+        step_description: "",
+      },
+    ]);
+  };
   const scrollToBottom = () => {
     if (stepsContainerRef) {
       if (steps.length > 4) {
@@ -59,7 +69,7 @@ const AddPlan = ({ open, handleClose }) => {
   };
 
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={handleModalClose}>
       <Box
         className="w-4/5 p-6 mx-auto bg-white rounded-lg shadow-lg"
         sx={{
@@ -70,7 +80,7 @@ const AddPlan = ({ open, handleClose }) => {
         }}
       >
         <div className="flex justify-end w-full">
-          <button onClick={handleClose}>
+          <button onClick={handleModalClose}>
             <IoCloseCircleOutline className="text-navy" size={40} />
           </button>
         </div>
@@ -244,7 +254,10 @@ const AddPlan = ({ open, handleClose }) => {
 
         <div className="flex justify-end gap-2">
           <button
-            onClick={() => addPlan(learningPlan, steps)}
+            onClick={() => {
+              addPlan(learningPlan, steps);
+              handleModalClose();
+            }}
             className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-700 rounded-self"
           >
             Create Learning Plan
