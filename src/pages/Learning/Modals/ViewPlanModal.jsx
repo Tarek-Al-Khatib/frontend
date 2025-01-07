@@ -17,6 +17,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
   });
 
   const [steps, setSteps] = useState([]);
+  const [progress, setProgress] = useState(calculateProgress(plan));
 
   const stepsContainerRef = useRef(null);
 
@@ -33,6 +34,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
 
   useEffect(() => {
     scrollToBottom();
+    setProgress(calculateProgress({ steps: steps }));
   }, [steps]);
 
   const handleInputChange = (e) => {
@@ -84,10 +86,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
             <h2 className="mb-1 text-3xl font-extrabold text-navy">
               Learning Plan
             </h2>
-            <CircularProgressWithLabel
-              value={calculateProgress(plan)}
-              size={60}
-            />
+            <CircularProgressWithLabel value={progress} size={60} />
           </div>
           <button
             onClick={() => {
