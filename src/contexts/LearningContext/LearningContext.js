@@ -81,6 +81,7 @@ const LearningProvider = ({ children }) => {
           },
         }
       );
+      console.log(response);
       const updatedPlan = response.data.plan;
 
       setLearningPlans((prevPlans) =>

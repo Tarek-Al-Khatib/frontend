@@ -7,7 +7,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import CircularProgressWithLabel from "../../../components/CircularProgressWithLabel/CircularProgressWithLabel";
 import { learningContext } from "../../../contexts/LearningContext/LearningContext";
 const ViewPlan = ({ open, handleClose, plan }) => {
-  const { calculateProgress, markPlanAsDone, markStepAsDone } =
+  const { calculateProgress, markPlanAsDone, markStepAsDone, updatePlan } =
     useContext(learningContext);
   const [learningPlan, setLearningPlan] = useState({
     id: 0,
@@ -34,8 +34,17 @@ const ViewPlan = ({ open, handleClose, plan }) => {
     scrollToBottom();
   }, [steps]);
 
-  const handleInputChange = (field, value) => {
-    setLearningPlan({ ...learningPlan, [field]: value });
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setLearningPlan({ ...learningPlan, [id]: value });
+  };
+
+  const handleStepInputChange = (index, field, value) => {
+    setSteps((prevSteps) =>
+      prevSteps.map((step, i) =>
+        i === index ? { ...step, [field]: value } : step
+      )
+    );
   };
 
   const scrollToBottom = () => {
@@ -100,8 +109,8 @@ const ViewPlan = ({ open, handleClose, plan }) => {
               Title:
             </label>
             <TextField
-              id="plan-title"
-              name="plan-title"
+              id="title"
+              name="title"
               variant="outlined"
               placeholder="Learning title... ex: State NodeJS"
               onChange={handleInputChange}
@@ -127,8 +136,8 @@ const ViewPlan = ({ open, handleClose, plan }) => {
               Description:
             </label>
             <TextField
-              id="plan-description"
-              name="plan-description"
+              id="description"
+              name="description"
               multiline={true}
               maxRows={4}
               placeholder="Learning description... ex: I will start by learning the fundamentals of NodeJS and then dive deep to become a professional NodeJS developer !"
@@ -176,11 +185,17 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                     Title:
                   </label>
                   <TextField
-                    id="plan-title"
-                    name="plan-title"
+                    id="step_title"
+                    name="step_title"
                     variant="outlined"
                     placeholder="Learning title... ex: State NodeJS"
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      handleStepInputChange(
+                        step.id,
+                        e.target.id,
+                        e.target.value
+                      )
+                    }
                     defaultValue={step.step_title}
                     sx={{
                       width: "80%",
@@ -203,13 +218,19 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                     Description:
                   </label>
                   <TextField
-                    id={`step-description-${index}`}
-                    name={`step-description-${index}`}
+                    id="step_description"
+                    name="step_description"
                     multiline={true}
                     maxRows={4}
                     placeholder="Learning description... ex: I will start by learning the fundamentals of NodeJS and then dive deep to become a professional NodeJS developer !"
                     variant="outlined"
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      handleStepInputChange(
+                        step.id,
+                        e.target.id,
+                        e.target.value
+                      )
+                    }
                     defaultValue={step.step_description}
                     sx={{
                       width: "80%",
@@ -256,7 +277,13 @@ const ViewPlan = ({ open, handleClose, plan }) => {
         </div>
 
         <div className="flex justify-end gap-2">
-          <button className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-700 rounded-self">
+          <button
+            onClick={() => {
+              updatePlan(learningPlan.id, learningPlan, steps);
+              handleClose();
+            }}
+            className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-700 rounded-self"
+          >
             Edit Learning Plan
           </button>
         </div>
