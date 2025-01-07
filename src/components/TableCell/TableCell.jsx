@@ -10,7 +10,7 @@ const TableCellStyled = ({
   bold,
 }) => {
   const width = start ? 300 : "auto";
-  const position = start ? "start" : end ? "end" : "center";
+  const position = start ? "start" : "center";
   return (
     <TableCell
       sx={{
