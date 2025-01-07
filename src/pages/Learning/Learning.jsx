@@ -161,7 +161,7 @@ const Learning = () => {
         </div>
 
         <div className="overflow-x-auto scroll-container custom-scrollbar">
-          <div className="flex gap-9 min-w-max">
+          <div className="flex mb-3 gap-9 min-w-max">
             {learningPlans.map((plan, index) => (
               <button
                 key={index}

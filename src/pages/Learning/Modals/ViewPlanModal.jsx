@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Modal, Box, IconButton, TextField, Divider } from "@mui/material";
 import "../../../css/colors.css";
+import "../../../css/base.css";
 import Completed from "../../../assets/completed.png";
 import Progress from "../../../assets/progress.png";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -72,6 +73,12 @@ const ViewPlan = ({ open, handleClose, plan }) => {
             <IoCloseCircleOutline className="text-navy" size={40} />
           </button>
         </div>
+        <div className="px-3 py-1 text-sm font-bold rounded-self bg-blue w-fit">
+          <p className="text-white">
+            +{steps.reduce((sum, step) => sum + (step.points || 0), 0)} points
+          </p>
+        </div>
+
         <div className="flex items-end justify-between mb-3">
           <div className="flex items-center justify-center gap-4">
             <h2 className="mb-1 text-3xl font-extrabold text-navy">
@@ -176,74 +183,80 @@ const ViewPlan = ({ open, handleClose, plan }) => {
               key={index}
               className="flex items-center pb-2 mt-1 mb-4 border-b "
             >
-              <div className="flex w-11/12 gap-10">
-                <div className="flex items-center justify-between w-1/3">
-                  <label
-                    htmlFor={`step-title-${index}`}
-                    className="text-2xl font-bold text-navy"
-                  >
-                    Title:
-                  </label>
-                  <TextField
-                    id="step_title"
-                    name="step_title"
-                    variant="outlined"
-                    placeholder="Learning title... ex: State NodeJS"
-                    onChange={(e) =>
-                      handleStepInputChange(
-                        step.id,
-                        e.target.id,
-                        e.target.value
-                      )
-                    }
-                    defaultValue={step.step_title}
-                    sx={{
-                      width: "80%",
-                      "& .MuiOutlinedInput-root": {
-                        fontFamily: "Open Sans",
-                        fontWeight: "700",
-                        borderRadius: 5,
-                      },
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#E5E5E5",
-                      },
-                    }}
-                  />
+              <div className="flex flex-col w-11/12">
+                <div className="px-3 py-1 text-sm font-bold rounded-self bg-blue w-fit">
+                  <p className="text-white">+{step.points} points</p>
                 </div>
-                <div className="flex items-center justify-between w-3/5">
-                  <label
-                    htmlFor={`step-description-${index}`}
-                    className="text-2xl font-bold text-navy"
-                  >
-                    Description:
-                  </label>
-                  <TextField
-                    id="step_description"
-                    name="step_description"
-                    multiline={true}
-                    maxRows={4}
-                    placeholder="Learning description... ex: I will start by learning the fundamentals of NodeJS and then dive deep to become a professional NodeJS developer !"
-                    variant="outlined"
-                    onChange={(e) =>
-                      handleStepInputChange(
-                        step.id,
-                        e.target.id,
-                        e.target.value
-                      )
-                    }
-                    defaultValue={step.step_description}
-                    sx={{
-                      width: "80%",
-                      "& .MuiOutlinedInput-root": {
-                        fontFamily: "Open Sans",
-                        fontWeight: "700",
-                        borderRadius: 5,
-                      },
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#E5E5E5",
-                      },
-                    }}
-                  />
+
+                <div className="flex w-11/12 gap-10">
+                  <div className="flex items-center justify-between w-1/3">
+                    <label
+                      htmlFor={`step-title-${index}`}
+                      className="text-2xl font-bold text-navy"
+                    >
+                      Title:
+                    </label>
+                    <TextField
+                      id="step_title"
+                      name="step_title"
+                      variant="outlined"
+                      placeholder="Learning title... ex: State NodeJS"
+                      onChange={(e) =>
+                        handleStepInputChange(
+                          step.id,
+                          e.target.id,
+                          e.target.value
+                        )
+                      }
+                      defaultValue={step.step_title}
+                      sx={{
+                        width: "80%",
+                        "& .MuiOutlinedInput-root": {
+                          fontFamily: "Open Sans",
+                          fontWeight: "700",
+                          borderRadius: 5,
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#E5E5E5",
+                        },
+                      }}
+                    />
+                  </div>
+                  <div className="flex items-center justify-between w-3/5">
+                    <label
+                      htmlFor={`step-description-${index}`}
+                      className="text-2xl font-bold text-navy"
+                    >
+                      Description:
+                    </label>
+                    <TextField
+                      id="step_description"
+                      name="step_description"
+                      multiline={true}
+                      maxRows={4}
+                      placeholder="Learning description... ex: I will start by learning the fundamentals of NodeJS and then dive deep to become a professional NodeJS developer !"
+                      variant="outlined"
+                      onChange={(e) =>
+                        handleStepInputChange(
+                          step.id,
+                          e.target.id,
+                          e.target.value
+                        )
+                      }
+                      defaultValue={step.step_description}
+                      sx={{
+                        width: "80%",
+                        "& .MuiOutlinedInput-root": {
+                          fontFamily: "Open Sans",
+                          fontWeight: "700",
+                          borderRadius: 5,
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#E5E5E5",
+                        },
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col">
