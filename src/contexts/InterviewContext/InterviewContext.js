@@ -86,6 +86,7 @@ const InterviewProvider = ({ children }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log(response);
+      fetchInvitations(token);
     } catch (error) {
       console.log(`Error updating interview with id ${interviewId}:`, error);
     }

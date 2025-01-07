@@ -17,7 +17,8 @@ import moment from "moment";
 const Interview = () => {
   const [text, setText] = useState("");
   const { user } = useContext(authContext);
-  const { userInterviews, interviewInvitations } = useContext(interviewContext);
+  const { userInterviews, interviewInvitations, updateStatus } =
+    useContext(interviewContext);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -204,19 +205,29 @@ const Interview = () => {
                         <TableCellStyled dark end>
                           {invitation.status === "PENDING" ? (
                             <div className="flex items-center justify-center gap-2">
-                              <button className="px-6 py-2 text-base font-bold text-white transition bg-red-400 hover:bg-red-600 rounded-self">
+                              <button
+                                onClick={() =>
+                                  updateStatus(invitation.id, "REJECTED")
+                                }
+                                className="px-6 py-2 text-base font-bold text-white transition bg-red-400 hover:bg-red-600 rounded-self"
+                              >
                                 Reject
                               </button>
-                              <button className="px-6 py-2 text-base font-bold text-white transition bg-green-400 hover:bg-green-600 rounded-self">
+                              <button
+                                onClick={() =>
+                                  updateStatus(invitation.id, "ACCEPTED")
+                                }
+                                className="px-6 py-2 text-base font-bold text-white transition bg-green-400 hover:bg-green-600 rounded-self"
+                              >
                                 Accept
                               </button>
                             </div>
                           ) : invitation.status === "ACCEPTED" ? (
-                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-green-400 hover:bg-green-600 rounded-self">
+                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-green-400 rounded-self">
                               Accepted
                             </div>
                           ) : (
-                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-red-400 hover:bg-red-600 rounded-self">
+                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-red-400 rounded-self">
                               Rejected
                             </div>
                           )}
@@ -255,9 +266,19 @@ const Interview = () => {
                           </div>
                         </TableCellStyled>
                         <TableCellStyled dark end>
-                          <div className="px-6 py-2 text-base font-bold text-center text-yellow-300 transition">
-                            Pending
-                          </div>
+                          {invitation.status === "PENDING" ? (
+                            <div className="px-6 py-2 text-base font-bold text-center text-yellow-300 transition">
+                              Pending
+                            </div>
+                          ) : invitation.status === "ACCEPTED" ? (
+                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-green-400 rounded-self">
+                              Accepted
+                            </div>
+                          ) : (
+                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-red-400 rounded-self">
+                              Rejected
+                            </div>
+                          )}
                         </TableCellStyled>
                       </TableRow>
                     )
