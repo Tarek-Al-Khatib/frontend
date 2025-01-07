@@ -53,6 +53,7 @@ const Communities = () => {
 
   useEffect(() => {
     setModeratorsData(members.filter((m) => m.role === "MODERATOR"));
+    console.log(members);
   }, [members]);
 
   useEffect(() => {
@@ -235,9 +236,12 @@ const Communities = () => {
                     {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
                     Channels
                   </button>
-                  {(user &&
+                  {(user && members.filter((m) => m.user_id === user.id) ? (
+                    <div> </div>
+                  ) : (
                     members.filter((m) => m.user_id === user.id)[0].role ===
-                      "MODERATOR") ||
+                    "MODERATOR"
+                  )) ||
                   members.filter((m) => m.user_id === user.id)[0].role ===
                     "ADMIN" ? (
                     <button onClick={handleChannelModalToggle}>
