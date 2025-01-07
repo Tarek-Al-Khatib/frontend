@@ -33,34 +33,34 @@ const Interview = () => {
     <div>
       <Navbar />
       <ViewFeedback open={open} handleClose={handleClose} text={text} />
-      <div class="p-8 min-h-screen">
+      <div className="min-h-screen p-8">
         <h1 className="pb-5 text-2xl font-thin text-navy">My Interviews</h1>
 
         <div className="flex">
-          <div class="bg-gradient-to-r from-[#b0e9ff] to-[#0594b4] rounded-l-lg w-full flex flex-col items-start justify-center p-6 pl-32 gap-4">
-            <h1 class="text-navy text-4xl font-extrabold">
+          <div className="bg-gradient-to-r from-[#b0e9ff] to-[#0594b4] rounded-l-lg w-full flex flex-col items-start justify-center p-6 pl-32 gap-4">
+            <h1 className="text-4xl font-extrabold text-navy">
               Practicing interviews?
             </h1>
-            <p class="text-navy text-2xl font-normal">
+            <p className="text-2xl font-normal text-navy">
               Try out our new advanced{" "}
               <span className="font-extrabold">AI feature!</span>
             </p>
-            <p class="text-navy text-2xl font-normal">
+            <p className="text-2xl font-normal text-navy">
               Start your mock interview with our{" "}
               <span className="font-extrabold">AI model.</span>
             </p>
-            <p class="text-navy text-2xl font-normal">
+            <p className="text-2xl font-normal text-navy">
               Just like a normal one!
               <span className="font-extrabold"> TRY IT NOW</span>
             </p>
             <div className="pl-16">
-              <button class="bg-[#1e25a5] text-white text-xl font-bold px-6 py-3 rounded-md">
+              <button className="bg-[#1e25a5] text-white text-xl font-bold px-6 py-3 rounded-md">
                 Start Mock Interview
               </button>
             </div>
           </div>
           <img
-            class="w-full h-auto rounded-r-lg max-h-[350px] object-cover"
+            className="w-full h-auto rounded-r-lg max-h-[350px] object-cover"
             src="https://miro.medium.com/v2/resize:fit:1000/1*ycwawTXjHk1-yuDuugyT5g.jpeg"
             alt="AI Recruitment"
           />
@@ -175,7 +175,7 @@ const Interview = () => {
                         <TableCellStyled dark start={true}>
                           <div className="flex items-center gap-3">
                             <div className="flex items-center gap-1">
-                              <div class="w-9 h-9 rounded-full">
+                              <div className="rounded-full w-9 h-9">
                                 <img
                                   src={invitation.user.profile_pic}
                                   alt={`${invitation.user.profile_pic} profile pic`}
@@ -238,7 +238,7 @@ const Interview = () => {
                         <TableCellStyled dark start={true}>
                           <div className="flex items-center gap-3">
                             <div className="flex items-center gap-1">
-                              <div class="w-9 h-9 rounded-full">
+                              <div className="rounded-full w-9 h-9">
                                 <img
                                   src={invitation.user.profile_pic}
                                   alt={`${invitation.user.profile_pic} profile pic`}
