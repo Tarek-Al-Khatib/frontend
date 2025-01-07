@@ -285,19 +285,29 @@ const Communities = () => {
                     )}
                     Moderators
                   </button>
-                  <div className="space-y-3">
-                    {moderatorsData.map((moderator, index) => (
-                      <button
-                        key={index}
-                        className="flex items-center space-x-3"
-                      >
-                        <div className="w-6 h-6 bg-white rounded"></div>
-                        <div className="text-sm font-thin text-white">
-                          {moderator.name}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
+                  {flipModerators && (
+                    <div className="space-y-3">
+                      {moderatorsData.map((moderator, index) => (
+                        <button
+                          key={index}
+                          className="flex items-center space-x-3"
+                        >
+                          <div className="w-6 h-6 bg-white rounded-full">
+                            {moderator.user && moderator.user.profile_pic && (
+                              <img
+                                src={moderator.user.profile_pic}
+                                alt={`${moderator.user.profile_pic} profile pic`}
+                                className="object-cover w-full h-full rounded-full"
+                              />
+                            )}
+                          </div>
+                          <div className="text-sm font-thin text-white">
+                            {moderator.user.username}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
