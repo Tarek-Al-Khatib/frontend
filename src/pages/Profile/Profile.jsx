@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -18,6 +18,11 @@ import { generalContext } from "../../contexts/GeneralContext/GeneralContext";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
 
 const Profile = () => {
+  const [profileImage, setProfileImage] = useState(null);
+  const handleFileChange = (e) => {
+    const { files } = e.target;
+    setProfileImage(files[0]);
+  };
   const { communities } = useContext(communityContext);
   const { learningPlans, calculateProgress } = useContext(learningContext);
   const { leaderboardData } = useContext(generalContext);
@@ -34,7 +39,7 @@ const Profile = () => {
             <div className="flex flex-col justify-between gap-8">
               <div class="flex gap-5 justify-between w-[650px] border rounded-2xl border-gray-200 bg-white p-6 h-fit">
                 <div class="w-32 h-32 rounded-full flex justify-center items-center">
-                  <div>
+                  <div className="relative">
                     {user && user.profile_pic && (
                       <img
                         src={user.profile_pic}
@@ -42,6 +47,18 @@ const Profile = () => {
                         className="object-cover w-full h-full rounded-full"
                       />
                     )}
+                    <label
+                      htmlFor="image_input"
+                      className="absolute top-0 w-32 h-32 rounded-full cursor-pointer"
+                    ></label>
+                    <input
+                      id="image_input"
+                      type="file"
+                      name="image_input"
+                      accept="image/*"
+                      className="absolute hidden top-2/4 left-1/2"
+                      onChange={handleFileChange}
+                    />
                   </div>
                 </div>
 
