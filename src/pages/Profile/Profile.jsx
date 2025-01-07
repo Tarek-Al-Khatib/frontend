@@ -183,7 +183,15 @@ const Profile = () => {
                             <div className="flex items-center gap-3">
                               {userData.rank + 1} {". "}
                               <div className="flex items-center gap-1">
-                                <div className="w-9 h-9 bg-[#1e25a6] rounded-full"></div>{" "}
+                                <div className="rounded-full w-9 h-9">
+                                  {user && user.profile_pic && (
+                                    <img
+                                      src={user.profile_pic}
+                                      alt={`${user.profile_pic} profile pic`}
+                                      className="object-cover w-full h-full rounded-full"
+                                    />
+                                  )}
+                                </div>
                                 {userData.username}
                               </div>
                             </div>
