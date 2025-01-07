@@ -235,9 +235,17 @@ const Communities = () => {
                     {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
                     Channels
                   </button>
-                  <button onClick={handleChannelModalToggle}>
-                    <IoMdAdd size={25} />
-                  </button>
+                  {(user &&
+                    members.filter((m) => m.user_id === user.id)[0].role ===
+                      "MODERATOR") ||
+                  members.filter((m) => m.user_id === user.id)[0].role ===
+                    "ADMIN" ? (
+                    <button onClick={handleChannelModalToggle}>
+                      <IoMdAdd size={25} />
+                    </button>
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
                 {flipChannel && (
                   <div className="flex flex-col">
