@@ -99,6 +99,22 @@ const GeneralProvider = ({ children }) => {
     }
   };
 
+  const updateImage = async (profileImage) => {
+    try {
+      const response = await axios.put(
+        `${serverUrl}/api/user/image`,
+        { profile_image: profileImage },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.log("Error fetching the leaderboard: ", error);
+    }
+  };
+
   return (
     <generalContext.Provider
       value={{
@@ -107,6 +123,7 @@ const GeneralProvider = ({ children }) => {
         markAsReadNotifications,
         chartData,
         leaderboardData,
+        updateImage,
       }}
     >
       {children}
