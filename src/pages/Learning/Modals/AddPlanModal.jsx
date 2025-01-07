@@ -1,17 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  Modal,
-  Box,
-  Button,
-  IconButton,
-  TextField,
-  Divider,
-} from "@mui/material";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Modal, Box, IconButton, TextField, Divider } from "@mui/material";
 import "../../../css/colors.css";
+import { learningContext } from "../../../contexts/LearningContext/LearningContext.js";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { IoCloseCircleOutline } from "react-icons/io5";
 const AddPlan = ({ open, handleClose }) => {
+  const { addPlan } = useContext(learningContext);
   const [learningPlan, setLearningPlan] = useState({
     title: "",
     description: "",
@@ -19,8 +14,8 @@ const AddPlan = ({ open, handleClose }) => {
 
   const [steps, setSteps] = useState([
     {
-      title: "",
-      description: "",
+      step_title: "",
+      step_description: "",
     },
   ]);
 
@@ -89,7 +84,7 @@ const AddPlan = ({ open, handleClose }) => {
               Title:
             </label>
             <TextField
-              id="plan-title"
+              id="title"
               name="plan-title"
               variant="outlined"
               placeholder="Learning title... ex: State NodeJS"
@@ -109,13 +104,13 @@ const AddPlan = ({ open, handleClose }) => {
           </div>
           <div className="flex items-center justify-between w-1/2">
             <label
-              htmlFor="plan-title"
+              htmlFor="plan-description"
               className="text-2xl font-bold text-navy"
             >
               Description:
             </label>
             <TextField
-              id="plan-description"
+              id="description"
               name="plan-description"
               multiline={true}
               maxRows={4}
@@ -172,8 +167,8 @@ const AddPlan = ({ open, handleClose }) => {
                     Title:
                   </label>
                   <TextField
-                    id="plan-title"
-                    name="plan-title"
+                    id="step_title"
+                    name={`step-title-${index}`}
                     variant="outlined"
                     placeholder="Learning title... ex: State NodeJS"
                     onChange={handleInputChange}
@@ -198,7 +193,7 @@ const AddPlan = ({ open, handleClose }) => {
                     Description:
                   </label>
                   <TextField
-                    id={`step-description-${index}`}
+                    id="step_description"
                     name={`step-description-${index}`}
                     multiline={true}
                     maxRows={4}
@@ -234,7 +229,10 @@ const AddPlan = ({ open, handleClose }) => {
         </div>
 
         <div className="flex justify-end gap-2">
-          <button className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-700 rounded-self">
+          <button
+            onClick={() => addPlan(learningPlan, steps)}
+            className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-700 rounded-self"
+          >
             Create Learning Plan
           </button>
         </div>
