@@ -5,7 +5,6 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Completed from "../../assets/completed.png";
 import Progress from "../../assets/progress.png";
-import { PiTreeStructureBold } from "react-icons/pi";
 import { Divider } from "@mui/material";
 import { learningContext } from "../../contexts/LearningContext/LearningContext";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
@@ -14,6 +13,7 @@ import { GiProgression } from "react-icons/gi";
 import { GoTasklist } from "react-icons/go";
 import capitalize from "capitalize";
 import AddPlan from "./Modals/AddPlanModal";
+import ViewPlan from "./Modals/ViewPlanModal";
 
 const Learning = () => {
   const {
@@ -27,9 +27,20 @@ const Learning = () => {
   } = useContext(learningContext);
   const { user } = useContext(authContext);
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openViewModal, setOpenViewModal] = useState(false);
+  const [planView, setPlanView] = useState(null);
 
   const handleAddModalClose = () => {
     setOpenAddModal(false);
+  };
+
+  const handleViewModalClose = () => {
+    setOpenViewModal(false);
+    setPlanView({
+      title: "",
+      description: "",
+      steps: [{ title: "", description: "" }],
+    });
   };
   const renderPlanSteps = (steps) =>
     steps.map((step, index) => (
@@ -40,7 +51,7 @@ const Learning = () => {
           alt="Step Icon"
         />
         <div>
-          <div className="text-base font-normal text-navy">
+          <div className="text-base font-normal text-start text-navy">
             {step.step_title}
           </div>
           <Divider
@@ -56,7 +67,7 @@ const Learning = () => {
               fontSize: 20,
             }}
           ></Divider>
-          <div className="text-2xl font-normal text-navy">
+          <div className="text-2xl font-normal text-start text-navy">
             {step.step_description}
           </div>
         </div>
@@ -80,6 +91,11 @@ const Learning = () => {
     <div>
       <Navbar />
       <AddPlan open={openAddModal} handleClose={handleAddModalClose} />
+      <ViewPlan
+        open={openViewModal}
+        handleClose={handleViewModalClose}
+        plan={planView}
+      />
       <div className="min-h-screen p-8 bg-white">
         <div className="flex justify-center">
           <div className="w-1/4">
@@ -153,9 +169,13 @@ const Learning = () => {
         <div className="overflow-x-auto scroll-container custom-scrollbar">
           <div className="flex gap-9 min-w-max">
             {learningPlans.map((plan, index) => (
-              <div
+              <button
                 key={index}
                 className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]"
+                onClick={() => {
+                  setPlanView(plan);
+                  setOpenViewModal(true);
+                }}
               >
                 <div className="flex gap-6">
                   <div>
@@ -175,13 +195,13 @@ const Learning = () => {
                 </div>
 
                 <div className="relative p-4 bg-white ">
-                  <div className="space-y-4 h-[400px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
+                  <div className="space-y-4 h-[400px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal py-6">
                     {renderPlanSteps(plan.steps)}
                   </div>
                   <div className="absolute top-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-b from-white via-white/70 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-t from-white via-white/70 to-transparent"></div>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
