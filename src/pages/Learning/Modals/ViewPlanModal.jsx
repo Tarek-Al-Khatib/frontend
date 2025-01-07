@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Modal, Box, IconButton, TextField, Divider } from "@mui/material";
 import "../../../css/colors.css";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { IoIosRemoveCircleOutline } from "react-icons/io";
+import Completed from "../../../assets/completed.png";
+import Progress from "../../../assets/progress.png";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import CircularProgressWithLabel from "../../../components/CircularProgressWithLabel/CircularProgressWithLabel";
 import { learningContext } from "../../../contexts/LearningContext/LearningContext";
 const ViewPlan = ({ open, handleClose, plan }) => {
-  const { calculateProgress, markPlanAsDone } = useContext(learningContext);
+  const { calculateProgress, markPlanAsDone, markStepAsDone } =
+    useContext(learningContext);
   const [learningPlan, setLearningPlan] = useState({
     id: 0,
     title: "",
@@ -44,16 +45,6 @@ const ViewPlan = ({ open, handleClose, plan }) => {
         container.scrollTop = container.scrollHeight;
       }
     }
-  };
-
-  const addStep = () => {
-    setSteps([...steps, { title: "", description: "" }]);
-  };
-
-  const removeStep = (index) => {
-    console.log(index);
-    const updatedSteps = steps.filter((_, i) => i !== index);
-    setSteps(updatedSteps);
   };
 
   return (
@@ -167,15 +158,6 @@ const ViewPlan = ({ open, handleClose, plan }) => {
             marginBottom: 2,
           }}
         ></Divider>
-        <div className="flex items-center gap-5 mb-4">
-          <button onClick={addStep}>
-            {" "}
-            <IoIosAddCircleOutline className="text-navy" size={40} />
-          </button>
-          <button className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-800 rounded-self">
-            Enhance with AI
-          </button>
-        </div>
         <div
           className="overflow-y-auto custom-scrollbar h-[300px] mb-5 scroll-smooth"
           ref={stepsContainerRef}
@@ -243,16 +225,32 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                   />
                 </div>
               </div>
-              <IconButton
-                color="error"
-                onClick={() => removeStep(index)}
-                disabled={steps.length === 1}
-              >
-                <IoIosRemoveCircleOutline
-                  size={40}
-                  className={steps.length === 1 ? "text-gray-400" : "text-navy"}
-                />
-              </IconButton>
+              <div className="flex flex-col">
+                <IconButton
+                  onClick={() => {
+                    if (steps.length === 1) {
+                      markPlanAsDone(learningPlan.id);
+                      handleClose();
+                    } else {
+                      markStepAsDone(step.id);
+                      setSteps((prevSteps) =>
+                        prevSteps.map((st) =>
+                          st.id === step.id ? { ...st, is_completed: true } : st
+                        )
+                      );
+                    }
+                  }}
+                >
+                  <img
+                    className="w-14 h-14"
+                    src={step.is_completed ? Completed : Progress}
+                    alt="Step Icon"
+                  />
+                </IconButton>
+                <p className="">
+                  {step.is_completed ? "Completed" : "In Progress"}
+                </p>
+              </div>
             </div>
           ))}
         </div>

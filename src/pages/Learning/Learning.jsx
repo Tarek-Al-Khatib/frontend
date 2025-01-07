@@ -16,7 +16,8 @@ import AddPlan from "./Modals/AddPlanModal";
 import ViewPlan from "./Modals/ViewPlanModal";
 
 const Learning = () => {
-  const { learningPlans, calculateProgress } = useContext(learningContext);
+  const { learningPlans, calculateProgress, fetchPlans } =
+    useContext(learningContext);
   const { user } = useContext(authContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openViewModal, setOpenViewModal] = useState(false);
@@ -33,6 +34,7 @@ const Learning = () => {
       description: "",
       steps: [{ title: "", description: "" }],
     });
+    fetchPlans();
   };
   const renderPlanSteps = (steps) =>
     steps.map((step, index) => (

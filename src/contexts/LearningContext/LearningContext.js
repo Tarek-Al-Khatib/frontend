@@ -104,8 +104,6 @@ const LearningProvider = ({ children }) => {
           },
         }
       );
-
-      fetchPlans();
     } catch (error) {
       console.error("Error marking plan as done:", error);
     }
@@ -122,8 +120,6 @@ const LearningProvider = ({ children }) => {
           },
         }
       );
-
-      fetchPlans();
     } catch (error) {
       console.error("Error marking step as done:", error);
     }
