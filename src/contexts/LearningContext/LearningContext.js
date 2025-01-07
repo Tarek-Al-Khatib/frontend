@@ -18,7 +18,6 @@ const LearningProvider = ({ children }) => {
 
   const calculateProgress = (plan) => {
     if (!plan || !plan.steps) {
-      console.error("Invalid plan data.");
       return 0;
     }
 
@@ -41,12 +40,13 @@ const LearningProvider = ({ children }) => {
 
   const fetchPlans = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/learning/${user.id}`, {
+      const response = await axios.get(`${serverUrl}/api/learning`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setLearningPlans(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching plans:", error);
     }
@@ -55,7 +55,7 @@ const LearningProvider = ({ children }) => {
   const addPlan = async (planData, steps) => {
     try {
       const response = await axios.post(
-        `${serverUrl}/api/learning/${user.id}`,
+        `${serverUrl}/api/learning`,
         { planData, steps },
         {
           headers: {
@@ -104,13 +104,8 @@ const LearningProvider = ({ children }) => {
           },
         }
       );
-      const updatedPlan = response.data.plan;
 
-      setLearningPlans((prevPlans) =>
-        prevPlans.map((plan) =>
-          plan.id === planId ? { ...plan, ...updatedPlan } : plan
-        )
-      );
+      fetchPlans();
     } catch (error) {
       console.error("Error marking plan as done:", error);
     }
@@ -127,16 +122,8 @@ const LearningProvider = ({ children }) => {
           },
         }
       );
-      const updatedStep = response.data.step;
 
-      setLearningPlans((prevPlans) =>
-        prevPlans.map((plan) => ({
-          ...plan,
-          steps: plan.steps.map((step) =>
-            step.id === stepId ? { ...step, ...updatedStep } : step
-          ),
-        }))
-      );
+      fetchPlans();
     } catch (error) {
       console.error("Error marking step as done:", error);
     }

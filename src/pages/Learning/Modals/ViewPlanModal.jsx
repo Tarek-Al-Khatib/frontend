@@ -84,7 +84,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
           </div>
           <button
             onClick={() => {
-              markPlanAsDone(plan);
+              markPlanAsDone(learningPlan.id);
               handleClose();
             }}
             className="px-8 py-2 text-xs font-bold transition text-cyan bg-navy rounded- hover:bg-blue-800 rounded-self"

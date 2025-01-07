@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "../../css/custom-scroll.css";
 import CircularWithValueLabel from "../../components/CircularProgressWithLabel/CircularProgressWithLabel";
 import Navbar from "../../components/Navbar/Navbar";
@@ -8,7 +8,7 @@ import Progress from "../../assets/progress.png";
 import { Divider } from "@mui/material";
 import { learningContext } from "../../contexts/LearningContext/LearningContext";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
-import { MdAddTask, MdDoneOutline } from "react-icons/md";
+import { MdDoneOutline } from "react-icons/md";
 import { GiProgression } from "react-icons/gi";
 import { GoTasklist } from "react-icons/go";
 import capitalize from "capitalize";
@@ -16,15 +16,7 @@ import AddPlan from "./Modals/AddPlanModal";
 import ViewPlan from "./Modals/ViewPlanModal";
 
 const Learning = () => {
-  const {
-    learningPlans,
-    fetchPlans,
-    addPlan,
-    updatePlan,
-    markPlanAsDone,
-    markStepAsDone,
-    calculateProgress,
-  } = useContext(learningContext);
+  const { learningPlans, calculateProgress } = useContext(learningContext);
   const { user } = useContext(authContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openViewModal, setOpenViewModal] = useState(false);
