@@ -50,7 +50,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
 
   const scrollToBottom = () => {
     if (stepsContainerRef) {
-      if (steps.length > 4) {
+      if (steps.length > 3) {
         const container = stepsContainerRef.current;
         container.scrollTop = container.scrollHeight;
       }

@@ -16,8 +16,7 @@ import AddPlan from "./Modals/AddPlanModal";
 import ViewPlan from "./Modals/ViewPlanModal";
 
 const Learning = () => {
-  const { learningPlans, calculateProgress, fetchPlans } =
-    useContext(learningContext);
+  const { learningPlans, calculateProgress } = useContext(learningContext);
   const { user } = useContext(authContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openViewModal, setOpenViewModal] = useState(false);
@@ -34,7 +33,6 @@ const Learning = () => {
       description: "",
       steps: [{ title: "", description: "" }],
     });
-    fetchPlans();
   };
   const renderPlanSteps = (steps) =>
     steps.map((step, index) => (
@@ -161,11 +159,11 @@ const Learning = () => {
         </div>
 
         <div className="overflow-x-auto scroll-container custom-scrollbar">
-          <div className="flex mb-3 gap-9 min-w-max">
+          <div className="flex items-start mb-3 gap-9 min-w-max">
             {learningPlans.map((plan, index) => (
               <button
                 key={index}
-                className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px]"
+                className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-2xl"
                 onClick={() => {
                   setPlanView(plan);
                   setOpenViewModal(true);
@@ -173,10 +171,10 @@ const Learning = () => {
               >
                 <div className="flex gap-6">
                   <div>
-                    <div className="mb-4 text-2xl font-bold text-navy">
+                    <div className="w-3/4 mb-4 text-2xl font-bold text-start text-navy">
                       {plan.title}
                     </div>
-                    <div className="mb-6 text-xl font-normal text-navy">
+                    <div className="w-3/4 mb-6 text-xl font-normal text-start text-navy">
                       {plan.description}
                     </div>
                   </div>

@@ -63,8 +63,8 @@ const LearningProvider = ({ children }) => {
           },
         }
       );
-      const newPlan = response.data.plan;
-      setLearningPlans((prevPlans) => [...prevPlans, newPlan]);
+      console.log(response.data);
+      fetchPlans();
     } catch (error) {
       console.error("Error adding plan:", error);
     }
@@ -82,13 +82,8 @@ const LearningProvider = ({ children }) => {
         }
       );
       console.log(response);
-      const updatedPlan = response.data.plan;
 
-      setLearningPlans((prevPlans) =>
-        prevPlans.map((plan) =>
-          plan.id === planId ? { ...plan, ...updatedPlan } : plan
-        )
-      );
+      fetchPlans();
     } catch (error) {
       console.error("Error updating plan:", error);
     }
@@ -105,6 +100,8 @@ const LearningProvider = ({ children }) => {
           },
         }
       );
+      console.log(response);
+      fetchPlans();
     } catch (error) {
       console.error("Error marking plan as done:", error);
     }
@@ -121,6 +118,8 @@ const LearningProvider = ({ children }) => {
           },
         }
       );
+      console.log(response);
+      fetchPlans();
     } catch (error) {
       console.error("Error marking step as done:", error);
     }
