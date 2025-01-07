@@ -203,7 +203,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                       placeholder="Learning title... ex: State NodeJS"
                       onChange={(e) =>
                         handleStepInputChange(
-                          step.id,
+                          index,
                           e.target.id,
                           e.target.value
                         )
@@ -238,7 +238,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                       variant="outlined"
                       onChange={(e) =>
                         handleStepInputChange(
-                          step.id,
+                          index,
                           e.target.id,
                           e.target.value
                         )

@@ -25,10 +25,20 @@ const AddPlan = ({ open, handleClose }) => {
     scrollToBottom();
   }, [steps]);
 
-  const handleInputChange = (field, value) => {
-    setLearningPlan({ ...learningPlan, [field]: value });
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    console.log(id, value);
+    setLearningPlan({ ...learningPlan, [id]: value });
   };
 
+  const handleStepInputChange = (index, id, value) => {
+    console.log(id, value);
+    setSteps((prevSteps) =>
+      prevSteps.map((step, i) =>
+        i === index ? { ...step, [id]: value } : step
+      )
+    );
+  };
   const scrollToBottom = () => {
     if (stepsContainerRef) {
       if (steps.length > 4) {
@@ -39,7 +49,7 @@ const AddPlan = ({ open, handleClose }) => {
   };
 
   const addStep = () => {
-    setSteps([...steps, { title: "", description: "" }]);
+    setSteps([...steps, { step_title: "", step_description: "" }]);
   };
 
   const removeStep = (index) => {
@@ -171,7 +181,9 @@ const AddPlan = ({ open, handleClose }) => {
                     name={`step-title-${index}`}
                     variant="outlined"
                     placeholder="Learning title... ex: State NodeJS"
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      handleStepInputChange(index, e.target.id, e.target.value)
+                    }
                     sx={{
                       width: "80%",
                       "& .MuiOutlinedInput-root": {
@@ -199,7 +211,9 @@ const AddPlan = ({ open, handleClose }) => {
                     maxRows={4}
                     placeholder="Learning description... ex: I will start by learning the fundamentals of NodeJS and then dive deep to become a professional NodeJS developer !"
                     variant="outlined"
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      handleStepInputChange(index, e.target.id, e.target.value)
+                    }
                     sx={{
                       width: "80%",
                       "& .MuiOutlinedInput-root": {

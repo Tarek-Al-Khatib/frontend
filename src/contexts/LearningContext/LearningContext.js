@@ -54,16 +54,17 @@ const LearningProvider = ({ children }) => {
 
   const addPlan = async (planData, steps) => {
     try {
+      console.log(steps);
       const response = await axios.post(
         `${serverUrl}/api/learning`,
-        { planData, steps },
+        { planData: planData, steps: steps },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log(response.data);
+      console.log(response);
       fetchPlans();
     } catch (error) {
       console.error("Error adding plan:", error);
