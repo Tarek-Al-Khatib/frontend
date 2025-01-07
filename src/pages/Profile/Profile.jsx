@@ -40,13 +40,23 @@ const Profile = () => {
               <div class="flex gap-5 justify-between w-[650px] border rounded-2xl border-gray-200 bg-white p-6 h-fit">
                 <div class="w-32 h-32 rounded-full flex justify-center items-center">
                   <div className="relative">
-                    {user && user.profile_pic && (
+                    {profileImage ? (
                       <img
-                        src={user.profile_pic}
-                        alt={`${user.profile_pic} profile pic`}
-                        className="object-cover w-full h-full rounded-full"
+                        src={URL.createObjectURL(profileImage)}
+                        alt={`${profileImage.name} profile pic`}
+                        className="object-cover w-32 h-32 rounded-full"
                       />
+                    ) : (
+                      user &&
+                      user.profile_pic && (
+                        <img
+                          src={user.profile_pic}
+                          alt={`${user.profile_pic} profile pic`}
+                          className="object-cover w-32 h-32 rounded-full"
+                        />
+                      )
                     )}
+
                     <label
                       htmlFor="image_input"
                       className="absolute top-0 w-32 h-32 rounded-full cursor-pointer"
