@@ -202,14 +202,26 @@ const Interview = () => {
                           </div>
                         </TableCellStyled>
                         <TableCellStyled dark end>
-                          <div className="flex items-center justify-center gap-4">
-                            <button className="px-6 py-2 text-base font-bold text-white transition bg-red-400 hover:bg-red-600 rounded-self">
-                              Reject
-                            </button>
-                            <button className="px-6 py-2 text-base font-bold text-white transition bg-green-400 hover:bg-green-600 rounded-self">
-                              Accept
-                            </button>
-                          </div>
+                          {invitation.status === "PENDING" ? (
+                            invitation.status === "ACCEPTED" ? (
+                              <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-green-400 hover:bg-green-600 rounded-self">
+                                Accepted
+                              </div>
+                            ) : (
+                              <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-red-400 hover:bg-red-600 rounded-self">
+                                Rejected
+                              </div>
+                            )
+                          ) : (
+                            <div className="flex items-center justify-center gap-4">
+                              <button className="px-6 py-2 text-base font-bold text-white transition bg-red-400 hover:bg-red-600 rounded-self">
+                                Reject
+                              </button>
+                              <button className="px-6 py-2 text-base font-bold text-white transition bg-green-400 hover:bg-green-600 rounded-self">
+                                Accept
+                              </button>
+                            </div>
+                          )}
                         </TableCellStyled>
                       </TableRow>
                     ) : (
