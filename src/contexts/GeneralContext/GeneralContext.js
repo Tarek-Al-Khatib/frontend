@@ -9,14 +9,13 @@ export const generalContext = createContext();
 
 const GeneralProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState(null);
   const [leaderboardData, setLeaderboardData] = useState([]);
   const { token } = useContext(authContext);
 
   useEffect(() => {
     if (token) {
       fetchNotifications(token);
-      fetchStepsLastWeek(token);
       fetchStepsLastWeek(token);
       fetchLeaderboard(token);
     }

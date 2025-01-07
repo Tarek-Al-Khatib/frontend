@@ -11,12 +11,14 @@ import { dashboardContext } from "../../contexts/DashboardContext/DashboardConte
 import { LineChart } from "@mui/x-charts";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
 import capitalize from "capitalize";
+import { generalContext } from "../../contexts/GeneralContext/GeneralContext";
 const Dashboard = () => {
   const { quote } = useContext(dashboardContext);
   const { user } = useContext(authContext);
   const navigation = useNavigate();
   const [topLearningPicks, setTopLearningPicks] = useState([]);
   const [topCommunities, setTopCommunities] = useState([]);
+  const { chartData } = useContext(generalContext);
   const [dashboardButtons, setDashboardButtons] = useState([]);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ const Dashboard = () => {
         ],
       },
       {
-        id: 2,
+        id: 3,
         title: "Learn Data Science",
         category: "Data Science",
         imageUrl: "bg-green-500",
@@ -67,7 +69,12 @@ const Dashboard = () => {
         description: "Join us to know more about React!",
       },
       {
-        id: 2,
+        id: 4,
+        name: "Frontend Devs",
+        description: "A community for frontend enthusiasts.",
+      },
+      {
+        id: 3,
         name: "Frontend Devs",
         description: "A community for frontend enthusiasts.",
       },
@@ -77,17 +84,12 @@ const Dashboard = () => {
         description: "A community for frontend enthusiasts.",
       },
       {
-        id: 2,
+        id: 6,
         name: "Frontend Devs",
         description: "A community for frontend enthusiasts.",
       },
       {
-        id: 2,
-        name: "Frontend Devs",
-        description: "A community for frontend enthusiasts.",
-      },
-      {
-        id: 2,
+        id: 8,
         name: "Frontend Devs",
         description: "A community for frontend enthusiasts.",
       },
@@ -151,18 +153,15 @@ const Dashboard = () => {
         </div>
 
         <div className="flex items-center justify-center w-full p-8 py-0 border border-gray-300 mb-14 rounded-3xl">
-          <LineChart
-            xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-            series={[
-              {
-                data: [2, 5.5, 2, 8.5, 1.5, 5],
-                color: "#1e25a6",
-              },
-            ]}
-            width={1000}
-            height={600}
-            grid={{ vertical: true, horizontal: true }}
-          />
+          {chartData && (
+            <LineChart
+              xAxis={chartData.xAxis}
+              series={chartData.series}
+              width={1000}
+              height={600}
+              grid={{ vertical: true, horizontal: true }}
+            />
+          )}
 
           <div className="grid w-2/5 grid-cols-2 gap-7">
             {dashboardButtons.map((button) => (

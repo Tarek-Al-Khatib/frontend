@@ -144,7 +144,7 @@ const SignUp = () => {
                 className="w-full py-3 text-2xl font-extrabold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
                 onClick={handleSignup}
               >
-                Sign in
+                Sign Up
               </button>
               <p className="pt-8 text-sm text-center text-navy">
                 Already have an account?{" "}
