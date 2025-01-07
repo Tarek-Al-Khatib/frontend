@@ -23,9 +23,15 @@ const Profile = () => {
     const { files } = e.target;
     setProfileImage(files[0]);
   };
+
+  useEffect(() => {
+    if (profileImage) {
+      updateImage(profileImage);
+    }
+  }, [profileImage]);
   const { communities } = useContext(communityContext);
   const { learningPlans, calculateProgress } = useContext(learningContext);
-  const { leaderboardData } = useContext(generalContext);
+  const { leaderboardData, updateImage } = useContext(generalContext);
   const { user } = useContext(authContext);
   return (
     <div>
