@@ -217,10 +217,10 @@ const Profile = () => {
                               {userData.rank + 1} {". "}
                               <div className="flex items-center gap-1">
                                 <div className="rounded-full w-9 h-9">
-                                  {user && user.profile_pic && (
+                                  {user && userData.profile_pic && (
                                     <img
-                                      src={user.profile_pic}
-                                      alt={`${user.profile_pic} profile pic`}
+                                      src={userData.profile_pic}
+                                      alt={`${userData.profile_pic} profile pic`}
                                       className="object-cover w-full h-full rounded-full"
                                     />
                                   )}

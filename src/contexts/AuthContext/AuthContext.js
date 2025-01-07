@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
     if (userId && token) {
       console.log("getting the user");
       try {
-        const response = await axios.get(`${serverUrl}/api/user/${userId}`, {
+        const response = await axios.get(`${serverUrl}/api/user`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
