@@ -99,19 +99,25 @@ const GeneralProvider = ({ children }) => {
     }
   };
 
-  const updateImage = async (profileImage) => {
+  const updateImage = async (profileImageFile) => {
     try {
+      const formData = new FormData();
+      formData.append("profile_image", profileImageFile);
+
       const response = await axios.put(
         `${serverUrl}/api/user/image`,
-        { profile_image: profileImage },
+        formData,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
       console.log(response);
     } catch (error) {
-      console.log("Error fetching the leaderboard: ", error);
+      console.log("Error uploading the profile image: ", error);
     }
   };
 
