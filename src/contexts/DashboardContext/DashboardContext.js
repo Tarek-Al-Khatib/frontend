@@ -20,14 +20,11 @@ const DashboardProvider = ({ children }) => {
 
   const getQuote = async () => {
     try {
-      const response = await axios.get(
-        "https://api.api-ninjas.com/v1/quotes?category=success",
-        {
-          headers: {
-            "X-Api-Key": process.env.REACT_APP_NINJAS_API,
-          },
-        }
-      );
+      const response = await axios.get("https://api.api-ninjas.com/v1/quotes", {
+        headers: {
+          "X-Api-Key": process.env.REACT_APP_NINJAS_API,
+        },
+      });
 
       setQuote(response.data[0]);
     } catch (e) {
