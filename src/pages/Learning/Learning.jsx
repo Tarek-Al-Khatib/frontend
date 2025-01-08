@@ -159,22 +159,22 @@ const Learning = () => {
         </div>
 
         <div className="overflow-x-auto scroll-container custom-scrollbar">
-          <div className="flex mb-3 gap-9 min-w-max ">
+          <div className="flex mb-3 gap-9 min-w-max">
             {learningPlans.map((plan, index) => (
               <button
                 key={index}
-                className="border rounded-2xl border-gray-200 bg-white p-4 w-full max-w-sm h-[650px] flex flex-col items-start"
+                className="border rounded-2xl border-gray-200 bg-white p-4 max-w-sm h-[650px] w-[350px] flex flex-col items-start"
                 onClick={() => {
                   setPlanView(plan);
                   setOpenViewModal(true);
                 }}
               >
                 <div className="flex justify-between w-full gap-6">
-                  <div>
-                    <div className="w-3/4 mb-4 text-2xl font-bold text-start text-navy">
+                  <div className="w-3/4">
+                    <div className="mb-4 text-2xl font-bold text-start text-navy">
                       {plan.title}
                     </div>
-                    <div className="w-3/4 mb-6 text-xl font-normal text-start text-navy">
+                    <div className="mb-6 text-xl font-normal text-start text-navy">
                       {plan.description}
                     </div>
                   </div>
