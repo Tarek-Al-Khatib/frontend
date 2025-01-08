@@ -47,36 +47,93 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="mx-auto text-center">
-          <h2 className="mb-8 text-3xl font-extrabold text-navy">Our goals</h2>
-          <div className="flex items-center justify-center w-1/2 gap-20 mx-auto ">
-            <div className="w-2/6 p-6 bg-white rounded-md shadow h-60">
+      <section className="py-16 bg-cyan">
+        <div className="mx-auto text-center h-72">
+          <h2 className="mb-8 text-3xl font-extrabold text-navy ">Our goals</h2>
+          <div className="flex items-center justify-center w-2/3 h-full gap-20 mx-auto">
+            <div className="w-2/6 p-6 bg-white rounded-xl h-2/3">
               <h3 className="p-2 font-extrabold text-white -translate-y-full rounded-lg text-l bg-navy">
                 Unlock
               </h3>
-              <p className="p-4 text-gray-600 text-start">
+              <p className="p-4 text-gray-600 -translate-y-1/4 text-start">
                 Unlocking your potential is about embracing growth, discovering
                 new opportunities, and achieving greater success.
               </p>
             </div>
-            <div className="w-2/6 p-6 bg-white rounded-md shadow h-60">
+            <div className="w-2/6 p-6 bg-white rounded-xl h-2/3">
               <h3 className="p-2 font-extrabold text-white -translate-y-full rounded-lg text-l bg-navy">
                 Grow
               </h3>
-              <p className="p-4 pt-2 text-gray-600 text-start">
+              <p className="p-4 pt-2 text-gray-600 -translate-y-1/4 text-start">
                 Grow by learning, adapting, and embracing new opportunities to
                 become your best self.
               </p>
             </div>
-            <div className="w-2/6 p-6 bg-white rounded-md shadow h-52">
+            <div className="w-2/6 p-6 bg-white rounded-xl h-2/3">
               <h3 className="p-2 font-extrabold text-white -translate-y-full rounded-lg text-l bg-navy">
                 Expand
               </h3>
-              <p className="p-4 text-gray-600 text-start">
+              <p className="p-4 text-gray-600 -translate-y-1/4 text-start">
                 Expand relations by building strong communities through trust,
                 collaboration, and shared values.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="py-16 background-opp h-[650px]">
+        <div className="h-full mx-auto text-center">
+          <h2 className="mb-8 text-3xl font-extrabold text-navy ">
+            More Oppurtunities for everyone
+          </h2>
+          <div className="flex items-start justify-center w-2/3 h-full gap-20 mx-auto">
+            <div className="flex flex-col items-start justify-between w-2/6 p-6 bg-white h-4/5 rounded-xl text-start">
+              <h1 className="p-4 text-2xl font-bold text-navy ">
+                Virual Mockup Interview
+              </h1>
+              <p className="p-4 text-navy">
+                The Virtual Mock Interview simulates real interviews with
+                AI-generated questions and feedback, offering detailed
+                performance analysis and live sessions with moderators for
+                real-time guidance.
+              </p>
+              <div className="px-4">
+                <button className="p-3 px-8 text-xl text-white rounded-lg bg-navy">
+                  Start now
+                </button>
+              </div>
+            </div>
+            <div className="flex flex-col items-start justify-between w-2/6 p-6 bg-white h-4/5 rounded-xl text-start">
+              <h1 className="p-4 text-2xl font-bold text-navy ">
+                Virual Mockup Interview
+              </h1>
+              <p className="p-4 text-navy">
+                The Virtual Mock Interview simulates real interviews with
+                AI-generated questions and feedback, offering detailed
+                performance analysis and live sessions with moderators for
+                real-time guidance.
+              </p>
+              <div className="px-4">
+                <button className="p-3 px-8 text-xl text-white rounded-lg bg-navy">
+                  Start now
+                </button>
+              </div>
+            </div>
+            <div className="flex flex-col items-start justify-between w-2/6 p-6 bg-white h-4/5 rounded-xl text-start">
+              <h1 className="p-4 text-2xl font-bold text-navy ">
+                Virual Mockup Interview
+              </h1>
+              <p className="p-4 text-navy">
+                The Virtual Mock Interview simulates real interviews with
+                AI-generated questions and feedback, offering detailed
+                performance analysis and live sessions with moderators for
+                real-time guidance.
+              </p>
+              <div className="px-4">
+                <button className="p-3 px-8 text-xl text-white rounded-lg bg-navy">
+                  Start now
+                </button>
+              </div>
             </div>
           </div>
         </div>
