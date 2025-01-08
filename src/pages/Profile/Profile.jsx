@@ -5,6 +5,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Tooltip,
 } from "@mui/material";
 import { LuInfo } from "react-icons/lu";
 import CircularProgressWithLabel from "../../components/CircularProgressWithLabel/CircularProgressWithLabel";
@@ -191,7 +192,12 @@ const Profile = () => {
             <div className="p-6 border border-gray-200 rounded-2xl">
               <div className="flex items-center gap-3 mb-4 ">
                 <h1 className="text-xl font-bold text-navy">Leaderboard</h1>
-                <LuInfo color="navy" size={25} />
+                <Tooltip
+                  placement="top-start"
+                  title="This leaderboard shows user's rank based on their points and the number of interviews and plans the've done"
+                >
+                  <LuInfo color="navy" size={25} />
+                </Tooltip>
               </div>
               <TableContainer className="p-3 pb-8 border border-gray-200 rounded-xl">
                 <Table aria-label="leaderboard table">
