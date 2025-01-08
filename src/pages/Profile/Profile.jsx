@@ -32,8 +32,14 @@ const Profile = () => {
   }, [profileImage]);
   const { communities } = useContext(communityContext);
   const { learningPlans, calculateProgress } = useContext(learningContext);
-  const { leaderboardData, updateImage } = useContext(generalContext);
+  const { fetchUser } = useContext(authContext);
+  const { leaderboardData, updateImage, fetchLeaderboard } =
+    useContext(generalContext);
   const { user } = useContext(authContext);
+  useEffect(() => {
+    fetchUser();
+    fetchLeaderboard();
+  }, []);
   return (
     <div>
       <Navbar />

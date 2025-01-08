@@ -51,7 +51,7 @@ const GeneralProvider = ({ children }) => {
     fetchNotifications(token);
   };
 
-  const fetchLeaderboard = async (token) => {
+  const fetchLeaderboard = async () => {
     try {
       const response = await axios.get(`${serverUrl}/api/user/leaderboard`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -93,6 +93,7 @@ const GeneralProvider = ({ children }) => {
         markAsReadNotifications,
         leaderboardData,
         updateImage,
+        fetchLeaderboard,
       }}
     >
       {children}

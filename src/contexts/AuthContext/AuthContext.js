@@ -88,6 +88,7 @@ const AuthProvider = ({ children }) => {
         token,
         fetchLogin,
         fetchSignup,
+        fetchUser,
       }}
     >
       {children}
