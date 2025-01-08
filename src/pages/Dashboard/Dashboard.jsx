@@ -133,7 +133,9 @@ const Dashboard = () => {
   return (
     <div>
       {loading ? (
-        <HashLoader color="#3572ef" />
+        <div className="flex items-center justify-center w-full h-screen bg-gray-600 class">
+          <HashLoader color="#3572ef" size={60} />
+        </div>
       ) : (
         <div>
           <Navbar />
