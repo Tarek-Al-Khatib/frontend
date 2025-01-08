@@ -8,10 +8,18 @@ import { MdPeopleAlt } from "react-icons/md";
 import { FaUserPen } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { dashboardContext } from "../../contexts/DashboardContext/DashboardContext";
-import { LineChart } from "@mui/x-charts";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
 import capitalize from "capitalize";
 import { generalContext } from "../../contexts/GeneralContext/GeneralContext";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 const Dashboard = () => {
   const { quote } = useContext(dashboardContext);
   const { user } = useContext(authContext);
@@ -152,15 +160,39 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center w-full p-8 py-0 border border-gray-300 mb-14 rounded-3xl">
+        <div className="flex items-center justify-center w-full p-8 py-4 border border-gray-300 mb-14 rounded-3xl gap-14">
           {chartData && (
-            <LineChart
-              xAxis={chartData.xAxis}
-              series={chartData.series}
-              width={1000}
-              height={600}
-              grid={{ vertical: true, horizontal: true }}
-            />
+            <ResponsiveContainer width={1000} height={600}>
+              <LineChart
+                data={chartData}
+                margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="day"
+                  label={{
+                    value: "Day",
+                    position: "insideBottomRight",
+                    offset: -5,
+                  }}
+                />
+                <YAxis
+                  dataKey={"stepCount"}
+                  label={{
+                    value: "Step Count",
+                    angle: -90,
+                    position: "insideLeft",
+                  }}
+                />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="stepCount"
+                  stroke="#8884d8"
+                  strokeWidth={2}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           )}
 
           <div className="grid w-2/5 grid-cols-2 gap-7">

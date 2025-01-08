@@ -58,7 +58,8 @@ const GeneralProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const steps = response.data;
+      const steps = response.data.data;
+      console.log(steps);
 
       const last7Days = Array.from({ length: 7 }, (_, i) =>
         moment()
@@ -66,22 +67,14 @@ const GeneralProvider = ({ children }) => {
           .format("MM/DD")
       );
 
-      const stepCounts = last7Days.map(
-        (day) =>
-          steps.filter(
-            (step) => moment(step.completed_at).format("MM/DD") === day
-          ).length
-      );
+      const dataset = last7Days.map((day) => ({
+        day,
+        stepCount: steps.filter(
+          (step) => moment(step.completed_at).format("MM/DD") === day
+        ).length,
+      }));
 
-      setChartData({
-        xAxis: [{ data: last7Days }],
-        series: [
-          {
-            data: stepCounts,
-            color: "#1e25a6",
-          },
-        ],
-      });
+      setChartData(dataset);
     } catch (error) {
       console.log("Error in fetching steps last week: ", error);
     }
