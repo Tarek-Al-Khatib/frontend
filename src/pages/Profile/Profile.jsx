@@ -8,6 +8,8 @@ import {
   Tooltip,
 } from "@mui/material";
 import { LuInfo } from "react-icons/lu";
+import "./Profile.css";
+import LevelBg from "../../assets/level_bg.png";
 import CircularProgressWithLabel from "../../components/CircularProgressWithLabel/CircularProgressWithLabel";
 import TableCellStyled from "../../components/TableCell/TableCell";
 import Navbar from "../../components/Navbar/Navbar";
@@ -117,9 +119,16 @@ const Profile = () => {
                       Badges
                     </span>
                     <div class="flex flex-wrap gap-3 justify-center">
-                      <div class="w-9 h-9 bg-[#1e25a6] rounded-full flex justify-center items-center">
-                        <span class="text-black text-base font-extrabold font-['Open Sans Hebrew']">
-                          13
+                      <div
+                        class={`relative w-9 h-9 background-level rounded-full flex justify-center items-center`}
+                      >
+                        <img
+                          src={LevelBg}
+                          alt="Level background"
+                          className="absolute"
+                        />
+                        <span class="absolute top-0 text-yellow-600 text-base font-extrabold font-['Open Sans Hebrew']">
+                          {user && user.level}
                         </span>
                       </div>
                       <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>
