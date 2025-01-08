@@ -171,7 +171,7 @@ const Interview = () => {
                 <TableBody>
                   {interviewInvitations.map((invitation) =>
                     user && invitation.moderator.id === user.id ? (
-                      <TableRow key={invitation.user.id}>
+                      <TableRow key={invitation.id}>
                         <TableCellStyled dark start={true}>
                           <div className="flex items-center gap-3">
                             <div className="flex items-center gap-1">
@@ -234,7 +234,7 @@ const Interview = () => {
                         </TableCellStyled>
                       </TableRow>
                     ) : (
-                      <TableRow key={invitation.rank}>
+                      <TableRow key={invitation.id}>
                         <TableCellStyled dark start={true}>
                           <div className="flex items-center gap-3">
                             <div className="flex items-center gap-1">

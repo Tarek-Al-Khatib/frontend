@@ -210,7 +210,7 @@ const Communities = () => {
           selectedCommunity ? (
             <div className="p-6 bg-blue-900 w-80">
               <div className="flex flex-col items-center mb-8">
-                <div className="flex items-center justify-center mb-4 overflow-hidden text-base font-light text-center text-blue-300 bg-blue-900 rounded rounded-full first-letter:h-24 w-28 h-28">
+                <div className="flex items-center justify-center mb-4 overflow-hidden text-base font-light text-center text-blue-300 bg-blue-900 rounded-full first-letter:h-24 w-28 h-28">
                   {selectedCommunity && selectedCommunity.community_logo ? (
                     <img
                       src={selectedCommunity.community_logo}
