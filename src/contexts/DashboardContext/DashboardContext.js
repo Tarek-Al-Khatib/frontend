@@ -22,10 +22,14 @@ const DashboardProvider = ({ children }) => {
   }, [token]);
 
   useEffect(() => {
-    if (quoteLoaded && chartDataLoaded) {
+    if (quote !== null && chartData !== null) {
       setLoading(false);
+    } else {
+      if (quoteLoaded && chartDataLoaded) {
+        setLoading(false);
+      }
     }
-  }, [quoteLoaded, chartDataLoaded]);
+  }, [quote, chartData]);
 
   const getQuote = async () => {
     try {
