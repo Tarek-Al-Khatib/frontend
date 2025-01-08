@@ -21,12 +21,11 @@ import {
   YAxis,
 } from "recharts";
 const Dashboard = () => {
-  const { quote } = useContext(dashboardContext);
+  const { quote, chartData } = useContext(dashboardContext);
   const { user } = useContext(authContext);
   const navigation = useNavigate();
   const [topLearningPicks, setTopLearningPicks] = useState([]);
   const [topCommunities, setTopCommunities] = useState([]);
-  const { chartData } = useContext(generalContext);
   const [dashboardButtons, setDashboardButtons] = useState([]);
 
   useEffect(() => {
