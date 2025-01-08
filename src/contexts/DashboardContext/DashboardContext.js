@@ -8,15 +8,24 @@ export const dashboardContext = createContext();
 
 const DashboardProvider = ({ children }) => {
   const [quote, setQuote] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [chartData, setChartData] = useState(null);
   const { token } = useContext(authContext);
-
+  const [quoteLoaded, setQuoteLoaded] = useState(false);
+  const [chartDataLoaded, setChartDataLoaded] = useState(false);
   useEffect(() => {
     if (token) {
-      getQuote(token);
+      setLoading(true);
+      getQuote();
       fetchStepsLastWeek(token);
     }
   }, [token]);
+
+  useEffect(() => {
+    if (quoteLoaded && chartDataLoaded) {
+      setLoading(false);
+    }
+  }, [quoteLoaded, chartDataLoaded]);
 
   const getQuote = async () => {
     try {
@@ -27,6 +36,7 @@ const DashboardProvider = ({ children }) => {
       });
 
       setQuote(response.data[0]);
+      setQuoteLoaded(true);
     } catch (e) {
       console.log("Error getting a quote:", e);
     }
@@ -55,12 +65,13 @@ const DashboardProvider = ({ children }) => {
       }));
 
       setChartData(dataset);
+      setChartDataLoaded(true);
     } catch (error) {
       console.log("Error in fetching steps last week: ", error);
     }
   };
   return (
-    <dashboardContext.Provider value={{ quote, chartData }}>
+    <dashboardContext.Provider value={{ quote, chartData, loading }}>
       {children}
     </dashboardContext.Provider>
   );
