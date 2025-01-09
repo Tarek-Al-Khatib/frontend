@@ -13,6 +13,14 @@ export const useSocket = (channelIds = [], selectedChannel, channels) => {
       console.log("Joining user room for notifications");
       socketRef.current.emit("joinUserRoom", userId);
     }
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.emit("leaveUserRoom", userId);
+        socketRef.current.disconnect();
+        socketRef.current = null;
+      }
+    };
   }, []);
 
   useEffect(() => {
