@@ -21,26 +21,14 @@ const VideoProvider = ({ children }) => {
   const fetchRoom = async (token) => {
     const domain = `https://workwise.daily.co/`;
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         `${serverUrl}/api/meeting/interview-mod/${roomId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
       console.log(response);
       if (response.status === 200) {
-        return `window.DailyIframe.createFrame({
-            iframeStyle: {
-              position: "relative",
-              width: "100%",
-              height: "100%",
-              border: "0",
-              zIndex: 9999
-            },
-            showLeaveButton: true,
-            showFullscreenButton: true,
-          }).join({
-            url: "${domain}${roomId}",
-          });`;
+        return `${domain}${roomId}`;
       }
     } catch (error) {
       console.log("Error fetching room: ", error);
