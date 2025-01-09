@@ -10,6 +10,7 @@ import AppProviders from "./contexts/AppProviders";
 import Profile from "./pages/Profile/Profile";
 import ProtectionRoute from "./components/ProtectionRoute/ProtectionRoute";
 import Interview from "./pages/Interviews/Interviews";
+import VideoInterview from "./pages/Interviews/VideoInterview/VideoInterview";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/myprofile" element={<Profile />}></Route>
             <Route path="/community" element={<Communities />}></Route>
             <Route path="/interview" element={<Interview />}></Route>
+            <Route path="/meeting" element={<VideoInterview />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
