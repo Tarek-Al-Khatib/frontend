@@ -8,14 +8,7 @@ export const interviewContext = createContext();
 const InterviewProvider = ({ children }) => {
   const [userInterviews, setUserInterviews] = useState([]);
   const [interviewInvitations, setInterviewInvitations] = useState([]);
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    if (token) {
-      fetchInterviews(token);
-      fetchInvitations(token);
-    }
-  }, [token]);
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const fetchInterviews = async (token) => {
     try {

@@ -20,10 +20,23 @@ const Interview = () => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
   const { user } = useContext(authContext);
-  const { userInterviews, interviewInvitations, updateStatus } =
-    useContext(interviewContext);
+  const token = localStorage.getItem("token");
+  const {
+    userInterviews,
+    interviewInvitations,
+    updateStatus,
+    fetchInterviews,
+    fetchInvitations,
+  } = useContext(interviewContext);
   const { setInterview } = useContext(videoContext);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      fetchInterviews(token);
+      fetchInvitations(token);
+    }
+  }, []);
 
   useEffect(() => {
     if (text.length > 0) setOpen(true);
