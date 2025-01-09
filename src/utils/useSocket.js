@@ -33,10 +33,12 @@ export const useSocket = (channelIds = [], selectedChannel, channels) => {
 
     return () => {
       if (channelIds.length > 0) {
-        console.log("Leaving channels", channelIds);
-        channelIds.forEach((channelId) => {
-          socketRef.current.emit("leaveChannel", channelId);
-        });
+        if (socketRef.current) {
+          console.log("Leaving channels", channelIds);
+          channelIds.forEach((channelId) => {
+            socketRef.current.emit("leaveChannel", channelId);
+          });
+        }
       }
     };
   }, [selectedChannel, channels]);
