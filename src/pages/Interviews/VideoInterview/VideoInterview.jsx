@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { videoContext } from "../../../contexts/VideoCallContext/VideoCallContext";
+import { useNavigate } from "react-router-dom";
 
 const VideoInterview = () => {
-  const { roomId, fetchRoom } = useContext(videoContext);
+  const { roomId, fetchRoom, setRoomId, setInterview } =
+    useContext(videoContext);
+  const navigate = useNavigate();
+  const [scriptsLoaded, setScriptsLoaded] = useState(false);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -14,6 +18,7 @@ const VideoInterview = () => {
         script.onload = () => console.log("DailyIframe SDK loaded");
         document.body.appendChild(script);
       }
+      setScriptsLoaded(true);
     };
     loadDailyIframe();
   }, []);
@@ -33,15 +38,22 @@ const VideoInterview = () => {
           showLeaveButton: true,
           showFullscreenButton: true,
         });
+        iframe.on("left-meeting", () => {
+          iframe.destroy();
+          setScriptsLoaded(false);
+          setRoomId(null);
+          setInterview(null);
+          navigate("/interview");
+        });
         iframe.join({ url: roomUrl });
       } else {
         console.error("DailyIframe is not available or room URL is invalid.");
       }
     };
-    if (roomId) {
+    if (roomId && scriptsLoaded) {
       startInterview();
     }
-  }, [roomId]);
+  }, [roomId, scriptsLoaded]);
   return <div></div>;
 };
 
