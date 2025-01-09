@@ -14,11 +14,13 @@ import ViewFeedback from "./Modal/ViewFeedback";
 import { interviewContext } from "../../contexts/InterviewContext/InterviewContext";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
 import moment from "moment";
+import { videoContext } from "../../contexts/VideoCallContext/VideoCallContext";
 const Interview = () => {
   const [text, setText] = useState("");
   const { user } = useContext(authContext);
   const { userInterviews, interviewInvitations, updateStatus } =
     useContext(interviewContext);
+  const { setInterview } = useContext(videoContext);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -28,6 +30,10 @@ const Interview = () => {
   const handleClose = () => {
     setText("");
     setOpen(false);
+  };
+
+  const handleVideoStart = (interview) => {
+    setInterview(interview);
   };
   return (
     <div>
@@ -223,9 +229,12 @@ const Interview = () => {
                               </button>
                             </div>
                           ) : invitation.status === "ACCEPTED" ? (
-                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-green-400 rounded-self">
-                              Accepted
-                            </div>
+                            <button
+                              onClick={() => handleVideoStart(invitation)}
+                              className="w-full px-6 py-2 text-xl font-bold text-center text-white transition bg-navy hover:bg-blue-600 rounded-self"
+                            >
+                              Join
+                            </button>
                           ) : (
                             <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-red-400 rounded-self">
                               Rejected
@@ -240,8 +249,8 @@ const Interview = () => {
                             <div className="flex items-center gap-1">
                               <div className="rounded-full w-9 h-9">
                                 <img
-                                  src={invitation.user.profile_pic}
-                                  alt={`${invitation.user.profile_pic} profile pic`}
+                                  src={invitation.moderator.profile_pic}
+                                  alt={`${invitation.moderator.profile_pic} profile pic`}
                                   className="object-cover w-full h-full rounded-full"
                                 />
                               </div>{" "}
