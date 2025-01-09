@@ -4,7 +4,6 @@ import { videoContext } from "../../../contexts/VideoCallContext/VideoCallContex
 const VideoInterview = () => {
   const { roomId, fetchRoom } = useContext(videoContext);
   const token = localStorage.getItem("token");
-  const [scriptsLoaded, setScriptsLoaded] = useState(false);
 
   useEffect(() => {
     const loadDailyIframe = async () => {

@@ -236,7 +236,7 @@ const Interview = () => {
                               onClick={() => handleVideoStart(invitation)}
                               className="w-full px-6 py-2 text-xl font-bold text-center text-white transition bg-navy hover:bg-blue-600 rounded-self"
                             >
-                              Join
+                              Start Interview
                             </button>
                           ) : (
                             <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-red-400 rounded-self">
@@ -283,9 +283,12 @@ const Interview = () => {
                               Pending
                             </div>
                           ) : invitation.status === "ACCEPTED" ? (
-                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-green-400 rounded-self">
-                              Accepted
-                            </div>
+                            <button
+                              onClick={() => handleVideoStart(invitation)}
+                              className="w-full px-6 py-2 text-xl font-bold text-center text-white transition bg-navy hover:bg-blue-600 rounded-self"
+                            >
+                              Join
+                            </button>
                           ) : (
                             <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-red-400 rounded-self">
                               Rejected
