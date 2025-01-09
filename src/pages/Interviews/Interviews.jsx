@@ -15,7 +15,9 @@ import { interviewContext } from "../../contexts/InterviewContext/InterviewConte
 import { authContext } from "../../contexts/AuthContext/AuthContext";
 import moment from "moment";
 import { videoContext } from "../../contexts/VideoCallContext/VideoCallContext";
+import { useNavigate } from "react-router-dom";
 const Interview = () => {
+  const navigate = useNavigate();
   const [text, setText] = useState("");
   const { user } = useContext(authContext);
   const { userInterviews, interviewInvitations, updateStatus } =
@@ -34,6 +36,7 @@ const Interview = () => {
 
   const handleVideoStart = (interview) => {
     setInterview(interview);
+    navigate("/meeting");
   };
   return (
     <div>
