@@ -76,7 +76,10 @@ const Interview = () => {
               <span className="font-extrabold"> TRY IT NOW</span>
             </p>
             <div className="pl-16">
-              <button className="bg-[#1e25a5] text-white text-xl font-bold px-6 py-3 rounded-md">
+              <button
+                className="bg-[#1e25a5] text-white text-xl font-bold px-6 py-3 rounded-md"
+                onClick={() => navigate("/meeting-ai")}
+              >
                 Start Mock Interview
               </button>
             </div>

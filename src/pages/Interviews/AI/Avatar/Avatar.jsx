@@ -124,7 +124,6 @@ export function Avatar(props) {
 
     setAnimation(message.animation);
     setFacialExpression(message.facialExpression);
-    setLipsync(message.lipsync);
 
     const audio = new Audio("data:audio/mp3;base64," + message.audio);
     audio.play().catch((err) => console.error("Audio play failed:", err));
@@ -139,15 +138,6 @@ export function Avatar(props) {
     };
   }, [message, isUserInteracted]);
 
-  useEffect(() => {
-    const wakeUpBrowser = () => {
-      const tempAudio = new Audio();
-      tempAudio.play().catch(() => {});
-    };
-
-    wakeUpBrowser();
-  }, []);
-
   const { animations } = useGLTF(AnimationsPath);
 
   const group = useRef();
@@ -161,7 +151,11 @@ export function Avatar(props) {
       .reset()
       .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
       .play();
-    return () => actions[animation].fadeOut(0.5);
+    return () => {
+      if (actions && actions[animation]) {
+        actions[animation].fadeOut(0.5);
+      }
+    };
   }, [animation]);
 
   const lerpMorphTarget = (target, value, speed = 0.1) => {

@@ -10,6 +10,15 @@ export const ChatProvider = ({ children }) => {
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    return () => {
+      setMessage(null);
+      setMessages(null);
+      setLoading(false);
+      setIsUserInteracted(false);
+    };
+  }, []);
   const chat = async (message) => {
     setLoading(true);
     const response = await axios.get(
