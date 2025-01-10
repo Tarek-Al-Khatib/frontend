@@ -1,23 +1,31 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { serverUrl } from "../../config/url";
+import axios from "axios";
 export const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
-  const chat = async (message) => {
-    setLoading(true);
-    const data = await fetch(`${serverUrl}/api/ai/interview`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message }),
-    });
-    console.log(data);
-  };
   const [allMessages, setAllMessages] = useState([]);
+  const [isUserInteracted, setIsUserInteracted] = useState(false);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("token");
+  const chat = async (message) => {
+    setLoading(true);
+    const response = await axios.get(
+      `${serverUrl}/api/ai/interview`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      { message }
+    );
+    console.log(response.data);
+    setMessage(response.data.messages);
+    setLoading(false);
+  };
 
   const onMessagePlayed = () => {
     setMessages((messages) => messages.slice(1));
@@ -38,6 +46,8 @@ export const ChatProvider = ({ children }) => {
         message,
         onMessagePlayed,
         loading,
+        isUserInteracted,
+        setIsUserInteracted,
       }}
     >
       {children}
