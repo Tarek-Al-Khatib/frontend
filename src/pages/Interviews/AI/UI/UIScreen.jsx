@@ -1,7 +1,8 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Experience } from "../Screen/Screen";
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
+import VoiceRecognition from "../VoiceRecognition/VoiceRecognition";
 
 const CameraSetup = () => {
   const cameraRef = useRef();
@@ -17,6 +18,7 @@ const CameraSetup = () => {
 };
 
 const UI = () => {
+  const [message, setMessage] = useState("");
   useEffect(() => {
     const enableAudioPlayback = () => {
       setIsUserInteracted(true);
@@ -42,16 +44,19 @@ const UI = () => {
           </button>
         </div>
       ) : (
-        <Canvas
-          shadows
-          camera={{
-            position: [0, 1.5, 2],
-            fov: 30,
-          }}
-        >
-          <CameraSetup />
-          <Experience />
-        </Canvas>
+        <>
+          <VoiceRecognition sendMessage={setMessage} />
+          <Canvas
+            shadows
+            camera={{
+              position: [0, 1.5, 2],
+              fov: 30,
+            }}
+          >
+            <CameraSetup />
+            <Experience />
+          </Canvas>
+        </>
       )}
     </div>
   );
