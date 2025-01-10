@@ -106,52 +106,63 @@ export function Avatar(props) {
   const { scene } = useGLTF(ModelPath);
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = useGraph(clone);
-  const { message, onMessagePlayed } = useContext(ChatContext);
+  const {
+    message,
+    onMessagePlayed,
+    chat,
+    setIsUserInteracted,
+    isUserInteracted,
+  } = useContext(ChatContext);
 
   const [lipsync, setLipsync] = useState();
 
   useEffect(() => {
-    console.log(message);
-    if (!message) {
+    if (!message || !isUserInteracted) {
       setAnimation("Idle");
       return;
     }
+
     setAnimation(message.animation);
     setFacialExpression(message.facialExpression);
     setLipsync(message.lipsync);
+
     const audio = new Audio("data:audio/mp3;base64," + message.audio);
-    audio.play();
+    audio.play().catch((err) => console.error("Audio play failed:", err));
     setAudio(audio);
     audio.onended = onMessagePlayed;
-  }, [message]);
 
-  useEffect(() => {}, []);
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.src = "";
+      }
+    };
+  }, [message, isUserInteracted]);
+
+  useEffect(() => {
+    const wakeUpBrowser = () => {
+      const tempAudio = new Audio();
+      tempAudio.play().catch(() => {});
+    };
+
+    wakeUpBrowser();
+  }, []);
 
   const { animations } = useGLTF(AnimationsPath);
 
   const group = useRef();
   const { actions, mixer } = useAnimations(animations, group);
   const [animation, setAnimation] = useState(
-    animations.find((a) => a.name === "Idle") ? "Idle" : animations[0].name
+    animations.find((a) => a.name === "Idle") ? "Idle" : animations[0].name // Check if Idle animation exists otherwise use first animation
   );
-  useEffect(() => {
-    console.log(
-      "Animations:",
-      animations.map((a) => a.name)
-    );
-    console.log("Actions:", actions);
-    if (actions) {
-      actions.Idle.reset()
-        .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
-        .play();
-    }
 
-    return () => {
-      if (actions && actions[animation]) {
-        actions[animation].fadeOut(0.5);
-      }
-    };
-  }, [animation, actions, mixer]);
+  useEffect(() => {
+    actions[animation]
+      .reset()
+      .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
+      .play();
+    return () => actions[animation].fadeOut(0.5);
+  }, [animation]);
 
   const lerpMorphTarget = (target, value, speed = 0.1) => {
     scene.traverse((child) => {
@@ -224,6 +235,7 @@ export function Avatar(props) {
   });
 
   useEffect(() => {
+    chat("Hi");
     let blinkTimeout;
     const nextBlink = () => {
       blinkTimeout = setTimeout(() => {
@@ -235,7 +247,9 @@ export function Avatar(props) {
       }, THREE.MathUtils.randInt(1000, 5000));
     };
     nextBlink();
-    return () => clearTimeout(blinkTimeout);
+    return () => {
+      clearTimeout(blinkTimeout);
+    };
   }, []);
 
   return (
