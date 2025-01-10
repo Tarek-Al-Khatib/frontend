@@ -11,6 +11,7 @@ import Profile from "./pages/Profile/Profile";
 import ProtectionRoute from "./components/ProtectionRoute/ProtectionRoute";
 import Interview from "./pages/Interviews/Interviews";
 import VideoInterview from "./pages/Interviews/VideoInterview/VideoInterview";
+import UI from "./pages/Interviews/AI/UI/UIScreen.jsx";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/community" element={<Communities />}></Route>
             <Route path="/interview" element={<Interview />}></Route>
             <Route path="/meeting" element={<VideoInterview />}></Route>
+            <Route path="/meeting-ai" element={<UI />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
