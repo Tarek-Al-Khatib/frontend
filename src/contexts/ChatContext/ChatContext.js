@@ -1,21 +1,20 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { serverUrl } from "../../config/url";
-const ChatContext = createContext();
+export const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
   const chat = async (message) => {
     setLoading(true);
-    const data = await fetch(`${serverUrl}/chat`, {
-      method: "POST",
+    const data = await fetch(`${serverUrl}/api/ai/interview`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ message }),
     });
-    const resp = (await data.json()).messages;
-    setMessages((messages) => [...messages, ...resp]);
-    setLoading(false);
+    console.log(data);
   };
+  const [allMessages, setAllMessages] = useState([]);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
