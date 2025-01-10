@@ -1,6 +1,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Experience } from "../Screen/Screen";
+import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 
 const CameraSetup = () => {
   const cameraRef = useRef();
@@ -16,17 +17,43 @@ const CameraSetup = () => {
 };
 
 const UI = () => {
+  useEffect(() => {
+    const enableAudioPlayback = () => {
+      setIsUserInteracted(true);
+      window.removeEventListener("click", enableAudioPlayback);
+    };
+
+    window.addEventListener("click", enableAudioPlayback);
+
+    return () => {
+      window.removeEventListener("click", enableAudioPlayback);
+    };
+  }, []);
+  const { isUserInteracted, setIsUserInteracted } = useContext(ChatContext);
   return (
-    <Canvas
-      shadows
-      camera={{
-        position: [0, 1.5, 2],
-        fov: 30,
-      }}
-    >
-      <CameraSetup />
-      <Experience />
-    </Canvas>
+    <div className="h-full min-h-screen">
+      {!isUserInteracted ? (
+        <div className="flex items-center justify-center h-full">
+          <button
+            onClick={() => setIsUserInteracted(true)}
+            className="p-3 text-4xl font-bold text-white bg-blue-800 rounded-full w-52 h-52"
+          >
+            Click to Start
+          </button>
+        </div>
+      ) : (
+        <Canvas
+          shadows
+          camera={{
+            position: [0, 1.5, 2],
+            fov: 30,
+          }}
+        >
+          <CameraSetup />
+          <Experience />
+        </Canvas>
+      )}
+    </div>
   );
 };
 
