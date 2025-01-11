@@ -5,8 +5,10 @@ export const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
   const [allMessages, setAllMessages] = useState([]);
+  const [userInput, setUserInput] = useState(null);
   const [isUserInteracted, setIsUserInteracted] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [startChatting, setStartChatting] = useState(false);
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
@@ -14,39 +16,55 @@ export const ChatProvider = ({ children }) => {
   useEffect(() => {
     return () => {
       setMessage(null);
+      setAllMessages(null);
       setMessages(null);
       setLoading(false);
       setIsUserInteracted(false);
     };
   }, []);
-  const chat = async (message) => {
+
+  useEffect(() => {
+    if (startChatting) {
+      chat(allMessages);
+    }
+  }, [startChatting]);
+
+  const chat = async (messages) => {
+    if (!messages) {
+      return;
+    }
     setLoading(true);
-    const response = await axios.get(
+    const response = await axios.post(
       `${serverUrl}/api/ai/interview`,
+      { messages: messages },
       {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      },
-      { message }
+      }
     );
     console.log(response.data);
-    setMessage(response.data.messages);
+    const messageResponse = response.data.messageResponse;
+    console.log(messageResponse);
+    setMessage(messageResponse.content);
+    setMessages([...messages, messageResponse.content]);
+    setAllMessages([
+      ...allMessages,
+      {
+        role: messageResponse.role,
+        content: messageResponse.content.text,
+      },
+    ]);
+    setUserInput(null);
+    setStartChatting(false);
     setLoading(false);
   };
 
   const onMessagePlayed = () => {
     setMessages((messages) => messages.slice(1));
+    setMessage(null);
   };
-
-  useEffect(() => {
-    if (messages.length > 0) {
-      setMessage(messages[0]);
-    } else {
-      setMessage(null);
-    }
-  }, [messages]);
 
   return (
     <ChatContext.Provider
@@ -57,6 +75,11 @@ export const ChatProvider = ({ children }) => {
         loading,
         isUserInteracted,
         setIsUserInteracted,
+        setUserInput,
+        userInput,
+        allMessages,
+        setAllMessages,
+        setStartChatting,
       }}
     >
       {children}
