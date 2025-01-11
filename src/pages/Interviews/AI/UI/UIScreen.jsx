@@ -18,7 +18,6 @@ const CameraSetup = () => {
 };
 
 const UI = () => {
-  const [message, setMessage] = useState("");
   useEffect(() => {
     const enableAudioPlayback = () => {
       setIsUserInteracted(true);
@@ -45,7 +44,7 @@ const UI = () => {
         </div>
       ) : (
         <>
-          <VoiceRecognition sendMessage={setMessage} />
+          <VoiceRecognition />
           <Canvas
             shadows
             camera={{

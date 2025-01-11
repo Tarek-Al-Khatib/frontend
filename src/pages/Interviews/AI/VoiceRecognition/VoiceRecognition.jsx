@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 
-const VoiceRecognition = ({ sendMessage }) => {
+const VoiceRecognition = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
-
+  const { setUserInput } = useContext(ChatContext);
   const handleStart = () => {
     if (!("webkitSpeechRecognition" in window)) {
       alert("Speech recognition not supported in this browser.");
@@ -28,7 +29,7 @@ const VoiceRecognition = ({ sendMessage }) => {
     recognition.onresult = (event) => {
       const speechToText = event.results[0][0].transcript;
       setTranscript(speechToText);
-      sendMessage(speechToText);
+      setUserInput(speechToText);
     };
 
     recognition.onerror = (event) => {

@@ -6,6 +6,7 @@ import * as THREE from "three";
 import ModelPath from "../../../../assets/ai/678026faf8c9ed00ef2678ac-transformed.glb";
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 import { SkeletonUtils } from "three-stdlib";
+import { authContext } from "../../../../contexts/AuthContext/AuthContext";
 
 const facialExpressions = {
   default: {},
@@ -110,11 +111,25 @@ export function Avatar(props) {
     message,
     onMessagePlayed,
     chat,
-    setIsUserInteracted,
     isUserInteracted,
+    userInput,
+    setAllMessages,
+    allMessages,
+    setStartChatting,
   } = useContext(ChatContext);
 
   const [lipsync, setLipsync] = useState();
+  const { user } = useContext(authContext);
+
+  useEffect(() => {
+    console.log("triggered user input");
+    if (userInput) {
+      console.log("started the request");
+      const message = { role: "user", content: userInput };
+      setAllMessages([...allMessages, message]);
+      setStartChatting(true);
+    }
+  }, [userInput]);
 
   useEffect(() => {
     if (!message || !isUserInteracted) {
@@ -227,9 +242,18 @@ export function Avatar(props) {
       lerpMorphTarget(value, 0, 0.1);
     });
   });
+  useEffect(() => {
+    if (user) {
+      console.log("went here");
+      const message = {
+        role: "user",
+        content: `Hello my name is ${user.username}`,
+      };
+      chat([message]);
+    }
+  }, [user]);
 
   useEffect(() => {
-    chat("Hi");
     let blinkTimeout;
     const nextBlink = () => {
       blinkTimeout = setTimeout(() => {
