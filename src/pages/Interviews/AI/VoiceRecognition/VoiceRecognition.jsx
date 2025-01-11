@@ -51,7 +51,10 @@ const VoiceRecognition = () => {
   };
 
   return (
-    <div className="absolute z-10 flex flex-col w-1/6 left-1/2 top-3/4">
+    <div
+      className="absolute z-10 flex flex-col w-48 top-3/4"
+      style={{ left: "47%" }}
+    >
       <button
         onClick={handleStart}
         disabled={loading}
