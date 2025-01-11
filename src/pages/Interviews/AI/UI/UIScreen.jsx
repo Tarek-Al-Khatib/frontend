@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Experience } from "../Screen/Screen";
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 import VoiceRecognition from "../VoiceRecognition/VoiceRecognition";
+import "./UIScreen.css";
 
 const CameraSetup = () => {
   const cameraRef = useRef();
@@ -10,7 +11,7 @@ const CameraSetup = () => {
   return (
     <group>
       {useFrame(({ camera }) => {
-        camera.position.set(0, 1.5, 1.5);
+        camera.position.set(0, 1.5, 1.2);
         camera.lookAt(0, 1.5, 0);
       })}
     </group>
@@ -43,7 +44,7 @@ const UI = () => {
           </button>
         </div>
       ) : (
-        <>
+        <div className="h-full min-h-screen office-background">
           <VoiceRecognition />
           <Canvas
             shadows
@@ -55,7 +56,7 @@ const UI = () => {
             <CameraSetup />
             <Experience />
           </Canvas>
-        </>
+        </div>
       )}
     </div>
   );
