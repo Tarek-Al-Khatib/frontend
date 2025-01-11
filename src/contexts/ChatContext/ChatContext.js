@@ -9,6 +9,7 @@ export const ChatProvider = ({ children }) => {
   const [isUserInteracted, setIsUserInteracted] = useState(false);
   const [messages, setMessages] = useState([]);
   const [startChatting, setStartChatting] = useState(false);
+  const [ended, setEnded] = useState(false);
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
@@ -19,6 +20,7 @@ export const ChatProvider = ({ children }) => {
       setAllMessages(null);
       setMessages(null);
       setLoading(false);
+      setEnded(false);
       setIsUserInteracted(false);
     };
   }, []);
@@ -59,6 +61,26 @@ export const ChatProvider = ({ children }) => {
     setUserInput(null);
     setStartChatting(false);
     setLoading(false);
+    if (messageResponse.content.isCompleted === true) {
+      setEnded(true);
+    }
+  };
+
+  const complete = async () => {
+    if (!allMessages) {
+      return;
+    }
+    const response = await axios.post(
+      `${serverUrl}/api/ai/completed`,
+      { messages: allMessages },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
   };
 
   const onMessagePlayed = () => {
@@ -80,6 +102,8 @@ export const ChatProvider = ({ children }) => {
         allMessages,
         setAllMessages,
         setStartChatting,
+        ended,
+        complete,
       }}
     >
       {children}

@@ -116,6 +116,8 @@ export function Avatar(props) {
     setAllMessages,
     allMessages,
     setStartChatting,
+    ended,
+    complete,
   } = useContext(ChatContext);
 
   const [lipsync, setLipsync] = useState();
@@ -140,17 +142,7 @@ export function Avatar(props) {
     setAnimation(message.animation);
     setFacialExpression(message.facialExpression);
 
-    const audio = new Audio("data:audio/mp3;base64," + message.audio);
-    audio.play().catch((err) => console.error("Audio play failed:", err));
-    setAudio(audio);
-    audio.onended = onMessagePlayed;
-
-    return () => {
-      if (audio) {
-        audio.pause();
-        audio.src = "";
-      }
-    };
+    setAudio(new Audio("data:audio/mp3;base64," + message.audio));
   }, [message, isUserInteracted]);
 
   const { animations } = useGLTF(AnimationsPath);
@@ -197,6 +189,43 @@ export function Avatar(props) {
   const [winkRight, setWinkRight] = useState(false);
   const [facialExpression, setFacialExpression] = useState("");
   const [audio, setAudio] = useState();
+
+  useEffect(() => {
+    if (audio) {
+      audio.play().catch((err) => console.error("Audio play failed:", err));
+      setAudio(audio);
+      audio.onended = () => {
+        onMessagePlayed();
+        setAudio(null);
+      };
+    }
+
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.src = "";
+        setAudio(null);
+      }
+    };
+  }, [audio]);
+
+  useEffect(() => {
+    if (ended === true) {
+      setTimeout(() => {
+        if (audio && !audio.paused && !audio.ended && audio.currentTime > 0) {
+          console.log(
+            "Audio is still playing. Waiting to execute ending mechanism."
+          );
+        } else {
+          console.log(
+            "No audio playing. Executing ending mechanism immediately."
+          );
+          onMessagePlayed();
+          complete();
+        }
+      }, 1000);
+    }
+  }, [audio]);
 
   useFrame(() => {
     !setupMode &&
