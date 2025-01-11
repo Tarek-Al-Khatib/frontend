@@ -1,10 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 
 const VoiceRecognition = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
+  const { loading } = useContext(ChatContext);
   const { setUserInput } = useContext(ChatContext);
+
   const handleStart = () => {
     if (!("webkitSpeechRecognition" in window)) {
       alert("Speech recognition not supported in this browser.");
@@ -49,11 +51,17 @@ const VoiceRecognition = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleStart}>
-        {isRecording ? "Listening..." : "Start Voice Recognition"}
+    <div className="absolute z-10 flex flex-col w-1/6 left-1/2 top-3/4">
+      <button
+        onClick={handleStart}
+        disabled={loading}
+        className={`p-5 text-2xl font-bold text-white  rounded-xl ${
+          loading ? "bg-gray-300" : "bg-navy"
+        }`}
+      >
+        {isRecording ? "Listening..." : "Talk"}
       </button>
-      <p>Recognized text: {transcript}</p>
+      <p className="text-white">Recognized text: {transcript}</p>
     </div>
   );
 };

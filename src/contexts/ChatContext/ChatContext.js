@@ -60,7 +60,7 @@ export const ChatProvider = ({ children }) => {
     ]);
     setUserInput(null);
     setStartChatting(false);
-    setLoading(false);
+
     if (messageResponse.content.isCompleted === true) {
       setEnded(true);
     }
@@ -97,6 +97,7 @@ export const ChatProvider = ({ children }) => {
         loading,
         isUserInteracted,
         setIsUserInteracted,
+        setLoading,
         setUserInput,
         userInput,
         allMessages,

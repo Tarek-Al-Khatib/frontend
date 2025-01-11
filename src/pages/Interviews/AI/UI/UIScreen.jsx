@@ -44,7 +44,7 @@ const UI = () => {
           </button>
         </div>
       ) : (
-        <div className="h-full min-h-screen office-background">
+        <div className="relative h-full min-h-screen office-background">
           <VoiceRecognition />
           <Canvas
             shadows

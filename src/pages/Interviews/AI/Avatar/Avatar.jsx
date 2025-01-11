@@ -118,6 +118,7 @@ export function Avatar(props) {
     setStartChatting,
     ended,
     complete,
+    setLoading,
   } = useContext(ChatContext);
 
   const [lipsync, setLipsync] = useState();
@@ -197,6 +198,7 @@ export function Avatar(props) {
       audio.onended = () => {
         onMessagePlayed();
         setAudio(null);
+        setLoading(false);
       };
     }
 
