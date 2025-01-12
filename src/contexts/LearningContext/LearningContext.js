@@ -10,6 +10,17 @@ const LearningProvider = ({ children }) => {
   const [learningPlans, setLearningPlans] = useState([]);
   const { user, token } = useContext(authContext);
 
+  const [learningPlan, setLearningPlan] = useState({
+    title: "",
+    description: "",
+  });
+
+  const [steps, setSteps] = useState([
+    {
+      step_title: "",
+      step_description: "",
+    },
+  ]);
   useEffect(() => {
     if (user && token) {
       fetchPlans();
@@ -126,6 +137,35 @@ const LearningProvider = ({ children }) => {
     }
   };
 
+  const enhancePlan = async () => {
+    try {
+      const response = await axios.post(
+        `${serverUrl}/api/ai/enhance`,
+        {
+          plan: {
+            title: learningPlan.title,
+            description: learningPlan.description,
+            steps: [...steps],
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response);
+      setLearningPlan({
+        title: response.data.plan.title,
+        description: response.data.plan.description,
+      });
+      setSteps([...response.data.plan.steps]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <learningContext.Provider
       value={{
@@ -136,6 +176,11 @@ const LearningProvider = ({ children }) => {
         markPlanAsDone,
         markStepAsDone,
         calculateProgress,
+        learningPlan,
+        setLearningPlan,
+        steps,
+        setSteps,
+        enhancePlan,
       }}
     >
       {children}

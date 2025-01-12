@@ -6,18 +6,14 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { IoCloseCircleOutline } from "react-icons/io5";
 const AddPlan = ({ open, handleClose }) => {
-  const { addPlan } = useContext(learningContext);
-  const [learningPlan, setLearningPlan] = useState({
-    title: "",
-    description: "",
-  });
-
-  const [steps, setSteps] = useState([
-    {
-      step_title: "",
-      step_description: "",
-    },
-  ]);
+  const {
+    addPlan,
+    learningPlan,
+    setLearningPlan,
+    setSteps,
+    steps,
+    enhancePlan,
+  } = useContext(learningContext);
 
   const stepsContainerRef = useRef(null);
 
@@ -107,6 +103,7 @@ const AddPlan = ({ open, handleClose }) => {
               id="title"
               name="plan-title"
               variant="outlined"
+              value={learningPlan.title}
               placeholder="Learning title... ex: State NodeJS"
               onChange={handleInputChange}
               sx={{
@@ -134,6 +131,7 @@ const AddPlan = ({ open, handleClose }) => {
               name="plan-description"
               multiline={true}
               maxRows={4}
+              value={learningPlan.description}
               placeholder="Learning description... ex: I will start by learning the fundamentals of NodeJS and then dive deep to become a professional NodeJS developer !"
               variant="outlined"
               onChange={handleInputChange}
@@ -165,7 +163,12 @@ const AddPlan = ({ open, handleClose }) => {
             {" "}
             <IoIosAddCircleOutline className="text-navy" size={40} />
           </button>
-          <button className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-800 rounded-self">
+          <button
+            onClick={() => {
+              enhancePlan();
+            }}
+            className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-800 rounded-self"
+          >
             Enhance with AI
           </button>
         </div>
@@ -190,6 +193,7 @@ const AddPlan = ({ open, handleClose }) => {
                     id="step_title"
                     name={`step-title-${index}`}
                     variant="outlined"
+                    value={step.step_title}
                     placeholder="Learning title... ex: State NodeJS"
                     onChange={(e) =>
                       handleStepInputChange(index, e.target.id, e.target.value)
@@ -219,6 +223,7 @@ const AddPlan = ({ open, handleClose }) => {
                     name={`step-description-${index}`}
                     multiline={true}
                     maxRows={4}
+                    value={step.step_description}
                     placeholder="Learning description... ex: I will start by learning the fundamentals of NodeJS and then dive deep to become a professional NodeJS developer !"
                     variant="outlined"
                     onChange={(e) =>
