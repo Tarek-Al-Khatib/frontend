@@ -8,6 +8,7 @@ export const learningContext = createContext();
 
 const LearningProvider = ({ children }) => {
   const [learningPlans, setLearningPlans] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { user, token } = useContext(authContext);
 
   const [learningPlan, setLearningPlan] = useState({
@@ -139,6 +140,7 @@ const LearningProvider = ({ children }) => {
 
   const enhancePlan = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
         `${serverUrl}/api/ai/enhance`,
         {
@@ -161,6 +163,7 @@ const LearningProvider = ({ children }) => {
         description: response.data.plan.description,
       });
       setSteps([...response.data.plan.steps]);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -181,6 +184,7 @@ const LearningProvider = ({ children }) => {
         steps,
         setSteps,
         enhancePlan,
+        loading,
       }}
     >
       {children}
