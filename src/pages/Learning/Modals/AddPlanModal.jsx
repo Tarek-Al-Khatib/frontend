@@ -40,6 +40,7 @@ const AddPlan = ({ open, handleClose }) => {
 
   const handleModalClose = () => {
     handleClose();
+    setLearningPlan({ title: "", description: "" });
     setSteps([
       {
         step_title: "",

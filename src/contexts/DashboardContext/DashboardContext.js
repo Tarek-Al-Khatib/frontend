@@ -13,6 +13,8 @@ const DashboardProvider = ({ children }) => {
   const { token } = useContext(authContext);
   const [quoteLoaded, setQuoteLoaded] = useState(false);
   const [chartDataLoaded, setChartDataLoaded] = useState(false);
+  const [communities, setCommunities] = useState(null);
+  const [learningPlans, setLearningPlans] = useState(null);
   useEffect(() => {
     if (token) {
       setLoading(true);
@@ -72,6 +74,36 @@ const DashboardProvider = ({ children }) => {
       setChartDataLoaded(true);
     } catch (error) {
       console.log("Error in fetching steps last week: ", error);
+    }
+  };
+
+  const fetchTopCommunities = async () => {
+    try {
+      const response = await axios.get(`${serverUrl}/api/community/top`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(response.data);
+      setCommunities(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchTopLearningPlans = async () => {
+    try {
+      const response = await axios.get(`${serverUrl}/api/ai/top-plans`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(response.data);
+      setLearningPlans(response.data.learning_plans);
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
