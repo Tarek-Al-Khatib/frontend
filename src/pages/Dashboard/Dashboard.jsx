@@ -21,87 +21,14 @@ import {
 } from "recharts";
 import { HashLoader } from "react-spinners";
 const Dashboard = () => {
-  const { quote, chartData, loading } = useContext(dashboardContext);
+  const { quote, chartData, loading, communities, learningPlans } =
+    useContext(dashboardContext);
   const { user } = useContext(authContext);
   const navigation = useNavigate();
-  const [topLearningPicks, setTopLearningPicks] = useState([]);
-  const [topCommunities, setTopCommunities] = useState([]);
+
   const [dashboardButtons, setDashboardButtons] = useState([]);
 
   useEffect(() => {
-    setTopLearningPicks([
-      {
-        id: 1,
-        title: "Become a Full Stack Developer",
-        category: "Web Development",
-        imageUrl: "bg-navy",
-        lessons: [
-          "Introduction to web development",
-          "Learn the basics",
-          "What is a library?",
-          "Learn about JavaScript",
-          "Create your first React page",
-        ],
-      },
-      {
-        id: 2,
-        title: "Learn Data Science",
-        category: "Data Science",
-        imageUrl: "bg-green-500",
-        lessons: [
-          "Intro to Data Science",
-          "Learn Python",
-          "Statistics for Data Science",
-          "Data Visualization",
-        ],
-      },
-      {
-        id: 3,
-        title: "Learn Data Science",
-        category: "Data Science",
-        imageUrl: "bg-green-500",
-        lessons: [
-          "Intro to Data Science",
-          "Learn Python",
-          "Statistics for Data Science",
-          "Data Visualization",
-        ],
-      },
-    ]);
-
-    setTopCommunities([
-      {
-        id: 1,
-        name: "React Lovers",
-        description: "Join us to know more about React!",
-      },
-      {
-        id: 4,
-        name: "Frontend Devs",
-        description: "A community for frontend enthusiasts.",
-      },
-      {
-        id: 3,
-        name: "Frontend Devs",
-        description: "A community for frontend enthusiasts.",
-      },
-      {
-        id: 2,
-        name: "Frontend Devs",
-        description: "A community for frontend enthusiasts.",
-      },
-      {
-        id: 6,
-        name: "Frontend Devs",
-        description: "A community for frontend enthusiasts.",
-      },
-      {
-        id: 8,
-        name: "Frontend Devs",
-        description: "A community for frontend enthusiasts.",
-      },
-    ]);
-
     setDashboardButtons([
       {
         id: 1,
@@ -226,15 +153,12 @@ const Dashboard = () => {
                   Top Learning Picks
                 </h2>
                 <div className="flex items-center justify-center ">
-                  {topLearningPicks.map((pick) => (
+                  {learningPlans.map((pick) => (
                     <div
-                      key={pick.id}
+                      key={pick.title}
                       className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded"
                     >
                       <div>
-                        <div
-                          className={`w-full h-48 mb-1 ${pick.imageUrl} rounded-3xl`}
-                        ></div>
                         <div className="inline-block mb-1 text-sm font-bold text-center rounded-full px-9 bg-light-navy text-cyan">
                           {pick.category}
                         </div>
@@ -243,8 +167,8 @@ const Dashboard = () => {
                         </h3>
                       </div>
                       <ul className="p-4 text-base list-disc text-navy text-start">
-                        {pick.lessons.map((lesson, index) => (
-                          <li key={index}>{lesson}</li>
+                        {pick.steps.map((step, index) => (
+                          <li key={index}>{step.step_title}</li>
                         ))}
                       </ul>
                       <button className="w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
@@ -260,7 +184,7 @@ const Dashboard = () => {
                   Top Communities
                 </h2>
                 <div className="grid grid-cols-1 p-4 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                  {topCommunities.map((community) => (
+                  {communities.map((community) => (
                     <div
                       key={community.id}
                       className="flex flex-col items-center justify-center p-4 rounded"
@@ -268,7 +192,7 @@ const Dashboard = () => {
                       <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
                       <div className="self-start">
                         <h3 className="text-xl font-bold text-navy">
-                          {community.name}
+                          {community.title}
                         </h3>
                         <p className="text-base font-normal text-navy">
                           {community.description}

@@ -11,8 +11,6 @@ const DashboardProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [chartData, setChartData] = useState(null);
   const { token } = useContext(authContext);
-  const [quoteLoaded, setQuoteLoaded] = useState(false);
-  const [chartDataLoaded, setChartDataLoaded] = useState(false);
   const [communities, setCommunities] = useState(null);
   const [learningPlans, setLearningPlans] = useState(null);
   useEffect(() => {
@@ -20,18 +18,21 @@ const DashboardProvider = ({ children }) => {
       setLoading(true);
       getQuote();
       fetchStepsLastWeek(token);
+      fetchTopCommunities();
+      fetchTopLearningPlans();
     }
   }, [token]);
 
   useEffect(() => {
-    if (quote !== null && chartData !== null) {
+    if (
+      quote !== null &&
+      chartData !== null &&
+      communities !== null &&
+      learningPlans !== null
+    ) {
       setLoading(false);
-    } else {
-      if (quoteLoaded && chartDataLoaded) {
-        setLoading(false);
-      }
     }
-  }, [quote, chartData]);
+  }, [quote, chartData, communities, learningPlans]);
 
   const getQuote = async () => {
     try {
@@ -42,7 +43,6 @@ const DashboardProvider = ({ children }) => {
       });
 
       setQuote(response.data[0]);
-      setQuoteLoaded(true);
     } catch (e) {
       console.log("Error getting a quote:", e);
     }
@@ -71,7 +71,6 @@ const DashboardProvider = ({ children }) => {
       }));
 
       setChartData(dataset);
-      setChartDataLoaded(true);
     } catch (error) {
       console.log("Error in fetching steps last week: ", error);
     }
@@ -94,11 +93,15 @@ const DashboardProvider = ({ children }) => {
 
   const fetchTopLearningPlans = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/ai/top-plans`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        `${serverUrl}/api/ai/top-plans`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       console.log(response.data);
       setLearningPlans(response.data.learning_plans);
@@ -107,7 +110,9 @@ const DashboardProvider = ({ children }) => {
     }
   };
   return (
-    <dashboardContext.Provider value={{ quote, chartData, loading }}>
+    <dashboardContext.Provider
+      value={{ quote, chartData, loading, communities, learningPlans }}
+    >
       {children}
     </dashboardContext.Provider>
   );
