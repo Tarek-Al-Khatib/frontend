@@ -183,13 +183,23 @@ const Dashboard = () => {
                 <h2 className="mb-4 text-2xl font-normal text-black">
                   Top Communities
                 </h2>
-                <div className="grid grid-cols-1 p-4 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+                <div className="grid items-start w-full h-full grid-cols-1 p-4 sm:grid-cols-2 lg:grid-cols-3 gap-7">
                   {communities.map((community) => (
                     <div
                       key={community.id}
-                      className="flex flex-col items-center justify-center p-4 rounded"
+                      className="flex flex-col items-center justify-between p-4 rounded h-60"
                     >
-                      <div className="w-full h-24 mb-1 bg-navy rounded-3xl"></div>
+                      <div className="flex items-center justify-center w-full h-24 mb-4 overflow-hidden text-base font-light text-center text-blue-300 bg-blue-900 rounded-3xl first-letter:h-24">
+                        {community && community.community_banner ? (
+                          <img
+                            src={community.community_banner}
+                            alt={`${community.title} banner`}
+                            className="object-cover w-full h-full"
+                          />
+                        ) : (
+                          <span>No Logo</span>
+                        )}
+                      </div>
                       <div className="self-start">
                         <h3 className="text-xl font-bold text-navy">
                           {community.title}
