@@ -36,7 +36,7 @@ const Interview = () => {
     setShareFeedback,
     handleCloseIsCompleted,
   } = useContext(interviewContext);
-  const { setInterview } = useContext(videoContext);
+  const { interview, setInterview } = useContext(videoContext);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -68,21 +68,27 @@ const Interview = () => {
     <div>
       <Navbar />
       <ViewFeedback open={open} handleClose={handleClose} text={text} />
-      <AlertModal
-        open={isVideoCompleted}
-        text={"Is the interview completed ?"}
-        yesButton={() => {
-          setShareFeedback(true);
-        }}
-        noButton={() => {
-          handleCloseIsCompleted();
-        }}
-      />
-      <GiveFeedback
-        isOpen={shareFeedback}
-        onClose={handleFeedbackPageClose}
-        updateInterview={updateInterview}
-      />
+
+      {interview && interview.moderator.id === user.id && (
+        <AlertModal
+          open={isVideoCompleted}
+          text={"Is the interview completed ?"}
+          yesButton={() => {
+            setShareFeedback(true);
+          }}
+          noButton={() => {
+            handleCloseIsCompleted();
+          }}
+        />
+      )}
+      {interview && interview.moderator.id === user.id && (
+        <GiveFeedback
+          isOpen={shareFeedback}
+          onClose={handleFeedbackPageClose}
+          updateInterview={updateInterview}
+        />
+      )}
+
       <div className="min-h-screen p-8">
         <h1 className="pb-5 text-2xl font-thin text-navy">My Interviews</h1>
 
