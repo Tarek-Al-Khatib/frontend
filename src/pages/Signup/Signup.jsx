@@ -148,7 +148,7 @@ const SignUp = () => {
               </button>
               <p className="pt-8 text-sm text-center text-navy">
                 Already have an account?{" "}
-                <button>
+                <button onClick={() => navigation("/signin")}>
                   <strong>Login</strong>
                 </button>
               </p>

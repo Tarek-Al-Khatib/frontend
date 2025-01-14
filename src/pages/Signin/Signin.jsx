@@ -62,7 +62,9 @@ const Signin = () => {
           <div className="flex items-center justify-center w-full ">
             <div className="w-4/5 pr-8">
               <div>
-                <h3 className="text-2xl font-bold text-navy">Welcome Back!</h3>
+                <h3 className="text-2xl font-extrabold text-navy">
+                  Welcome Back!
+                </h3>
                 <p className="mb-6 text-sm font-bold text-dark-gray">
                   Let today be as a step to empower growth!
                 </p>
