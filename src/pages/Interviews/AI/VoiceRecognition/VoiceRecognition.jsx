@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 
 const VoiceRecognition = () => {
-  const [isRecording, setIsRecording] = useState(false);
+  const [isRecording, setIsRecording] = useState(true);
   const [transcript, setTranscript] = useState("");
   const { loading } = useContext(ChatContext);
   const { setUserInput } = useContext(ChatContext);

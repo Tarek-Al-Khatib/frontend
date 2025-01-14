@@ -143,7 +143,9 @@ const Interview = () => {
                                     className="object-cover w-full h-full rounded-full"
                                   />
                                 </div>
-                                {interview.interviewer.username}
+                                {interview.interviewer.username !== null
+                                  ? "AI"
+                                  : interview.interviewer.username}
                               </div>
                             </div>
                           </TableCellStyled>
