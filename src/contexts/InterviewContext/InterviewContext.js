@@ -9,6 +9,15 @@ const InterviewProvider = ({ children }) => {
   const [userInterviews, setUserInterviews] = useState([]);
   const [interviewInvitations, setInterviewInvitations] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [isVideoCompleted, setIsVideoCompleted] = useState(false);
+
+  const handleOpenIsCompleted = () => {
+    setIsVideoCompleted(true);
+  };
+
+  const handleCloseIsCompleted = () => {
+    setIsVideoCompleted(false);
+  };
 
   const fetchInterviews = async (token) => {
     try {
@@ -95,6 +104,10 @@ const InterviewProvider = ({ children }) => {
         createInterview,
         updateInterview,
         updateStatus,
+        isVideoCompleted,
+        setIsVideoCompleted,
+        handleOpenIsCompleted,
+        handleCloseIsCompleted,
       }}
     >
       {children}

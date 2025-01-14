@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { videoContext } from "../../../contexts/VideoCallContext/VideoCallContext";
 import { useNavigate } from "react-router-dom";
+import { interviewContext } from "../../../contexts/InterviewContext/InterviewContext";
 
 const VideoInterview = () => {
   const { roomId, fetchRoom, setRoomId, setInterview } =
     useContext(videoContext);
+  const { handleOpenIsCompleted } = useContext(interviewContext);
   const navigate = useNavigate();
   const [scriptsLoaded, setScriptsLoaded] = useState(false);
   const token = localStorage.getItem("token");
@@ -65,6 +67,8 @@ const VideoInterview = () => {
             iframe.destroy();
             setRoomId(null);
             setInterview(null);
+            console.log(typeof handleOpenIsCompleted);
+            handleOpenIsCompleted();
             navigate("/interview");
           });
 

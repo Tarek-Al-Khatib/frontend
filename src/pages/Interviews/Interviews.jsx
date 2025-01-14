@@ -17,6 +17,7 @@ import moment from "moment";
 import { videoContext } from "../../contexts/VideoCallContext/VideoCallContext";
 import { useNavigate } from "react-router-dom";
 import { serverUrl } from "../../config/url";
+import AlertModal from "./Modal/AlertModal";
 const Interview = () => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
@@ -28,6 +29,7 @@ const Interview = () => {
     updateStatus,
     fetchInterviews,
     fetchInvitations,
+    isVideoCompleted,
   } = useContext(interviewContext);
   const { setInterview } = useContext(videoContext);
   const [open, setOpen] = useState(false);
@@ -52,10 +54,21 @@ const Interview = () => {
     setInterview(interview);
     navigate("/meeting");
   };
+
   return (
     <div>
       <Navbar />
       <ViewFeedback open={open} handleClose={handleClose} text={text} />
+      <AlertModal
+        open={isVideoCompleted}
+        text={"Is the interview completed ?"}
+        yesButton={() => {
+          console.log("yes");
+        }}
+        noButton={() => {
+          console.log("no");
+        }}
+      />
       <div className="min-h-screen p-8">
         <h1 className="pb-5 text-2xl font-thin text-navy">My Interviews</h1>
 
