@@ -29,6 +29,8 @@ const Communities = () => {
   const [flipChannel, setFlipChannel] = useState(true);
   const [flipModerators, setFlipModerators] = useState(true);
 
+  const [selectedModerator, setSelectedModerator] = useState(null);
+
   const messagesContainerRef = useRef(null);
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -159,6 +161,10 @@ const Communities = () => {
 
       setMessages((prevMessages) => [...prevMessages, messageDisplay]);
     }
+  };
+
+  const handleOpenInviteDiv = (index) => {
+    setSelectedModerator((prevIndex) => (prevIndex === index ? null : index));
   };
 
   const messagesToRender = renderMessages(messages);
@@ -292,23 +298,42 @@ const Communities = () => {
                   {flipModerators && (
                     <div className="space-y-3">
                       {moderatorsData.map((moderator, index) => (
-                        <button
-                          key={index}
-                          className="flex items-center space-x-3"
-                        >
-                          <div className="w-6 h-6 bg-white rounded-full">
-                            {moderator.user && moderator.user.profile_pic && (
-                              <img
-                                src={moderator.user.profile_pic}
-                                alt={`${moderator.user.profile_pic} profile pic`}
-                                className="object-cover w-full h-full rounded-full"
-                              />
-                            )}
-                          </div>
-                          <div className="text-sm font-thin text-white">
-                            {moderator.user.username}
-                          </div>
-                        </button>
+                        <div>
+                          <button
+                            onClick={() => handleOpenInviteDiv(index)}
+                            key={index}
+                            className="flex items-center space-x-3"
+                          >
+                            <div className="w-6 h-6 bg-white rounded-full">
+                              {moderator.user && moderator.user.profile_pic && (
+                                <img
+                                  src={moderator.user.profile_pic}
+                                  alt={`${moderator.user.profile_pic} profile pic`}
+                                  className="object-cover w-full h-full rounded-full"
+                                />
+                              )}
+                            </div>
+                            <div className="text-sm font-thin text-white">
+                              {moderator.user.username}
+                            </div>
+                          </button>
+                          {selectedModerator === index && (
+                            <div className="p-2 mt-2 text-white bg-gray-800 rounded shadow-lg">
+                              <p>
+                                Invite {moderator.user.username} to an
+                                interview?
+                              </p>
+                              <button
+                                className="px-2 py-1 mt-1 text-white bg-blue-600 rounded hover:bg-blue-500"
+                                onClick={() =>
+                                  alert(`Invited ${moderator.user.username}!`)
+                                }
+                              >
+                                Invite
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       ))}
                     </div>
                   )}

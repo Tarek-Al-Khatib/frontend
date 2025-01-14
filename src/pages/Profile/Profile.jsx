@@ -52,7 +52,7 @@ const Profile = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="flex gap-10 p-5">
             <div className="flex flex-col justify-between gap-8">
-              <div class="flex gap-5 justify-between w-[650px] border rounded-2xl border-gray-200 bg-white p-6 h-fit">
+              <div class="flex gap-5 justify-between w-full border rounded-2xl border-gray-200 bg-white p-6 h-fit">
                 <div class="w-32 h-32 rounded-full flex justify-center items-center">
                   <div className="relative">
                     {profileImage ? (
@@ -87,7 +87,7 @@ const Profile = () => {
                   </div>
                 </div>
 
-                <div class="flex justify-center gap-10">
+                <div class="flex justify-between gap-5">
                   <div className="flex flex-col justify-center w-1/3 gap-5">
                     <div class="flex justify-start gap-5">
                       <span class="text-[#1e25a6] text-sm font-normal font-['Open Sans Hebrew']">
@@ -114,7 +114,17 @@ const Profile = () => {
                       </span>
                     </div>
                   </div>
-                  <div class="flex flex-col items-center w-1/3">
+                  <div className="flex flex-col justify-center w-1/4 gap-5">
+                    <span class="text-[#1e25a6] text-sm font-normal font-['Open Sans Hebrew']">
+                      Description:
+                    </span>
+                    <span class="text-[#1e25a6] text-sm font-bold font-['Open Sans Hebrew']">
+                      {user && user.desription
+                        ? user.description
+                        : "No description"}
+                    </span>
+                  </div>
+                  <div class="flex flex-col items-center w-1/4">
                     <span class="text-[#1e25a6] text-base font-extrabold font-['Open Sans Hebrew'] mb-4">
                       Badges
                     </span>
@@ -147,12 +157,14 @@ const Profile = () => {
                   </div>
 
                   <div className="bg-white h-[570px] pt-4">
-                    <div className="space-y-4 h-[570px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
+                    <div className="space-y-4 h-[570px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal ">
                       {learningPlans.map((plan) => (
                         <div className="flex justify-between pr-3">
                           <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">{plan.title}</p>
-                            <p className="font-normal text-navy">
+                            <p className="w-4/5 font-bold text-navy">
+                              {plan.title}
+                            </p>
+                            <p className="w-4/5 font-normal text-navy">
                               {plan.description}
                             </p>
                           </div>
@@ -172,8 +184,8 @@ const Profile = () => {
                     My Communities
                   </div>
 
-                  <div className="p-4 bg-white h-[550px] px-0">
-                    <div className="flex flex-col gap-6 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal">
+                  <div className="p-4 bg-white h-[550px] w-full px-0 w-1/2">
+                    <div className="flex flex-col gap-6 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal ">
                       {communities.map((community) => (
                         <div className="flex items-center gap-4 pr-2">
                           <div className="flex items-center justify-center w-12 h-12 overflow-hidden rounded-full bg-navy">
@@ -193,7 +205,7 @@ const Profile = () => {
                             <p className="font-bold text-navy">
                               {community.title}
                             </p>
-                            <p className="font-normal text-navy">
+                            <p className="w-4/5 font-normal text-navy">
                               {community.description}
                             </p>
                           </div>

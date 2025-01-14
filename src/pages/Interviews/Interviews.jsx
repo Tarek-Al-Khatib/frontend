@@ -16,6 +16,7 @@ import { authContext } from "../../contexts/AuthContext/AuthContext";
 import moment from "moment";
 import { videoContext } from "../../contexts/VideoCallContext/VideoCallContext";
 import { useNavigate } from "react-router-dom";
+import { serverUrl } from "../../config/url";
 const Interview = () => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
@@ -138,12 +139,16 @@ const Interview = () => {
                               <div className="flex items-center gap-1">
                                 <div className="rounded-full w-9 h-9">
                                   <img
-                                    src={interview.interviewer.profile_pic}
-                                    alt={`${interview.interviewer.profile_pic} profile pic`}
+                                    src={
+                                      typeof interview.interviewer !== "object"
+                                        ? `${serverUrl}/uploads/ai.jpg`
+                                        : interview.interviewer.profile_pic
+                                    }
+                                    alt={`Interviewer profile pic`}
                                     className="object-cover w-full h-full rounded-full"
                                   />
                                 </div>
-                                {interview.interviewer.username !== null
+                                {typeof interview.interviewer !== "object"
                                   ? "AI"
                                   : interview.interviewer.username}
                               </div>
