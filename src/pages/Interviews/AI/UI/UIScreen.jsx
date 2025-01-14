@@ -22,7 +22,7 @@ const UI = () => {
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       event.preventDefault();
-      event.returnValue = ""; // Required for most browsers to show a confirmation dialog
+      event.returnValue = "";
     };
 
     const handlePopState = (event) => {
@@ -30,13 +30,12 @@ const UI = () => {
         "You have unsaved changes. Do you really want to leave?"
       );
       if (!confirmed) {
-        // Push the current state back to prevent navigation
         window.history.pushState(null, "", window.location.href);
       }
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
-    window.history.pushState(null, "", window.location.href); // Add to history stack
+    window.history.pushState(null, "", window.location.href);
     window.addEventListener("popstate", handlePopState);
     const enableAudioPlayback = () => {
       setIsUserInteracted(true);

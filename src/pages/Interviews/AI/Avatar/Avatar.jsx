@@ -7,6 +7,7 @@ import ModelPath from "../../../../assets/ai/678026faf8c9ed00ef2678ac-transforme
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 import { SkeletonUtils } from "three-stdlib";
 import { authContext } from "../../../../contexts/AuthContext/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const facialExpressions = {
   default: {},
@@ -104,6 +105,7 @@ const corresponding = {
 let setupMode = false;
 
 export function Avatar(props) {
+  const navigate = useNavigate();
   const { scene } = useGLTF(ModelPath);
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = useGraph(clone);
@@ -219,11 +221,14 @@ export function Avatar(props) {
             "Audio is still playing. Waiting to execute ending mechanism."
           );
         } else {
-          console.log(
-            "No audio playing. Executing ending mechanism immediately."
-          );
-          onMessagePlayed();
-          complete();
+          if (audio != null) {
+            console.log(
+              "No audio playing. Executing ending mechanism immediately."
+            );
+            onMessagePlayed();
+            complete();
+            navigate("/interview");
+          }
         }
       }, 1000);
     }
