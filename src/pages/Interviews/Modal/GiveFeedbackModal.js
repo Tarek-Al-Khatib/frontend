@@ -10,9 +10,8 @@ import "../../../css/colors.css";
 import React, { useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const GiveFeedback = ({ isOpen, onClose }) => {
+const GiveFeedback = ({ isOpen, onClose, updateInterview }) => {
   const [feedback, setFeedback] = useState("");
-
   const handleInputChange = (e) => {
     setFeedback(e.target.value);
   };
@@ -21,6 +20,7 @@ const GiveFeedback = ({ isOpen, onClose }) => {
     if (feedback.trim() !== "") {
       try {
         console.log("Feedback submitted:", feedback);
+        updateInterview({ feedback: feedback });
         onClose();
       } catch (e) {
         console.log("Error in submitting feedback", e);

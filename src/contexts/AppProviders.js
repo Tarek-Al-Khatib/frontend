@@ -11,15 +11,15 @@ const AppProviders = ({ children }) => (
   <AuthProvider>
     <GeneralProvider>
       <ChatProvider>
-        <InterviewProvider>
-          <VideoProvider>
+        <VideoProvider>
+          <InterviewProvider>
             <LearningProvider>
               <CommunityProvider>
                 <DashboardProvider>{children}</DashboardProvider>
               </CommunityProvider>
             </LearningProvider>
-          </VideoProvider>
-        </InterviewProvider>
+          </InterviewProvider>
+        </VideoProvider>
       </ChatProvider>
     </GeneralProvider>
   </AuthProvider>

@@ -30,6 +30,7 @@ const Interview = () => {
     updateStatus,
     fetchInterviews,
     fetchInvitations,
+    updateInterview,
     isVideoCompleted,
     shareFeedback,
     setShareFeedback,
@@ -77,7 +78,11 @@ const Interview = () => {
           handleCloseIsCompleted();
         }}
       />
-      <GiveFeedback isOpen={shareFeedback} onClose={handleFeedbackPageClose} />
+      <GiveFeedback
+        isOpen={shareFeedback}
+        onClose={handleFeedbackPageClose}
+        updateInterview={updateInterview}
+      />
       <div className="min-h-screen p-8">
         <h1 className="pb-5 text-2xl font-thin text-navy">My Interviews</h1>
 

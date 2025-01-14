@@ -37,7 +37,7 @@ const VideoProvider = ({ children }) => {
   };
   return (
     <videoContext.Provider
-      value={{ roomId, setRoomId, setInterview, fetchRoom }}
+      value={{ roomId, setRoomId, setInterview, fetchRoom, interview }}
     >
       {children}
     </videoContext.Provider>

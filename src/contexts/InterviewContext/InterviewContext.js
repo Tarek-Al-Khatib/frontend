@@ -1,16 +1,18 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { useState } from "react";
 import { serverUrl } from "../../config/url";
 import axios from "axios";
+import { videoContext } from "../VideoCallContext/VideoCallContext";
 
 export const interviewContext = createContext();
 
 const InterviewProvider = ({ children }) => {
   const [userInterviews, setUserInterviews] = useState([]);
   const [interviewInvitations, setInterviewInvitations] = useState([]);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token] = useState(localStorage.getItem("token"));
   const [isVideoCompleted, setIsVideoCompleted] = useState(false);
   const [shareFeedback, setShareFeedback] = useState(false);
+  const { interview } = useContext(videoContext);
 
   const handleOpenIsCompleted = () => {
     setIsVideoCompleted(true);
@@ -68,16 +70,13 @@ const InterviewProvider = ({ children }) => {
   const updateInterview = async (interviewData) => {
     try {
       const response = await axios.put(
-        `${serverUrl}/api/interviews/${interviewData.id}`,
+        `${serverUrl}/api/interviews/${interview.id}`,
         interviewData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log(response);
     } catch (error) {
-      console.log(
-        `Error updating interview with id ${interviewData.id}:`,
-        error
-      );
+      console.log(`Error updating interview with id ${interview.id}:`, error);
     }
   };
 

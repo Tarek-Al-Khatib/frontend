@@ -41,7 +41,6 @@ const VideoInterview = () => {
       }
       setScriptsLoaded(false);
       setRoomId(null);
-      setInterview(null);
     };
   }, []);
 
@@ -66,7 +65,6 @@ const VideoInterview = () => {
           iframe.on("left-meeting", () => {
             iframe.destroy();
             setRoomId(null);
-            setInterview(null);
             console.log(typeof handleOpenIsCompleted);
             handleOpenIsCompleted();
             navigate("/interview");
