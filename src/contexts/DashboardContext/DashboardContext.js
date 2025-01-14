@@ -111,7 +111,14 @@ const DashboardProvider = ({ children }) => {
   };
   return (
     <dashboardContext.Provider
-      value={{ quote, chartData, loading, communities, learningPlans }}
+      value={{
+        quote,
+        chartData,
+        loading,
+        communities,
+        learningPlans,
+        setLearningPlans,
+      }}
     >
       {children}
     </dashboardContext.Provider>

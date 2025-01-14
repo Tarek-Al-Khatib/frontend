@@ -20,10 +20,18 @@ import {
   YAxis,
 } from "recharts";
 import { HashLoader } from "react-spinners";
+import { learningContext } from "../../contexts/LearningContext/LearningContext";
 const Dashboard = () => {
-  const { quote, chartData, loading, communities, learningPlans } =
-    useContext(dashboardContext);
+  const {
+    quote,
+    chartData,
+    loading,
+    communities,
+    learningPlans,
+    setLearningPlans,
+  } = useContext(dashboardContext);
   const { user } = useContext(authContext);
+  const { addPlan } = useContext(learningContext);
   const navigation = useNavigate();
 
   const [dashboardButtons, setDashboardButtons] = useState([]);
@@ -153,7 +161,7 @@ const Dashboard = () => {
                   Top Learning Picks
                 </h2>
                 <div className="flex items-center justify-center ">
-                  {learningPlans.map((pick) => (
+                  {learningPlans.map((pick, index) => (
                     <div
                       key={pick.title}
                       className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded"
@@ -171,8 +179,29 @@ const Dashboard = () => {
                           <li key={index}>{step.step_title}</li>
                         ))}
                       </ul>
-                      <button className="w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
-                        Add to your learning
+                      <button
+                        disabled={pick.is_added}
+                        onClick={() => {
+                          addPlan(
+                            {
+                              title: pick.title,
+                              description: pick.description,
+                            },
+                            pick.steps
+                          );
+                          setLearningPlans((prevPlans) =>
+                            prevPlans.map((plan, i) =>
+                              i === index ? { ...plan, is_added: true } : plan
+                            )
+                          );
+
+                          navigation("/learning");
+                        }}
+                        className={`w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl ${
+                          pick.is_added ? "bg-blue " : "bg-navy"
+                        } hover:bg-blue-700`}
+                      >
+                        {pick.is_added ? "Added " : "Add to your learning"}
                       </button>
                     </div>
                   ))}
