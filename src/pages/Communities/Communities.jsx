@@ -13,6 +13,7 @@ import CreateChannel from "./Modals/CreateChannelModal";
 import { useSocket } from "../../utils/useSocket";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
 import moment from "moment";
+import InviteModerator from "./Modals/InviteModeratorModal";
 
 const Communities = () => {
   const {
@@ -29,12 +30,13 @@ const Communities = () => {
   const [flipChannel, setFlipChannel] = useState(true);
   const [flipModerators, setFlipModerators] = useState(true);
 
-  const [selectedModerator, setSelectedModerator] = useState(null);
+  const [inviteModal, setInviteModal] = useState(false);
 
   const messagesContainerRef = useRef(null);
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const [selectedModerator, setSelectedModerator] = useState(null);
   const [selectedCommunity, setSelectedCommunity] = useState(null);
   const [selectedChannel, setSelectedChannel] = useState(null);
   const [moderatorsData, setModeratorsData] = useState(
@@ -167,6 +169,11 @@ const Communities = () => {
     setSelectedModerator((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  const handleCloseInvite = () => {
+    setInviteModal(false);
+    setSelectedModerator(null);
+  };
+
   const messagesToRender = renderMessages(messages);
 
   return (
@@ -181,6 +188,7 @@ const Communities = () => {
         onClose={handleChannelModalToggle}
         communityId={selectedCommunity ? selectedCommunity.id : null}
       />
+      <InviteModerator isOpen={inviteModal} onClose={handleCloseInvite} />
       <div className="flex w-full bg-white h-screen/92">
         <div className="flex flex-col items-center w-24 max-h-screen py-6 overflow-y-auto bg-white scrollbar-hidden">
           <div className="flex flex-col items-center w-full ">
@@ -325,9 +333,7 @@ const Communities = () => {
                               </p>
                               <button
                                 className="px-2 py-1 mt-1 text-white bg-blue-600 rounded hover:bg-blue-500"
-                                onClick={() =>
-                                  alert(`Invited ${moderator.user.username}!`)
-                                }
+                                onClick={() => setInviteModal(true)}
                               >
                                 Invite
                               </button>
