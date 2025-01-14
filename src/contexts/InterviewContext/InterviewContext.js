@@ -10,6 +10,7 @@ const InterviewProvider = ({ children }) => {
   const [interviewInvitations, setInterviewInvitations] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isVideoCompleted, setIsVideoCompleted] = useState(false);
+  const [shareFeedback, setShareFeedback] = useState(false);
 
   const handleOpenIsCompleted = () => {
     setIsVideoCompleted(true);
@@ -108,6 +109,8 @@ const InterviewProvider = ({ children }) => {
         setIsVideoCompleted,
         handleOpenIsCompleted,
         handleCloseIsCompleted,
+        shareFeedback,
+        setShareFeedback,
       }}
     >
       {children}

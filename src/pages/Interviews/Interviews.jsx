@@ -18,6 +18,7 @@ import { videoContext } from "../../contexts/VideoCallContext/VideoCallContext";
 import { useNavigate } from "react-router-dom";
 import { serverUrl } from "../../config/url";
 import AlertModal from "./Modal/AlertModal";
+import GiveFeedback from "./Modal/GiveFeedbackModal";
 const Interview = () => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
@@ -30,6 +31,9 @@ const Interview = () => {
     fetchInterviews,
     fetchInvitations,
     isVideoCompleted,
+    shareFeedback,
+    setShareFeedback,
+    handleCloseIsCompleted,
   } = useContext(interviewContext);
   const { setInterview } = useContext(videoContext);
   const [open, setOpen] = useState(false);
@@ -55,6 +59,10 @@ const Interview = () => {
     navigate("/meeting");
   };
 
+  const handleFeedbackPageClose = () => {
+    setShareFeedback(false);
+    handleCloseIsCompleted();
+  };
   return (
     <div>
       <Navbar />
@@ -63,12 +71,13 @@ const Interview = () => {
         open={isVideoCompleted}
         text={"Is the interview completed ?"}
         yesButton={() => {
-          console.log("yes");
+          setShareFeedback(true);
         }}
         noButton={() => {
-          console.log("no");
+          handleCloseIsCompleted();
         }}
       />
+      <GiveFeedback isOpen={shareFeedback} onClose={handleFeedbackPageClose} />
       <div className="min-h-screen p-8">
         <h1 className="pb-5 text-2xl font-thin text-navy">My Interviews</h1>
 
