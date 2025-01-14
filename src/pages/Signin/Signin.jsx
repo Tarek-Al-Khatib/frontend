@@ -56,11 +56,11 @@ const Signin = () => {
           </Alert>
         </Collapse>
         <div
-          className="bg-white w-[923px] p-12 pb-0 rounded-lg shadow-lg flex flex-col items-center justify-center gap-10"
+          className="flex flex-col items-center justify-center w-1/3 gap-10 p-12 pb-0 bg-white rounded-lg shadow-lg"
           style={{ borderRadius: 50 }}
         >
           <div className="flex items-center justify-center w-full ">
-            <div className="w-3/5 pr-8">
+            <div className="w-4/5 pr-8">
               <div>
                 <h3 className="text-2xl font-bold text-navy">Welcome Back!</h3>
                 <p className="mb-6 text-sm font-bold text-dark-gray">
@@ -134,7 +134,7 @@ const Signin = () => {
                 </button>
               </div>
             </div>
-            <Divider
+            {/* <Divider
               orientation="vertical"
               textAlign="center"
               flexItem
@@ -153,7 +153,7 @@ const Signin = () => {
               <strong>Sign in with Google</strong>
               <strong>Sign in with Github</strong>
               <strong>Sign in with Linkedin</strong>
-            </div>
+            </div> */}
           </div>
           <p className="pb-4 text-sm text-navy">
             No account? No problem,{" "}
