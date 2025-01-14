@@ -157,7 +157,7 @@ const Signin = () => {
           </div>
           <p className="pb-4 text-sm text-navy">
             No account? No problem,{" "}
-            <button>
+            <button onClick={() => navigation("/signup")}>
               <strong>Signup</strong>
             </button>
           </p>
