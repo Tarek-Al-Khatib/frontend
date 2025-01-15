@@ -109,7 +109,7 @@ const CommunityProvider = ({ children }) => {
   const joinCommunity = async (communityId, role = "USER") => {
     try {
       const response = await axios.post(
-        `${serverUrl}/api/communities/${user.id}/${communityId}/join`,
+        `${serverUrl}/api/community/${communityId}/join`,
         { role },
         {
           headers: {
@@ -118,7 +118,8 @@ const CommunityProvider = ({ children }) => {
         }
       );
 
-      return response;
+      console.log(response);
+      fetchUserCommunities();
     } catch (error) {
       console.error("Error joining community:", error);
     }
