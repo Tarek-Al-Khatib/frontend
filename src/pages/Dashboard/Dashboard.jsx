@@ -21,6 +21,7 @@ import {
 } from "recharts";
 import { HashLoader } from "react-spinners";
 import { learningContext } from "../../contexts/LearningContext/LearningContext";
+import { communityContext } from "../../contexts/CommunityContext/CommunityContext";
 const Dashboard = () => {
   const {
     quote,
@@ -30,6 +31,7 @@ const Dashboard = () => {
     learningPlans,
     setLearningPlans,
   } = useContext(dashboardContext);
+  const { joinCommunity } = useContext(communityContext);
   const { user } = useContext(authContext);
   const { addPlan } = useContext(learningContext);
   const navigation = useNavigate();
@@ -60,7 +62,7 @@ const Dashboard = () => {
         id: 4,
         label: "My Profile",
         icon: <FaUserPen size={80} />,
-        url: "/profile",
+        url: "/myprofile",
       },
     ]);
   }, []);
@@ -237,7 +239,10 @@ const Dashboard = () => {
                           {community.description}
                         </p>
                       </div>
-                      <button className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700">
+                      <button
+                        onClick={() => joinCommunity(community.id)}
+                        className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700"
+                      >
                         Join Community
                       </button>
                     </div>
