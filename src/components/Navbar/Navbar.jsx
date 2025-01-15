@@ -5,7 +5,7 @@ import Logo from "../../assets/logo.png";
 import "../../css/colors.css";
 import Avatar from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import InfoIcon from "@mui/icons-material/Info";
 import NotificationSound from "../../assets/sounds/notification.mp3";
 import EventNoteIcon from "@mui/icons-material/EventNote";
@@ -29,6 +29,8 @@ const Navbar = () => {
   const socket = useSocket();
   const { user } = useContext(authContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedPage, setSelectedPage] = useState(location.pathname);
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
   const { notifications, setNotifications, markAsReadNotifications } =
@@ -76,16 +78,44 @@ const Navbar = () => {
           <img src={Logo} alt="Logo" className="w-16 h-16" />
         </div>
         <nav className="flex items-center gap-24 text-xl font-thin">
-          <button className="text-navy" onClick={() => navigate("/dashboard")}>
+          <button
+            className={`text-navy ${
+              selectedPage === "/dashboard" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              navigate("/dashboard");
+            }}
+          >
             Dashboard
           </button>
-          <button className="text-navy" onClick={() => navigate("/learning")}>
+          <button
+            className={`text-navy  ${
+              selectedPage === "/learning" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              navigate("/learning");
+            }}
+          >
             My Learning
           </button>
-          <button className="text-navy" onClick={() => navigate("/community")}>
+          <button
+            className={`text-navy  ${
+              selectedPage === "/community" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              navigate("/community");
+            }}
+          >
             Communities
           </button>
-          <button className="text-navy" onClick={() => navigate("/interview")}>
+          <button
+            className={`text-navy  ${
+              selectedPage === "/interview" ? "font-bold" : ""
+            }`}
+            onClick={() => {
+              navigate("/interview");
+            }}
+          >
             My Interviews
           </button>
         </nav>

@@ -55,10 +55,15 @@ const CreateCommunity = ({ isOpen, onClose }) => {
       <div className="flex justify-between">
         <DialogTitle
           className="text-navy"
-          sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 22 }}
+          sx={{
+            fontWeight: "800",
+            fontFamily: "Open Sans",
+            fontSize: 22,
+            width: "80%",
+          }}
         >
           New Community? Let's go!
-          <p className="text-xs text-gray-300">
+          <p className="text-base text-gray-300 ">
             Customize your community to fit in people with similar interests as
             you
           </p>
@@ -79,7 +84,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
           <div className="mb-3">
             <label
               htmlFor="title"
-              className="block mb-3 text-xs font-extrabold text-navy"
+              className="block mb-3 text-base font-extrabold text-navy"
             >
               Community Name
             </label>
@@ -94,7 +99,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
                   fontWeight: "500",
-                  borderRadius: 5,
+                  borderRadius: 1,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#E5E5E5",
@@ -105,7 +110,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
           <div className="mb-3">
             <label
               htmlFor="description"
-              className="block mb-3 text-xs font-extrabold text-navy"
+              className="block mb-3 text-base font-extrabold text-navy"
             >
               Community Description
             </label>
@@ -122,7 +127,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
                   fontWeight: "500",
-                  borderRadius: 5,
+                  borderRadius: 1,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#E5E5E5",
@@ -146,7 +151,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
 
               <label
                 htmlFor="community_logo"
-                className="flex items-center justify-center text-xs font-extrabold cursor-pointer text-navy"
+                className="flex items-center justify-center text-base font-extrabold cursor-pointer text-navy"
               >
                 Community Logo
               </label>
@@ -175,7 +180,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
 
               <label
                 htmlFor="community_banner"
-                className="flex items-center justify-center text-xs font-extrabold cursor-pointer text-navy"
+                className="flex items-center justify-center text-base font-extrabold cursor-pointer text-navy"
               >
                 Community Banner
               </label>

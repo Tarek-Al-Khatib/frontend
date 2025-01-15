@@ -95,14 +95,14 @@ const InviteModerator = ({ isOpen, onClose, createInterview, data }) => {
                 shrink: true,
               }}
               inputProps={{
-                min: new Date().toISOString().split("T")[0], // Set the minimum date to today
+                min: new Date().toISOString().split("T")[0],
               }}
               sx={{
                 width: "100%",
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
                   fontWeight: "500",
-                  borderRadius: 5,
+                  borderRadius: 1,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#E5E5E5",
@@ -132,7 +132,7 @@ const InviteModerator = ({ isOpen, onClose, createInterview, data }) => {
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
                   fontWeight: "500",
-                  borderRadius: 5,
+                  borderRadius: 1,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#E5E5E5",

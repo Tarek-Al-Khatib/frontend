@@ -53,7 +53,7 @@ const CreateChannel = ({ isOpen, onClose, communityId }) => {
         >
           <div className="flex items-center gap-1">
             Create a channel!
-            <p className="text-sm text-gray-300">(ensure it's meaningful)</p>
+            <p className="text-base text-gray-300">(ensure it's meaningful)</p>
           </div>
         </DialogTitle>
 
@@ -72,7 +72,7 @@ const CreateChannel = ({ isOpen, onClose, communityId }) => {
           <div className="mb-3">
             <label
               htmlFor="name"
-              className="block mb-3 text-xs font-extrabold text-navy"
+              className="block mb-3 text-base font-extrabold text-navy"
             >
               Channel Name
             </label>
@@ -87,7 +87,7 @@ const CreateChannel = ({ isOpen, onClose, communityId }) => {
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
                   fontWeight: "500",
-                  borderRadius: 5,
+                  borderRadius: 1,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#E5E5E5",
@@ -98,7 +98,7 @@ const CreateChannel = ({ isOpen, onClose, communityId }) => {
           <div className="mb-3">
             <label
               htmlFor="description"
-              className="block mb-3 text-xs font-extrabold text-navy"
+              className="block mb-3 text-base font-extrabold text-navy"
             >
               Channel Description
             </label>
@@ -115,7 +115,7 @@ const CreateChannel = ({ isOpen, onClose, communityId }) => {
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
                   fontWeight: "500",
-                  borderRadius: 5,
+                  borderRadius: 1,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#E5E5E5",
@@ -127,7 +127,7 @@ const CreateChannel = ({ isOpen, onClose, communityId }) => {
         <DialogActions>
           <button
             type="submit"
-            className="px-8 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
+            className="px-8 py-2 text-base font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
           >
             Create Channel
           </button>

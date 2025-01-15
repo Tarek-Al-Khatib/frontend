@@ -274,7 +274,7 @@ const Interview = () => {
                                 onClick={() =>
                                   updateStatus(invitation.id, "REJECTED")
                                 }
-                                className="px-6 py-2 text-base font-bold text-white transition bg-red-400 hover:bg-red-600 rounded-self"
+                                className="px-6 py-2 text-base font-bold text-white transition bg-blue-300 hover:bg-blue-500 rounded-self"
                               >
                                 Reject
                               </button>
@@ -282,7 +282,7 @@ const Interview = () => {
                                 onClick={() =>
                                   updateStatus(invitation.id, "ACCEPTED")
                                 }
-                                className="px-6 py-2 text-base font-bold text-white transition bg-green-400 hover:bg-green-600 rounded-self"
+                                className="px-6 py-2 text-base font-bold text-white transition bg-blue-500 hover:bg-blue-600 rounded-self"
                               >
                                 Accept
                               </button>
@@ -295,7 +295,7 @@ const Interview = () => {
                               Start Interview
                             </button>
                           ) : (
-                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-red-400 rounded-self">
+                            <div className="px-6 py-2 text-xl font-bold text-center text-white transition bg-blue-400 hover:bg-blue-600 rounded-self">
                               Rejected
                             </div>
                           )}
@@ -335,7 +335,7 @@ const Interview = () => {
                         </TableCellStyled>
                         <TableCellStyled dark end>
                           {invitation.status === "PENDING" ? (
-                            <div className="px-6 py-2 text-base font-bold text-center text-yellow-300 transition">
+                            <div className="px-6 py-2 text-base font-bold text-center text-blue-700 transition">
                               Pending
                             </div>
                           ) : invitation.status === "ACCEPTED" ? (

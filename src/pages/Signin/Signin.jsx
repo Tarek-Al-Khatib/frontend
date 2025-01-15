@@ -73,7 +73,7 @@ const Signin = () => {
                   <div>
                     <label
                       htmlFor="emailOrUsername"
-                      className="block mb-3 text-xs font-extrabold text-navy"
+                      className="block mb-3 text-base font-extrabold text-navy"
                     >
                       Username/email
                     </label>
@@ -85,7 +85,7 @@ const Signin = () => {
                         width: "100%",
 
                         "& .MuiOutlinedInput-root": {
-                          borderRadius: 5,
+                          borderRadius: 1,
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
                           borderColor: "#E5E5E5",
@@ -97,7 +97,7 @@ const Signin = () => {
                   <div>
                     <label
                       htmlFor="password"
-                      className="block mb-3 text-xs font-extrabold text-navy"
+                      className="block mb-3 text-base font-extrabold text-navy"
                     >
                       Password
                     </label>
@@ -109,7 +109,7 @@ const Signin = () => {
                       sx={{
                         width: "100%",
                         "& .MuiOutlinedInput-root": {
-                          borderRadius: 5,
+                          borderRadius: 1,
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
                           borderColor: "#E5E5E5",
@@ -120,12 +120,7 @@ const Signin = () => {
                 </div>
 
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm text-navy">
-                    Forgot your password?{" "}
-                    <button>
-                      <strong>Reset</strong>
-                    </button>
-                  </p>
+                  <p className="text-sm text-navy">Forgot your password?</p>
                 </div>
 
                 <button
@@ -160,7 +155,7 @@ const Signin = () => {
           <p className="pb-4 text-sm text-navy">
             No account? No problem,{" "}
             <button onClick={() => navigation("/signup")}>
-              <strong>Signup</strong>
+              <strong>Sign Up</strong>
             </button>
           </p>
         </div>

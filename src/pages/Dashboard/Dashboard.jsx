@@ -199,7 +199,7 @@ const Dashboard = () => {
 
                           navigation("/learning");
                         }}
-                        className={`w-full px-6 py-2 mt-4 font-bold text-white transition rounded-xl ${
+                        className={`w-full px-6 py-2 mt-4 font-bold text-white transition rounded-lg ${
                           pick.is_added ? "bg-blue " : "bg-navy"
                         } hover:bg-blue-700`}
                       >
@@ -242,7 +242,7 @@ const Dashboard = () => {
                         </div>
                         <button
                           onClick={() => joinCommunity(community.id)}
-                          className="self-start w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700"
+                          className="self-start w-2/3 py-1 mt-4 font-bold text-white transition rounded-lg bg-navy hover:bg-blue-700"
                         >
                           Join Community
                         </button>

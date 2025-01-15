@@ -63,7 +63,7 @@ const SignUp = () => {
               <h3 className="mb-3 text-2xl font-extrabold text-navy">
                 Hey there!
               </h3>
-              <p className="mb-6 text-sm font-medium text-dark-gray">
+              <p className="mb-6 text-base font-medium text-dark-gray">
                 You've chosen the right path, son. Let it glow!
               </p>
 
@@ -71,7 +71,7 @@ const SignUp = () => {
                 <div>
                   <label
                     htmlFor="username"
-                    className="block mb-3 text-xs font-extrabold text-navy"
+                    className="block mb-3 text-base font-extrabold text-navy"
                   >
                     Username
                   </label>
@@ -83,7 +83,7 @@ const SignUp = () => {
                       width: "100%",
 
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 5,
+                        borderRadius: 1,
                       },
                       "& .MuiOutlinedInput-notchedOutline": {
                         borderColor: "#E5E5E5",
@@ -94,7 +94,7 @@ const SignUp = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block mb-3 text-xs font-extrabold text-navy"
+                    className="block mb-3 text-base font-extrabold text-navy"
                   >
                     Email
                   </label>
@@ -106,7 +106,7 @@ const SignUp = () => {
                       width: "100%",
 
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 5,
+                        borderRadius: 1,
                       },
                       "& .MuiOutlinedInput-notchedOutline": {
                         borderColor: "#E5E5E5",
@@ -118,7 +118,7 @@ const SignUp = () => {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block mb-3 text-xs font-extrabold text-navy"
+                    className="block mb-3 text-base font-extrabold text-navy"
                   >
                     Password
                   </label>
@@ -130,7 +130,7 @@ const SignUp = () => {
                     sx={{
                       width: "100%",
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 5,
+                        borderRadius: 1,
                       },
                       "& .MuiOutlinedInput-notchedOutline": {
                         borderColor: "#E5E5E5",

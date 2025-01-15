@@ -107,7 +107,7 @@ const Learning = () => {
             <div className="flex justify-end">
               <button
                 onClick={() => setOpenAddModal(true)}
-                className="px-12 py-2 text-xl font-normal text-white bg-navy rounded-2xl"
+                className="px-12 py-2 text-xl font-normal text-white rounded-lg bg-navy"
               >
                 Add Plan
               </button>
