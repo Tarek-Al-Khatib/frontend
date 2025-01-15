@@ -215,38 +215,40 @@ const Dashboard = () => {
                   Top Communities
                 </h2>
                 <div className="grid items-start w-full h-full grid-cols-1 p-4 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                  {communities.map((community) => (
-                    <div
-                      key={community.id}
-                      className="flex flex-col items-center justify-between p-4 rounded h-60"
-                    >
-                      <div className="flex items-center justify-center w-full h-24 mb-4 overflow-hidden text-base font-light text-center text-blue-300 bg-blue-900 rounded-3xl first-letter:h-24">
-                        {community && community.community_banner ? (
-                          <img
-                            src={community.community_banner}
-                            alt={`${community.title} banner`}
-                            className="object-cover w-full h-full"
-                          />
-                        ) : (
-                          <span>No Logo</span>
-                        )}
-                      </div>
-                      <div className="self-start">
-                        <h3 className="text-xl font-bold text-navy">
-                          {community.title}
-                        </h3>
-                        <p className="text-base font-normal text-navy">
-                          {community.description}
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => joinCommunity(community.id)}
-                        className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700"
+                  {communities.length > 0 &&
+                    communities.map((community) => (
+                      <div
+                        key={community.id}
+                        className="flex flex-col items-center justify-between p-4 rounded h-60"
                       >
-                        Join Community
-                      </button>
-                    </div>
-                  ))}
+                        <div className="flex items-center justify-center w-full h-24 mb-4 overflow-hidden text-base font-light text-center text-blue-300 bg-blue-900 rounded-3xl first-letter:h-24">
+                          {community && community.community_banner ? (
+                            <img
+                              src={community.community_banner}
+                              alt={`${community.title} banner`}
+                              className="object-cover w-full h-full"
+                            />
+                          ) : (
+                            <span>No Logo</span>
+                          )}
+                        </div>
+                        <div className="self-start">
+                          <h3 className="text-xl font-bold text-navy">
+                            {community.title}
+                          </h3>
+                          <p className="text-base font-normal text-navy">
+                            {community.description}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => joinCommunity(community.id)}
+                          className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700"
+                        >
+                          Join Community
+                        </button>
+                      </div>
+                    ))}
+                  {communities.length === 0 && <p>No Communities to join</p>}
                 </div>
                 <div></div>
               </div>

@@ -14,9 +14,9 @@ const AppProviders = ({ children }) => (
         <VideoProvider>
           <InterviewProvider>
             <LearningProvider>
-              <CommunityProvider>
-                <DashboardProvider>{children}</DashboardProvider>
-              </CommunityProvider>
+              <DashboardProvider>
+                <CommunityProvider>{children}</CommunityProvider>
+              </DashboardProvider>
             </LearningProvider>
           </InterviewProvider>
         </VideoProvider>

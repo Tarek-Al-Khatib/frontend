@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { serverUrl } from "../../config/url";
 import { authContext } from "../AuthContext/AuthContext";
+import { dashboardContext } from "../DashboardContext/DashboardContext";
 
 export const communityContext = createContext();
 
@@ -10,6 +11,7 @@ const CommunityProvider = ({ children }) => {
   const [channels, setChannels] = useState([]);
   const [members, setMembers] = useState([]);
   const { user, token } = useContext(authContext);
+  const { fetchTopCommunities } = useContext(dashboardContext);
 
   useEffect(() => {
     if (user && token) fetchUserCommunities();
@@ -120,6 +122,7 @@ const CommunityProvider = ({ children }) => {
 
       console.log(response);
       fetchUserCommunities();
+      fetchTopCommunities();
     } catch (error) {
       console.error("Error joining community:", error);
     }

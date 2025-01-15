@@ -11,7 +11,7 @@ const DashboardProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [chartData, setChartData] = useState(null);
   const { token } = useContext(authContext);
-  const [communities, setCommunities] = useState(null);
+  const [communities, setCommunities] = useState([]);
   const [learningPlans, setLearningPlans] = useState(null);
   useEffect(() => {
     if (token) {
@@ -24,12 +24,7 @@ const DashboardProvider = ({ children }) => {
   }, [token]);
 
   useEffect(() => {
-    if (
-      quote !== null &&
-      chartData !== null &&
-      communities !== null &&
-      learningPlans !== null
-    ) {
+    if (quote !== null && chartData !== null && learningPlans !== null) {
       setLoading(false);
     }
   }, [quote, chartData, communities, learningPlans]);
@@ -123,6 +118,7 @@ const DashboardProvider = ({ children }) => {
         communities,
         learningPlans,
         setLearningPlans,
+        fetchTopCommunities,
       }}
     >
       {children}
