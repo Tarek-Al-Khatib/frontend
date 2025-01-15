@@ -113,8 +113,20 @@ const Navbar = () => {
               vertical: "top",
               horizontal: "right",
             }}
+            sx={{
+              borderRadius: 24,
+              "& .MuiPaper-root": {
+                borderRadius: 5,
+              },
+            }}
           >
-            <Box sx={{ width: 300, maxHeight: 400, overflowY: "auto" }}>
+            <Box
+              sx={{
+                width: 300,
+                maxHeight: 400,
+                overflowY: "auto",
+              }}
+            >
               <List>
                 {notifications.length > 0 ? (
                   notifications.map((notification, index) => {
@@ -127,7 +139,8 @@ const Navbar = () => {
                           alignItems: "flex-start",
                           display: "flex",
                           gap: 1,
-
+                          borderBottom: 1,
+                          borderColor: "#ddd",
                           backgroundColor: notification.is_read
                             ? ""
                             : "#b0e9ff",
