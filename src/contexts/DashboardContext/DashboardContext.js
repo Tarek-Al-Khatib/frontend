@@ -104,7 +104,12 @@ const DashboardProvider = ({ children }) => {
       );
 
       console.log(response.data);
-      setLearningPlans(response.data.learning_plans);
+      if (response.data.plans) {
+        setLearningPlans(response.data.plans);
+      }
+      if (response.data.learning_plans) {
+        setLearningPlans(response.data.learning_plans);
+      }
     } catch (error) {
       console.log(error);
     }
