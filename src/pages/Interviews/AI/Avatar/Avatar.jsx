@@ -221,7 +221,7 @@ export function Avatar(props) {
             "Audio is still playing. Waiting to execute ending mechanism."
           );
         } else {
-          if (audio != null) {
+          if (audio == null) {
             console.log(
               "No audio playing. Executing ending mechanism immediately."
             );

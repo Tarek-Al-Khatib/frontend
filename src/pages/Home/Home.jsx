@@ -11,9 +11,8 @@ const Home = () => {
     <div className="bg-gray-100">
       <header className="py-4 text-white bg-navy">
         <div className="container flex items-center justify-between w-11/12 mx-auto">
-          <div className="flex items-center space-x-2">
-            <img src={Logo} alt="Logo" className="w-16 h-16" />
-          </div>
+          <img src={Logo} alt="Logo" className="w-14 h-14" />
+
           <div className="flex items-center space-x-4">
             <nav className="flex space-x-6 text-2xl gap-14">
               <a href="#" className="hover:text-gray-200">
