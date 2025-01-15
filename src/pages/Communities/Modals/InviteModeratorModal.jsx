@@ -7,10 +7,10 @@ import {
   TextField,
 } from "@mui/material";
 import "../../../css/colors.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const InviteModerator = ({ isOpen, onClose }) => {
+const InviteModerator = ({ isOpen, onClose, createInterview, data }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
 
@@ -25,7 +25,9 @@ const InviteModerator = ({ isOpen, onClose }) => {
   const handleSubmit = async () => {
     if (selectedDate && selectedTime) {
       try {
-        console.log("Selected date and time:", selectedDate, selectedTime);
+        const date = new Date(`${selectedDate}T${selectedTime}:00`);
+        console.log({ ...data, type: "MODERATOR", date: date });
+        //createInterview({ ...data, type: "MODERATOR", date: date });
         onClose();
       } catch (e) {
         console.log("Error in selecting date and time", e);

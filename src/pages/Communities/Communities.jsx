@@ -14,6 +14,7 @@ import { useSocket } from "../../utils/useSocket";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
 import moment from "moment";
 import InviteModerator from "./Modals/InviteModeratorModal";
+import { interviewContext } from "../../contexts/InterviewContext/InterviewContext";
 
 const Communities = () => {
   const {
@@ -24,6 +25,7 @@ const Communities = () => {
     fetchChannels,
     fetchMembers,
   } = useContext(communityContext);
+  const { createInterview } = useContext(interviewContext);
   const { user } = useContext(authContext);
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
@@ -188,7 +190,20 @@ const Communities = () => {
         onClose={handleChannelModalToggle}
         communityId={selectedCommunity ? selectedCommunity.id : null}
       />
-      <InviteModerator isOpen={inviteModal} onClose={handleCloseInvite} />
+      {moderatorsData !== null &&
+        moderatorsData.length > 0 &&
+        selectedModerator !== null &&
+        user !== null && (
+          <InviteModerator
+            isOpen={inviteModal}
+            onClose={handleCloseInvite}
+            createInterview={createInterview}
+            data={{
+              moderator_id: moderatorsData[selectedModerator].user_id,
+              user_id: user.id,
+            }}
+          />
+        )}
       <div className="flex w-full bg-white h-screen/92">
         <div className="flex flex-col items-center w-24 max-h-screen py-6 overflow-y-auto bg-white scrollbar-hidden">
           <div className="flex flex-col items-center w-full ">
