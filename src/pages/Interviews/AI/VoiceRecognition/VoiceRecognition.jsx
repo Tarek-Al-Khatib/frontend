@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 
 const VoiceRecognition = () => {
-  const [isRecording, setIsRecording] = useState(true);
+  const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
   const { loading } = useContext(ChatContext);
   const { setUserInput } = useContext(ChatContext);
@@ -64,7 +64,6 @@ const VoiceRecognition = () => {
       >
         {isRecording ? "Listening..." : "Talk"}
       </button>
-      <p className="text-white">Recognized text: {transcript}</p>
     </div>
   );
 };

@@ -10,17 +10,17 @@ import VideoProvider from "./VideoCallContext/VideoCallContext";
 const AppProviders = ({ children }) => (
   <AuthProvider>
     <GeneralProvider>
-      <ChatProvider>
-        <VideoProvider>
-          <InterviewProvider>
+      <VideoProvider>
+        <InterviewProvider>
+          <ChatProvider>
             <LearningProvider>
               <DashboardProvider>
                 <CommunityProvider>{children}</CommunityProvider>
               </DashboardProvider>
             </LearningProvider>
-          </InterviewProvider>
-        </VideoProvider>
-      </ChatProvider>
+          </ChatProvider>
+        </InterviewProvider>
+      </VideoProvider>
     </GeneralProvider>
   </AuthProvider>
 );

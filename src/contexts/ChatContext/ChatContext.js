@@ -1,7 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { serverUrl } from "../../config/url";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { interviewContext } from "../InterviewContext/InterviewContext";
 export const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
@@ -14,6 +14,7 @@ export const ChatProvider = ({ children }) => {
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
+  const { fetchInterviews } = useContext(interviewContext);
 
   useEffect(() => {
     return () => {
@@ -82,6 +83,7 @@ export const ChatProvider = ({ children }) => {
       }
     );
     console.log(response.data);
+    fetchInterviews(token);
   };
 
   const onMessagePlayed = () => {
