@@ -26,8 +26,7 @@ const InviteModerator = ({ isOpen, onClose, createInterview, data }) => {
     if (selectedDate && selectedTime) {
       try {
         const date = new Date(`${selectedDate}T${selectedTime}:00`);
-        console.log({ ...data, type: "MODERATOR", date: date });
-        //createInterview({ ...data, type: "MODERATOR", date: date });
+        createInterview({ ...data, type: "MODERATOR", date: date });
         onClose();
       } catch (e) {
         console.log("Error in selecting date and time", e);
