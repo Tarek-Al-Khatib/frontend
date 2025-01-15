@@ -120,7 +120,7 @@ const AddPlan = ({ open, handleClose }) => {
                   width: "70%",
                   "& .MuiOutlinedInput-root": {
                     fontFamily: "Open Sans",
-                    fontWeight: "700",
+                    fontWeight: "500",
                     borderRadius: 5,
                   },
                   "& .MuiOutlinedInput-notchedOutline": {
@@ -149,7 +149,7 @@ const AddPlan = ({ open, handleClose }) => {
                   width: "70%",
                   "& .MuiOutlinedInput-root": {
                     fontFamily: "Open Sans",
-                    fontWeight: "700",
+                    fontWeight: "500",
                     borderRadius: 5,
                   },
                   "& .MuiOutlinedInput-notchedOutline": {

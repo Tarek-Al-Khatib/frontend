@@ -259,7 +259,7 @@ const Communities = () => {
               <div className="mb-10">
                 <div className="flex items-center justify-between w-full mb-3 text-lg font-bold text-white">
                   <button
-                    className="flex items-center"
+                    className="flex items-center gap-2"
                     onClick={() => setFlipChannel(!flipChannel)}
                   >
                     {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}

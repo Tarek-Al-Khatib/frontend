@@ -101,7 +101,7 @@ const InviteModerator = ({ isOpen, onClose, createInterview, data }) => {
                 width: "100%",
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   borderRadius: 5,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
@@ -131,7 +131,7 @@ const InviteModerator = ({ isOpen, onClose, createInterview, data }) => {
                 width: "100%",
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   borderRadius: 5,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {

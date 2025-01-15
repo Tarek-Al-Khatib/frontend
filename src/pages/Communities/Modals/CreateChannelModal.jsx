@@ -86,7 +86,7 @@ const CreateChannel = ({ isOpen, onClose, communityId }) => {
                 width: "100%",
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   borderRadius: 5,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
@@ -114,7 +114,7 @@ const CreateChannel = ({ isOpen, onClose, communityId }) => {
                 width: "100%",
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   borderRadius: 5,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
