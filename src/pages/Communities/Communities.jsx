@@ -265,17 +265,20 @@ const Communities = () => {
                     {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
                     Channels
                   </button>
-                  {(user && members.filter((m) => m.user_id === user.id) ? (
-                    <div> </div>
-                  ) : (
-                    members.filter((m) => m.user_id === user.id)[0].role ===
-                    "MODERATOR"
-                  )) ||
-                  members.filter((m) => m.user_id === user.id)[0].role ===
-                    "ADMIN" ? (
-                    <button onClick={handleChannelModalToggle}>
-                      <IoMdAdd size={25} />
-                    </button>
+                  {user ? (
+                    members.some((m) => m.user_id === user.id) ? (
+                      ["MODERATOR", "ADMIN"].includes(
+                        members.find((m) => m.user_id === user.id)?.role
+                      ) ? (
+                        <button onClick={handleChannelModalToggle}>
+                          <IoMdAdd size={25} />
+                        </button>
+                      ) : (
+                        <div></div>
+                      )
+                    ) : (
+                      <div></div>
+                    )
                   ) : (
                     <div></div>
                   )}
