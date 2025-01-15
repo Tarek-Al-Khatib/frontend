@@ -141,7 +141,7 @@ const Dashboard = () => {
                 {dashboardButtons.map((button) => (
                   <button
                     key={button.id}
-                    className="flex flex-col items-center justify-center py-4 text-white shadow rounded-xl bg-dark-blue hover:bg-blue-600"
+                    className="flex flex-col items-center justify-center py-4 text-white border border-gray-300 shadow rounded-xl"
                     onClick={() => {
                       navigation(button.url);
                     }}
@@ -242,7 +242,7 @@ const Dashboard = () => {
                         </div>
                         <button
                           onClick={() => joinCommunity(community.id)}
-                          className="w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700"
+                          className="self-start w-2/3 py-1 mt-4 font-bold text-white transition rounded-xl bg-navy hover:bg-blue-700"
                         >
                           Join Community
                         </button>

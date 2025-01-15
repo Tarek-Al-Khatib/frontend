@@ -330,7 +330,7 @@ const Communities = () => {
                             key={index}
                             className="flex items-center space-x-3"
                           >
-                            <div className="w-6 h-6 bg-white rounded-full">
+                            <div className="w-10 h-10 bg-white rounded-full">
                               {moderator.user && moderator.user.profile_pic && (
                                 <img
                                   src={moderator.user.profile_pic}
@@ -339,7 +339,7 @@ const Communities = () => {
                                 />
                               )}
                             </div>
-                            <div className="text-sm font-thin text-white">
+                            <div className="text-lg font-thin text-white">
                               {moderator.user.username}
                             </div>
                           </button>
