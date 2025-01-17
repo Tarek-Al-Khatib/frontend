@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
-  const [selectedInterviewer, setSelectedInterviewer] = useState("");
+  const [selectedInterviewer, setSelectedInterviewer] = useState(null);
   const [selectedInterviewType, setSelectedInterviewType] = useState("");
 
   const interviewers = [
@@ -71,7 +71,7 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
   ];
 
   const handleInterviewerClick = (interviewer) => {
-    setSelectedInterviewer(interviewer.label);
+    setSelectedInterviewer(interviewer);
   };
 
   const handleInterviewTypeChange = (e) => {
@@ -93,7 +93,7 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
     <Dialog
       open={isOpen}
       onClose={() => {
-        setSelectedInterviewer("");
+        setSelectedInterviewer(null);
         setSelectedInterviewType("");
         onClose();
       }}
@@ -112,7 +112,7 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
         </DialogTitle>
         <Button
           onClick={() => {
-            setSelectedInterviewer("");
+            setSelectedInterviewer(null);
             setSelectedInterviewType("");
             onClose();
           }}
@@ -134,11 +134,13 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
                 borderRadius: 3,
                 padding: 2,
                 boxShadow:
-                  selectedInterviewer === interviewer.label
+                  selectedInterviewer &&
+                  selectedInterviewer.label === interviewer.label
                     ? "0 0 10px #4449b5"
                     : "0 0 5px rgba(0,0,0,0.1)",
                 border:
-                  selectedInterviewer === interviewer.label
+                  selectedInterviewer &&
+                  selectedInterviewer.label === interviewer.label
                     ? "2px solid #4449b5"
                     : "1px solid #ddd",
                 transition: "0.3s",
