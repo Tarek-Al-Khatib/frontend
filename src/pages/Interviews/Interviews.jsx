@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { serverUrl } from "../../config/url";
 import AlertModal from "./Modal/AlertModal";
 import GiveFeedback from "./Modal/GiveFeedbackModal";
+import InterviewSetup from "./Modal/InterviewSetup";
 const Interview = () => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
@@ -37,6 +38,7 @@ const Interview = () => {
     handleCloseIsCompleted,
   } = useContext(interviewContext);
   const { interview, setInterview } = useContext(videoContext);
+  const [setupOpen, setSetupOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -64,11 +66,25 @@ const Interview = () => {
     setShareFeedback(false);
     handleCloseIsCompleted();
   };
+
+  const handleSetupOpen = () => {
+    setSetupOpen(true);
+  };
+
+  const handleSetupClose = () => {
+    setSetupOpen(false);
+  };
+
+  const onInterviewSelect = () => {};
   return (
     <div>
       <Navbar />
       <ViewFeedback open={open} handleClose={handleClose} text={text} />
-
+      <InterviewSetup
+        isOpen={setupOpen}
+        onClose={handleSetupClose}
+        onInterviewSelect={onInterviewSelect}
+      />
       {interview && interview.moderator.id === user.id && (
         <AlertModal
           open={isVideoCompleted}
@@ -112,7 +128,7 @@ const Interview = () => {
             <div className="pl-16">
               <button
                 className="bg-[#1e25a5] text-white text-xl font-bold px-6 py-3 rounded-md"
-                onClick={() => navigate("/meeting-ai")}
+                onClick={() => handleSetupOpen()}
               >
                 Start Mock Interview
               </button>

@@ -11,7 +11,7 @@ const CameraSetup = () => {
   return (
     <group>
       {useFrame(({ camera }) => {
-        camera.position.set(0, 1.5, 1.2);
+        camera.position.set(0, 1.5, 1.4);
         camera.lookAt(0, 1.5, 0);
       })}
     </group>
