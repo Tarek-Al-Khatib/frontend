@@ -15,6 +15,7 @@ const InterviewProvider = ({ children }) => {
   const { interview } = useContext(videoContext);
   const [speciality, setSpeciality] = useState(null);
   const [characteristics, setCharacteristics] = useState(null);
+  const [voiceId, setVoiceId] = useState(null);
 
   const handleOpenIsCompleted = () => {
     setIsVideoCompleted(true);
@@ -116,6 +117,8 @@ const InterviewProvider = ({ children }) => {
         characteristics,
         setCharacteristics,
         setSpeciality,
+        voiceId,
+        setVoiceId,
       }}
     >
       {children}

@@ -14,7 +14,8 @@ export const ChatProvider = ({ children }) => {
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
-  const { fetchInterviews } = useContext(interviewContext);
+  const { fetchInterviews, speciality, characteristics, voiceId } =
+    useContext(interviewContext);
 
   useEffect(() => {
     return () => {
@@ -40,7 +41,12 @@ export const ChatProvider = ({ children }) => {
     setLoading(true);
     const response = await axios.post(
       `${serverUrl}/api/ai/interview`,
-      { messages: messages },
+      {
+        messages: messages,
+        speciality: speciality,
+        characteristics: characteristics,
+        voiceId: voiceId,
+      },
       {
         headers: {
           "Content-Type": "application/json",

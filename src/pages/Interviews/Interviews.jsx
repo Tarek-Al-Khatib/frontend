@@ -38,6 +38,7 @@ const Interview = () => {
     handleCloseIsCompleted,
     setCharacteristics,
     setSpeciality,
+    setVoiceId,
   } = useContext(interviewContext);
   const { interview, setInterview } = useContext(videoContext);
   const [setupOpen, setSetupOpen] = useState(false);
@@ -77,9 +78,10 @@ const Interview = () => {
     setSetupOpen(false);
   };
 
-  const onInterviewSelect = ({ speciality, characteristics }) => {
+  const onInterviewSelect = ({ speciality, characteristics, voiceId }) => {
     setSpeciality(speciality);
     setCharacteristics(characteristics);
+    setVoiceId(voiceId);
     navigate("/meeting-ai");
   };
   return (

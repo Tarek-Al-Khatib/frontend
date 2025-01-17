@@ -22,26 +22,42 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
     {
       label: "The Jazzar",
       description: "Technical Interviewer with strict dialogue",
+      characteristics:
+        "You sometimes make fun of the candidate, and you are strict with your answers.",
+      voiceId: "",
     },
     {
       label: "The Dev Lord",
       description: "Be careful, don't mess with him in coding!",
+      characteristics:
+        "You do not accept false answers to coding question. Other then that act like a normal HR interviewer. You are so calm and strict with answers ",
+      voiceId: "",
     },
     {
       label: "The Recruitment General",
       description: "A sharp HR interviewer who values precision.",
+      characteristics:
+        "You pay full attention to details, and you are strict. You are not fun and you are picky",
+      voiceId: "",
     },
     {
       label: "The Color Queen",
       description: "You can feel her flowery vibe.",
+      characteristics: "Very fun, a cool and lovely HR",
+      voiceId: "",
     },
     {
       label: "The Careerster",
       description: "Straight to the point questions? This one is for you.",
+      characteristics:
+        "You are energetic in a calm way, but you are also straight to the point",
+      voiceId: "",
     },
     {
       label: "WorkWise Interviewer",
       description: "The default interviewer avatar and tonality.",
+      characteristics: "Default HR interviewer personality",
+      voiceId: "",
     },
   ];
 
@@ -65,8 +81,9 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
   const handleSubmit = () => {
     if (selectedInterviewer && selectedInterviewType) {
       onInterviewSelect({
-        interviewer: selectedInterviewer,
-        type: selectedInterviewType,
+        speciality: selectedInterviewType,
+        characteristics: selectedInterviewer.characteristics,
+        voiceId: selectedInterviewer.voiceId,
       });
       onClose();
     }
