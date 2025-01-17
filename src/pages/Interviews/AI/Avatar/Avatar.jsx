@@ -1,108 +1,13 @@
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { useFrame, useGraph } from "@react-three/fiber";
+import { useGraph } from "@react-three/fiber";
 import AnimationsPath from "../../../../assets/ai/animations.glb";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import ModelPath from "../../../../assets/ai/678026faf8c9ed00ef2678ac-transformed.glb";
+import ModelPath from "../../../../assets/ai/nour-transformed.glb";
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 import { SkeletonUtils } from "three-stdlib";
 import { authContext } from "../../../../contexts/AuthContext/AuthContext";
 import { useNavigate } from "react-router-dom";
-
-const facialExpressions = {
-  default: {},
-  smile: {
-    browInnerUp: 0.17,
-    eyeSquintLeft: 0.4,
-    eyeSquintRight: 0.44,
-    noseSneerLeft: 0.1700000727403593,
-    noseSneerRight: 0.14000002836874015,
-    mouthPressLeft: 0.61,
-    mouthPressRight: 0.41000000000000003,
-  },
-  funnyFace: {
-    jawLeft: 0.63,
-    mouthPucker: 0.53,
-    noseSneerLeft: 1,
-    noseSneerRight: 0.39,
-    mouthLeft: 1,
-    eyeLookUpLeft: 1,
-    eyeLookUpRight: 1,
-    cheekPuff: 0.9999924982764238,
-    mouthDimpleLeft: 0.414743888682652,
-    mouthRollLower: 0.32,
-    mouthSmileLeft: 0.35499733688813034,
-    mouthSmileRight: 0.35499733688813034,
-  },
-  sad: {
-    mouthFrownLeft: 1,
-    mouthFrownRight: 1,
-    mouthShrugLower: 0.78341,
-    browInnerUp: 0.452,
-    eyeSquintLeft: 0.72,
-    eyeSquintRight: 0.75,
-    eyeLookDownLeft: 0.5,
-    eyeLookDownRight: 0.5,
-    jawForward: 1,
-  },
-  surprised: {
-    eyeWideLeft: 0.5,
-    eyeWideRight: 0.5,
-    jawOpen: 0.351,
-    mouthFunnel: 1,
-    browInnerUp: 1,
-  },
-  angry: {
-    browDownLeft: 1,
-    browDownRight: 1,
-    eyeSquintLeft: 1,
-    eyeSquintRight: 1,
-    jawForward: 1,
-    jawLeft: 1,
-    mouthShrugLower: 1,
-    noseSneerLeft: 1,
-    noseSneerRight: 0.42,
-    eyeLookDownLeft: 0.16,
-    eyeLookDownRight: 0.16,
-    cheekSquintLeft: 1,
-    cheekSquintRight: 1,
-    mouthClose: 0.23,
-    mouthFunnel: 0.63,
-    mouthDimpleRight: 1,
-  },
-  crazy: {
-    browInnerUp: 0.9,
-    jawForward: 1,
-    noseSneerLeft: 0.5700000000000001,
-    noseSneerRight: 0.51,
-    eyeLookDownLeft: 0.39435766259644545,
-    eyeLookUpRight: 0.4039761421719682,
-    eyeLookInLeft: 0.9618479575523053,
-    eyeLookInRight: 0.9618479575523053,
-    jawOpen: 0.9618479575523053,
-    mouthDimpleLeft: 0.9618479575523053,
-    mouthDimpleRight: 0.9618479575523053,
-    mouthStretchLeft: 0.27893590769016857,
-    mouthStretchRight: 0.2885543872656917,
-    mouthSmileLeft: 0.5578718153803371,
-    mouthSmileRight: 0.38473918302092225,
-    tongueOut: 0.9618479575523053,
-  },
-};
-
-const corresponding = {
-  A: "viseme_PP",
-  B: "viseme_kk",
-  C: "viseme_I",
-  D: "viseme_AA",
-  E: "viseme_O",
-  F: "viseme_U",
-  G: "viseme_FF",
-  H: "viseme_TH",
-  X: "viseme_PP",
-};
-
-let setupMode = false;
 
 export function Avatar(props) {
   const navigate = useNavigate();
@@ -122,8 +27,6 @@ export function Avatar(props) {
     complete,
     setLoading,
   } = useContext(ChatContext);
-
-  const [lipsync, setLipsync] = useState();
   const { user } = useContext(authContext);
 
   useEffect(() => {
@@ -143,7 +46,6 @@ export function Avatar(props) {
     }
 
     setAnimation(message.animation);
-    setFacialExpression(message.facialExpression);
 
     setAudio(new Audio("data:audio/mp3;base64," + message.audio));
   }, [message, isUserInteracted]);
@@ -153,7 +55,7 @@ export function Avatar(props) {
   const group = useRef();
   const { actions, mixer } = useAnimations(animations, group);
   const [animation, setAnimation] = useState(
-    animations.find((a) => a.name === "Idle") ? "Idle" : animations[0].name // Check if Idle animation exists otherwise use first animation
+    animations.find((a) => a.name === "Idle") ? "Idle" : animations[0].name
   );
 
   useEffect(() => {
@@ -186,11 +88,6 @@ export function Avatar(props) {
       }
     });
   };
-
-  const [blink, setBlink] = useState(false);
-  const [winkLeft, setWinkLeft] = useState(false);
-  const [winkRight, setWinkRight] = useState(false);
-  const [facialExpression, setFacialExpression] = useState("");
   const [audio, setAudio] = useState();
 
   useEffect(() => {
@@ -234,53 +131,8 @@ export function Avatar(props) {
     }
   }, [audio]);
 
-  useFrame(() => {
-    !setupMode &&
-      Object.keys(nodes.EyeLeft.morphTargetDictionary).forEach((key) => {
-        const mapping = facialExpressions[facialExpression];
-        if (key === "eyeBlinkLeft" || key === "eyeBlinkRight") {
-          return;
-        }
-        if (mapping && mapping[key]) {
-          lerpMorphTarget(key, mapping[key], 0.1);
-        } else {
-          lerpMorphTarget(key, 0, 0.1);
-        }
-      });
-
-    lerpMorphTarget("eyeBlinkLeft", blink || winkLeft ? 1 : 0, 0.5);
-    lerpMorphTarget("eyeBlinkRight", blink || winkRight ? 1 : 0, 0.5);
-
-    if (setupMode) {
-      return;
-    }
-
-    const appliedMorphTargets = [];
-    if (message && lipsync) {
-      const currentAudioTime = audio.currentTime;
-      for (let i = 0; i < lipsync.mouthCues.length; i++) {
-        const mouthCue = lipsync.mouthCues[i];
-        if (
-          currentAudioTime >= mouthCue.start &&
-          currentAudioTime <= mouthCue.end
-        ) {
-          appliedMorphTargets.push(corresponding[mouthCue.value]);
-          lerpMorphTarget(corresponding[mouthCue.value], 1, 0.2);
-          break;
-        }
-      }
-    }
-
-    Object.values(corresponding).forEach((value) => {
-      if (appliedMorphTargets.includes(value)) {
-        return;
-      }
-      lerpMorphTarget(value, 0, 0.1);
-    });
-  });
   useEffect(() => {
     if (user) {
-      console.log("went here");
       const message = {
         role: "user",
         content: `Hello my name is ${user.username}`,
@@ -289,35 +141,13 @@ export function Avatar(props) {
     }
   }, [user]);
 
-  useEffect(() => {
-    let blinkTimeout;
-    const nextBlink = () => {
-      blinkTimeout = setTimeout(() => {
-        setBlink(true);
-        setTimeout(() => {
-          setBlink(false);
-          nextBlink();
-        }, 200);
-      }, THREE.MathUtils.randInt(1000, 5000));
-    };
-    nextBlink();
-    return () => {
-      clearTimeout(blinkTimeout);
-    };
-  }, []);
-
   return (
     <group ref={group} {...props} dispose={null}>
       <primitive object={nodes.Hips} />
       <skinnedMesh
-        geometry={nodes.Wolf3D_Hair.geometry}
-        material={materials.Wolf3D_Hair}
-        skeleton={nodes.Wolf3D_Hair.skeleton}
-      />
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Glasses.geometry}
-        material={materials.Wolf3D_Glasses}
-        skeleton={nodes.Wolf3D_Glasses.skeleton}
+        geometry={nodes.Wolf3D_Headwear.geometry}
+        material={materials.Wolf3D_Headwear}
+        skeleton={nodes.Wolf3D_Headwear.skeleton}
       />
       <skinnedMesh
         geometry={nodes.Wolf3D_Body.geometry}
@@ -375,5 +205,5 @@ export function Avatar(props) {
   );
 }
 
-useGLTF.preload("/678026faf8c9ed00ef2678ac-transformed.glb");
+useGLTF.preload(ModelPath);
 useGLTF.preload(AnimationsPath);
