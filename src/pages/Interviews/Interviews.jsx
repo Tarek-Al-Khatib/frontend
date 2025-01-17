@@ -36,9 +36,7 @@ const Interview = () => {
     shareFeedback,
     setShareFeedback,
     handleCloseIsCompleted,
-    setCharacteristics,
-    setSpeciality,
-    setVoiceId,
+    setInterviewer,
   } = useContext(interviewContext);
   const { interview, setInterview } = useContext(videoContext);
   const [setupOpen, setSetupOpen] = useState(false);
@@ -78,10 +76,8 @@ const Interview = () => {
     setSetupOpen(false);
   };
 
-  const onInterviewSelect = ({ speciality, characteristics, voiceId }) => {
-    setSpeciality(speciality);
-    setCharacteristics(characteristics);
-    setVoiceId(voiceId);
+  const onInterviewSelect = (interviewer) => {
+    setInterviewer(interviewer);
     navigate("/meeting-ai");
   };
   return (

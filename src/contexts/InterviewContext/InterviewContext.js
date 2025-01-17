@@ -13,9 +13,7 @@ const InterviewProvider = ({ children }) => {
   const [isVideoCompleted, setIsVideoCompleted] = useState(false);
   const [shareFeedback, setShareFeedback] = useState(false);
   const { interview } = useContext(videoContext);
-  const [speciality, setSpeciality] = useState(null);
-  const [characteristics, setCharacteristics] = useState(null);
-  const [voiceId, setVoiceId] = useState(null);
+  const [interviewer, setInterviewer] = useState(null);
 
   const handleOpenIsCompleted = () => {
     setIsVideoCompleted(true);
@@ -113,12 +111,8 @@ const InterviewProvider = ({ children }) => {
         handleCloseIsCompleted,
         shareFeedback,
         setShareFeedback,
-        speciality,
-        characteristics,
-        setCharacteristics,
-        setSpeciality,
-        voiceId,
-        setVoiceId,
+        interviewer,
+        setInterviewer,
       }}
     >
       {children}

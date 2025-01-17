@@ -14,8 +14,7 @@ export const ChatProvider = ({ children }) => {
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
-  const { fetchInterviews, speciality, characteristics, voiceId } =
-    useContext(interviewContext);
+  const { fetchInterviews, interviewer } = useContext(interviewContext);
 
   useEffect(() => {
     return () => {
@@ -43,9 +42,9 @@ export const ChatProvider = ({ children }) => {
       `${serverUrl}/api/ai/interview`,
       {
         messages: messages,
-        speciality: speciality,
-        characteristics: characteristics,
-        voiceId: voiceId,
+        speciality: interviewer.speciality,
+        characteristics: interviewer.characteristics,
+        voiceId: interviewer.voiceId,
       },
       {
         headers: {

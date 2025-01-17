@@ -4,6 +4,7 @@ import { Experience } from "../Screen/Screen";
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 import VoiceRecognition from "../VoiceRecognition/VoiceRecognition";
 import "./UIScreen.css";
+import { interviewContext } from "../../../../contexts/InterviewContext/InterviewContext";
 
 const CameraSetup = () => {
   const cameraRef = useRef();

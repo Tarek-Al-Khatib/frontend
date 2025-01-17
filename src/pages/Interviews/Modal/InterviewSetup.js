@@ -80,11 +80,7 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
 
   const handleSubmit = () => {
     if (selectedInterviewer && selectedInterviewType) {
-      onInterviewSelect({
-        speciality: selectedInterviewType,
-        characteristics: selectedInterviewer.characteristics,
-        voiceId: selectedInterviewer.voiceId,
-      });
+      onInterviewSelect(selectedInterviewer);
       onClose();
     }
   };

@@ -1,17 +1,51 @@
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useGraph } from "@react-three/fiber";
-import AnimationsPath from "../../../../assets/ai/animations.glb";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import AnimationsLady from "../../../../assets/ai/animations.glb";
+import AnimationsMan from "../../../../assets/ai/animations_man.glb";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import ModelPath from "../../../../assets/ai/nour-transformed.glb";
+import JazzarModel from "../../../../assets/ai/jazzar-transformed.glb";
+import DevLordModel from "../../../../assets/ai/taha-transformed.glb";
+import RecruitmentGeneralModel from "../../../../assets/ai/gheeda-transformed.glb";
+import ColorQueenModel from "../../../../assets/ai/nour-transformed.glb";
+import CareersterModel from "../../../../assets/ai/jane-transformed.glb";
+import DefaultModel from "../../../../assets/ai/default.glb";
 import { ChatContext } from "../../../../contexts/ChatContext/ChatContext";
 import { SkeletonUtils } from "three-stdlib";
 import { authContext } from "../../../../contexts/AuthContext/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { interviewContext } from "../../../../contexts/InterviewContext/InterviewContext";
+
+const modelMap = {
+  "The Jazzar": JazzarModel,
+  "The Dev Lord": DevLordModel,
+  "The Recruitment General": RecruitmentGeneralModel,
+  "The Color Queen": ColorQueenModel,
+  "The Careerster": CareersterModel,
+  "WorkWise Interviewer": DefaultModel,
+};
+
+const animationsMap = {
+  man: [JazzarModel, DevLordModel],
+  lady: [
+    RecruitmentGeneralModel,
+    ColorQueenModel,
+    CareersterModel,
+    DefaultModel,
+  ],
+};
 
 export function Avatar(props) {
   const navigate = useNavigate();
-  const { scene } = useGLTF(ModelPath);
+  const { interviewer } = useContext(interviewContext);
+  console.log(interviewer.label);
+  console.log(modelMap[interviewer.label]);
+  const modelPath = useMemo(
+    () => modelMap[interviewer.label] || DefaultModel,
+    [interviewer.label]
+  );
+
+  const { scene } = useGLTF(modelPath);
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = useGraph(clone);
   const {
@@ -50,7 +84,24 @@ export function Avatar(props) {
     setAudio(new Audio("data:audio/mp3;base64," + message.audio));
   }, [message, isUserInteracted]);
 
-  const { animations } = useGLTF(AnimationsPath);
+  function getModelPath(interviewer) {
+    const modelPaths = {
+      "The Jazzar": "../../../../assets/ai/jazzar-transformed.glb",
+      "The Dev Lord": "../../../../assets/ai/taha-transformed.glb",
+      "The Recruitment General": "../../../../assets/ai/gheeda-transformed.glb",
+      "The Color Queen": "../../../../assets/ai/nour-transformed.glb",
+      "The Careerster": "../../../../assets/ai/jane-transformed.glb",
+      "WorkWise Interviewer": "../../../../assets/ai/default.glb",
+    };
+    return modelPaths[interviewer] || "../../../../assets/ai/default-model.glb";
+  }
+
+  const animationsPath = useMemo(() => {
+    return animationsMap.man.includes(modelPath)
+      ? AnimationsMan
+      : AnimationsLady;
+  }, [modelPath]);
+  const { animations } = useGLTF(animationsPath);
 
   const group = useRef();
   const { actions, mixer } = useAnimations(animations, group);
@@ -144,66 +195,22 @@ export function Avatar(props) {
   return (
     <group ref={group} {...props} dispose={null}>
       <primitive object={nodes.Hips} />
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Headwear.geometry}
-        material={materials.Wolf3D_Headwear}
-        skeleton={nodes.Wolf3D_Headwear.skeleton}
-      />
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Body.geometry}
-        material={materials.Wolf3D_Body}
-        skeleton={nodes.Wolf3D_Body.skeleton}
-      />
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Outfit_Bottom.geometry}
-        material={materials.Wolf3D_Outfit_Bottom}
-        skeleton={nodes.Wolf3D_Outfit_Bottom.skeleton}
-      />
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Outfit_Footwear.geometry}
-        material={materials.Wolf3D_Outfit_Footwear}
-        skeleton={nodes.Wolf3D_Outfit_Footwear.skeleton}
-      />
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Outfit_Top.geometry}
-        material={materials.Wolf3D_Outfit_Top}
-        skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
-      />
-      <skinnedMesh
-        name="EyeLeft"
-        geometry={nodes.EyeLeft.geometry}
-        material={materials.Wolf3D_Eye}
-        skeleton={nodes.EyeLeft.skeleton}
-        morphTargetDictionary={nodes.EyeLeft.morphTargetDictionary}
-        morphTargetInfluences={nodes.EyeLeft.morphTargetInfluences}
-      />
-      <skinnedMesh
-        name="EyeRight"
-        geometry={nodes.EyeRight.geometry}
-        material={materials.Wolf3D_Eye}
-        skeleton={nodes.EyeRight.skeleton}
-        morphTargetDictionary={nodes.EyeRight.morphTargetDictionary}
-        morphTargetInfluences={nodes.EyeRight.morphTargetInfluences}
-      />
-      <skinnedMesh
-        name="Wolf3D_Head"
-        geometry={nodes.Wolf3D_Head.geometry}
-        material={materials.Wolf3D_Skin}
-        skeleton={nodes.Wolf3D_Head.skeleton}
-        morphTargetDictionary={nodes.Wolf3D_Head.morphTargetDictionary}
-        morphTargetInfluences={nodes.Wolf3D_Head.morphTargetInfluences}
-      />
-      <skinnedMesh
-        name="Wolf3D_Teeth"
-        geometry={nodes.Wolf3D_Teeth.geometry}
-        material={materials.Wolf3D_Teeth}
-        skeleton={nodes.Wolf3D_Teeth.skeleton}
-        morphTargetDictionary={nodes.Wolf3D_Teeth.morphTargetDictionary}
-        morphTargetInfluences={nodes.Wolf3D_Teeth.morphTargetInfluences}
-      />
+      {Object.keys(nodes).map((key) => {
+        const node = nodes[key];
+        if (node.isSkinnedMesh) {
+          return (
+            <skinnedMesh
+              key={key}
+              geometry={node.geometry}
+              material={materials[node.material?.name]}
+              skeleton={node.skeleton}
+              morphTargetDictionary={node.morphTargetDictionary}
+              morphTargetInfluences={node.morphTargetInfluences}
+            />
+          );
+        }
+        return null; // Skip if the node is not a skinned mesh
+      })}
     </group>
   );
 }
-
-useGLTF.preload(ModelPath);
-useGLTF.preload(AnimationsPath);
