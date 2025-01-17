@@ -344,17 +344,19 @@ const Communities = () => {
                             </div>
                           </button>
                           {selectedModerator === index && (
-                            <div className="p-2 mt-2 text-white bg-gray-800 rounded shadow-lg">
+                            <div className="p-2 mt-2 text-white bg-gray-800 rounded shadow-lg w-fit">
                               <p>
                                 Invite {moderator.user.username} to an
                                 interview?
                               </p>
-                              <button
-                                className="px-2 py-1 mt-1 text-white bg-blue-600 rounded hover:bg-blue-500"
-                                onClick={() => setInviteModal(true)}
-                              >
-                                Invite
-                              </button>
+                              <div className="flex justify-end">
+                                <button
+                                  className="px-2 py-1 mt-1 text-white bg-blue-600 rounded hover:bg-blue-500"
+                                  onClick={() => setInviteModal(true)}
+                                >
+                                  Invite
+                                </button>
+                              </div>
                             </div>
                           )}
                         </div>

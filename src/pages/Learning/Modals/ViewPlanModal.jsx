@@ -188,10 +188,10 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                 </div>
 
                 <div className="flex w-11/12 gap-10">
-                  <div className="flex items-center justify-between w-1/3">
+                  <div className="flex flex-col items-start justify-start w-1/3 mt-2">
                     <label
                       htmlFor={`step-title-${index}`}
-                      className="text-2xl font-bold text-navy"
+                      className="text-xl font-bold text-navy"
                     >
                       Title:
                     </label>
@@ -221,10 +221,10 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                       }}
                     />
                   </div>
-                  <div className="flex items-center justify-between w-3/5">
+                  <div className="flex flex-col items-start justify-between w-4/5 mt-2">
                     <label
                       htmlFor={`step-description-${index}`}
-                      className="text-2xl font-bold text-navy"
+                      className="text-xl font-bold text-navy"
                     >
                       Description:
                     </label>

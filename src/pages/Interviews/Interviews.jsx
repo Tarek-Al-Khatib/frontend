@@ -72,7 +72,7 @@ const Interview = () => {
       {interview && interview.moderator.id === user.id && (
         <AlertModal
           open={isVideoCompleted}
-          text={"Is the interview completed ?"}
+          text={"Is the interview completed?"}
           yesButton={() => {
             setShareFeedback(true);
           }}

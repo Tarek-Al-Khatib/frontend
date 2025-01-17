@@ -39,21 +39,20 @@ const AlertModal = ({
           {text}
         </Typography>
         <div className="flex justify-center gap-3 mt-2">
-          {yesButton && (
-            <button
-              onClick={yesButton}
-              className="px-8 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
-            >
-              Yes
-            </button>
-          )}
-
           {noButton && (
             <button
               onClick={noButton}
               className="px-8 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
             >
               No
+            </button>
+          )}
+          {yesButton && (
+            <button
+              onClick={yesButton}
+              className="px-8 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
+            >
+              Yes
             </button>
           )}
         </div>
