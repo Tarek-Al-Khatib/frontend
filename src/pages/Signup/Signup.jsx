@@ -65,7 +65,7 @@ const SignUp = () => {
             {error}
           </Alert>
         </Collapse>
-        <div className="bg-white w-[477px] rounded-self shadow-lg flex flex-col items-center justify-center gap-10 pt-6 ">
+        <div className="flex flex-col items-center justify-center w-2/6 gap-10 pt-6 bg-white shadow-lg rounded-self max-lg:w-2/3">
           <div className="w-full">
             <div className="m-6">
               <h3 className="mb-3 text-2xl font-extrabold text-navy">
