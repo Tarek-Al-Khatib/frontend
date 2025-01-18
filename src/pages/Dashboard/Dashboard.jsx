@@ -74,7 +74,7 @@ const Dashboard = () => {
         </div>
       ) : (
         <div>
-          {/* <Navbar /> */}
+          <Navbar />
           <div className="p-8">
             <div className="flex items-center justify-between mb-3 max-md:flex-col max-md:gap-5">
               <div>
@@ -250,7 +250,7 @@ const Dashboard = () => {
               </div>
             </section>
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       )}
     </div>

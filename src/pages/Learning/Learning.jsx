@@ -81,7 +81,7 @@ const Learning = () => {
   };
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <AddPlan open={openAddModal} handleClose={handleAddModalClose} />
       <ViewPlan
         open={openViewModal}
@@ -89,22 +89,22 @@ const Learning = () => {
         plan={planView}
       />
       <div className="min-h-screen p-8 bg-white">
-        <div className="flex justify-center">
-          <div className="w-1/4">
+        <div className="flex justify-center max-md:flex-col">
+          <div className="w-1/4 max-lg:w-1/3 max-md:w-full">
             <div className="mb-16 text-2xl font-light text-navy">
               My Learning | Learning Plans
             </div>
             <div className="mb-2 text-4xl font-bold text-navy">
               {user != null && `Hey ${capitalize(user.username)}!`}
             </div>
-            <div className="mb-8 text-xl font-light text-navy">
+            <div className="mb-8 text-xl font-light text-navy max-md:mb-2">
               Here you can check your learning plans and see each plan's steps
               and progress. Have a productive day!
             </div>
           </div>
 
-          <div className="flex flex-col items-stretch flex-grow gap-5 pl-20 mt-10">
-            <div className="flex justify-end">
+          <div className="flex flex-col items-stretch flex-grow gap-5 pl-20 mt-10 max-md:pl-0">
+            <div className="flex justify-end max-md:justify-center">
               <button
                 onClick={() => setOpenAddModal(true)}
                 className="px-12 py-2 text-xl font-normal text-white rounded-lg bg-navy"
@@ -112,44 +112,44 @@ const Learning = () => {
                 Add Plan
               </button>
             </div>
-            <div className="flex justify-center gap-10 h-60">
-              <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl">
-                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy">
-                  <GoTasklist size={60} color="white" />
+            <div className="flex justify-center gap-10 h-60 max-2xl:gap-5 max-sm:flex-col max-sm:h-auto">
+              <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl max-2xl:flex-col max-2xl:h-full max-md:p-2 max-sm:w-full">
+                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy max-2xl:h-20 max-2xl:w-20">
+                  <GoTasklist size={50} color="white" />
                 </div>
                 <div>
-                  <div className="mb-5 text-6xl font-bold text-center text-navy">
+                  <div className="mb-5 text-6xl font-bold text-center text-navy max-2xl:text-4xl">
                     {learningPlans.length}
                   </div>
-                  <div className="text-xl font-normal text-navy">
+                  <div className="text-xl font-normal text-navy max-xl:text-base">
                     Plans Created
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl">
-                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy">
-                  <MdDoneOutline size={60} color="white" />
+              <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl max-2xl:flex-col max-2xl:h-full max-md:p-2 max-sm:w-full">
+                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy max-2xl:h-20 max-2xl:w-20">
+                  <MdDoneOutline size={50} color="white" />
                 </div>
                 <div>
-                  <div className="mb-5 text-5xl font-bold text-center text-navy ">
+                  <div className="mb-5 text-5xl font-bold text-center text-navy max-2xl:text-4xl">
                     {learningPlans.filter((l) => l.is_completed).length}
                   </div>
-                  <div className="text-xl font-normal text-navy">
+                  <div className="text-xl font-normal text-navy max-xl:text-base">
                     Plans Completed
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl">
-                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy">
-                  <GiProgression size={60} color="white" />
+              <div className="flex items-center justify-center w-2/5 p-6 bg-white border border-gray-200 h-4/5 rounded-xl max-2xl:flex-col max-2xl:h-full max-md:p-2 max-sm:w-full">
+                <div className="flex items-center justify-center mb-4 rounded-full w-28 h-28 bg-navy max-2xl:h-20 max-2xl:w-20">
+                  <GiProgression size={50} color="white" />
                 </div>
                 <div>
-                  <div className="mb-5 text-5xl font-bold text-center text-navy ">
+                  <div className="mb-5 text-5xl font-bold text-center text-navy max-2xl:text-4xl">
                     {calculateTotalStepsProgress()}
                   </div>
-                  <div className="text-xl font-normal text-navy">
+                  <div className="text-xl font-normal text-navy max-xl:text-base">
                     Steps in progress
                   </div>
                 </div>
@@ -158,12 +158,12 @@ const Learning = () => {
           </div>
         </div>
 
-        <div className="overflow-x-auto scroll-container custom-scrollbar">
+        <div className="overflow-x-auto scroll-container custom-scrollbar max-2xl:mt-5">
           <div className="flex mb-3 gap-9 min-w-max">
             {learningPlans.map((plan, index) => (
               <button
                 key={index}
-                className="border rounded-2xl border-gray-200 bg-white p-4 max-w-sm h-[650px] w-[350px] flex flex-col items-start"
+                className="border rounded-2xl border-gray-200 bg-white p-4 max-w-sm h-[650px] w-[350px] flex flex-col items-start max-sm:h-auto max-sm:w-auto"
                 onClick={() => {
                   setPlanView(plan);
                   setOpenViewModal(true);
@@ -198,7 +198,7 @@ const Learning = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
