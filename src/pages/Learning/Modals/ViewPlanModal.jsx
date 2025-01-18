@@ -14,6 +14,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
     id: 0,
     title: "",
     description: "",
+    is_completed: false,
   });
 
   const [steps, setSteps] = useState([]);
@@ -27,6 +28,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
         id: plan.id,
         title: plan.title,
         description: plan.description,
+        is_completed: plan.is_completed,
       });
       setSteps([...plan.steps]);
     }
@@ -89,6 +91,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
             <CircularProgressWithLabel value={progress} size={60} />
           </div>
           <button
+            disabled={learningPlan.is_completed}
             onClick={() => {
               markPlanAsDone(learningPlan.id);
               handleClose();
@@ -115,6 +118,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
               Title:
             </label>
             <TextField
+              disabled={learningPlan.is_completed}
               id="title"
               name="title"
               variant="outlined"
@@ -142,6 +146,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
               Description:
             </label>
             <TextField
+              disabled={learningPlan.is_completed}
               id="description"
               name="description"
               multiline={true}
@@ -196,6 +201,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                       Title:
                     </label>
                     <TextField
+                      disabled={step.completed_at != null}
                       id="step_title"
                       name="step_title"
                       variant="outlined"
@@ -229,6 +235,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                       Description:
                     </label>
                     <TextField
+                      disabled={step.completed_at != null}
                       id="step_description"
                       name="step_description"
                       multiline={true}
@@ -260,6 +267,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
               </div>
               <div className="flex flex-col">
                 <IconButton
+                  disabled={step.completed_at != null}
                   onClick={() => {
                     if (steps.length === 1) {
                       markPlanAsDone(learningPlan.id);
@@ -290,6 +298,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
 
         <div className="flex justify-end gap-2">
           <button
+            disabled={learningPlan.is_completed}
             onClick={() => {
               updatePlan(learningPlan.id, learningPlan, steps);
               handleClose();
