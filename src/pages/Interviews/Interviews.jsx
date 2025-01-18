@@ -82,7 +82,7 @@ const Interview = () => {
   };
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <ViewFeedback open={open} handleClose={handleClose} text={text} />
       <InterviewSetup
         isOpen={setupOpen}
@@ -381,7 +381,7 @@ const Interview = () => {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

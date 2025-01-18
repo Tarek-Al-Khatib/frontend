@@ -43,8 +43,8 @@ const GiveFeedback = ({ isOpen, onClose, updateInterview }) => {
           className="text-navy"
           sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 22 }}
         >
-          <div className="flex items-center gap-1">
-            Share Your Feedback!
+          <div className="flex items-center gap-1 max-sm:flex-col max-sm:items-start max-sm:gap-0">
+            <p className="max-sm:text-base">Share Your Feedback!</p>
             <p className="text-sm text-gray-300">(we value your input)</p>
           </div>
         </DialogTitle>
