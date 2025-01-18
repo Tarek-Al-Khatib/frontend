@@ -20,7 +20,15 @@ const SignUp = () => {
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setSignupState({ ...signupState, [id]: value });
-    setError("");
+
+    if (id === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (value && !emailRegex.test(value)) {
+        setError("Please enter a valid email address");
+      } else {
+        setError("");
+      }
+    }
   };
 
   const handleSignup = async () => {
@@ -100,11 +108,11 @@ const SignUp = () => {
                   </label>
                   <TextField
                     id="email"
+                    value={signupState.email}
                     onChange={handleInputChange}
                     variant="outlined"
                     sx={{
                       width: "100%",
-
                       "& .MuiOutlinedInput-root": {
                         borderRadius: 1,
                       },
@@ -112,6 +120,8 @@ const SignUp = () => {
                         borderColor: "#E5E5E5",
                       },
                     }}
+                    error={!!error}
+                    helperText={error}
                   />
                 </div>
 
@@ -141,6 +151,11 @@ const SignUp = () => {
               </div>
 
               <button
+                disabled={
+                  signupState.username === "" ||
+                  signupState.email === "" ||
+                  signupState.password === ""
+                }
                 className="w-full py-3 text-2xl font-extrabold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
                 onClick={handleSignup}
               >

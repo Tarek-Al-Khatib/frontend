@@ -124,6 +124,10 @@ const Signin = () => {
                 </div>
 
                 <button
+                  disabled={
+                    loginState.emailOrUsername === "" ||
+                    loginState.password === ""
+                  }
                   className="w-full py-3 text-2xl font-extrabold text-white transition bg-dark-blue hover:bg-blue-400 rounded-self"
                   onClick={handleSignIn}
                 >
