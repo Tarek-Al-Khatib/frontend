@@ -82,7 +82,7 @@ const Interview = () => {
   };
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <ViewFeedback open={open} handleClose={handleClose} text={text} />
       <InterviewSetup
         isOpen={setupOpen}
@@ -113,7 +113,7 @@ const Interview = () => {
         <h1 className="pb-5 text-2xl font-thin text-navy">My Interviews</h1>
 
         <div className="flex">
-          <div className="bg-gradient-to-r from-[#b0e9ff] to-[#0594b4] rounded-l-lg w-full flex flex-col items-start justify-center p-6 pl-32 gap-4 max-2xl:rounded-lg max-sm:pl-6">
+          <div className="bg-gradient-to-r from-[#b0e9ff] to-[#0594b4] rounded-l-lg w-full flex flex-col items-start justify-center p-6 pl-32 gap-4 max-2xl:rounded-lg max-2xl:pl-6 max-2xl:items-center">
             <h1 className="text-4xl font-extrabold text-navy">
               Practicing interviews?
             </h1>
@@ -381,7 +381,7 @@ const Interview = () => {
         </div>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

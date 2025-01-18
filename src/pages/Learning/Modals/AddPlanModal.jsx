@@ -77,7 +77,7 @@ const AddPlan = ({ open, handleClose }) => {
         </div>
       ) : (
         <Box
-          className="w-4/5 p-6 mx-auto bg-white rounded-lg shadow-lg"
+          className="w-4/5 p-6 mx-auto bg-white rounded-lg shadow-lg max-sm:py-1"
           sx={{
             position: "absolute",
             top: "50%",
@@ -90,7 +90,7 @@ const AddPlan = ({ open, handleClose }) => {
               <IoCloseCircleOutline className="text-navy" size={40} />
             </button>
           </div>
-          <h2 className="mb-1 text-3xl font-extrabold text-navy">
+          <h2 className="mb-1 text-3xl font-extrabold text-navy max-sm:text-xl">
             Learning Plan
           </h2>
           <Divider
@@ -102,10 +102,10 @@ const AddPlan = ({ open, handleClose }) => {
             }}
           ></Divider>
           <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-between w-1/2">
+            <div className="flex items-center justify-between w-1/2 max-2xl:w-full max-sm:flex-col max-sm:items-start max-sm:gap-2">
               <label
                 htmlFor="plan-title"
-                className="text-2xl font-bold text-navy"
+                className="text-2xl font-bold text-navy max-sm:text-xl"
               >
                 Title:
               </label>
@@ -129,10 +129,10 @@ const AddPlan = ({ open, handleClose }) => {
                 }}
               />
             </div>
-            <div className="flex items-center justify-between w-1/2">
+            <div className="flex items-center justify-between w-1/2 max-2xl:w-full max-sm:flex-col max-sm:items-start max-sm:gap-2">
               <label
                 htmlFor="plan-description"
-                className="text-2xl font-bold text-navy"
+                className="text-2xl font-bold text-navy max-sm:text-xl"
               >
                 Description:
               </label>
@@ -159,7 +159,9 @@ const AddPlan = ({ open, handleClose }) => {
               />
             </div>
           </div>
-          <h2 className="mb-1 text-3xl font-extrabold text-navy">Steps</h2>
+          <h2 className="mb-1 text-3xl font-extrabold text-navy max-sm:text-xl">
+            Steps
+          </h2>
           <Divider
             textAlign="center"
             flexItem
@@ -177,13 +179,13 @@ const AddPlan = ({ open, handleClose }) => {
               onClick={() => {
                 enhancePlan();
               }}
-              className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-800 rounded-self"
+              className="px-8 py-2 text-xl font-bold transition text-cyan bg-navy rounded- hover:bg-blue-800 rounded-self max-sm:text-base"
             >
               Enhance with AI
             </button>
           </div>
           <div
-            className="overflow-y-auto custom-scrollbar h-[300px] mb-5 scroll-smooth"
+            className="overflow-y-auto custom-scrollbar h-[300px] mb-5 scroll-smooth max-sm:mb-1"
             ref={stepsContainerRef}
           >
             {steps.map((step, index) => (
@@ -191,11 +193,11 @@ const AddPlan = ({ open, handleClose }) => {
                 key={index}
                 className="flex items-center pb-2 mt-1 mb-4 border-b "
               >
-                <div className="flex w-11/12 gap-10">
-                  <div className="flex flex-col items-start justify-start w-1/3">
+                <div className="flex w-11/12 gap-10 max-2xl:flex-col">
+                  <div className="flex flex-col items-start justify-start w-1/3 max-xl:w-full">
                     <label
                       htmlFor={`step-title-${index}`}
-                      className="text-2xl font-bold text-navy"
+                      className="text-2xl font-bold text-navy max-sm:text-xl"
                     >
                       Title:
                     </label>
@@ -217,7 +219,7 @@ const AddPlan = ({ open, handleClose }) => {
                         "& .MuiOutlinedInput-root": {
                           fontFamily: "Open Sans",
                           fontWeight: "700",
-                          borderRadius: 5,
+                          borderRadius: 1,
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
                           borderColor: "#E5E5E5",
@@ -225,10 +227,10 @@ const AddPlan = ({ open, handleClose }) => {
                       }}
                     />
                   </div>
-                  <div className="flex flex-col items-start justify-start w-4/5">
+                  <div className="flex flex-col items-start justify-start w-4/5 max-xl:w-full">
                     <label
                       htmlFor={`step-description-${index}`}
-                      className="text-2xl font-bold text-navy"
+                      className="text-2xl font-bold text-navy max-sm:text-xl"
                     >
                       Description:
                     </label>
@@ -252,7 +254,7 @@ const AddPlan = ({ open, handleClose }) => {
                         "& .MuiOutlinedInput-root": {
                           fontFamily: "Open Sans",
                           fontWeight: "700",
-                          borderRadius: 5,
+                          borderRadius: 1,
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
                           borderColor: "#E5E5E5",
