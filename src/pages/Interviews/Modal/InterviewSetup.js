@@ -101,12 +101,11 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
       }}
     >
       <div className="flex justify-between">
-        <DialogTitle
-          className="text-navy"
-          sx={{ fontWeight: "800", fontFamily: "Open Sans", fontSize: 22 }}
-        >
-          Choose Your Interview Setup
-        </DialogTitle>
+        <div className="p-4">
+          <p className="text-xl font-extrabold text-navy">
+            Choose Your Interview Setup
+          </p>
+        </div>
         <Button
           onClick={() => {
             setSelectedInterviewer(null);
@@ -126,7 +125,7 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
               key={index}
               onClick={() => handleInterviewerClick(interviewer)}
               sx={{
-                width: "30%",
+                width: 250,
                 cursor: "pointer",
                 borderRadius: 3,
                 padding: 2,
@@ -199,7 +198,7 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
       <DialogActions>
         <button
           onClick={handleSubmit}
-          className="px-8 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
+          className="px-8 py-2 text-sm font-bold text-white transition bg-dark-blue hover:bg-blue-400 rounded-self"
         >
           Confirm Selection
         </button>
