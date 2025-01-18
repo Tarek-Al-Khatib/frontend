@@ -55,12 +55,9 @@ const Signin = () => {
             {error}
           </Alert>
         </Collapse>
-        <div
-          className="flex flex-col items-center justify-center w-1/3 gap-10 p-4 pb-0 bg-white rounded-lg shadow-lg max-lg:w-2/3"
-          style={{ borderRadius: 50 }}
-        >
+        <div className="flex flex-col items-center justify-center w-1/3 gap-10 p-8 pb-0 bg-white rounded-lg shadow-lg max-lg:w-2/3">
           <div className="flex items-center justify-center w-full ">
-            <div className="w-4/5 pr-8 max-lg:pr-0">
+            <div className="w-full pr-8 max-lg:pr-0">
               <div>
                 <h3 className="text-2xl font-extrabold text-navy max-lg:text-xl">
                   Welcome Back!

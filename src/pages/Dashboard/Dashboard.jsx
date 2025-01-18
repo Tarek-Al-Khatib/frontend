@@ -35,7 +35,6 @@ const Dashboard = () => {
   const { user } = useContext(authContext);
   const { addPlan } = useContext(learningContext);
   const navigation = useNavigate();
-
   const [dashboardButtons, setDashboardButtons] = useState([]);
 
   useEffect(() => {
@@ -43,25 +42,25 @@ const Dashboard = () => {
       {
         id: 1,
         label: "My Learning",
-        icon: <LuGraduationCap size={80} />,
+        icon: <LuGraduationCap size={60} />,
         url: "/learning",
       },
       {
         id: 2,
         label: "My Interviews",
-        icon: <RiSpeakFill size={80} />,
+        icon: <RiSpeakFill size={60} />,
         url: "/interview",
       },
       {
         id: 3,
         label: "Communities",
-        icon: <MdPeopleAlt size={80} />,
+        icon: <MdPeopleAlt size={60} />,
         url: "/community",
       },
       {
         id: 4,
         label: "My Profile",
-        icon: <FaUserPen size={80} />,
+        icon: <FaUserPen size={60} />,
         url: "/myprofile",
       },
     ]);
@@ -75,21 +74,21 @@ const Dashboard = () => {
         </div>
       ) : (
         <div>
-          <Navbar />
+          {/* <Navbar /> */}
           <div className="p-8">
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-3 max-md:flex-col max-md:gap-5">
               <div>
                 <h1 className="pb-5 text-2xl font-thin text-navy">Dashboard</h1>
                 <h1 className="mb-4 text-4xl font-bold text-blue-900">
                   Welcome Back, {user && capitalize(user.username)}!
                 </h1>
-                <p className="w-3/5 text-xl font-normal text-navy">
+                <p className="w-3/5 text-xl font-normal text-navy max-sm:w-full">
                   Here you can check your current stats, regarding interviews,
                   accomplishments in learning ...etc. Good luck!
                 </p>
               </div>
 
-              <div className="w-2/5 p-6 mb-6 border border-b-gray-300 rounded-3xl">
+              <div className="w-2/5 p-6 mb-6 border border-b-gray-300 rounded-3xl max-xl:w-3/4 max-md:w-full">
                 <h2 className="mb-3 font-thin text-center text-navy">
                   For you to remember
                 </h2>
@@ -102,13 +101,10 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-center w-full p-8 py-4 border border-gray-300 mb-14 rounded-3xl gap-14">
+            <div className="flex items-center justify-center w-full p-8 py-4 border border-gray-300 mb-14 rounded-3xl gap-14 max-2xl:flex-col">
               {chartData && (
-                <ResponsiveContainer width={1000} height={600}>
-                  <LineChart
-                    data={chartData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
-                  >
+                <ResponsiveContainer height={600}>
+                  <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis
                       dataKey="day"
@@ -137,7 +133,7 @@ const Dashboard = () => {
                 </ResponsiveContainer>
               )}
 
-              <div className="grid w-2/5 grid-cols-2 gap-7">
+              <div className="grid w-2/5 grid-cols-2 gap-7 max-xl:w-4/5 max-sm:w-full">
                 {dashboardButtons.map((button) => (
                   <button
                     key={button.id}
@@ -146,7 +142,7 @@ const Dashboard = () => {
                       navigation(button.url);
                     }}
                   >
-                    <div className="flex items-center justify-center dashboard-buttons-icons">
+                    <div className="flex items-center justify-center rounded-full bg-navy w-36 h-36 max-sm:w-20 max-sm:h-20">
                       {button.icon}
                     </div>
                     <p className="my-1 mt-5 text-xl font-medium text-black">
@@ -157,16 +153,16 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <section className="flex justify-center gap-6">
-              <div className="w-1/2 p-6 mb-8 border border-gray-300 rounded-3xl">
+            <section className="flex justify-center gap-6 max-2xl:flex-col">
+              <div className="w-1/2 p-6 mb-8 border border-gray-300 rounded-3xl max-2xl:w-full">
                 <h2 className="mb-4 text-2xl font-normal text-black">
                   Top Learning Picks
                 </h2>
-                <div className="flex items-center justify-center ">
+                <div className="flex items-center justify-center max-md:flex-col">
                   {learningPlans.map((pick, index) => (
                     <div
                       key={pick.title}
-                      className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded"
+                      className="flex flex-col justify-between w-1/3 min-h-[612px] p-4 rounded max-md:w-full max-md:min-h-fit"
                     >
                       <div>
                         <div className="inline-block mb-1 text-sm font-bold text-center rounded-full px-9 bg-light-navy text-cyan">
@@ -210,7 +206,7 @@ const Dashboard = () => {
                 </div>
                 <div></div>
               </div>
-              <div className="flex flex-col items-start justify-between w-1/2 p-6 mb-8 border border-gray-300 min-h-max rounded-3xl">
+              <div className="flex flex-col items-start justify-between w-1/2 p-6 mb-8 border border-gray-300 rounded-3xl max-2xl:w-full">
                 <h2 className="mb-4 text-2xl font-normal text-black">
                   Top Communities
                 </h2>
@@ -254,7 +250,7 @@ const Dashboard = () => {
               </div>
             </section>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       )}
     </div>
