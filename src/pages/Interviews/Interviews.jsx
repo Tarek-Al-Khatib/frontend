@@ -82,7 +82,7 @@ const Interview = () => {
   };
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <ViewFeedback open={open} handleClose={handleClose} text={text} />
       <InterviewSetup
         isOpen={setupOpen}
@@ -113,7 +113,7 @@ const Interview = () => {
         <h1 className="pb-5 text-2xl font-thin text-navy">My Interviews</h1>
 
         <div className="flex">
-          <div className="bg-gradient-to-r from-[#b0e9ff] to-[#0594b4] rounded-l-lg w-full flex flex-col items-start justify-center p-6 pl-32 gap-4">
+          <div className="bg-gradient-to-r from-[#b0e9ff] to-[#0594b4] rounded-l-lg w-full flex flex-col items-start justify-center p-6 pl-32 gap-4 max-2xl:rounded-lg max-sm:pl-6">
             <h1 className="text-4xl font-extrabold text-navy">
               Practicing interviews?
             </h1>
@@ -129,7 +129,7 @@ const Interview = () => {
               Just like a normal one!
               <span className="font-extrabold"> TRY IT NOW</span>
             </p>
-            <div className="pl-16">
+            <div className="pl-16 max-sm:pl-0 max-sm:self-center">
               <button
                 className="bg-[#1e25a5] text-white text-xl font-bold px-6 py-3 rounded-md"
                 onClick={() => handleSetupOpen()}
@@ -139,13 +139,13 @@ const Interview = () => {
             </div>
           </div>
           <img
-            className="w-full h-auto rounded-r-lg max-h-[350px] object-cover"
+            className="w-full h-auto rounded-r-lg max-h-[350px] object-cover max-2xl:hidden"
             src="https://miro.medium.com/v2/resize:fit:1000/1*ycwawTXjHk1-yuDuugyT5g.jpeg"
             alt="AI Recruitment"
           />
         </div>
-        <div className="flex gap-20 py-20">
-          <div className="w-1/2">
+        <div className="flex gap-20 py-20 max-lg:flex-col">
+          <div className="w-1/2 max-lg:w-full">
             <h1 className="pb-5 text-2xl font-normal text-navy">
               Interview History
             </h1>
@@ -234,7 +234,7 @@ const Interview = () => {
               </Table>
             </TableContainer>
           </div>
-          <div className="w-1/2">
+          <div className="w-1/2 max-lg:w-full">
             <h1 className="pb-5 text-2xl font-normal text-navy">
               Interview Invitations
             </h1>
@@ -381,7 +381,7 @@ const Interview = () => {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
