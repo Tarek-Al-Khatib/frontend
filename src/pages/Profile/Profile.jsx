@@ -44,16 +44,16 @@ const Profile = () => {
   }, []);
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="p-8">
         <h1 className="self-start pb-5 text-2xl font-thin text-start text-navy">
           Profile
         </h1>
         <div className="flex flex-col items-center justify-center">
-          <div className="flex gap-10 p-5">
+          <div className="flex gap-10 p-5 max-lg:flex-col">
             <div className="flex flex-col justify-between gap-8">
               <div class="flex gap-5 justify-between w-full border rounded-2xl border-gray-200 bg-white p-6 h-fit">
-                <div class="w-32 h-32 rounded-full flex justify-center items-center">
+                <div class="w-32 h-32 rounded-full flex justify-center items-center  max-xl:w-full">
                   <div className="relative">
                     {profileImage ? (
                       <img
@@ -87,8 +87,8 @@ const Profile = () => {
                   </div>
                 </div>
 
-                <div class="flex justify-between gap-5">
-                  <div className="flex flex-col justify-center w-1/3 gap-5">
+                <div class="flex justify-between gap-5 max-xl:flex-col max-xl:w-full">
+                  <div className="flex flex-col justify-center w-1/3 gap-5 ">
                     <div class="flex justify-start gap-5">
                       <span class="text-[#1e25a6] text-sm font-normal font-['Open Sans Hebrew']">
                         Name:
@@ -124,7 +124,7 @@ const Profile = () => {
                         : "No description"}
                     </span>
                   </div>
-                  <div class="flex flex-col items-center w-1/4">
+                  <div class="flex flex-col items-center w-1/4 max-xl:w-full">
                     <span class="text-[#1e25a6] text-base font-extrabold font-['Open Sans Hebrew'] mb-4">
                       Badges
                     </span>
@@ -150,7 +150,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-8">
+              <div className="flex gap-8 max-sm:flex-col max-sm:items-center">
                 <div className="w-full h-full max-w-sm p-4 bg-white border border-gray-200 rounded-2xl">
                   <div className="mb-3 text-base font-bold text-center text-navy">
                     My learning plans
@@ -184,7 +184,7 @@ const Profile = () => {
                     My Communities
                   </div>
 
-                  <div className="p-4 bg-white h-[550px] w-full px-0 w-1/2">
+                  <div className="p-4 bg-white h-[550px] w-full px-0">
                     <div className="flex flex-col gap-6 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal ">
                       {communities.map((community) => (
                         <div className="flex items-center gap-4 pr-2">
@@ -216,7 +216,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="p-6 border border-gray-200 rounded-2xl">
+            <div className="p-6 border border-gray-200 rounded-2xl max-sm:hidden">
               <div className="flex items-center gap-3 mb-4 ">
                 <h1 className="text-xl font-bold text-navy">Leaderboard</h1>
                 <Tooltip
@@ -226,7 +226,7 @@ const Profile = () => {
                   <LuInfo color="navy" size={25} />
                 </Tooltip>
               </div>
-              <TableContainer className="p-3 pb-8 border border-gray-200 rounded-xl">
+              <TableContainer className="p-3 pb-8 border border-gray-200 rounded-xl ">
                 <Table aria-label="leaderboard table">
                   <TableHead>
                     <TableRow>
@@ -287,7 +287,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
