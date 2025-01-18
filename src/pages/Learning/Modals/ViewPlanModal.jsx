@@ -77,18 +77,21 @@ const ViewPlan = ({ open, handleClose, plan }) => {
             <IoCloseCircleOutline className="text-navy" size={40} />
           </button>
         </div>
-        <div className="px-3 py-1 text-sm font-bold rounded-self bg-blue w-fit">
-          <p className="text-white">
-            +{steps.reduce((sum, step) => sum + (step.points || 0), 0)} points
-          </p>
-        </div>
 
-        <div className="flex items-end justify-between mb-3">
-          <div className="flex items-center justify-center gap-4">
-            <h2 className="mb-1 text-3xl font-extrabold text-navy">
-              Learning Plan
-            </h2>
-            <CircularProgressWithLabel value={progress} size={60} />
+        <div className="flex items-end justify-between mb-3 max-sm:flex-col max-sm:items-start max-sm:gap-3">
+          <div className="flex flex-col max-sm:flex-row max-sm:items-center max-sm:gap-3">
+            <div className="flex items-center justify-center gap-4">
+              <h2 className="mb-1 text-3xl font-extrabold text-navy max-md:text-xl">
+                Learning Plan
+              </h2>
+              <CircularProgressWithLabel value={progress} size={60} />
+            </div>
+            <div className="px-3 py-1 text-sm font-bold rounded-self bg-blue w-fit h-fit">
+              <p className="text-white">
+                +{steps.reduce((sum, step) => sum + (step.points || 0), 0)}{" "}
+                points
+              </p>
+            </div>
           </div>
           <button
             disabled={learningPlan.is_completed}
@@ -110,7 +113,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
           }}
         ></Divider>
         <div className="flex flex-col gap-8">
-          <div className="flex items-center justify-between w-1/2">
+          <div className="flex items-center justify-between w-1/2 max-xl:w-full max-md:flex-col max-md:items-start max-md:gap-2">
             <label
               htmlFor="plan-title"
               className="text-2xl font-bold text-navy"
@@ -130,7 +133,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
                   fontWeight: "700",
-                  borderRadius: 5,
+                  borderRadius: 1,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#E5E5E5",
@@ -138,7 +141,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
               }}
             />
           </div>
-          <div className="flex items-center justify-between w-1/2">
+          <div className="flex items-center justify-between w-1/2 max-xl:w-full max-md:flex-col max-md:items-start max-md:gap-2">
             <label
               htmlFor="plan-title"
               className="text-2xl font-bold text-navy"
@@ -160,7 +163,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "Open Sans",
                   fontWeight: "700",
-                  borderRadius: 5,
+                  borderRadius: 1,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#E5E5E5",
@@ -169,7 +172,9 @@ const ViewPlan = ({ open, handleClose, plan }) => {
             />
           </div>
         </div>
-        <h2 className="mb-1 text-3xl font-extrabold text-navy">Steps</h2>
+        <h2 className="mb-1 text-3xl font-extrabold text-navy max-sm:text-xl">
+          Steps
+        </h2>
         <Divider
           textAlign="center"
           flexItem
@@ -179,21 +184,21 @@ const ViewPlan = ({ open, handleClose, plan }) => {
           }}
         ></Divider>
         <div
-          className="overflow-y-auto custom-scrollbar h-[300px] mb-5 scroll-smooth"
+          className="overflow-y-auto custom-scrollbar h-[300px] mb-5 scroll-smooth max-sm:mb-0"
           ref={stepsContainerRef}
         >
           {steps.map((step, index) => (
             <div
               key={index}
-              className="flex items-center pb-2 mt-1 mb-4 border-b "
+              className="flex items-center pb-2 mt-1 mb-4 border-b"
             >
               <div className="flex flex-col w-11/12">
                 <div className="px-3 py-1 text-sm font-bold rounded-self bg-blue w-fit">
                   <p className="text-white">+{step.points} points</p>
                 </div>
 
-                <div className="flex w-11/12 gap-10">
-                  <div className="flex flex-col items-start justify-start w-1/3 mt-2">
+                <div className="flex w-11/12 gap-10 max-lg:flex-col max-lg:gap-4">
+                  <div className="flex flex-col items-start justify-start w-1/3 mt-2 max-lg:w-full">
                     <label
                       htmlFor={`step-title-${index}`}
                       className="text-xl font-bold text-navy"
@@ -219,7 +224,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                         "& .MuiOutlinedInput-root": {
                           fontFamily: "Open Sans",
                           fontWeight: "700",
-                          borderRadius: 5,
+                          borderRadius: 1,
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
                           borderColor: "#E5E5E5",
@@ -227,7 +232,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                       }}
                     />
                   </div>
-                  <div className="flex flex-col items-start justify-between w-4/5 mt-2">
+                  <div className="flex flex-col items-start justify-between w-4/5 mt-2 max-lg:w-full">
                     <label
                       htmlFor={`step-description-${index}`}
                       className="text-xl font-bold text-navy"
@@ -255,7 +260,7 @@ const ViewPlan = ({ open, handleClose, plan }) => {
                         "& .MuiOutlinedInput-root": {
                           fontFamily: "Open Sans",
                           fontWeight: "700",
-                          borderRadius: 5,
+                          borderRadius: 1,
                         },
                         "& .MuiOutlinedInput-notchedOutline": {
                           borderColor: "#E5E5E5",

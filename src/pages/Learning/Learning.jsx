@@ -81,7 +81,7 @@ const Learning = () => {
   };
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <AddPlan open={openAddModal} handleClose={handleAddModalClose} />
       <ViewPlan
         open={openViewModal}
@@ -198,7 +198,7 @@ const Learning = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
