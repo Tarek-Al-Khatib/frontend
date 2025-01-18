@@ -198,6 +198,7 @@ const CreateCommunity = ({ isOpen, onClose }) => {
         </DialogContent>
         <DialogActions>
           <button
+            disabled={formData.title === "" || formData.description === ""}
             type="submit"
             className="px-4 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
           >

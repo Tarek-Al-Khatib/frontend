@@ -126,6 +126,7 @@ const CreateChannel = ({ isOpen, onClose, communityId }) => {
         </DialogContent>
         <DialogActions>
           <button
+            disabled={formData.name === "" || formData.description === ""}
             type="submit"
             className="px-8 py-2 text-base font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
           >

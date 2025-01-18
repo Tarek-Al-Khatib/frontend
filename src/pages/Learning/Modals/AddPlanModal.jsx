@@ -279,6 +279,9 @@ const AddPlan = ({ open, handleClose }) => {
 
           <div className="flex justify-end gap-2">
             <button
+              disabled={
+                learningPlan.title === "" || learningPlan.description === ""
+              }
               onClick={() => {
                 addPlan(learningPlan, steps);
                 handleModalClose();

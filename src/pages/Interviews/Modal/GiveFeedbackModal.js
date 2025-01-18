@@ -93,6 +93,7 @@ const GiveFeedback = ({ isOpen, onClose, updateInterview }) => {
         </DialogContent>
         <DialogActions>
           <button
+            disabled={feedback === ""}
             type="submit"
             className="px-8 py-2 text-sm font-bold text-white transition bg-dark-blue rounded- hover:bg-blue-400 rounded-self"
           >
