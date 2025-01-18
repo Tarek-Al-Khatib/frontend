@@ -21,7 +21,8 @@ const InterviewSetup = ({ isOpen, onClose, onInterviewSelect }) => {
   const interviewers = [
     {
       label: "The Jazzar",
-      description: "Technical Interviewer with strict dialogue",
+      description:
+        "Technical Interviewer with strict dialogue, and somehow, funny.",
       characteristics:
         "You sometimes make fun of the candidate, and you are strict with your answers.",
       voiceId: "29vD33N1CtxCmqQRPOHJ",

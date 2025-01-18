@@ -1,7 +1,12 @@
 import React from "react";
 import "../../css/colors.css";
 import "./Home.css";
+import { FiPhone } from "react-icons/fi";
+import { MdOutlineEmail } from "react-icons/md";
+import { IoLocationOutline } from "react-icons/io5";
 import Logo from "../../assets/logo.png";
+import { FiGithub } from "react-icons/fi";
+import { LuLinkedin } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
@@ -192,6 +197,84 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <footer className="flex flex-col gap-16 p-12 mt-24 text-white bg-navy">
+        <div className="container flex items-center justify-between w-11/12 mx-auto">
+          <div className="flex flex-col items-center justify-center gap-3">
+            <div className="flex items-center justify-center w-40 h-40 bg-white rounded-full">
+              <img src={Logo} alt="Logo" className="w-24 h-24" />
+            </div>
+            <p className="text-base font-bold">
+              Empower Growth, Unlock Potential
+            </p>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <nav className="flex space-x-6 text-2xl gap-14">
+              <a href="#" className="hover:text-gray-200">
+                Home
+              </a>
+              <a href="#about" className="hover:text-gray-200">
+                About us
+              </a>
+              <a href="#contact" className="hover:text-gray-200">
+                Contact us
+              </a>
+            </nav>
+          </div>
+          <div className="flex space-x-4">
+            <button
+              onClick={() => {
+                if (userId && token) {
+                  navigate("/dashboard");
+                } else {
+                  navigate("/signin");
+                }
+              }}
+              className="px-4 py-2 font-bold"
+            >
+              {userId && token ? "Dashboard" : "Login"}
+            </button>
+            <button
+              onClick={() => {
+                if (userId && token) {
+                  navigate("/signin");
+                  localStorage.removeItem("userId");
+                  localStorage.removeItem("token");
+                } else {
+                  navigate("/signup");
+                }
+              }}
+              className="px-4 py-2 font-bold"
+            >
+              {userId && token ? "Logout" : "SignUp"}
+            </button>
+          </div>
+        </div>
+        <div className="flex items-center justify-between w-4/5 mx-auto">
+          <div className="flex items-center gap-1">
+            <IoLocationOutline color="white" size={30} />
+            <p>Beirut, Lebanon</p>
+          </div>
+          <div className="flex items-center gap-1">
+            <MdOutlineEmail color="white" size={30} />
+            <p>tarek.al.khatiib@gmail.com</p>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <FiPhone color="white" size={20} />
+            <p>+961 76 906 694</p>
+          </div>
+          <div className="flex gap-2">
+            <a href="https://www.linkedin.com/in/tarek-al-khatib/">
+              <LuLinkedin color="white" size={30} />
+            </a>
+            <a href="https://github.com/Tarek-Al-Khatib">
+              <FiGithub color="white" size={30} />
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

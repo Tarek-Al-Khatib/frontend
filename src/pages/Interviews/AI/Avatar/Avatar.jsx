@@ -38,8 +38,6 @@ const animationsMap = {
 export function Avatar(props) {
   const navigate = useNavigate();
   const { interviewer } = useContext(interviewContext);
-  console.log(interviewer.label);
-  console.log(modelMap[interviewer.label]);
   const modelPath = useMemo(
     () => modelMap[interviewer.label] || DefaultModel,
     [interviewer.label]
@@ -84,18 +82,6 @@ export function Avatar(props) {
     setAudio(new Audio("data:audio/mp3;base64," + message.audio));
   }, [message, isUserInteracted]);
 
-  function getModelPath(interviewer) {
-    const modelPaths = {
-      "The Jazzar": "../../../../assets/ai/jazzar-transformed.glb",
-      "The Dev Lord": "../../../../assets/ai/taha-transformed.glb",
-      "The Recruitment General": "../../../../assets/ai/gheeda-transformed.glb",
-      "The Color Queen": "../../../../assets/ai/nour-transformed.glb",
-      "The Careerster": "../../../../assets/ai/jane-transformed.glb",
-      "WorkWise Interviewer": "../../../../assets/ai/default.glb",
-    };
-    return modelPaths[interviewer] || "../../../../assets/ai/default-model.glb";
-  }
-
   const animationsPath = useMemo(() => {
     return animationsMap.man.includes(modelPath)
       ? AnimationsMan
@@ -121,24 +107,6 @@ export function Avatar(props) {
     };
   }, [animation]);
 
-  const lerpMorphTarget = (target, value, speed = 0.1) => {
-    scene.traverse((child) => {
-      if (child.isSkinnedMesh && child.morphTargetDictionary) {
-        const index = child.morphTargetDictionary[target];
-        if (
-          index === undefined ||
-          child.morphTargetInfluences[index] === undefined
-        ) {
-          return;
-        }
-        child.morphTargetInfluences[index] = THREE.MathUtils.lerp(
-          child.morphTargetInfluences[index],
-          value,
-          speed
-        );
-      }
-    });
-  };
   const [audio, setAudio] = useState();
 
   useEffect(() => {
@@ -209,7 +177,7 @@ export function Avatar(props) {
             />
           );
         }
-        return null; // Skip if the node is not a skinned mesh
+        return null;
       })}
     </group>
   );
