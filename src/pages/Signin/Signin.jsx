@@ -56,16 +56,16 @@ const Signin = () => {
           </Alert>
         </Collapse>
         <div
-          className="flex flex-col items-center justify-center w-1/3 gap-10 p-12 pb-0 bg-white rounded-lg shadow-lg"
+          className="flex flex-col items-center justify-center w-1/3 gap-10 p-4 pb-0 bg-white rounded-lg shadow-lg max-lg:w-2/3"
           style={{ borderRadius: 50 }}
         >
           <div className="flex items-center justify-center w-full ">
-            <div className="w-4/5 pr-8">
+            <div className="w-4/5 pr-8 max-lg:pr-0">
               <div>
-                <h3 className="text-2xl font-extrabold text-navy">
+                <h3 className="text-2xl font-extrabold text-navy max-lg:text-xl">
                   Welcome Back!
                 </h3>
-                <p className="mb-6 text-sm font-bold text-dark-gray">
+                <p className="mb-6 text-sm font-bold text-dark-gray max-lg:text-xs">
                   Let today be as a step to empower growth!
                 </p>
 
@@ -73,7 +73,7 @@ const Signin = () => {
                   <div>
                     <label
                       htmlFor="emailOrUsername"
-                      className="block mb-3 text-base font-extrabold text-navy"
+                      className="block mb-3 text-base font-extrabold text-navy max-lg:text-sm"
                     >
                       Username/email
                     </label>
@@ -135,28 +135,8 @@ const Signin = () => {
                 </button>
               </div>
             </div>
-            {/* <Divider
-              orientation="vertical"
-              textAlign="center"
-              flexItem
-              sx={{
-                color: "#1E25A6",
-                "::before, ::after": {
-                  borderColor: "#1E25A6",
-                },
-                fontWeight: "800",
-                fontSize: 20,
-              }}
-            >
-              OR
-            </Divider>
-            <div className="flex flex-col items-center justify-center w-2/5">
-              <strong>Sign in with Google</strong>
-              <strong>Sign in with Github</strong>
-              <strong>Sign in with Linkedin</strong>
-            </div> */}
           </div>
-          <p className="pb-4 text-sm text-navy">
+          <p className="pb-4 text-sm text-navy max-md:text-xs">
             No account? No problem,{" "}
             <button onClick={() => navigation("/signup")}>
               <strong>Sign Up</strong>

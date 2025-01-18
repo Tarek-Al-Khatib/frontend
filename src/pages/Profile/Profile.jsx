@@ -44,7 +44,7 @@ const Profile = () => {
   }, []);
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="p-8">
         <h1 className="self-start pb-5 text-2xl font-thin text-start text-navy">
           Profile
@@ -52,8 +52,8 @@ const Profile = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="flex gap-10 p-5 max-lg:flex-col">
             <div className="flex flex-col justify-between gap-8">
-              <div class="flex gap-5 justify-between w-full border rounded-2xl border-gray-200 bg-white p-6 h-fit">
-                <div class="w-32 h-32 rounded-full flex justify-center items-center  max-xl:w-full">
+              <div class="flex gap-5 justify-between w-full border rounded-2xl border-gray-200 bg-white p-6 h-fit max-xl:items-center">
+                <div class="w-32 h-32 rounded-full flex justify-center items-center max-xl:w-full ">
                   <div className="relative">
                     {profileImage ? (
                       <img
@@ -287,7 +287,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
