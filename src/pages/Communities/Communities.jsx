@@ -182,7 +182,7 @@ const Communities = () => {
 
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <CreateCommunity
         isOpen={isCommunityModalOpen}
         onClose={handleCommunityModalToggle}

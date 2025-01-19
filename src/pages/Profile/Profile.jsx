@@ -45,7 +45,7 @@ const Profile = () => {
   }, []);
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="p-8 max-sm:px-0">
         <h1 className="self-start pb-5 text-2xl font-thin text-start text-navy">
           Profile
