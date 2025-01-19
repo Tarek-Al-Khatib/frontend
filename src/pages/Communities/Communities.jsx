@@ -15,6 +15,7 @@ import { authContext } from "../../contexts/AuthContext/AuthContext";
 import moment from "moment";
 import InviteModerator from "./Modals/InviteModeratorModal";
 import { interviewContext } from "../../contexts/InterviewContext/InterviewContext";
+import Hamburger from "hamburger-react";
 
 const Communities = () => {
   const {
@@ -31,6 +32,7 @@ const Communities = () => {
   const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
   const [flipChannel, setFlipChannel] = useState(true);
   const [flipModerators, setFlipModerators] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const [inviteModal, setInviteModal] = useState(false);
 
@@ -180,7 +182,7 @@ const Communities = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <CreateCommunity
         isOpen={isCommunityModalOpen}
         onClose={handleCommunityModalToggle}
@@ -205,178 +207,380 @@ const Communities = () => {
           />
         )}
       <div className="flex w-full bg-white h-screen/92">
-        <div className="flex flex-col items-center w-24 max-h-screen py-6 overflow-y-auto bg-white scrollbar-hidden">
-          <div className="flex flex-col items-center w-full ">
-            {communities.map((community) => (
-              <button
-                key={community.id}
-                className="flex items-center justify-center w-20 h-20 mb-5 overflow-hidden rounded-full bg-navy"
-                onClick={() => handleCommunitySelect(community)}
-              >
-                {community.community_logo ? (
-                  <img
-                    src={community.community_logo}
-                    alt={`${community.title} logo`}
-                    className="object-cover w-full h-full"
-                  />
-                ) : (
-                  <span className="text-sm text-white">No Logo</span>
-                )}
-              </button>
-            ))}
-          </div>
-          <div>
-            <button
-              onClick={handleCommunityModalToggle}
-              className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:bg-gray-100"
-            >
-              <IoMdAdd size={25} className="text-gray-700" />
-            </button>
-          </div>
-        </div>
+        <button
+          className="fixed z-50 p-3 text-whiterounded-full top-24 right-4 lg:hidden"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        >
+          <Hamburger
+            color="#1e25a6"
+            toggled={isSidebarOpen}
+            toggle={setIsSidebarOpen}
+          />
+        </button>
+        {isSidebarOpen && (
+          <div
+            className="fixed inset-0 z-30 bg-black opacity-50"
+            onClick={() => setIsSidebarOpen(false)}
+          ></div>
+        )}
 
-        {communities && communities.length > 0 ? (
-          selectedCommunity ? (
-            <div className="p-6 bg-blue-900 w-80">
-              <div className="flex flex-col items-center mb-8">
-                <div className="flex items-center justify-center mb-4 overflow-hidden text-base font-light text-center text-blue-300 bg-blue-900 rounded-full first-letter:h-24 w-28 h-28">
-                  {selectedCommunity && selectedCommunity.community_logo ? (
+        <div
+          className={`fixed top-0 left-0 z-40 h-full max-lg:flex lg:hidden bg-white transition-transform transform ${
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } lg:relative lg:translate-x-0 w-[400px]`}
+        >
+          <div className="flex flex-col items-center w-24 max-h-screen py-6 overflow-y-auto bg-white scrollbar-hidden ">
+            <div className="flex flex-col items-center w-full ">
+              {communities.map((community) => (
+                <button
+                  key={community.id}
+                  className="flex items-center justify-center w-20 h-20 mb-5 overflow-hidden rounded-full bg-navy"
+                  onClick={() => handleCommunitySelect(community)}
+                >
+                  {community.community_logo ? (
                     <img
-                      src={selectedCommunity.community_logo}
-                      alt={`${selectedCommunity.title} logo`}
+                      src={community.community_logo}
+                      alt={`${community.title} logo`}
                       className="object-cover w-full h-full"
                     />
                   ) : (
-                    <span>No Logo</span>
+                    <span className="text-sm text-white">No Logo</span>
                   )}
+                </button>
+              ))}
+            </div>
+            <div>
+              <button
+                onClick={handleCommunityModalToggle}
+                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:bg-gray-100"
+              >
+                <IoMdAdd size={25} className="text-gray-700" />
+              </button>
+            </div>
+          </div>
+          {communities && communities.length > 0 ? (
+            selectedCommunity ? (
+              <div className="p-6 bg-blue-900 w-80">
+                <div className="flex flex-col items-center mb-8">
+                  <div className="flex items-center justify-center mb-4 overflow-hidden text-base font-light text-center text-blue-300 bg-blue-900 rounded-full first-letter:h-24 w-28 h-28">
+                    {selectedCommunity && selectedCommunity.community_logo ? (
+                      <img
+                        src={selectedCommunity.community_logo}
+                        alt={`${selectedCommunity.title} logo`}
+                        className="object-cover w-full h-full"
+                      />
+                    ) : (
+                      <span>No Logo</span>
+                    )}
+                  </div>
+
+                  <div className="text-lg font-light text-white">
+                    {selectedCommunity.title}
+                  </div>
                 </div>
 
-                <div className="text-lg font-light text-white">
-                  {selectedCommunity.title}
-                </div>
-              </div>
-
-              <div className="mb-10">
-                <div className="flex items-center justify-between w-full mb-3 text-lg font-bold text-white">
-                  <button
-                    className="flex items-center gap-2"
-                    onClick={() => setFlipChannel(!flipChannel)}
-                  >
-                    {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
-                    Channels
-                  </button>
-                  {user ? (
-                    members.some((m) => m.user_id === user.id) ? (
-                      ["MODERATOR", "ADMIN"].includes(
-                        members.find((m) => m.user_id === user.id)?.role
-                      ) ? (
-                        <button onClick={handleChannelModalToggle}>
-                          <IoMdAdd size={25} />
-                        </button>
+                <div className="mb-10">
+                  <div className="flex items-center justify-between w-full mb-3 text-lg font-bold text-white">
+                    <button
+                      className="flex items-center gap-2"
+                      onClick={() => setFlipChannel(!flipChannel)}
+                    >
+                      {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
+                      Channels
+                    </button>
+                    {user ? (
+                      members.some((m) => m.user_id === user.id) ? (
+                        ["MODERATOR", "ADMIN"].includes(
+                          members.find((m) => m.user_id === user.id)?.role
+                        ) ? (
+                          <button onClick={handleChannelModalToggle}>
+                            <IoMdAdd size={25} />
+                          </button>
+                        ) : (
+                          <div></div>
+                        )
                       ) : (
                         <div></div>
                       )
                     ) : (
                       <div></div>
-                    )
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-                {flipChannel && (
-                  <div className="flex flex-col">
-                    {channels.map((channel, index) => (
-                      <button
-                        key={index}
-                        className={`flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded text-start ${
-                          selectedChannel != null &&
-                          channel.id === selectedChannel.id
-                            ? "bg-dark-blue"
-                            : "hover:bg-blue-700/30"
-                        }`}
-                        onClick={() => handleChannelSelect(channel)}
-                      >
-                        {channel.name}
-                        {channel.unread > 0 && (
-                          <div className="flex items-center justify-center w-5 h-5 text-xs bg-blue-600 rounded-full">
-                            {channel.unread}
-                          </div>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {moderatorsData.length > 0 && (
-                <div>
-                  <button
-                    onClick={() => setFlipModerators(!flipModerators)}
-                    className="flex items-center mb-3 text-lg font-bold text-white"
-                  >
-                    {flipModerators ? (
-                      <IoIosArrowDown />
-                    ) : (
-                      <IoIosArrowForward />
                     )}
-                    Moderators
-                  </button>
-                  {flipModerators && (
-                    <div className="space-y-3">
-                      {moderatorsData.map((moderator, index) => (
-                        <div>
-                          <button
-                            onClick={() => handleOpenInviteDiv(index)}
-                            key={index}
-                            className="flex items-center space-x-3"
-                          >
-                            <div className="w-10 h-10 bg-white rounded-full">
-                              {moderator.user && moderator.user.profile_pic && (
-                                <img
-                                  src={moderator.user.profile_pic}
-                                  alt={`${moderator.user.profile_pic} profile pic`}
-                                  className="object-cover w-full h-full rounded-full"
-                                />
-                              )}
-                            </div>
-                            <div className="text-lg font-thin text-white">
-                              {moderator.user.username}
-                            </div>
-                          </button>
-                          {selectedModerator === index && (
-                            <div className="p-2 mt-2 text-white bg-gray-800 rounded shadow-lg w-fit">
-                              <p>
-                                Invite {moderator.user.username} to an
-                                interview?
-                              </p>
-                              <div className="flex justify-end">
-                                <button
-                                  className="px-2 py-1 mt-1 text-white bg-blue-600 rounded hover:bg-blue-500"
-                                  onClick={() => setInviteModal(true)}
-                                >
-                                  Invite
-                                </button>
-                              </div>
+                  </div>
+                  {flipChannel && (
+                    <div className="flex flex-col">
+                      {channels.map((channel, index) => (
+                        <button
+                          key={index}
+                          className={`flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded text-start ${
+                            selectedChannel != null &&
+                            channel.id === selectedChannel.id
+                              ? "bg-dark-blue"
+                              : "hover:bg-blue-700/30"
+                          }`}
+                          onClick={() => handleChannelSelect(channel)}
+                        >
+                          {channel.name}
+                          {channel.unread > 0 && (
+                            <div className="flex items-center justify-center w-5 h-5 text-xs bg-blue-600 rounded-full">
+                              {channel.unread}
                             </div>
                           )}
-                        </div>
+                        </button>
                       ))}
                     </div>
                   )}
                 </div>
-              )}
-            </div>
+
+                {moderatorsData.length > 0 && (
+                  <div>
+                    <button
+                      onClick={() => setFlipModerators(!flipModerators)}
+                      className="flex items-center mb-3 text-lg font-bold text-white"
+                    >
+                      {flipModerators ? (
+                        <IoIosArrowDown />
+                      ) : (
+                        <IoIosArrowForward />
+                      )}
+                      Moderators
+                    </button>
+                    {flipModerators && (
+                      <div className="space-y-3">
+                        {moderatorsData.map((moderator, index) => (
+                          <div>
+                            <button
+                              onClick={() => handleOpenInviteDiv(index)}
+                              key={index}
+                              className="flex items-center space-x-3"
+                            >
+                              <div className="w-10 h-10 bg-white rounded-full">
+                                {moderator.user &&
+                                  moderator.user.profile_pic && (
+                                    <img
+                                      src={moderator.user.profile_pic}
+                                      alt={`${moderator.user.profile_pic} profile pic`}
+                                      className="object-cover w-full h-full rounded-full"
+                                    />
+                                  )}
+                              </div>
+                              <div className="text-lg font-thin text-white">
+                                {moderator.user.username}
+                              </div>
+                            </button>
+                            {selectedModerator === index && (
+                              <div className="p-2 mt-2 text-white bg-gray-800 rounded shadow-lg w-fit">
+                                <p>
+                                  Invite {moderator.user.username} to an
+                                  interview?
+                                </p>
+                                <div className="flex justify-end">
+                                  <button
+                                    className="px-2 py-1 mt-1 text-white bg-blue-600 rounded hover:bg-blue-500"
+                                    onClick={() => setInviteModal(true)}
+                                  >
+                                    Invite
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center flex-grow text-base font-bold text-gray-500">
+                Let's start! Select a community that you like
+              </div>
+            )
           ) : (
             <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
-              Let's start! Select a community that you like
+              Please join a community or create a new one !
             </div>
-          )
-        ) : (
-          <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
-            Please join a community or create a new one !
+          )}
+        </div>
+        <div
+          className={`flex ${
+            (communities && communities.length === 0) || !selectedCommunity
+              ? "w-full"
+              : ""
+          } max-lg:hidden`}
+        >
+          <div className="flex flex-col items-center w-24 max-h-screen py-6 overflow-y-auto bg-white scrollbar-hidden ">
+            <div className="flex flex-col items-center w-full ">
+              {communities.map((community) => (
+                <button
+                  key={community.id}
+                  className="flex items-center justify-center w-20 h-20 mb-5 overflow-hidden rounded-full bg-navy"
+                  onClick={() => handleCommunitySelect(community)}
+                >
+                  {community.community_logo ? (
+                    <img
+                      src={community.community_logo}
+                      alt={`${community.title} logo`}
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <span className="text-sm text-white">No Logo</span>
+                  )}
+                </button>
+              ))}
+            </div>
+            <div>
+              <button
+                onClick={handleCommunityModalToggle}
+                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:bg-gray-100"
+              >
+                <IoMdAdd size={25} className="text-gray-700" />
+              </button>
+            </div>
           </div>
-        )}
 
+          {communities && communities.length > 0 ? (
+            selectedCommunity ? (
+              <div className="p-6 bg-blue-900 w-80">
+                <div className="flex flex-col items-center mb-8">
+                  <div className="flex items-center justify-center mb-4 overflow-hidden text-base font-light text-center text-blue-300 bg-blue-900 rounded-full first-letter:h-24 w-28 h-28">
+                    {selectedCommunity && selectedCommunity.community_logo ? (
+                      <img
+                        src={selectedCommunity.community_logo}
+                        alt={`${selectedCommunity.title} logo`}
+                        className="object-cover w-full h-full"
+                      />
+                    ) : (
+                      <span>No Logo</span>
+                    )}
+                  </div>
+
+                  <div className="text-lg font-light text-white">
+                    {selectedCommunity.title}
+                  </div>
+                </div>
+
+                <div className="mb-10">
+                  <div className="flex items-center justify-between w-full mb-3 text-lg font-bold text-white">
+                    <button
+                      className="flex items-center gap-2"
+                      onClick={() => setFlipChannel(!flipChannel)}
+                    >
+                      {flipChannel ? <IoIosArrowDown /> : <IoIosArrowForward />}
+                      Channels
+                    </button>
+                    {user ? (
+                      members.some((m) => m.user_id === user.id) ? (
+                        ["MODERATOR", "ADMIN"].includes(
+                          members.find((m) => m.user_id === user.id)?.role
+                        ) ? (
+                          <button onClick={handleChannelModalToggle}>
+                            <IoMdAdd size={25} />
+                          </button>
+                        ) : (
+                          <div></div>
+                        )
+                      ) : (
+                        <div></div>
+                      )
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                  {flipChannel && (
+                    <div className="flex flex-col">
+                      {channels.map((channel, index) => (
+                        <button
+                          key={index}
+                          className={`flex items-center justify-between w-full px-3 py-3 font-bold text-white bg-transparent rounded text-start ${
+                            selectedChannel != null &&
+                            channel.id === selectedChannel.id
+                              ? "bg-dark-blue"
+                              : "hover:bg-blue-700/30"
+                          }`}
+                          onClick={() => handleChannelSelect(channel)}
+                        >
+                          {channel.name}
+                          {channel.unread > 0 && (
+                            <div className="flex items-center justify-center w-5 h-5 text-xs bg-blue-600 rounded-full">
+                              {channel.unread}
+                            </div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {moderatorsData.length > 0 && (
+                  <div>
+                    <button
+                      onClick={() => setFlipModerators(!flipModerators)}
+                      className="flex items-center mb-3 text-lg font-bold text-white"
+                    >
+                      {flipModerators ? (
+                        <IoIosArrowDown />
+                      ) : (
+                        <IoIosArrowForward />
+                      )}
+                      Moderators
+                    </button>
+                    {flipModerators && (
+                      <div className="space-y-3">
+                        {moderatorsData.map((moderator, index) => (
+                          <div>
+                            <button
+                              onClick={() => handleOpenInviteDiv(index)}
+                              key={index}
+                              className="flex items-center space-x-3"
+                            >
+                              <div className="w-10 h-10 bg-white rounded-full">
+                                {moderator.user &&
+                                  moderator.user.profile_pic && (
+                                    <img
+                                      src={moderator.user.profile_pic}
+                                      alt={`${moderator.user.profile_pic} profile pic`}
+                                      className="object-cover w-full h-full rounded-full"
+                                    />
+                                  )}
+                              </div>
+                              <div className="text-lg font-thin text-white">
+                                {moderator.user.username}
+                              </div>
+                            </button>
+                            {selectedModerator === index && (
+                              <div className="p-2 mt-2 text-white bg-gray-800 rounded shadow-lg w-fit">
+                                <p>
+                                  Invite {moderator.user.username} to an
+                                  interview?
+                                </p>
+                                <div className="flex justify-end">
+                                  <button
+                                    className="px-2 py-1 mt-1 text-white bg-blue-600 rounded hover:bg-blue-500"
+                                    onClick={() => setInviteModal(true)}
+                                  >
+                                    Invite
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
+                <p>Let's start! Select a community that you like</p>
+              </div>
+            )
+          ) : (
+            <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
+              <p>Please join a community or create a new one !</p>
+            </div>
+          )}
+        </div>
         {!selectedChannel && selectedCommunity ? (
           <div className="flex items-center justify-center flex-grow text-2xl font-bold text-gray-500">
             Please select a channel to start chatting.
@@ -410,7 +614,7 @@ const Communities = () => {
                   {messagesToRender.length > 0 ? (
                     messagesToRender.map((message, index) => (
                       <div key={index}>
-                        <div className="flex items-start gap-7">
+                        <div className="flex items-start gap-7 max-sm:gap-3">
                           <div className="w-12 h-12">
                             {message.sender.profile_pic && (
                               <img
@@ -462,9 +666,6 @@ const Communities = () => {
                 </div>
               </div>
               <div className="flex items-center gap-6 p-4 bg-slight-gray rounded-self">
-                <button className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
-                  <IoMdAdd size={25} className="text-navy" />
-                </button>
                 <input
                   type="text"
                   className="flex-1 text-xl placeholder-gray-400 bg-transparent outline-none"
@@ -493,7 +694,7 @@ const Communities = () => {
           )
         )}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
