@@ -143,6 +143,7 @@ const Profile = () => {
                         </span>
                       </div>
                       {user &&
+                        user.user_badges &&
                         user.user_badges.map((b) => (
                           <Tooltip
                             title={`${b.badge.title}: ${
@@ -178,24 +179,25 @@ const Profile = () => {
 
                   <div className="bg-white h-[570px] pt-4">
                     <div className="space-y-4 h-[570px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal ">
-                      {learningPlans.map((plan) => (
-                        <div className="flex justify-between pr-3">
-                          <div className="flex flex-col gap-2">
-                            <p className="w-4/5 font-bold text-navy">
-                              {plan.title}
-                            </p>
-                            <p className="w-4/5 font-normal text-navy">
-                              {plan.description}
-                            </p>
+                      {learningPlans &&
+                        learningPlans.map((plan) => (
+                          <div className="flex justify-between pr-3">
+                            <div className="flex flex-col gap-2">
+                              <p className="w-4/5 font-bold text-navy">
+                                {plan.title}
+                              </p>
+                              <p className="w-4/5 font-normal text-navy">
+                                {plan.description}
+                              </p>
+                            </div>
+                            <div>
+                              <CircularProgressWithLabel
+                                value={calculateProgress(plan)}
+                                size={60}
+                              />
+                            </div>
                           </div>
-                          <div>
-                            <CircularProgressWithLabel
-                              value={calculateProgress(plan)}
-                              size={60}
-                            />
-                          </div>
-                        </div>
-                      ))}
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -206,31 +208,32 @@ const Profile = () => {
 
                   <div className="p-4 bg-white h-[550px] w-full px-0">
                     <div className="flex flex-col gap-6 h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar whitespace-normal ">
-                      {communities.map((community) => (
-                        <div className="flex items-center gap-4 pr-2">
-                          <div className="flex items-center justify-center w-12 h-12 overflow-hidden rounded-full bg-navy">
-                            {community.community_logo ? (
-                              <img
-                                src={community.community_logo}
-                                alt={`${community.title} logo`}
-                                className="object-cover w-full h-full"
-                              />
-                            ) : (
-                              <span className="text-sm text-center text-white">
-                                No Logo
-                              </span>
-                            )}
+                      {communities &&
+                        communities.map((community) => (
+                          <div className="flex items-center gap-4 pr-2">
+                            <div className="flex items-center justify-center w-12 h-12 overflow-hidden rounded-full bg-navy">
+                              {community.community_logo ? (
+                                <img
+                                  src={community.community_logo}
+                                  alt={`${community.title} logo`}
+                                  className="object-cover w-full h-full"
+                                />
+                              ) : (
+                                <span className="text-sm text-center text-white">
+                                  No Logo
+                                </span>
+                              )}
+                            </div>
+                            <div className="flex flex-col gap-2">
+                              <p className="font-bold text-navy">
+                                {community.title}
+                              </p>
+                              <p className="w-4/5 font-normal text-navy">
+                                {community.description}
+                              </p>
+                            </div>
                           </div>
-                          <div className="flex flex-col gap-2">
-                            <p className="font-bold text-navy">
-                              {community.title}
-                            </p>
-                            <p className="w-4/5 font-normal text-navy">
-                              {community.description}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
+                        ))}
                     </div>
                   </div>
                 </div>
