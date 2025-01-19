@@ -307,7 +307,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

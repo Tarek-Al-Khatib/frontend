@@ -19,8 +19,10 @@ const Footer = () => {
   return (
     <footer className="flex flex-col gap-16 p-8 text-white bg-navy">
       <div className="flex flex-col items-center justify-center gap-3 mt-5 text-center">
-        <h1 className="text-5xl font-bold">Empower Growth, Unlock Potential</h1>
-        <p className="w-1/3 text-sm">
+        <h1 className="text-5xl font-bold max-sm:text-2xl">
+          Empower Growth, Unlock Potential
+        </h1>
+        <p className="w-1/3 text-sm max-sm:w-2/3">
           WorkWise empowers graduates and junior professionals with personalized
           learning plans, instant feedback from AI-driven mock interviews, and
           expert community connections to boost industry knowledge.
@@ -43,8 +45,8 @@ const Footer = () => {
       </div>
 
       <Divider sx={{ borderColor: "#b0e9ff42", marginX: 40 }} />
-      <div className="container flex items-center justify-between w-11/12 mx-auto">
-        <div className="flex flex-col items-center justify-center gap-3">
+      <div className="container flex items-center justify-between w-11/12 mx-auto ">
+        <div className="flex flex-col items-center justify-center gap-3 max-sm:hidden">
           <div className="flex items-center justify-center w-32 h-32 bg-white rounded-full">
             <img src={Logo} alt="Logo" className="w-20 h-20" />
           </div>
