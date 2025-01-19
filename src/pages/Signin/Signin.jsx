@@ -116,10 +116,6 @@ const Signin = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm text-navy">Forgot your password?</p>
-                </div>
-
                 <button
                   disabled={
                     loginState.emailOrUsername === "" ||

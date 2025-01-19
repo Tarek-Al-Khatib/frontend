@@ -694,7 +694,7 @@ const Communities = () => {
           )
         )}
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
