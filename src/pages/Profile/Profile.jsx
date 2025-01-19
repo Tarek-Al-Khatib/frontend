@@ -19,6 +19,7 @@ import { communityContext } from "../../contexts/CommunityContext/CommunityConte
 import { learningContext } from "../../contexts/LearningContext/LearningContext";
 import { generalContext } from "../../contexts/GeneralContext/GeneralContext";
 import { authContext } from "../../contexts/AuthContext/AuthContext";
+import { serverUrl } from "../../config/url";
 
 const Profile = () => {
   const [profileImage, setProfileImage] = useState(null);
@@ -44,8 +45,8 @@ const Profile = () => {
   }, []);
   return (
     <div>
-      <Navbar />
-      <div className="p-8">
+      {/* <Navbar /> */}
+      <div className="p-8 max-sm:px-0">
         <h1 className="self-start pb-5 text-2xl font-thin text-start text-navy">
           Profile
         </h1>
@@ -87,7 +88,7 @@ const Profile = () => {
                   </div>
                 </div>
 
-                <div class="flex justify-between gap-5 max-xl:flex-col max-xl:w-full">
+                <div class="flex justify-between gap-5 max-xl:flex-col w-full">
                   <div className="flex flex-col justify-center w-1/3 gap-5 ">
                     <div class="flex justify-start gap-5">
                       <span class="text-[#1e25a6] text-sm font-normal font-['Open Sans Hebrew']">
@@ -141,11 +142,30 @@ const Profile = () => {
                           {user && user.level}
                         </span>
                       </div>
-                      <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>
-                      <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>
-                      <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>
-                      <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>
-                      <div class="w-9 h-9 bg-[#1e25a6] rounded-full"></div>
+                      {user &&
+                        user.user_badges.map((b) => (
+                          <Tooltip
+                            title={`${b.badge.title}: ${
+                              b.badge.description
+                            } : ${new Date(b.earned_at).toLocaleString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              }
+                            )}`}
+                            sx={{ width: 9, height: 9 }}
+                          >
+                            <div class="w-9 h-9 rounded-full">
+                              <img
+                                className="w-9 h-9"
+                                src={`${serverUrl}${b.badge.icon}`}
+                                alt={`${b.title} badge icon`}
+                              />
+                            </div>
+                          </Tooltip>
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -287,7 +307,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

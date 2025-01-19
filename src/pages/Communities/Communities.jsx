@@ -208,11 +208,11 @@ const Communities = () => {
         )}
       <div className="flex w-full bg-white h-screen/92">
         <button
-          className="fixed z-50 p-3 text-whiterounded-full top-24 right-4 lg:hidden"
+          className="fixed z-50 p-3 text-whiterounded-full top-28 right-4 lg:hidden"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
           <Hamburger
-            color="#1e25a6"
+            color="#4a80f1"
             toggled={isSidebarOpen}
             toggle={setIsSidebarOpen}
           />
